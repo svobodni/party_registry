@@ -6,14 +6,9 @@ class OrganizationsControllerTest < ActionController::TestCase
   end
 
   test "should get index" do
-    get :index
+    get :index, format: :json
     assert_response :success
     assert_not_nil assigns(:organizations)
-  end
-
-  test "should get new" do
-    get :new
-    assert_response :success
   end
 
   test "should create organization" do
@@ -25,12 +20,7 @@ class OrganizationsControllerTest < ActionController::TestCase
   end
 
   test "should show organization" do
-    get :show, id: @organization
-    assert_response :success
-  end
-
-  test "should get edit" do
-    get :edit, id: @organization
+    get :show, id: @organization, format: :json
     assert_response :success
   end
 
