@@ -1,8 +1,8 @@
 require 'test_helper'
 
-class OrganizationsControllerTest < ActionController::TestCase
+class RegionsControllerTest < ActionController::TestCase
   setup do
-    @organization = organizations(:republika)
+    @region = regions(:praha)
   end
 
   test "should get index" do
@@ -12,8 +12,8 @@ class OrganizationsControllerTest < ActionController::TestCase
   end
 
   test "should create organization" do
-    assert_difference('Organization.count') do
-      post :create, organization: { name: @organization.name, parent_id: @organization.parent_id, type: @organization.type }
+    assert_difference('Region.count') do
+      post :create, organization: { name: @region.name, parent_id: @region.parent_id, type: @region.type }
     end
 
     assert_redirected_to organization_path(assigns(:organization))

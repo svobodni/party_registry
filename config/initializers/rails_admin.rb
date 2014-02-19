@@ -15,7 +15,6 @@ RailsAdmin.config do |config|
   # config.audit_with :paper_trail, 'User', 'PaperTrail::Version' # PaperTrail >= 3.0.0
 
   ### More at https://github.com/sferik/rails_admin/wiki/Base-configuration
-
   config.actions do
     dashboard                     # mandatory
     index                         # mandatory
@@ -31,4 +30,29 @@ RailsAdmin.config do |config|
     # history_index
     # history_show
   end
+
+  config.model 'Region' do 
+    list do
+      field :name do
+        label "Název kraje"
+      end
+    end
+
+    show do
+      label "Název kraje"
+      field :name
+      field :branches
+    end
+    weight 10
+  end
+
+  config.model 'Branch' do
+    navigation_label 'Pobočky'
+    list do
+      field :name
+      field :region
+    end
+    weight 100
+  end
+
 end
