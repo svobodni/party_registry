@@ -2,6 +2,14 @@ kubicek:
   first_name: Jiří
   last_name: Kubíček
 
+mach:
+  first_name: Petr
+  last_name: Mach
+
 zvara:
   first_name: Karel
   last_name: Zvára
+
+seckar:
+  first_name: Alois
+  last_name: Sečkár

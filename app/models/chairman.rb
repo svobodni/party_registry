@@ -1,0 +1,2 @@
+class Chairman < Role
+end

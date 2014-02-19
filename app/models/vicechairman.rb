@@ -1,0 +1,2 @@
+class Vicechairman < Role
+end

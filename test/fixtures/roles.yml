@@ -1,0 +1,27 @@
+krp_praha_chairman:
+  type: Chairman
+  person: kubicek 
+  body: krp_praha
+  since: 2013-02-19
+  till: 2015-02-19
+
+rep_chairman:
+  type: Chairman
+  person: mach
+  body: rep
+  since: 2014-02-19
+  till: 2015-02-19
+
+rep_vicechairman_1:
+  type: Vicechairman
+  person: zvara
+  body: rep
+  since: 2014-02-19
+  till: 2015-02-19
+
+praha4_coordinator:
+  type: Coordinator
+  person: seckar
+  branch: praha4
+  since: 2014-02-19
+  till: 2015-02-19
