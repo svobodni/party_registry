@@ -1,11 +1,19 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+republika:
+  type: Country
+  name: Republikové orgány
 
-one:
-  type: 
-  name: MyString
-  parent_id: 1
 
-two:
-  type: 
-  name: MyString
-  parent_id: 1
+praha:
+  type: Region
+  name: Praha
+  country: republika
+
+stc:
+  type: Region
+  name: Středočeský kraj
+  country: republika
+
+praha4:
+  type: Branch
+  name: Praha 4
+  region: praha
