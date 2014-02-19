@@ -1,4 +1,5 @@
 PartyRegistry::Application.routes.draw do
+  devise_for :people
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
 
   resources :branches

@@ -45,4 +45,5 @@ end
 # gem 'debugger', group: [:development, :test]
 
 gem 'rails_admin'
+gem 'devise'
 gem 'cancan'
