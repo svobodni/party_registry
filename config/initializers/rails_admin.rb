@@ -39,7 +39,7 @@ RailsAdmin.config do |config|
     end
 
     show do
-      label "Název kraje"
+    #  label "Název kraje"
       field :name
       field :branches
     end
