@@ -5,7 +5,9 @@ PartyRegistry::Application.routes.draw do
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
 
   resources :bodies
-  resources :branches
+  resources :branches do
+    resources :people
+  end
   resources :organizations
   resources :people do
     member do
@@ -14,6 +16,7 @@ PartyRegistry::Application.routes.draw do
   end
   resources :regions do
     resources :branches
+    resources :people
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

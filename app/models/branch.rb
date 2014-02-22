@@ -21,4 +21,9 @@ class Branch < Organization
   	domestic_people+guest_people
   end
 
+
+  rails_admin do
+    field :name
+  end
+
 end
