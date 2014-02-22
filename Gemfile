@@ -48,9 +48,11 @@ gem 'rails_admin'
 gem 'devise'
 gem 'cancan'
 gem 'aasm'
+gem 'active_model_serializers'
 
 group :test do
   gem 'cucumber-rails', :require => false
   # database_cleaner is not required, but highly recommended
   gem 'database_cleaner'
+  gem 'cucumber-api-steps', :require => false
 end
