@@ -1,8 +1,12 @@
 require 'test_helper'
 
 class RegionsControllerTest < ActionController::TestCase
+
+  include Devise::TestHelpers
+
   setup do
     @region = organizations(:praha)
+    sign_in people(:mach)
   end
 
   test "should get index" do

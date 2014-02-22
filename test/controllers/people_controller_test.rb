@@ -1,8 +1,12 @@
 require 'test_helper'
 
 class PeopleControllerTest < ActionController::TestCase
+
+  include Devise::TestHelpers
+
   setup do
-    @person = people(:kubicek)
+    @person = people(:mach)
+    sign_in @person
   end
 
   test "should get index" do
@@ -13,7 +17,7 @@ class PeopleControllerTest < ActionController::TestCase
 
   test "should create person" do
     assert_difference('Person.count') do
-      post :create, person: { first_name: @person.first_name, last_name: @person.last_name }, format: :json
+      post :create, person: { first_name: @person.first_name, last_name: @person.last_name, email: "novy@svobodni.cz", password: "noveheslo" }, format: :json
     end
 
     assert_response :created

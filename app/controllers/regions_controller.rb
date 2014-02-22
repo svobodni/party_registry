@@ -1,7 +1,7 @@
 class RegionsController < ApplicationController
   # GET /regions.json
   def index
-    @regions = Region.includes(:branches).all
+    @regions = Region.includes(:branches)
     render json: @regions
   end
 

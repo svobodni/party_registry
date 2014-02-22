@@ -5,10 +5,10 @@ class Branch < Organization
   belongs_to :region, :foreign_key => "parent_id"
 
   # má svého koordinátora
-  has_one :coordinator
+  has_one :coordinator, -> { where("since < ? and till > ?", Time.now, Time.now ) }
 
   # má seznam i bývalých koordinátorů
-  has_many :coordinators
+  has_many :coordinators, -> { where("till < ?", Time.now) }
 
   # má kmenové členy a příznivce
   has_many :domestic_people, class_name: "Person", foreign_key: "domestic_branch_id"
@@ -20,7 +20,6 @@ class Branch < Organization
   def people
   	domestic_people+guest_people
   end
-
 
   rails_admin do
     field :name

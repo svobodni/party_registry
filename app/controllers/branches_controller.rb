@@ -15,7 +15,7 @@ class BranchesController < ApplicationController
   # POST /branches.json
   def create
     @branch = Branch.new(branch_params)
-
+    authorize!(:create, @branch)
     respond_to do |format|
       if @branch.save
         format.json { render json: @branch, status: :created, location: @branch }
@@ -27,6 +27,7 @@ class BranchesController < ApplicationController
 
   # PATCH/PUT /branches/1.json
   def update
+    authorize!(:update, @branch)
     respond_to do |format|
       if @branch.update(branch_params)
         format.json { head :no_content }
@@ -38,6 +39,7 @@ class BranchesController < ApplicationController
 
   # DELETE /branches/1.json
   def destroy
+    authorize!(:destroy, @branch)
     @branch.destroy
     respond_to do |format|
       format.json { head :no_content }

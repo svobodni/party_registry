@@ -1,3 +1,5 @@
+
+
 == README
 
 This README would normally document whatever steps are necessary to get the
@@ -7,22 +9,45 @@ Things you may want to cover:
 
 * Ruby version
 
+	2.1.0 + rubygems
+
 * System dependencies
+
+	gem install bundler
 
 * Configuration
 
+	bundle install
+
 * Database creation
+
+	rake db:create
 
 * Database initialization
 
+    rake db:migrate
+    rake db:fixtures:load RAILS_ENV=development
+
 * How to run the test suite
+
+	rake test
 
 * Services (job queues, cache servers, search engines, etc.)
 
 * Deployment instructions
 
-* ...
+* API Examples
 
+    # registrace nove osoby
+    curl --include      --request POST      --data-binary " { \"person\": { \"first_name\": \"Pavel\", \"last_name\":   \"Novák\", \"email\": \"novak@svobodni.cz\", \"password\": \"noveheslo\" } } "      "http://kubicek%40svobodni.cz:hesloheslo@localhost:3000/people" --header "Content-Type:application/json"
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+    # registrace nove pobocky
+    curl --include      --request POST      --data-binary " { \"branch\": { \"name\": \"Praha 3\", \"parent_id\": \"541224627\" } } "      "http://kubicek%40svobodni.cz:hesloheslo@localhost:3000/branches" --header "Content-Type:application/json"
+
+    # vypis pobocek
+    curl --include "http://kubicek%40svobodni.cz:hesloheslo@localhost:3000/branches" --header "Content-Type:application/json"
+    # vypis osob v pobocce
+    curl --include "http://seckar%40svobodni.cz:hesloheslo@localhost:3000/branches/570342242/people" --header "Content-Type:application/json"
+    # vypis osob v kraji
+    curl --include "http://kubicek%40svobodni.cz:hesloheslo@localhost:3000/regions/541224627/people" --header "Content-Type:application/json"
+

@@ -1,16 +1,21 @@
 # Třída Region reprezentuje Krajské sdružení
 class Region < Organization
+  # Krajské sdružení je zařazeno do republikové struktury
   belongs_to :country, :foreign_key => "parent_id"
-  has_many :branches, :foreign_key => "parent_id"
+
+  # Krajské sdružení má předsednictvo
   has_one :board, :class_name => Body, :foreign_key => "organization_id"
 
-  # má kmenové členy a příznivce
+  # Krajské předsednictvo zřizuje a eviduje krajské pobočky
+  has_many :branches, :foreign_key => "parent_id"
+
+  # Krajské sdružení má kmenové členy a příznivce
   has_many :domestic_people, class_name: "Person", foreign_key: "domestic_region_id"
 
-  # má hostující členy a příznivce
+  # Krajské sdružení má hostující členy a příznivce
   has_many :guest_people, class_name: "Person", foreign_key: "guest_region_id"
 
-  # má kmenové a hostující členy a příznivce
+  # Krajské sdružení má kmenové a hostující členy a příznivce
   def people
   	domestic_people+guest_people
   end

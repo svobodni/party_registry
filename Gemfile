@@ -70,5 +70,6 @@ group :test do
   # database_cleaner is not required, but highly recommended
   gem 'database_cleaner'
   gem 'cucumber-api-steps', :require => false
+  gem 'shoulda-context'
 end
 

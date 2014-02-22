@@ -6,7 +6,9 @@ class Person < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   # může vykonávat funkci
-  has_many :roles
+  has_many :roles, -> { where("since < ? and till > ?", Time.now, Time.now ) }
+  # vykonával funkci
+  has_many :historic_roles, -> { where("till < ?", Time.now) }, source: :role, class_name: Role
   # ve voleném orgánu
   has_many :bodies, through: :roles
   # může být koordinátorem více poboček
@@ -23,20 +25,19 @@ class Person < ActiveRecord::Base
   # změny evidujeme
   has_paper_trail
 
+  # Jméno je povinný údaj, minimální délka 3
   validates_presence_of :first_name
   validates :first_name, length: { minimum: 3 }
 
+  # Příjmení je povinný údaj, minimální délka 3
   validates_presence_of :last_name
   validates :last_name, length: { minimum: 3 }
 
-  validates :domestic_region, presence: true
+  #validates :domestic_region, presence: true
 
+  # sestaví jméno osoby včetně titulů, vhodné pro zobrazování
   def name
   	[first_name, last_name].join(' ')
-  end
-
-  def has_role?(role)
-    role == :krp_member
   end
 
   include AASM

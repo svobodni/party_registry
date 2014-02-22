@@ -1,27 +1,21 @@
 class PeopleController < ApplicationController
   before_action :set_branch, only: [:show, :edit, :update, :destroy, :application]
 
-#  load_and_authorize_resource :branch
-#  load_and_authorize_resource :person, through: :branch
-  #, through: :branch, shallow: true
-
   # GET /people.json
   def index
     if params[:branch_id]
-      #load_and_authorize_resource :branch
-      #load_and_authorize_resource :people, through: :branch, shallow: true
-      @people = Branch.find(params[:branch_id]).people
+      @people = Person.accessible_by(current_ability).where("domestic_branch_id=? or guest_branch_id=?", params[:branch_id], params[:branch_id])
     elsif params[:region_id]
-      @people = Region.find(params[:region_id]).people
+      @people = Person.accessible_by(current_ability).where("domestic_region_id=? or guest_region_id=?", params[:region_id], params[:region_id])
     else
-     # @people = Person.accessible_by(current_ability)
-     @people = Person.all
+      @people = Person.accessible_by(current_ability)
     end
     render json: @people
   end
 
   # GET /people/1.json
   def show
+    authorize!(:show, @person)
     render json: @person
   end
 
@@ -29,7 +23,7 @@ class PeopleController < ApplicationController
   # POST /branches.json
   def create
     @person = Person.new(person_params)
-
+    authorize!(:create, @person)
     respond_to do |format|
       if @person.save
         format.json { render json: @person, status: :created, location: @person }
@@ -41,6 +35,7 @@ class PeopleController < ApplicationController
 
   # PATCH/PUT /people/1.json
   def update
+    authorize!(:update, @person)
     respond_to do |format|
       if @person.update(person_params)
         format.json { head :no_content }
@@ -53,6 +48,7 @@ class PeopleController < ApplicationController
   # DELETE /branches/1
   # DELETE /branches/1.json
   def destroy
+    authorize!(:destroy, @person)
     @person.destroy
     respond_to do |format|
       format.json { head :no_content }
@@ -70,6 +66,6 @@ class PeopleController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def person_params
-      params.require(:person).permit(:first_name, :last_name)
+      params.require(:person).permit(:first_name, :last_name, :email, :password)
     end
 end

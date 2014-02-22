@@ -1,8 +1,11 @@
 require 'test_helper'
 
 class BodiesControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
+
   setup do
     @body = bodies(:rk)
+    sign_in people(:mach)
   end
 
   test "should get index" do

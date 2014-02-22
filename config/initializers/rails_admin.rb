@@ -38,8 +38,8 @@ RailsAdmin.config do |config|
     # except Stuff, Stuff2
 
     ## With an audit adapter, you can add:
-    # history_index
-    # history_show
+    history_index
+    history_show
   end
 
   config.model 'Region' do 

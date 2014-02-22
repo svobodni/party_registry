@@ -9,17 +9,23 @@ mach:
   first_name: Petr
   last_name: Mach
   email: mach@svobodni.cz
+  encrypted_password: $2a$10$6UhFCSGN8sBuKw5UlqCJn.NUrtimDYQI4qi7CWHaqoZXsRnCpPC8W # hesloheslo
   domestic_region: praha
+  domestic_branch: praha4
 
 zvara:
   first_name: Karel
   last_name: Zvára
   email: zvara@svobodni.cz
+  encrypted_password: $2a$10$6UhFCSGN8sBuKw5UlqCJn.NUrtimDYQI4qi7CWHaqoZXsRnCpPC8W # hesloheslo
   domestic_region: stc
   guest_region: praha
+  guest_branch: praha4
 
 seckar:
   first_name: Alois
   last_name: Sečkár
   email: seckar@svobodni.cz
+  encrypted_password: $2a$10$6UhFCSGN8sBuKw5UlqCJn.NUrtimDYQI4qi7CWHaqoZXsRnCpPC8W # hesloheslo
   domestic_region: praha
+  domestic_branch: praha4
