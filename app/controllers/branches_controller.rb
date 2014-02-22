@@ -1,62 +1,45 @@
 class BranchesController < ApplicationController
-  before_action :set_branch, only: [:show, :edit, :update, :destroy]
+  before_action :set_branch, only: [:show, :update, :destroy]
 
-  # GET /branches
   # GET /branches.json
   def index
     @branches = Branch.all
+    render json: @branches
   end
 
-  # GET /branches/1
   # GET /branches/1.json
   def show
+    render json: @branch
   end
 
-  # GET /branches/new
-  def new
-    @branch = Branch.new
-  end
-
-  # GET /branches/1/edit
-  def edit
-  end
-
-  # POST /branches
   # POST /branches.json
   def create
     @branch = Branch.new(branch_params)
 
     respond_to do |format|
       if @branch.save
-        format.html { redirect_to @branch, notice: 'Branch was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @branch }
+        format.json { render json: @branch, status: :created, location: @branch }
       else
-        format.html { render action: 'new' }
         format.json { render json: @branch.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # PATCH/PUT /branches/1
   # PATCH/PUT /branches/1.json
   def update
     respond_to do |format|
       if @branch.update(branch_params)
-        format.html { redirect_to @branch, notice: 'Branch was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: 'edit' }
         format.json { render json: @branch.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # DELETE /branches/1
   # DELETE /branches/1.json
   def destroy
     @branch.destroy
     respond_to do |format|
-      format.html { redirect_to branches_url }
       format.json { head :no_content }
     end
   end

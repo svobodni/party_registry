@@ -2,48 +2,38 @@ require 'test_helper'
 
 class BranchesControllerTest < ActionController::TestCase
   setup do
-    @branch = branches(:one)
+    @branch = organizations(:praha4)
   end
 
   test "should get index" do
-    get :index
+    get :index, format: :json
     assert_response :success
     assert_not_nil assigns(:branches)
   end
 
-  test "should get new" do
-    get :new
-    assert_response :success
-  end
-
   test "should create branch" do
     assert_difference('Branch.count') do
-      post :create, branch: { name: @branch.name, parent_id: @branch.parent_id, type: @branch.type }
+      post :create, branch: { name: @branch.name, parent_id: @branch.parent_id, type: @branch.type }, format: :json
     end
 
-    assert_redirected_to branch_path(assigns(:branch))
+    assert_response :created
   end
 
   test "should show branch" do
-    get :show, id: @branch
-    assert_response :success
-  end
-
-  test "should get edit" do
-    get :edit, id: @branch
+    get :show, id: @branch, format: :json
     assert_response :success
   end
 
   test "should update branch" do
-    patch :update, id: @branch, branch: { name: @branch.name, parent_id: @branch.parent_id, type: @branch.type }
-    assert_redirected_to branch_path(assigns(:branch))
+    patch :update, id: @branch, branch: { name: @branch.name, parent_id: @branch.parent_id, type: @branch.type }, format: :json
+    assert_response :no_content
   end
 
   test "should destroy branch" do
     assert_difference('Branch.count', -1) do
-      delete :destroy, id: @branch
+      delete :destroy, id: @branch, format: :json
     end
 
-    assert_redirected_to branches_path
+    assert_response :no_content
   end
 end

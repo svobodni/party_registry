@@ -2,12 +2,13 @@ PartyRegistry::Application.routes.draw do
   devise_for :people
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
 
+  resources :bodies
   resources :branches
-
+  resources :organizations
+  resources :people
   resources :regions do
     resources :branches
   end
-  resources :organizations
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

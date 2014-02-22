@@ -1,3 +1,10 @@
+krp_praha_exchairman:
+  type: Chairman
+  person: zvara
+  body: krp_praha
+  since: 2012-02-19
+  till: 2013-02-19
+
 krp_praha_chairman:
   type: Chairman
   person: kubicek 

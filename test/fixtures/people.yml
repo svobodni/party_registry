@@ -1,15 +1,20 @@
 kubicek:
   first_name: Jiří
   last_name: Kubíček
+  email: kubicek@svobodni.cz
+  encrypted_password: $2a$10$NqyTXZydLLlHz7SCl6RKRuhXBIN719apZdJPagf5pGaqTOq2xucbO
 
 mach:
   first_name: Petr
   last_name: Mach
+  email: mach@svobodni.cz
 
 zvara:
   first_name: Karel
   last_name: Zvára
+  email: zvara@svobodni.cz
 
 seckar:
   first_name: Alois
   last_name: Sečkár
+  email: seckar@svobodni.cz
