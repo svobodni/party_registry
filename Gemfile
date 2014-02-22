@@ -52,6 +52,9 @@ gem 'devise'
 # Autorizace
 gem 'cancan'
 
+# Verzování změn objektů
+gem 'paper_trail', '~> 3.0.0'
+
 # Stavovy stroj
 gem 'aasm'
 

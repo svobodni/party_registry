@@ -106,6 +106,9 @@ GEM
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
     orm_adapter (0.5.0)
+    paper_trail (3.0.0)
+      activerecord (>= 3.0, < 5.0)
+      activesupport (>= 3.0, < 5.0)
     pdf-core (0.1.6)
     polyglot (0.3.4)
     prawn (0.15.0)
@@ -210,6 +213,7 @@ DEPENDENCIES
   devise
   jbuilder (~> 1.2)
   jquery-rails
+  paper_trail (~> 3.0.0)
   prawn
   prawn-rails
   rails (= 4.0.3)
