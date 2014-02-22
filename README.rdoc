@@ -1,27 +1,20 @@
-
-
-== README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
+== Political party registry
 
 * Ruby version
 
-	2.1.0 + rubygems
+    2.1.0 + rubygems
 
 * System dependencies
 
-	gem install bundler
+    gem install bundler
 
 * Configuration
 
-	bundle install
+    bundle install
 
 * Database creation
 
-	rake db:create
+    rake db:create
 
 * Database initialization
 
@@ -30,7 +23,7 @@ Things you may want to cover:
 
 * How to run the test suite
 
-	rake test
+    rake test
 
 * Services (job queues, cache servers, search engines, etc.)
 
