@@ -1,0 +1,29 @@
+cs:
+  admin:
+    actions:
+      application:
+        menu: "Přihláška"
+  activerecord:
+    models:
+      person: Občan
+      body: Orgán
+      organization: Organizační jednotka
+      country: Republika
+      region: Kraj
+      branch: Pobočka
+      role: Funkce
+      chairman: Předseda
+      vicechairman: Místopředseda
+      coordinator: Koordinátor
+      member: Člen orgánu
+
+    attributes:
+      person:
+        first_name: "Jméno"
+        last_name: "Příjmení"
+        domestic_region: "Kmenový kraj"
+        guest_region: "Hostuje v kraji"
+        domestic_branch: "Kmenová pobočka"
+      organization:
+        name: "Název"
+      # will translate User attribute "login" as "Handle"
