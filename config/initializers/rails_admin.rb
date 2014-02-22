@@ -26,6 +26,16 @@ RailsAdmin.config do |config|
     delete
     show_in_app
 
+    member :application do
+      #i18n_key :application
+      only Person
+      route_fragment '/application.pdf'
+      controller PeopleController
+      pjax false
+      #action_name '../people/'
+    end
+    # except Stuff, Stuff2
+
     ## With an audit adapter, you can add:
     # history_index
     # history_show

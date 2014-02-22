@@ -8,14 +8,15 @@ class PeopleController < ApplicationController
   # GET /people.json
   def index
     if params[:branch_id]
-      render :text => @people.inspect
       #load_and_authorize_resource :branch
       #load_and_authorize_resource :people, through: :branch, shallow: true
-      #@people = Branch.find(params[:branch_id]).accessible_by(current_ability).people
+      @people = Branch.find(params[:branch_id]).people
+    elsif params[:region_id]
+      @people = Region.find(params[:region_id]).people
     else
      # @people = Person.accessible_by(current_ability)
+     @people = Person.all
     end
-    @people = Person.all
     render json: @people
   end
 

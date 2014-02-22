@@ -1,5 +1,7 @@
 PartyRegistry::Application.routes.draw do
   devise_for :people
+  get '/admin/person/:id/application' => 'people#application'
+
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
 
   resources :bodies
