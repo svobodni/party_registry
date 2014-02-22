@@ -4,15 +4,32 @@ class Person < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+
+  # může vykonávat funkci
   has_many :roles
+  # ve voleném orgánu
   has_many :bodies, through: :roles
-
+  # může být koordinátorem více poboček
   has_many :coordinated_branches, through: :roles, source: :branch
-
+  # patří do kraje dle volebního práva
   belongs_to :domestic_region, class_name: "Region"
+  # hostuje v kraji dle své volby
   belongs_to :guest_region, class_name: "Region"
+  # patří do pobočky dle volebního práva
   belongs_to :domestic_branch, class_name: "Branch"
+  # hostuje v pobočce dle své volby
   belongs_to :guest_branch, class_name: "Branch"
+
+  # změny evidujeme
+  has_paper_trail
+
+  validates_presence_of :first_name
+  validates :first_name, length: { minimum: 3 }
+
+  validates_presence_of :last_name
+  validates :last_name, length: { minimum: 3 }
+
+  validates :domestic_region, presence: true
 
   def name
   	[first_name, last_name].join(' ')

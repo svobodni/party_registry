@@ -26,4 +26,11 @@ cs:
         domestic_branch: "Kmenová pobočka"
       organization:
         name: "Název"
+        region: "Kraj"
+        coordinator: "Kooridinátor"
+      role:
+        type: "Funkce"
+        body: "Orgán"
+        person: "Osoba"
+        branch: "Pobočka"
       # will translate User attribute "login" as "Handle"

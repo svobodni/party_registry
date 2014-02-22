@@ -7,8 +7,7 @@ class Ability
     can :dashboard              # grant access to the dashboard
 
     can [:read, :update], Person, :id => user.id
-    can [:read], Region
-    can :read, Branch
+    can :read, [Body, Branch, Region, Role]
 
 #    user ||= User.new # guest user (not logged in)
 
@@ -19,8 +18,8 @@ class Ability
         can [:read, :application], Person, domestic_branch_id: role.branch_id
       elsif (role.type == "Chairman" || role.type == "ViceChairman") && role.body.organization.type=="Region"
         # Členové krajského předsednictva
-        can [:read, :update, :application], Person, guest_region_id: role.body.organization_id
         can [:read, :update, :application], Person, domestic_region_id: role.body.organization_id
+        can [:read, :application], Person, guest_region_id: role.body.organization_id
       elsif (role.type == "Chairman" || role.type == "ViceChairman") && role.body.organization.type=="Country"
         # Členové republikového předsednictva
         can [:read, :update], Person

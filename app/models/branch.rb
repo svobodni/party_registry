@@ -24,6 +24,12 @@ class Branch < Organization
 
   rails_admin do
     field :name
+    field :coordinator do
+      pretty_value do
+        value.name
+      end
+    end
+    field :region
   end
 
 end
