@@ -1,5 +1,5 @@
 class PeopleController < ApplicationController
-  before_action :set_branch, only: [:show, :edit, :update, :destroy]
+  before_action :set_branch, only: [:show, :edit, :update, :destroy, :application]
 
 #  load_and_authorize_resource :branch
 #  load_and_authorize_resource :person, through: :branch
@@ -56,6 +56,9 @@ class PeopleController < ApplicationController
     respond_to do |format|
       format.json { head :no_content }
     end
+  end
+
+  def application
   end
 
   private

@@ -45,10 +45,22 @@ end
 # gem 'debugger', group: [:development, :test]
 
 gem 'rails_admin'
+
+# Autentizace
 gem 'devise'
+
+# Autorizace
 gem 'cancan'
+
+# Stavovy stroj
 gem 'aasm'
+
+# JSON serializer
 gem 'active_model_serializers'
+
+# PDF generator
+gem 'prawn'
+gem 'prawn-rails'
 
 group :test do
   gem 'cucumber-rails', :require => false
@@ -56,3 +68,4 @@ group :test do
   gem 'database_cleaner'
   gem 'cucumber-api-steps', :require => false
 end
+

@@ -5,7 +5,11 @@ PartyRegistry::Application.routes.draw do
   resources :bodies
   resources :branches
   resources :organizations
-  resources :people
+  resources :people do
+    member do
+      get 'application'
+    end
+  end
   resources :regions do
     resources :branches
   end
