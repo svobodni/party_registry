@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140221030646) do
+ActiveRecord::Schema.define(version: 20140222043541) do
 
   create_table "bodies", force: true do |t|
     t.string   "type"
@@ -49,6 +49,8 @@ ActiveRecord::Schema.define(version: 20140221030646) do
     t.integer  "guest_region_id"
     t.integer  "domestic_branch_id"
     t.integer  "guest_branch_id"
+    t.string   "member_status"
+    t.string   "supporter_status"
   end
 
   add_index "people", ["email"], name: "index_people_on_email", unique: true
