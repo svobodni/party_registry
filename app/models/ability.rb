@@ -2,6 +2,31 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
+
+    can :access, :rails_admin   # grant access to rails_admin
+    can :dashboard              # grant access to the dashboard
+
+    can [:read, :update], Person, :id => user.id
+    can [:read], Region
+    can :read, Branch
+
+#    user ||= User.new # guest user (not logged in)
+
+    user.roles.each do |role|
+      if role.type == "Coordinator"
+        # Koordinátor pobočky
+        can [:read, :application], Person, guest_branch_id: role.branch_id
+        can [:read, :application], Person, domestic_branch_id: role.branch_id
+      elsif (role.type == "Chairman" || role.type == "ViceChairman") && role.body.organization.type=="Region"
+        # Členové krajského předsednictva
+        can [:read, :update, :application], Person, guest_region_id: role.body.organization_id
+        can [:read, :update, :application], Person, domestic_region_id: role.body.organization_id
+      elsif (role.type == "Chairman" || role.type == "ViceChairman") && role.body.organization.type=="Country"
+        # Členové republikového předsednictva
+        can [:read, :update], Person
+      end
+    end
+
     # Define abilities for the passed in user here. For example:
     #
     #   user ||= User.new # guest user (not logged in)
