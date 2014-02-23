@@ -69,6 +69,7 @@ gem 'prawn-rails'
 gem 'crack'
 
 gem 'geocoder'
+gem 'httparty'
 
 group :test do
   gem 'cucumber-rails', :require => false

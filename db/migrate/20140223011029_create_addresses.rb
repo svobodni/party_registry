@@ -7,6 +7,7 @@ class CreateAddresses < ActiveRecord::Migration
       t.float :latitude
       t.float :longitude
       t.integer :ruian_adresni_misto_id
+      t.string :ruian_adresni_misto_mestska_cast
       t.integer :addressable_id
       t.string :addressable_type
 
