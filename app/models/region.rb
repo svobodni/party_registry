@@ -19,4 +19,8 @@ class Region < Organization
   def people
   	domestic_people+guest_people
   end
+
+  # Krajské sdružení má adresy (sídla, poštovní)
+  has_many :addresses,  :as => :addressable, :dependent => :destroy
+
 end

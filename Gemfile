@@ -65,6 +65,9 @@ gem 'active_model_serializers'
 gem 'prawn'
 gem 'prawn-rails'
 
+# XML parser pro import
+gem 'crack'
+
 group :test do
   gem 'cucumber-rails', :require => false
   # database_cleaner is not required, but highly recommended

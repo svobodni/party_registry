@@ -11,7 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140222133544) do
+ActiveRecord::Schema.define(version: 20140223022146) do
+
+  create_table "addresses", force: true do |t|
+    t.string   "street"
+    t.string   "city"
+    t.string   "zip"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.integer  "ruian_adresni_misto_id"
+    t.integer  "addressable_id"
+    t.string   "addressable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "bodies", force: true do |t|
     t.string   "type"
@@ -51,6 +64,8 @@ ActiveRecord::Schema.define(version: 20140222133544) do
     t.integer  "guest_branch_id"
     t.string   "member_status"
     t.string   "supporter_status"
+    t.integer  "registered_address_id"
+    t.integer  "postal_address_id"
   end
 
   add_index "people", ["email"], name: "index_people_on_email", unique: true

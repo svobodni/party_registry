@@ -21,6 +21,12 @@ class Person < ActiveRecord::Base
   belongs_to :domestic_branch, class_name: "Branch"
   # hostuje v pobočce dle své volby
   belongs_to :guest_branch, class_name: "Branch"
+  # má adresy (bydliště, poštovní)
+  belongs_to :registered_address, class_name: :Address, foreign_key: :registered_address_id, dependent: :destroy
+  belongs_to :postal_address, class_name: :Address, foreign_key: :postal_address_id, dependent: :destroy
+
+  delegate :street, :city, :zip, to: :registered_address, prefix: true
+  delegate :street, :city, :zip, to: :postal_address, prefix: true
 
   # změny evidujeme
   has_paper_trail
