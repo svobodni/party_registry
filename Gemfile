@@ -68,6 +68,8 @@ gem 'prawn-rails'
 # XML parser pro import
 gem 'crack'
 
+gem 'geocoder'
+
 group :test do
   gem 'cucumber-rails', :require => false
   # database_cleaner is not required, but highly recommended
