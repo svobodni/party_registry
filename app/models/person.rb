@@ -1,8 +1,9 @@
+require Rails.root.join('lib', 'dotnet_sha1')
 # Třída Person reprezentuje osobu (členy a příznivce)
 class Person < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
+  devise :database_authenticatable, :registerable, :encryptable,
          :recoverable, :rememberable, :trackable, :validatable
 
   # může vykonávat funkci

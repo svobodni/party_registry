@@ -48,6 +48,7 @@ gem 'rails_admin'
 
 # Autentizace
 gem 'devise'
+gem 'devise-encryptable'
 
 # Autorizace
 gem 'cancan'

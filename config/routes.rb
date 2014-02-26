@@ -3,6 +3,8 @@ PartyRegistry::Application.routes.draw do
 
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
 
+  devise_for :people
+
   resources :bodies
   resources :branches do
     resources :people
@@ -18,7 +20,6 @@ PartyRegistry::Application.routes.draw do
     resources :people
   end
 
-  devise_for :people
 
   root 'people#index'
 end
