@@ -11,21 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140223022146) do
-
-  create_table "addresses", force: true do |t|
-    t.string   "street"
-    t.string   "city"
-    t.string   "zip"
-    t.float    "latitude"
-    t.float    "longitude"
-    t.integer  "ruian_adresni_misto_id"
-    t.string   "ruian_adresni_misto_mestska_cast"
-    t.integer  "addressable_id"
-    t.string   "addressable_type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+ActiveRecord::Schema.define(version: 20140223011029) do
 
   create_table "bodies", force: true do |t|
     t.string   "type"
@@ -40,23 +26,43 @@ ActiveRecord::Schema.define(version: 20140223022146) do
     t.string   "type"
     t.string   "name"
     t.integer  "parent_id"
+    t.integer  "ruian_vusc_id"
+    t.string   "nuts3_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "people", force: true do |t|
+    t.string   "name_prefix"
     t.string   "first_name"
     t.string   "last_name"
+    t.string   "name_suffix"
+    t.string   "birth_number"
+    t.date     "date_of_birth"
+    t.string   "legacy_type"
     t.string   "username"
+    t.string   "phone"
+    t.boolean  "phone_public"
+    t.string   "public_email"
+    t.text     "previous_political_parties"
+    t.string   "domestic_address_street"
+    t.string   "domestic_address_city"
+    t.string   "domestic_address_zip"
+    t.integer  "domestic_address_ruian_id"
+    t.string   "postal_address_street"
+    t.string   "postal_address_city"
+    t.string   "postal_address_zip"
+    t.integer  "postal_address_ruian_id"
+    t.string   "photo_url"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
-    t.string   "password_salt",          default: "", null: false
+    t.string   "email",                      default: "", null: false
+    t.string   "encrypted_password",         default: "", null: false
+    t.string   "password_salt",              default: "", null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",              default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -67,11 +73,8 @@ ActiveRecord::Schema.define(version: 20140223022146) do
     t.integer  "guest_branch_id"
     t.string   "member_status"
     t.string   "supporter_status"
-    t.integer  "registered_address_id"
-    t.integer  "postal_address_id"
   end
 
-  add_index "people", ["email"], name: "index_people_on_email", unique: true
   add_index "people", ["reset_password_token"], name: "index_people_on_reset_password_token", unique: true
 
   create_table "roles", force: true do |t|
@@ -81,6 +84,19 @@ ActiveRecord::Schema.define(version: 20140223022146) do
     t.integer  "branch_id"
     t.date     "since"
     t.date     "till"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "ruian_addresses", force: true do |t|
+    t.string   "mestska_cast"
+    t.integer  "mestska_cast_id"
+    t.string   "obec"
+    t.integer  "obec_id"
+    t.string   "kraj"
+    t.integer  "kraj_id"
+    t.float    "latitude"
+    t.float    "longitude"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

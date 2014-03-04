@@ -4,7 +4,7 @@ class Person < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :encryptable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable #, :validatable
 
   # může vykonávat funkci
   has_many :roles, -> { where("since < ? and till > ?", Time.now, Time.now ) }
@@ -23,18 +23,18 @@ class Person < ActiveRecord::Base
   # hostuje v pobočce dle své volby
   belongs_to :guest_branch, class_name: "Branch"
   # má adresy (bydliště, poštovní)
-  belongs_to :registered_address, class_name: :Address, foreign_key: :registered_address_id, dependent: :destroy
-  belongs_to :postal_address, class_name: :Address, foreign_key: :postal_address_id, dependent: :destroy
+  belongs_to :domestic_ruian_address, class_name: :RuianAddress, foreign_key: :domestic_address_ruian_id
+  belongs_to :postal_ruian_address, class_name: :RuianAddress, foreign_key: :postal_address_ruian_id
 
-  delegate :street, :city, :zip, to: :registered_address, prefix: true
-  delegate :street, :city, :zip, to: :postal_address, prefix: true
+  before_save :set_domestic_ruian_address,
+    if: Proc.new { |person| person.domestic_address_street_changed? } 
 
   # změny evidujeme
   has_paper_trail
 
   # Jméno je povinný údaj, minimální délka 3
   validates_presence_of :first_name
-  validates :first_name, length: { minimum: 3 }
+#  validates :first_name, length: { minimum: 3 }
 
   # Příjmení je povinný údaj, minimální délka 3
   validates_presence_of :last_name
@@ -44,7 +44,19 @@ class Person < ActiveRecord::Base
 
   # sestaví jméno osoby včetně titulů, vhodné pro zobrazování
   def name
-  	[first_name, last_name].join(' ')
+  	[[name_prefix, first_name, last_name].reject(&:empty?).join(' '),name_suffix].reject(&:empty?).join(', ')
+  end
+
+  def domestic_address_line
+    "#{domestic_address_street}, #{domestic_address_zip} #{domestic_address_city}"
+  end
+
+  def is_member?
+    legacy_type == "member"
+  end
+
+  def vs
+    (is_member? ? "1" : "5") + id.to_s.rjust(4,"0")
   end
 
   include AASM
@@ -121,6 +133,10 @@ class Person < ActiveRecord::Base
       transitions :from => :regular, :to => :cancelled
     end
 
+  end
+
+  def set_domestic_ruian_address
+    self.domestic_ruian_address = RuianAddress.find_or_create_by_address_line(domestic_address_line) if domestic_region_id==10
   end
 
 end
