@@ -15,6 +15,10 @@ class Region < Organization
   # Krajské sdružení má hostující členy a příznivce
   has_many :guest_people, class_name: "Person", foreign_key: "guest_region_id"
 
+  # Krajské sdružení má kmenové členy
+  has_many :domestic_members, -> { where('legacy_type="member" and member_status="regular"') },class_name: "Person", foreign_key: "domestic_region_id"
+  has_many :awaiting_domestic_people, -> { where('legacy_type="member" and member_status!="regular"') },class_name: "Person", foreign_key: "domestic_region_id"
+
   # Krajské sdružení má kmenové a hostující členy a příznivce
   def people
   	domestic_people+guest_people

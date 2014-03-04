@@ -12,7 +12,10 @@ class Branch < Organization
 
   # má kmenové členy a příznivce
   has_many :domestic_people, class_name: "Person", foreign_key: "domestic_branch_id"
+  has_many :domestic_members, -> { where('legacy_type="member" and member_status="regular"') },class_name: "Person", foreign_key: "domestic_branch_id"
+  has_many :domestic_supporters, -> { where('legacy_type="sympathizer" and supporter_status="regular"') },class_name: "Person", foreign_key: "domestic_branch_id"
 
+  has_many :awaiting_domestic_people, -> { where('legacy_type="member" and member_status!="regular"') },class_name: "Person", foreign_key: "domestic_branch_id"
   # má hostující členy a příznivce
   has_many :guest_people, class_name: "Person", foreign_key: "guest_branch_id"
 
