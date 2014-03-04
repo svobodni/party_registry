@@ -1,0 +1,14 @@
+<h1>Republikové orgány</h1>
+<ul>
+<% for body in @country.bodies %>
+<li><%= body.name %></li>
+<% end %>
+</ul>
+
+
+<h1>Krajská sdružení</h1>
+<ul>
+<% for region in @country.regions.order(:nuts3_id).all %>
+<li><%= link_to region.name, region %></li>
+<% end %>
+</ul>

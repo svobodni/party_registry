@@ -8,6 +8,9 @@ class RegionsController < ApplicationController
   # GET /regions/1.json
   def show
     @region = Region.find(params[:id])
-    render json: @region
+    respond_to do |format|
+      format.html
+      format.json { render json: @region }
+    end
   end
 end

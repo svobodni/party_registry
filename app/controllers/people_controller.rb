@@ -10,7 +10,11 @@ class PeopleController < ApplicationController
     else
       @people = Person.accessible_by(current_ability)
     end
-    render json: @people
+    respond_to do |format|
+      format.xls
+      format.json { render json: @people }
+    end
+
   end
 
   # GET /people/1.json

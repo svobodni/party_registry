@@ -1,0 +1,66 @@
+<%
+  page_title "Pobočka #{@branch.name}"
+  breadcrumb :branch, @branch
+%>
+
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
+  <li><a href="#domestic_members" data-toggle="tab">Kmenoví členové</a></li>
+  <li><a href="#domestic_supporters" data-toggle="tab">Kmenoví příznivci</a></li>
+  <li><a href="#guest_people" data-toggle="tab">Hostující členové</a></li>
+  <li><a href="#awaiting_domestic_people" data-toggle="tab">Zájemci o členství</a></li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+  <div class="tab-pane active" id="home">Koordinátor: <%= @branch.coordinator.try(:name) %></div>
+  <div><%= link_to "Export", branch_people_path(@branch, format: :xls), class: "btn btn-primary btn-lg active" %></div>
+  <div class="tab-pane" id="domestic_members">
+
+<h2>Kmenoví členové</h2>
+<ul>
+<% @branch.domestic_members.accessible_by(current_ability).each do |member| %>
+<li><%= member.name %></li>
+<% end %>
+</ul>
+
+  </div>
+  <div class="tab-pane" id="domestic_supporters">
+<h2>Kmenoví příznivci</h2>
+<ul>
+<% @branch.domestic_supporters.accessible_by(current_ability).each do |member| %>
+<li><%= member.name %></li>
+<% end %>
+</ul>
+  </div>
+
+  <div class="tab-pane" id="guest_people">
+<h2>Hostující členové</h2>
+<ul>
+<% @branch.guest_people.accessible_by(current_ability).each do |member| %>
+<li><%= member.name %></li>
+<% end %>
+</ul>
+  </div>
+
+  <div class="tab-pane" id="awaiting_domestic_people">
+<h2>Zájemci o členství</h2>
+<table class="table table-striped">
+	<thead>
+		<tr><th>Jméno</th><th>Stav</th><th>Telefon</th><th>Email</th><th></th></tr>
+	</thead>
+	<tbody>
+<% @branch.awaiting_domestic_people.accessible_by(current_ability).reverse.each do |member| %>
+<tr>
+<td><%= member.name %></td>
+<td><%= member.member_status%></td>
+<td><%= member.phone %></td>
+<td><%= mail_to member.email %></td>
+<td>[<%=link_to "Přihláška", application_person_path(member, format: :pdf)%>]</td>
+</tr>
+<% end %>
+</tbody>
+</table>
+  </div>
+
+</div>

@@ -9,7 +9,10 @@ class BranchesController < ApplicationController
 
   # GET /branches/1.json
   def show
-    render json: @branch
+    respond_to do |format|
+      format.html
+      format.json { render json: @branch }
+    end
   end
 
   # POST /branches.json
@@ -56,4 +59,5 @@ class BranchesController < ApplicationController
     def branch_params
       params.require(:branch).permit(:name, :parent_id)
     end
+
 end

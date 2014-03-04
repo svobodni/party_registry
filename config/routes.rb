@@ -20,6 +20,5 @@ PartyRegistry::Application.routes.draw do
     resources :people
   end
 
-
-  root 'people#index'
+  root 'welcome#index'
 end

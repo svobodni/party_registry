@@ -1,0 +1,70 @@
+<%
+  page_title "#{@region.name}"
+  breadcrumb :region, @region
+%>
+
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#board" data-toggle="tab">Předsednictvo</a></li>
+  <li><a href="#branches" data-toggle="tab">Pobočky</a></li>
+  <li><a href="#mestska_cast" data-toggle="tab">Městské části</a></li>
+  <li><a href="#awaiting_domestic_people" data-toggle="tab">Zájemci o členství</a></li>
+</ul>
+
+<!-- Tab panes -->
+
+<div class="tab-content">
+  <div class="tab-pane active" id="board">
+  	<div>Předseda: <%= @region.board.chairman.person.name %></div>
+  	<div>Místopředsedové: <%= @region.board.vicechairmen.collect{|p| p.name}.join(', ') %></div>
+    <div><%= link_to "Export", region_people_path(@region, format: :xls), class: "btn btn-primary btn-lg active" %></div>
+</div>
+
+  <div class="tab-pane" id="branches">
+
+<h2>Pobočky</h2>
+<% @region.branches.each do |branch| %>
+<h3><%= link_to branch.name, branch %></h3>
+<div>Koordinátor: <%= branch.coordinator.try(:name) %></div>
+<div>Kmenoví členové: <%= branch.domestic_members.count %></div>
+<% end %>
+
+  </div>
+
+
+<div class="tab-pane" id="mestska_cast">
+<h2>Městské části</h2>
+<table class="table table-striped">
+	<thead>
+		<tr><th>Městská část</th><th>Kmenoví členové</th></tr>
+	</thead>
+	<tbody>
+<% @region.domestic_members.group_by{|m| m.domestic_ruian_address.try(:mestska_cast)}.each do |mestska_cast,members| %>
+<tr><th><%= mestska_cast %></th><td><%= members.size %></td></tr>
+<% end %>
+</tbody>
+</table>
+  </div>
+
+<div class="tab-pane" id="awaiting_domestic_people">
+<h2>Zájemci o členství</h2>
+<table class="table table-striped">
+	<thead>
+		<tr><th>ID</th><th>Jméno</th><th>Stav</th><th>Městská část</th><th>Pobočka</th><th></th></tr>
+	</thead>
+	<tbody>
+<% @region.awaiting_domestic_people.accessible_by(current_ability).reverse.each do |member| %>
+<tr>
+<td><%= member.vs %></td>
+<td><%= member.name %></td>
+<td><%= member.member_status%></td>
+<td><%= member.domestic_ruian_address.try(:mestska_cast) %></td>
+<td><%= member.domestic_branch.try(:name) %></td>
+<td>[<%=link_to "Přihláška", application_person_path(member, format: :pdf)%>]</td>
+</tr>
+<% end %>
+</tbody>
+</table>
+  </div>
+
+</div>
+
