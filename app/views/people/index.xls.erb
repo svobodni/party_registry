@@ -1,0 +1,34 @@
+<% attributes = ["id", "name", "phone", "email", "legacy_type", "member_status", "supporter_status", "domestic_address_street", "domestic_address_city", "domestic_address_zip", "postal_address_street", "postal_address_city", "postal_address_zip"] %>
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Sheet1">
+    <Table>
+      <Row>
+      <% attributes.each do |a| %>
+        <Cell><Data ss:Type="String"><%=a%></Data></Cell>
+      <% end %>
+        <Cell><Data ss:Type="String">Domovská městská část</Data></Cell>
+        <Cell><Data ss:Type="String">Domovský kraj</Data></Cell>
+        <Cell><Data ss:Type="String">Hostuje v kraji</Data></Cell>
+        <Cell><Data ss:Type="String">Domovská pobočka</Data></Cell>
+        <Cell><Data ss:Type="String">Hostuje v pobočce</Data></Cell>
+      </Row>
+      <% @people.each do |person| %>
+      <Row>
+      <% attributes.each do |a| %>
+        <Cell><Data ss:Type="String"><%= person.send(a) %></Data></Cell>
+      <% end %>
+        <Cell><Data ss:Type="String"><%= person.domestic_ruian_address.try(:mestska_cast) %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= person.domestic_region.try(:name) %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= person.guest_region.try(:name) %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= person.domestic_branch.try(:name) %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= person.guest_branch.try(:name) %></Data></Cell>
+      </Row>
+      <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>
