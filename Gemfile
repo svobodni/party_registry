@@ -72,6 +72,9 @@ gem 'crack'
 gem 'geocoder'
 gem 'httparty'
 
+# [WEB] breadcrumbs
+gem 'gretel'
+
 group :test do
   gem 'cucumber-rails', :require => false
   # database_cleaner is not required, but highly recommended
