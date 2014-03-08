@@ -74,6 +74,9 @@ gem 'httparty'
 
 # [WEB] breadcrumbs
 gem 'gretel'
+# [WEB] layout
+gem 'svobodni_layout', git: 'https://github.com/svobodni/svobodni_layout'
+
 
 group :test do
   gem 'cucumber-rails', :require => false
