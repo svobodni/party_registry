@@ -86,3 +86,8 @@ group :test do
   gem 'shoulda-context'
 end
 
+group :development do
+  gem 'capistrano-rails',   '~> 1.1', require: false
+  gem 'capistrano-bundler', '~> 1.1', require: false
+end
+
