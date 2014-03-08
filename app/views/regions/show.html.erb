@@ -14,7 +14,7 @@
 
 <div class="tab-content">
   <div class="tab-pane active" id="board">
-  	<div>Předseda: <%= @region.board.chairman.person.name %></div>
+  	<div>Předseda: <%= @region.board.chairman.try(:person).try(:name) %></div>
   	<div>Místopředsedové: <%= @region.board.vicechairmen.collect{|p| p.name}.join(', ') %></div>
     <div><%= link_to "Export", region_people_path(@region, format: :xls), class: "btn btn-primary btn-lg active" %></div>
 </div>
@@ -22,12 +22,20 @@
   <div class="tab-pane" id="branches">
 
 <h2>Pobočky</h2>
+<table class="table table-striped">
+<thead><tr><th>Název pobočky</th><th>Koordinátor</th><th>Telefon</th><th>Email</th><th>Kmenoví členové</th></thead>
+<tbody>
 <% @region.branches.each do |branch| %>
-<h3><%= link_to branch.name, branch %></h3>
-<div>Koordinátor: <%= branch.coordinator.try(:name) %></div>
-<div>Kmenoví členové: <%= branch.domestic_members.count %></div>
+<tr>
+<th><%= link_to branch.name, branch %></th>
+<td><%= branch.coordinator.try(:person).try(:name) %></td>
+<td><%= branch.coordinator.try(:person).try(:phone) %></td>
+<td><%= mail_to branch.coordinator.try(:person).try(:email) %></td>
+<td><%= branch.domestic_members.count %></td>
+</tr>
 <% end %>
-
+</tbody>
+</table>
   </div>
 
 
