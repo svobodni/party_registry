@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class RuianAddress < ActiveRecord::Base
 
   def self.find_or_create_by_address_line(line)
