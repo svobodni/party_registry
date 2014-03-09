@@ -6,6 +6,15 @@ crumb :regions do
   link "Kraje", regions_path
 end
 
+crumb :people do
+  link "Lidé", people_path
+end
+
+crumb :person do |person|
+  link person.name, person_path(person)
+  parent :people
+end
+
 crumb :region do |region|
   link region.name, region_path(region)
   #parent :regions

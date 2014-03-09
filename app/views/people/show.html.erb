@@ -1,0 +1,67 @@
+<%
+	page_title @person.name
+	breadcrumb :person, @person
+%>
+
+<div>Variabilní symbol: <%= @person.vs %></div>
+<div>Typ:<%= @person.legacy_type %></div>
+<div>Typ:<%= @person.member_status %></div>
+<div>Typ:<%= @person.supporter_status %></div>
+
+<h2>Bydliště</h2>
+<div>v db: <%= @person.domestic_address_line %></div>
+
+<% if @person.domestic_ruian_address %>
+<div>rozpoznaná MČ: <%= @person.domestic_ruian_address.try(:mestska_cast) %></div>
+<% else %>
+
+<div><strong>nerozpoznaná adresa</strong></div>
+
+<script>
+
+    $(function() {
+        $("#address_line").autocomplete({
+            source: function(request, response) {
+                $.ajax({
+                    url: "http://localhost:9292/api/addresses/autocomplete/"+encodeURIComponent(request.term),
+                    type: "GET",
+                    dataType: "JSON",
+                    success: function(data) {
+                        response($.map(data["addresses"], function(item) {
+                            return {
+                                label: item["address_line"],
+                                id: item["id"]
+                            }
+                        }));
+                    },
+                });
+            },
+            select: function( event, ui ) {
+                $( "#domestic-ruian-address-id" ).val( ui.item.id );
+                return false;
+            },
+            minLength: 2
+        })
+    });
+
+
+</script>
+<%= form_tag("", method: "put") do %>
+<div class="ui-widget">
+    <input type="hidden" id="domestic-ruian-address-id" name="domestic_ruian_address_id">
+    <label for="address_line">Address line: </label>
+    <input id="address_line" name="address_id">
+</div>
+<% end %>
+ <% end %> 
+
+
+<h2>Pobočka</h3>
+<% if @person.domestic_branch %>
+	<%= render @person.domestic_branch %>
+<% else %>
+<strong>nezařazen</strong>
+<% end %>
+
+
+

@@ -8,6 +8,7 @@
   <li><a href="#branches" data-toggle="tab">Pobočky</a></li>
   <li><a href="#mestska_cast" data-toggle="tab">Městské části</a></li>
   <li><a href="#awaiting_domestic_people" data-toggle="tab">Zájemci o členství</a></li>
+  <li><a href="#unknown-addresses" data-toggle="tab">Nerozpoznaná adresa</a></li>
 </ul>
 
 <!-- Tab panes -->
@@ -53,6 +54,20 @@
 </table>
   </div>
 
+<div class="tab-pane" id="unknown-addresses">
+<h2>Městské části</h2>
+<table class="table table-striped">
+  <thead>
+    <tr><th>Městská část</th><th>Kmenoví členové</th></tr>
+  </thead>
+  <tbody>
+<% @region.domestic_people.accessible_by(current_ability).reject{|p| p.domestic_ruian_address}.each do |person| %>
+<tr><th><%= link_to person.name, person %></th><td><%= person.domestic_address_line %></td><td><%= person.legacy_type%></td></tr>
+<% end %>
+</tbody>
+</table>
+  </div>
+
 <div class="tab-pane" id="awaiting_domestic_people">
 <h2>Zájemci o členství</h2>
 <table class="table table-striped">
@@ -63,7 +78,7 @@
 <% @region.awaiting_domestic_people.accessible_by(current_ability).reverse.each do |member| %>
 <tr>
 <td><%= member.vs %></td>
-<td><%= member.name %></td>
+<td><%= link_to member.name, member %></td>
 <td><%= member.member_status%></td>
 <td><%= member.domestic_ruian_address.try(:mestska_cast) %></td>
 <td><%= member.domestic_branch.try(:name) %></td>

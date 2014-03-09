@@ -20,7 +20,10 @@ class PeopleController < ApplicationController
   # GET /people/1.json
   def show
     authorize!(:show, @person)
-    render json: @person
+    respond_to do |format|
+      format.html
+      format.json { render json: @person }
+    end
   end
 
   # POST /branches

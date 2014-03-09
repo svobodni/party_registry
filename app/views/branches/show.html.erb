@@ -7,40 +7,36 @@
   <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
   <li><a href="#domestic_members" data-toggle="tab">Kmenoví členové</a></li>
   <li><a href="#domestic_supporters" data-toggle="tab">Kmenoví příznivci</a></li>
-  <li><a href="#guest_people" data-toggle="tab">Hostující členové</a></li>
+  <li><a href="#guest_people" data-toggle="tab">Hostující</a></li>
   <li><a href="#awaiting_domestic_people" data-toggle="tab">Zájemci o členství</a></li>
 </ul>
 
 <!-- Tab panes -->
 <div class="tab-content">
-  <div class="tab-pane active" id="home">Koordinátor: <%= @branch.coordinator.try(:name) %></div>
-  <div><%= link_to "Export", branch_people_path(@branch, format: :xls), class: "btn btn-primary btn-lg active" %></div>
+  <div class="tab-pane active" id="home">Koordinátor: <%= @branch.coordinator.try(:name) %><div><%= link_to "Export", branch_people_path(@branch, format: :xls), class: "btn btn-primary btn-lg active" %></div></div>
+
   <div class="tab-pane" id="domestic_members">
-
-<h2>Kmenoví členové</h2>
-<ul>
-<% @branch.domestic_members.accessible_by(current_ability).each do |member| %>
-<li><%= member.name %></li>
-<% end %>
-</ul>
-
+    <h2>Kmenoví členové</h2>
+    <table class="table table-striped">
+      <thead><tr><th>Jméno</th><th>Email</th><th>Telefon</th><th>Městská část</th></tr></thead>
+      <tbody><%=render @branch.domestic_members.accessible_by(current_ability) %></tbody>
+    </table>
   </div>
+
   <div class="tab-pane" id="domestic_supporters">
-<h2>Kmenoví příznivci</h2>
-<ul>
-<% @branch.domestic_supporters.accessible_by(current_ability).each do |member| %>
-<li><%= member.name %></li>
-<% end %>
-</ul>
+    <h2>Kmenoví příznivci</h2>
+    <table class="table table-striped">
+      <thead><tr><th>Jméno</th><th>Email</th><th>Telefon</th><th>Městská část</th></tr></thead>
+      <tbody><%=render @branch.domestic_supporters.accessible_by(current_ability) %></tbody>
+    </table>
   </div>
 
   <div class="tab-pane" id="guest_people">
-<h2>Hostující členové</h2>
-<ul>
-<% @branch.guest_people.accessible_by(current_ability).each do |member| %>
-<li><%= member.name %></li>
-<% end %>
-</ul>
+    <h2>Hostující</h2>
+    <table class="table table-striped">
+      <thead><tr><th>Jméno</th><th>Email</th><th>Telefon</th><th>Městská část</th></tr></thead>
+      <tbody><%=render @branch.guest_people.accessible_by(current_ability) %></tbody>
+    </table>
   </div>
 
   <div class="tab-pane" id="awaiting_domestic_people">

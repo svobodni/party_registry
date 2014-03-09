@@ -1,0 +1,6 @@
+<tr>
+	<td><%=link_to person.name, person%></td>
+	<td><%=person.email%></td>
+	<td><%=person.phone%></td>
+	<td><%=person.domestic_ruian_address.try(:mestska_cast)%></td>
+</tr>	
