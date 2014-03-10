@@ -11,7 +11,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140223011029) do
+ActiveRecord::Schema.define(version: 20140310033735) do
+
+  create_table "bank_payments", force: true do |t|
+    t.integer  "account_id"
+    t.decimal  "amount",        precision: 10, scale: 2
+    t.string   "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "row_id"
+    t.boolean  "transfer",                               default: false
+    t.date     "validfrom"
+    t.date     "validto"
+    t.string   "curcode"
+    t.datetime "datum"
+    t.string   "debitaccount"
+    t.string   "debitbank"
+    t.string   "creditaccount"
+    t.string   "creditbank"
+    t.string   "varsym"
+    t.string   "constsym"
+    t.string   "info"
+    t.string   "ekonto_status"
+    t.string   "accname"
+    t.string   "specsym"
+    t.string   "type"
+  end
 
   create_table "bodies", force: true do |t|
     t.string   "type"
@@ -30,6 +55,9 @@ ActiveRecord::Schema.define(version: 20140223011029) do
     t.string   "nuts3_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "fio_account_number"
+    t.string   "fio_token"
+    t.string   "address_line"
   end
 
   create_table "people", force: true do |t|

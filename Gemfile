@@ -76,6 +76,8 @@ gem 'httparty'
 gem 'gretel'
 # [WEB] layout
 gem 'svobodni_layout', git: 'https://github.com/svobodni/svobodni_layout'
+# [INT] FIO banka
+gem 'fio_api' # gem 'fio_api', :git => 'https://github.com/kubicek/fio_api.git'
 
 
 group :test do

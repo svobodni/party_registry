@@ -8,6 +8,7 @@
   <li><a href="#branches" data-toggle="tab">Pobočky</a></li>
   <li><a href="#mestska_cast" data-toggle="tab">Městské části</a></li>
   <li><a href="#awaiting_domestic_people" data-toggle="tab">Zájemci o členství</a></li>
+  <li><a href="#account" data-toggle="tab">Krajský účet</a></li>
   <li><a href="#unknown-addresses" data-toggle="tab">Nerozpoznaná adresa</a></li>
 </ul>
 
@@ -39,6 +40,22 @@
 </table>
   </div>
 
+<div class="tab-pane" id="account">
+  <h2>Pohyby na účtu</h2>
+    <table class="table table-striped">
+      <thead><tr><th>Datum</th><th>Částka</th><th>Název účtu</th><th>Info</th></thead>
+      <tbody>
+        <% @region.fio_payments.reverse.each do |payment| %>
+        <tr>
+        <th><%= l payment.datum.to_date %></th>
+        <td><%= payment.amount %></td>
+        <td><%= payment.accname %></td>
+        <td><%= payment.info %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 
 <div class="tab-pane" id="mestska_cast">
 <h2>Městské části</h2>
