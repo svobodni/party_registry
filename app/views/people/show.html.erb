@@ -56,7 +56,7 @@
  <% end %> 
 
 
-<h2>Pobočka</h3>
+<h2>Kmenová pobočka</h3>
 <% if @person.domestic_branch %>
 	<%= render @person.domestic_branch %>
 <% else %>
@@ -65,3 +65,7 @@
 
 
 
+<h2>Hostuje v pobočce</h3>
+<% if @person.guest_branch %>
+    <%= render @person.guest_branch %>
+<% end %>
