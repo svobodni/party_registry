@@ -45,7 +45,7 @@
     <table class="table table-striped">
       <thead><tr><th>Datum</th><th>Částka</th><th>Název účtu</th><th>Info</th></thead>
       <tbody>
-        <% @region.fio_payments.reverse.each do |payment| %>
+        <% @region.fio_payments.order("datum DESC").each do |payment| %>
         <tr>
         <th><%= l payment.datum.to_date %></th>
         <td><%= payment.amount %></td>

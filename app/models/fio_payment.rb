@@ -20,13 +20,9 @@ class FioPayment < BankPayment
     response = list.response
     response.transactions.each do |row|
 
-      if !is_imported?(row) && row.amount > 0
-
-        # platby, ktere nemaji spravny var. symbol nebo jsou v jine mene, budou nesparovane
-        #account = (row.vs.blank? || row.currency != account_currency) ? nil : Invoices.configuration.account_class.find_by_varsymbol(row.vs)
+      unless is_imported?(row)
 
         fio_payment = create!(
-          #:account => account,
           :amount => row.amount,
           :datum => Date.parse(row.date),
           :curcode => row.currency,
