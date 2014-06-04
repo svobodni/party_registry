@@ -11,10 +11,11 @@
       <% attributes.each do |a| %>
         <Cell><Data ss:Type="String"><%=a%></Data></Cell>
       <% end %>
-        <Cell><Data ss:Type="String">Domovská městská část</Data></Cell>
         <Cell><Data ss:Type="String">Domovský kraj</Data></Cell>
-        <Cell><Data ss:Type="String">Hostuje v kraji</Data></Cell>
+        <Cell><Data ss:Type="String">Domovský okres</Data></Cell>
+        <Cell><Data ss:Type="String">Domovská městská část</Data></Cell>
         <Cell><Data ss:Type="String">Domovská pobočka</Data></Cell>
+        <Cell><Data ss:Type="String">Hostuje v kraji</Data></Cell>
         <Cell><Data ss:Type="String">Hostuje v pobočce</Data></Cell>
       </Row>
       <% @people.each do |person| %>
@@ -22,10 +23,11 @@
       <% attributes.each do |a| %>
         <Cell><Data ss:Type="String"><%= person.send(a) %></Data></Cell>
       <% end %>
-        <Cell><Data ss:Type="String"><%= person.domestic_ruian_address.try(:mestska_cast) %></Data></Cell>
         <Cell><Data ss:Type="String"><%= person.domestic_region.try(:name) %></Data></Cell>
-        <Cell><Data ss:Type="String"><%= person.guest_region.try(:name) %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= person.domestic_ruian_address.try(:okres) %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= person.domestic_ruian_address.try(:mestska_cast) %></Data></Cell>
         <Cell><Data ss:Type="String"><%= person.domestic_branch.try(:name) %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= person.guest_region.try(:name) %></Data></Cell>
         <Cell><Data ss:Type="String"><%= person.guest_branch.try(:name) %></Data></Cell>
       </Row>
       <% end %>
