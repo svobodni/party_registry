@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 require Rails.root.join('lib', 'dotnet_sha1')
 # Třída Person reprezentuje osobu (členy a příznivce)
 class Person < ActiveRecord::Base
@@ -57,6 +58,22 @@ class Person < ActiveRecord::Base
 
   def vs
     (is_member? ? "1" : "5") + id.to_s.rjust(4,"0")
+  end
+
+  def status_text
+    if is_member?
+      if member_status == "regular"
+        "řádný člen"
+      else
+        "žadatel o členství"
+      end
+    else
+      if supporter_status == "regular"
+        "příznivec"
+      else
+        "nezaplacený příznivec"
+      end
+    end
   end
 
   include AASM

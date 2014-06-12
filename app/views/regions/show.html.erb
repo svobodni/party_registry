@@ -3,6 +3,12 @@
   breadcrumb :region, @region
 %>
 
+<style type="text/css">
+#map-canvas {
+  width:100%;
+  height:480px;
+}
+</style>
 <ul class="nav nav-tabs">
   <li class="active"><a href="#board" data-toggle="tab">Předsednictvo</a></li>
   <li><a href="#branches" data-toggle="tab">Pobočky</a></li>
@@ -10,8 +16,10 @@
   <li><a href="#okres" data-toggle="tab">Okresy</a></li>
   <li><a href="#awaiting_domestic_people" data-toggle="tab">Zájemci o členství</a></li>
   <li><a href="#account" data-toggle="tab">Krajský účet</a></li>
+  <li><a id="mapa" href="#map" data-toggle="tab">Mapa</a></li>
   <li><a href="#unknown-addresses" data-toggle="tab">Nerozpoznaná adresa</a></li>
 </ul>
+
 
 <!-- Tab panes -->
 
@@ -100,6 +108,10 @@
 </table>
   </div>
 
+<div class="tab-pane active" id="map">
+    <div id="map-canvas"></div>
+</div>
+
 <div class="tab-pane" id="awaiting_domestic_people">
 <h2>Zájemci o členství</h2>
 <table class="table table-striped">
@@ -122,4 +134,35 @@
   </div>
 
 </div>
+
+<%
+@users = @region.domestic_people.accessible_by(current_ability).select{|p| p.domestic_ruian_address}
+@hash = Gmaps4rails.build_markers(@users) do |user, marker|
+  marker.lat user.domestic_ruian_address.latitude
+  marker.lng user.domestic_ruian_address.longitude
+  marker.infowindow "#{user.name}<br/>#{user.status_text}"
+  marker.picture ({
+        "url" => user.is_member? ?
+          image_path("Map-Marker-Drawing-Pin-Right-Chartreusen-icon.png") :
+          image_path("Map-Marker-Drawing-Pin-Right-Azure-icon.png"),
+        "width" =>  36,
+        "height" => 36})
+end
+%>
+
+
+<script>
+handler = Gmaps.build('Google');
+handler.buildMap({ provider: {}, internal: {id: 'map-canvas'}}, function(){
+  markers = handler.addMarkers(<%=raw @hash.to_json %>);
+  handler.bounds.extendWith(markers);
+  // handler.fitMapToBounds();
+});
+handler.getMap().setCenter(new google.maps.LatLng(50.1,14.42));
+handler.getMap().setZoom(9);
+
+$('#mapa').on('shown.bs.tab', function (e) {});
+
+initialize();
+</script>
 

@@ -13,6 +13,7 @@
 
 <% if @person.domestic_ruian_address %>
 <div>rozpoznaná MČ: <%= @person.domestic_ruian_address.try(:mestska_cast) %></div>
+<div>rozpoznaný okres: <%= @person.domestic_ruian_address.try(:okres) %></div>
 <% else %>
 
 <div><strong>nerozpoznaná adresa</strong></div>

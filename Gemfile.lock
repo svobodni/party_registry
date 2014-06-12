@@ -100,6 +100,7 @@ GEM
     geocoder (1.1.9)
     gherkin (2.12.2)
       multi_json (~> 1.3)
+    gmaps4rails (2.1.2)
     gretel (3.0.5)
       rails (>= 3.2.0)
     haml (4.0.5)
@@ -258,6 +259,7 @@ DEPENDENCIES
   devise-encryptable
   fio_api
   geocoder
+  gmaps4rails
   gretel
   httparty
   jbuilder (~> 1.2)
