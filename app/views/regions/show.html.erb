@@ -7,6 +7,7 @@
   <li class="active"><a href="#board" data-toggle="tab">Předsednictvo</a></li>
   <li><a href="#branches" data-toggle="tab">Pobočky</a></li>
   <li><a href="#mestska_cast" data-toggle="tab">Městské části</a></li>
+  <li><a href="#okres" data-toggle="tab">Okresy</a></li>
   <li><a href="#awaiting_domestic_people" data-toggle="tab">Zájemci o členství</a></li>
   <li><a href="#account" data-toggle="tab">Krajský účet</a></li>
   <li><a href="#unknown-addresses" data-toggle="tab">Nerozpoznaná adresa</a></li>
@@ -71,15 +72,29 @@
 </table>
   </div>
 
+<div class="tab-pane" id="okres">
+<h2>Okresy</h2>
+<table class="table table-striped">
+  <thead>
+    <tr><th>Okres</th><th>Kmenoví členové</th></tr>
+  </thead>
+  <tbody>
+<% @region.domestic_members.group_by{|m| m.domestic_ruian_address.try(:okres)}.each do |okres,members| %>
+<tr><th><%= okres %></th><td><%= members.size %></td></tr>
+<% end %>
+</tbody>
+</table>
+  </div>
+
 <div class="tab-pane" id="unknown-addresses">
 <h2>Městské části</h2>
 <table class="table table-striped">
   <thead>
-    <tr><th>Městská část</th><th>Kmenoví členové</th></tr>
+    <tr><th>VS</th><th>Městská část</th><th>Kmenoví členové</th></tr>
   </thead>
   <tbody>
 <% @region.domestic_people.accessible_by(current_ability).reject{|p| p.domestic_ruian_address}.each do |person| %>
-<tr><th><%= link_to person.name, person %></th><td><%= person.domestic_address_line %></td><td><%= person.legacy_type%></td></tr>
+<tr><th><%= person.vs %></th><th><%= link_to person.name, person %></th><td><%= person.domestic_address_line %></td><td><%= person.legacy_type%></td></tr>
 <% end %>
 </tbody>
 </table>
