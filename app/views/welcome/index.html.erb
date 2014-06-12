@@ -10,9 +10,9 @@
 	<tbody>
 		<% for body in @country.bodies %>
 		<tr>
-			<td><strong><%= body.name %></strong></td>
+			<td><strong><%= body.name.split("(").first %></strong></td>
 			<td><%= body.chairman.try(:name) %></td>
-			<td><%= body.members.collect(&:name).join(', ') %></td>
+			<td><%= body.vicechairmen.collect(&:name).join(', ') %></td>
 		</tr>
 		<% end %>
 	</tbody>
