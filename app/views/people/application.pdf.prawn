@@ -25,6 +25,6 @@ pdf.table([
 		["31.1.2014","Podpis:"]], position: :center, column_widths: [100, 300])
 pdf.move_down 20
 pdf.text "Podepsanou přihlášku zašlete prosím na adresu:"
-pdf.text "Krajské sdružení Svobodných Karlovarský kraj"
-pdf.text "Lázeňská 11"
-pdf.text "36001 Karlovy Vary"
+@person.domestic_region.address_line.split(",").each{|line|
+	pdf.text line
+}
