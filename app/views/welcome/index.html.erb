@@ -1,14 +1,42 @@
 <h1>Republikové orgány</h1>
-<ul>
-<% for body in @country.bodies %>
-<li><%= body.name %></li>
-<% end %>
-</ul>
+<table class="table">
+	<thead>
+		<tr>
+			<th>Kraj</th>
+			<th>Předseda</th>
+			<th>Členové</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% for body in @country.bodies %>
+		<tr>
+			<td><strong><%= body.name %></strong></td>
+			<td><%= body.chairman.try(:name) %></td>
+			<td><%= body.members.collect(&:name).join(', ') %></td>
+		</tr>
+		<% end %>
+	</tbody>
+</table>
 
 
 <h1>Krajská sdružení</h1>
-<ul>
-<% for region in @country.regions.order(:nuts3_id).all %>
-<li><%= link_to region.name, region %></li>
-<% end %>
-</ul>
+<table class="table">
+	<thead>
+		<tr>
+			<th>Kraj</th>
+			<th>Předseda</th>
+			<th>Počet členů</th>
+			<th>Počet poboček</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% for region in @country.regions.order(:nuts3_id).all %>
+		<tr>
+			<td><strong><%= link_to region.name, region %></strong></td>
+			<td><%= region.board.chairman.try(:name) %></td>
+			<td><%= region.domestic_members.count %></td>
+			<td><%= region.branches.count %></td>
+		</tr>
+		<% end %>
+	</tbody>
+</table>
