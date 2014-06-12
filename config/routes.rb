@@ -20,5 +20,13 @@ PartyRegistry::Application.routes.draw do
     resources :people
   end
 
+  get 'server' => 'server#index'
+  post 'server' => 'server#index'
+  get 'server/xrds' => 'server#idp_xrds'
+  get 'user/:username' => 'server#user_page'
+  get 'user/:username/xrds' => 'server#user_xrds'
+  get 'server/decision' => 'server#decision'
+  post 'server/decision' => 'server#decision'
+
   root 'welcome#index'
 end
