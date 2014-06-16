@@ -1,0 +1,76 @@
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html>
+<head lang="cs">
+
+    <!-- CSS (load bootstrap) -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/ng-grid/2.0.11/ng-grid.min.css"/>
+    <style>
+        .navbar { border-radius:0; }
+
+        .gridStyle {
+    border: 1px solid rgb(212,212,212);
+    width: 100%; 
+    height: 600px;
+}
+    </style>
+
+    <!-- JS (load angular, ui-router, and our custom js file) -->
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="//code.angularjs.org/1.2.13/angular.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.8/angular-ui-router.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/ng-grid/2.0.11/ng-grid.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/ng-grid/2.0.11/ng-grid-csv-export.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jspdf/0.9.0rc1/jspdf.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/ng-grid/2.0.11/ng-grid-pdf-export.js"></script>
+
+    <script src="/client/app.js"></script>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+
+<!-- apply our angular app to our site -->
+<body ng-app="routerApp">
+
+<!-- NAVIGATION -->
+<nav class="navbar navbar-inverse" role="navigation">
+    <div class="navbar-header">
+        <a class="navbar-brand" ui-sref="#">Svobodní API klient</a>
+    </div>
+    <ul class="nav navbar-nav">
+        <li><a ui-sref="profile">Home</a></li>
+        <li><a ui-sref="national_commitees">Republikové orgány</a></li>
+        <li><a ui-sref="regions">Krajská sdružení</a></li>
+        <li><a ui-sref="people">Občané</a></li>
+    </ul>
+    <div ng-controller="ProfileController">
+        <div ng-switch on="signed_in">
+        <div ng-switch-when="true">
+            Přihlášen <a ui-sref="profile">{{ profile.name }}</a>
+            <form method="post" action="/people/sign_out" class="button-to">
+        <input name="_method" type="hidden" value="delete" />
+        <input type="submit" value="Odhlásit" />        
+        </form>
+        </div>
+        <div ng-switch-default>
+            NE
+        </div>
+    </div>
+        <div ng-show="signed_in"></div>
+        </div>
+    </div>
+</nav>
+
+<!-- MAIN CONTENT -->
+<div class="container">
+
+	<!-- THIS IS WHERE WE WILL INJECT OUR CONTENT ============================== -->
+    <div ui-view></div>
+
+</div>
+
+</body>
+</html>

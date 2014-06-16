@@ -1,0 +1,91 @@
+// app.js
+var routerApp = angular.module('routerApp', ['ui.router','ngGrid']);
+
+routerApp.config(function($stateProvider, $urlRouterProvider) {
+    
+    $urlRouterProvider.otherwise('/profile');
+    
+    $stateProvider
+        
+        // HOME STATES AND NESTED VIEWS ========================================
+        .state('national_commitees', {
+            url: '/national_commitees',
+            templateUrl: '/client/templates/national_commitees.html'
+        })
+        .state('national_commitee', {
+            url: '/national_commitees/:commiteeId',
+            templateUrl: '/client/templates/national_commitee.html'
+        })
+        .state('people', {
+            url: '/people',
+            templateUrl: '/client/templates/people.html'
+        })
+        .state('profile', {
+            url: '/profile',
+            templateUrl: '/client/templates/profile.html'
+        })
+        .state('regions', {
+            url: '/regions',
+            templateUrl: '/client/templates/regions.html'
+        })
+        .state('region', {
+            url: '/regions/:regionId',
+            templateUrl: '/client/templates/region.html',
+        })
+        .state('branch', {
+            url: '/branches/:branchId',
+            templateUrl: '/client/templates/branch.html',
+        })
+        .state('awaiting_domestic_people', {
+            url: '/regions/:regionId/awaiting_domestic_people',
+            templateUrl: '/client/templates/awaiting_domestic_people.html'
+        });        
+});
+
+function ProfileController($scope, $http) {
+    $http.get('/people/profile.json').
+        success(function(data) {
+            $scope.profile = data.person;
+            $scope.signed_in = true;
+        }).error(function(data) {
+            $scope.signed_in = false;
+        });
+}
+
+function PeopleController($scope, $http, $stateParams, $filter) {
+    $scope.gridOptions = { 
+                data: 'people',
+                showGroupPanel: true,
+                showFilter: true,
+                plugins: [new ngGridCsvExportPlugin()],
+                showColumnMenu: true,
+                showFooter: true,
+                columnDefs: [
+                    {field:'first_name', displayName:'Jmeno'},
+                    {field:'last_name', displayName:'Prijmeni'},
+                    {field:'phone', displayName:'Telefon'},
+                    {field:'email', displayName:'Email'},
+                    {field:'domestic_region.name', displayName:'Domovsky kraj'},
+                    {field:'domestic_branch.name', displayName:'Domovska pobocka'}
+                ]
+            };
+    $http.get('/people.json', { cache: true }).
+        success(function(data) {
+            $scope.people = data.people;
+            // $scope.branches = _.chain(data.people).map(function(person){ return person.domestic_branch }).uniq(function(branch) {return branch.name;}).sortBy(function(branch){ return branch.name; }).value();
+
+        });
+}
+
+function OrganizationsController($scope, $http, $stateParams) {
+    $http.get('/bodies.json', { cache: true }).
+        success(function(data) {
+            $scope.bodies = data.bodies;
+        	$scope.national_commitees = _.select(data.bodies, function(body){ return body.organization.id == 100; });
+        	$scope.regional_commitees = _.reject(data.bodies, function(body){ return body.organization.id == 100; });
+            // current region
+        	$scope.region = _.find(data.bodies, function(body){ return body.organization.id == $stateParams.regionId; });
+            // current commitee
+            $scope.national_commitee = _.find(data.bodies, function(body){ return body.id == $stateParams.commiteeId; });
+        });
+}
