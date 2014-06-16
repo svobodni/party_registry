@@ -14,6 +14,9 @@ PartyRegistry::Application.routes.draw do
     member do
       get 'application'
     end
+    collection do
+      get 'profile'
+    end
   end
   resources :regions do
     resources :branches

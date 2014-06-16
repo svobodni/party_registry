@@ -12,7 +12,7 @@ class PeopleController < ApplicationController
     end
     respond_to do |format|
       format.xls
-      format.json { render json: @people }
+      format.json
     end
 
   end
@@ -23,6 +23,15 @@ class PeopleController < ApplicationController
     respond_to do |format|
       format.html
       format.json { render json: @person }
+    end
+  end
+
+  # GET /people/profile.json
+  def profile
+    @person = current_user
+    authorize!(:show, @person)
+    respond_to do |format|
+      format.json
     end
   end
 

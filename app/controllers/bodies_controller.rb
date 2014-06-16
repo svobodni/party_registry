@@ -1,8 +1,10 @@
 class BodiesController < ApplicationController
+
+  before_action :authenticate_person!, except: :index
+
   # GET /bodies.json
   def index
     @bodies = Body.all
-    render json: @bodies
   end
 
   # GET /bodies/1.json
