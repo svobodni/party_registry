@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140310033735) do
+ActiveRecord::Schema.define(version: 20140405000202) do
 
   create_table "bank_payments", force: true do |t|
     t.integer  "account_id"
@@ -127,6 +127,8 @@ ActiveRecord::Schema.define(version: 20140310033735) do
     t.float    "longitude"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "okres"
+    t.integer  "okres_id"
   end
 
   create_table "versions", force: true do |t|
