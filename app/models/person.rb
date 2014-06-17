@@ -80,32 +80,32 @@ class Person < ActiveRecord::Base
 
   aasm :column => 'member_status' do
     state :awaiting_application, :initial => true
-    state :awaiting_board_decision
+    state :awaiting_presidium_decision
     state :awaiting_first_payment
     state :regular
     state :cancelled
 
     # Přijatá přihláška
     event :received_application do
-      transitions :from => :awaiting_application, :to => :awaiting_board_decision
+      transitions :from => :awaiting_application, :to => :awaiting_presidium_decision
     end
 
     # Členství schváleno KrP
-    event :board_accepted do
-      transitions :from => :awaiting_board_decision, :to => :awaiting_first_payment
+    event :presidium_accepted do
+      transitions :from => :awaiting_presidium_decision, :to => :awaiting_first_payment
       # FIXME: obnoveni clenstvi
     end
 
     # Členství neschváleno KrP
-    event :board_denied do
-      transitions :from => :awaiting_board_decision, :to => :cancelled
+    event :presidium_denied do
+      transitions :from => :awaiting_presidium_decision, :to => :cancelled
     end
 
     # Zaplacení členského příspěvku
     event :payment do
       transitions :from => :awaiting_first_payment, :to => :regular
       transitions :from => :regular, :to => :regular
-      transitions :from => :cancelled, :to => :awaiting_board_decision
+      transitions :from => :cancelled, :to => :awaiting_presidium_decision
     end
 
     # Roční deaktivace nezaplacených členů
@@ -116,7 +116,7 @@ class Person < ActiveRecord::Base
     # Zrušení členství nebo žádosti o členství na žádost člena
     event :cancel_request do
       transitions :from => :awaiting_application, :to => :cancelled
-      transitions :from => :awaiting_board_decision, :to => :cancelled
+      transitions :from => :awaiting_presidium_decision, :to => :cancelled
       transitions :from => :awaiting_first_payment, :to => :cancelled
       transitions :from => :regular, :to => :cancelled
     end

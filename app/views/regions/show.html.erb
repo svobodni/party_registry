@@ -10,7 +10,7 @@
 }
 </style>
 <ul class="nav nav-tabs">
-  <li class="active"><a href="#board" data-toggle="tab">Předsednictvo</a></li>
+  <li class="active"><a href="#presidium" data-toggle="tab">Předsednictvo</a></li>
   <li><a href="#branches" data-toggle="tab">Pobočky</a></li>
   <li><a href="#mestska_cast" data-toggle="tab">Městské části</a></li>
   <li><a href="#okres" data-toggle="tab">Okresy</a></li>
@@ -24,11 +24,11 @@
 <!-- Tab panes -->
 
 <div class="tab-content">
-  <div class="tab-pane active" id="board">
+  <div class="tab-pane active" id="presidium">
   	<h2>Předseda</h2>
-    <div><%= @region.board.president.try(:person).try(:name) %></div>
+    <div><%= @region.presidium.president.try(:person).try(:name) %></div>
   	<h2>Místopředsedové</h2>
-    <div><%= @region.board.vicepresidents.collect{|p| p.name}.join(', ') %></div>
+    <div><%= @region.presidium.vicepresidents.collect{|p| p.name}.join(', ') %></div>
     <h2>Členové a příznivci</h2>
     <div><%= link_to "Export", region_people_path(@region, format: :xls), class: "btn btn-primary btn-lg active" %></div>
 </div>

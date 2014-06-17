@@ -1,5 +1,5 @@
 class RegionSerializer < ActiveModel::Serializer
   attributes :id, :name
   has_many :branches
-  has_one :board, serializer: BodySerializer
+  has_one :presidium, serializer: BodySerializer
 end

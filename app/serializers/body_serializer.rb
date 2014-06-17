@@ -1,6 +1,7 @@
 class BodySerializer < ActiveModel::Serializer
-  attributes :id, :name, :acronym, :organization_id
-  has_many :members, serializer: PublicPersonSerializer
-  has_one :chairman, serializer: PublicPersonSerializer
-  has_many :vicechairmen, serializer: PublicPersonSerializer
+  attributes :id, :name, :acronym, :organization_id, :type
+  has_many :members, serializer: RoleSerializer
+  has_one :president, serializer: RoleSerializer
+  has_many :vicepresidents, serializer: RoleSerializer
+  has_one :organization, polymorphic: true
 end
