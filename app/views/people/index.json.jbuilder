@@ -1,4 +1,5 @@
 json.people @people do |person|
+  json.type person.legacy_type
   json.name person.name
   json.first_name person.first_name
   json.last_name person.last_name

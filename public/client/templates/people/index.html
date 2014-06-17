@@ -1,0 +1,12 @@
+<div class="tab-pane" id="regions" ng-controller="PeopleController">
+
+<h1>Seznam členů a příznivců</h1>
+
+<strong>Filter:</strong> </string><input type="text" ng-model="filterOptions.filterText" />
+
+<button ng-click="filterOptions.filterText = 'type:member'">členové</button>
+<button ng-click="filterOptions.filterText = 'type:sympathizer'">příznivci</button>
+
+     <div class="gridStyle" ng-grid="gridOptions"></div>
+
+</div>

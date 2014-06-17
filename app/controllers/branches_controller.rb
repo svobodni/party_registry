@@ -1,6 +1,8 @@
 class BranchesController < ApplicationController
   before_action :set_branch, only: [:show, :update, :destroy]
 
+  before_action :authenticate_person!, except: :show
+
   # GET /branches.json
   def index
     @branches = Branch.all

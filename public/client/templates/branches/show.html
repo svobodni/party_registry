@@ -1,0 +1,12 @@
+<div class="tab-pane" id="branch" ng-controller="BranchController">
+
+<h1>Pobočka {{ branch.name  }}</h1>
+
+<ul class="nav nav-tabs">
+  <li ng-show="signed_in" ui-sref-active="active"><a ui-sref="branch.people">Občané</a></li>
+</ul>
+
+<div ui-view></div>
+
+</div>
+

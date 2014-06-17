@@ -18,7 +18,7 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
         })
         .state('people', {
             url: '/people',
-            templateUrl: '/client/templates/people.html'
+            templateUrl: '/client/templates/people/index.html'
         })
         .state('profile', {
             url: '/profile',
@@ -38,9 +38,15 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
         .state('region.branches', {
             templateUrl: '/client/templates/regions/branches.html'
         })
+        .state('region.people', {
+            templateUrl: '/client/templates/people/index.html'
+        })
         .state('branch', {
             url: '/branches/:branchId',
-            templateUrl: '/client/templates/branch.html',
+            templateUrl: '/client/templates/branches/show.html',
+        })
+        .state('branch.people', {
+            templateUrl: '/client/templates/people/index.html'
         })
         .state('awaiting_domestic_people', {
             url: '/regions/:regionId/awaiting_domestic_people',
@@ -48,17 +54,27 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
         });        
 });
 
-function ProfileController($scope, $http) {
+function ProfileController($rootScope, $scope, $http) {
     $http.get('/people/profile.json').
         success(function(data) {
-            $scope.profile = data.person;
-            $scope.signed_in = true;
+            $rootScope.profile = data.person;
+            $rootScope.signed_in = true;
         }).error(function(data) {
-            $scope.signed_in = false;
+            $rootScope.signed_in = false;
         });
 }
 
+function BranchController($scope, $http, $stateParams) {
+    $http.get('/branches/'+$stateParams.branchId+'.json')
+    .success(function(data) {
+        $scope.branch = data.branch;
+    });
+}
+
 function PeopleController($scope, $http, $stateParams, $filter) {
+    $scope.filterOptions = {
+      filterText: ''
+    };
     $scope.gridOptions = { 
                 data: 'people',
                 showGroupPanel: true,
@@ -66,16 +82,25 @@ function PeopleController($scope, $http, $stateParams, $filter) {
                 plugins: [new ngGridCsvExportPlugin()],
                 showColumnMenu: true,
                 showFooter: true,
+                filterOptions: $scope.filterOptions,
                 columnDefs: [
                     {field:'first_name', displayName:'Jmeno'},
                     {field:'last_name', displayName:'Prijmeni'},
                     {field:'phone', displayName:'Telefon'},
                     {field:'email', displayName:'Email'},
                     {field:'domestic_region.name', displayName:'Domovsky kraj'},
-                    {field:'domestic_branch.name', displayName:'Domovska pobocka'}
+                    {field:'domestic_branch.name', displayName:'Domovska pobocka'},
+                    {field:'type', displayName:'Typ'}
                 ]
             };
-    $http.get('/people.json', { cache: true }).
+    if ($stateParams.regionId) {
+        path =  '/regions/'+$stateParams.regionId+'/people.json'
+    } else if ($stateParams.branchId) {
+        path =  '/branches/'+$stateParams.branchId+'/people.json'
+    } else {
+        path = '/people.json'
+    }
+    $http.get(path). //, { cache: true }).
         success(function(data) {
             $scope.people = data.people;
             // $scope.branches = _.chain(data.people).map(function(person){ return person.domestic_branch }).uniq(function(branch) {return branch.name;}).sortBy(function(branch){ return branch.name; }).value();
