@@ -1,26 +1,26 @@
-krp_praha_exchairman:
-  type: Chairman
+krp_praha_expresident:
+  type: President
   person: zvara
   body: krp_praha
   since: 2012-02-19
   till: 2013-02-19
 
-krp_praha_chairman:
-  type: Chairman
+krp_praha_president:
+  type: President
   person: kubicek 
   body: krp_praha
   since: 2013-02-19
   till: 2015-02-19
 
-rep_chairman:
-  type: Chairman
+rep_president:
+  type: President
   person: mach
   body: rep
   since: 2014-02-19
   till: 2015-02-19
 
-rep_vicechairman_1:
-  type: Vicechairman
+rep_vicepresident_1:
+  type: Vicepresident
   person: zvara
   body: rep
   since: 2014-02-19

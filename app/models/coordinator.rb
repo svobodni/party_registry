@@ -1,4 +1,4 @@
-# Třída Chairman reprezentuje Koordinátora pobočky
+# Třída Coordinator reprezentuje Koordinátora pobočky
 class Coordinator < Role
   belongs_to :branch
 

@@ -13,10 +13,10 @@ class Body < ActiveRecord::Base
   has_many :historic_people, through: :historic_roles, source: :person
 
   # Stávající předseda orgánu (u předsednictev)
-  has_one :chairman, -> { where("since < ? and till > ?", Time.now, Time.now  ) }, class_name: Chairman
+  has_one :president, -> { where("since < ? and till > ?", Time.now, Time.now  ) }, class_name: President
 
   # Stávající místopředsedové orgánu (u předsednictev)
-  has_many :vicechairmen, -> { where("since < ? and till > ?", Time.now, Time.now  ) }, class_name: Vicechairman
+  has_many :vicepresidents, -> { where("since < ? and till > ?", Time.now, Time.now  ) }, class_name: Vicepresident
 
   # Stávající členové orgánu (u komisí)
   def members

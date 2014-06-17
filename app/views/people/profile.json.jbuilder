@@ -11,7 +11,7 @@ json.person do
     json.name @person.domestic_branch.try(:name)
   end
   json.roles @person.roles do |role|
-    json.name role.type.underscore.gsub(/chairman/,'president')
+    json.name role.type
     json.organization do
       if role.body
         json.id role.body.id

@@ -12,8 +12,8 @@ cs:
       region: Kraj
       branch: Pobočka
       role: Funkce
-      chairman: Předseda
-      vicechairman: Místopředseda
+      president: Předseda
+      vicepresident: Místopředseda
       coordinator: Koordinátor
       member: Člen orgánu
 

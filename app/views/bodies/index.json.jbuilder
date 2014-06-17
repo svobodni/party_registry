@@ -2,9 +2,9 @@ json.bodies @bodies do |body|
   json.id body.id
   json.name body.name.split('(').first
   json.president do |president|
-  	json.name body.chairman.try(:person).try(:name)
+  	json.name body.president.try(:person).try(:name)
   end
-  json.vicepresidents body.vicechairmen do |vicepresident|
+  json.vicepresidents body.vicepresidents do |vicepresident|
   	json.name vicepresident.try(:person).try(:name)
   end
   json.members body.members do |member|

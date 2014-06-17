@@ -26,9 +26,9 @@
 <div class="tab-content">
   <div class="tab-pane active" id="board">
   	<h2>Předseda</h2>
-    <div><%= @region.board.chairman.try(:person).try(:name) %></div>
+    <div><%= @region.board.president.try(:person).try(:name) %></div>
   	<h2>Místopředsedové</h2>
-    <div><%= @region.board.vicechairmen.collect{|p| p.name}.join(', ') %></div>
+    <div><%= @region.board.vicepresidents.collect{|p| p.name}.join(', ') %></div>
     <h2>Členové a příznivci</h2>
     <div><%= link_to "Export", region_people_path(@region, format: :xls), class: "btn btn-primary btn-lg active" %></div>
 </div>
