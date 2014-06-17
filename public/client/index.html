@@ -41,10 +41,10 @@
         <a class="navbar-brand" ui-sref="#">Svobodní API klient</a>
     </div>
     <ul class="nav navbar-nav">
-        <li><a ui-sref="profile">Home</a></li>
+        <li ng-show="signed_in"><a ui-sref="profile">Home</a></li>
         <li><a ui-sref="national_committees">Republikové orgány</a></li>
         <li><a ui-sref="regions">Krajská sdružení</a></li>
-        <li><a ui-sref="people">Občané</a></li>
+        <li ng-show="signed_in"><a ui-sref="people">Občané</a></li>
     </ul>
     <div ng-controller="ProfileController">
         <div ng-switch on="signed_in">
@@ -57,9 +57,6 @@
         </div>
         <div ng-switch-default>
             NE
-        </div>
-    </div>
-        <div ng-show="signed_in"></div>
         </div>
     </div>
 </nav>

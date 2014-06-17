@@ -1,0 +1,13 @@
+<h2>Krajské předsednictvo<h2>
+
+<h3>Předseda</h3>
+<ul>
+	<li>{{ region.president.name }}</li>
+</ul>
+
+<div ng-show="region.vicepresidents">
+<h3>Místopředsedové</h3>
+<ul data-ng-repeat="vicepresident in region.vicepresidents">
+	<li>{{ vicepresident.name }}</li>
+</ul>
+</div>

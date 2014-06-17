@@ -2,41 +2,12 @@
 
 <h1>Krajské sdružení {{ region.organization.name }}</h1>
 
-<ul class="nav nav-pills">
-  <li class="active"><a href="#">Home</a></li>
-  <li><a href="#">Krajské předsednictvo</a></li>
-  <li><a href="#">Pobočky</a></li>
+<ul class="nav nav-tabs">
+  <li ui-sref-active="active"><a ui-sref="region.presidency">Krajské předsednictvo</a></li>
+  <li ui-sref-active="active"><a ui-sref="region.branches">Pobočky</a></li>
 </ul>
 
-<h2>Krajské předsednictvo<h2>
+<div ui-view></div>
 
-<h3>Předseda</h3>
-<ul>
-	<li>{{ region.president.name }}</li>
-</ul>
-
-<div ng-show="region.vicepresidents">
-<h3>Místopředsedové</h3>
-<ul data-ng-repeat="vicepresident in region.vicepresidents">
-	<li>{{ vicepresident.name }}</li>
-</ul>
 </div>
 
-<div ng-show="region.organization.branches">
-<h2>Pobočky</h2>
-
-<table class="table table-striped">
-<thead><tr><th>Název pobočky</th><th>Koordinátor</th><th>Telefon</th><th>Email</th><th>Kmenoví členové</th></thead>
-<tbody>
-<tr data-ng-repeat="branch in region.organization.branches">
-<th><a ui-sref="branch({ branchId: branch.id })">{{ branch.name }}</a></th>
-<td>{{ branch.coordinator.name }}</td>
-<td>{{ branch.coordinator.phone }}</td>
-<td>{{ branch.coordinator.email }}</td>
-<td>{{ branch.members_count }}</td>
-</tr>
-</tbody>
-</table>
-</div>
-
-  </div>

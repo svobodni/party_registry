@@ -3,7 +3,7 @@ var routerApp = angular.module('routerApp', ['ui.router','ngGrid']);
 
 routerApp.config(function($stateProvider, $urlRouterProvider) {
     
-    $urlRouterProvider.otherwise('/profile');
+    $urlRouterProvider.otherwise('/regions');
     
     $stateProvider
         
@@ -31,6 +31,12 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
         .state('region', {
             url: '/regions/:regionId',
             templateUrl: '/client/templates/region.html',
+        })
+        .state('region.presidency', {
+            templateUrl: '/client/templates/regions/presidency.html'
+        })
+        .state('region.branches', {
+            templateUrl: '/client/templates/regions/branches.html'
         })
         .state('branch', {
             url: '/branches/:branchId',
