@@ -1,0 +1,17 @@
+<div class="tab-pane" id="national_committees" ng-controller="OrganizationsController">
+
+<h1>Republikové orgány</h1>
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>Orgán</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr data-ng-repeat="national_committee in national_committees">			
+			<td><strong><a ui-sref="national_committee({ committeeId: national_committee.id })">{{ national_committee.name }}</a></strong></td>
+		</tr>
+	</tbody>
+</table>
+
+</div>

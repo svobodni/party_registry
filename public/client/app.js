@@ -8,13 +8,13 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
         
         // HOME STATES AND NESTED VIEWS ========================================
-        .state('national_commitees', {
-            url: '/national_commitees',
-            templateUrl: '/client/templates/national_commitees.html'
+        .state('national_committees', {
+            url: '/national_committees',
+            templateUrl: '/client/templates/national_committees.html'
         })
-        .state('national_commitee', {
-            url: '/national_commitees/:commiteeId',
-            templateUrl: '/client/templates/national_commitee.html'
+        .state('national_committee', {
+            url: '/national_committees/:committeeId',
+            templateUrl: '/client/templates/national_committee.html'
         })
         .state('people', {
             url: '/people',
@@ -81,11 +81,11 @@ function OrganizationsController($scope, $http, $stateParams) {
     $http.get('/bodies.json', { cache: true }).
         success(function(data) {
             $scope.bodies = data.bodies;
-        	$scope.national_commitees = _.select(data.bodies, function(body){ return body.organization.id == 100; });
-        	$scope.regional_commitees = _.reject(data.bodies, function(body){ return body.organization.id == 100; });
+        	$scope.national_committees = _.select(data.bodies, function(body){ return body.organization.id == 100; });
+        	$scope.regional_committees = _.reject(data.bodies, function(body){ return body.organization.id == 100; });
             // current region
         	$scope.region = _.find(data.bodies, function(body){ return body.organization.id == $stateParams.regionId; });
-            // current commitee
-            $scope.national_commitee = _.find(data.bodies, function(body){ return body.id == $stateParams.commiteeId; });
+            // current committee
+            $scope.national_committee = _.find(data.bodies, function(body){ return body.id == $stateParams.committeeId; });
         });
 }

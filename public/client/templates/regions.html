@@ -11,11 +11,11 @@
 		</tr>
 	</thead>
 	<tbody>
-		<tr data-ng-repeat="regional_commitee in regional_commitees">
-			<td><strong><a ui-sref="region({ regionId: regional_commitee.organization.id })">{{ regional_commitee.organization.name }}</a></strong></td>
-			<td>{{ regional_commitee.president.name }}</td>
-			<td>{{ regional_commitee.organization.members_count }}</td>
-			<td>{{ regional_commitee.organization.branches_count }}</td>
+		<tr data-ng-repeat="regional_committee in regional_committees">
+			<td><strong><a ui-sref="region({ regionId: regional_committee.organization.id })">{{ regional_committee.organization.name }}</a></strong></td>
+			<td>{{ regional_committee.president.name }}</td>
+			<td>{{ regional_committee.organization.members_count }}</td>
+			<td>{{ regional_committee.organization.branches_count }}</td>
 		</tr>
 	</tbody>
 </table>
