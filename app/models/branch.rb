@@ -10,6 +10,9 @@ class Branch < Organization
   # má seznam i bývalých koordinátorů
   has_many :coordinators, -> { where("till < ?", Time.now) }
 
+  # má svého náboráře
+  has_one :recruiter, -> { where("since < ? and till > ?", Time.now, Time.now ) }
+
   # má kmenové členy a příznivce
   has_many :domestic_people, class_name: "Person", foreign_key: "domestic_branch_id"
   has_many :domestic_members, -> { where('legacy_type="member" and member_status="regular"') },class_name: "Person", foreign_key: "domestic_branch_id"

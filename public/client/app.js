@@ -32,8 +32,8 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
             url: '/regions/:regionId',
             templateUrl: '/client/templates/region.html',
         })
-        .state('region.presidency', {
-            templateUrl: '/client/templates/regions/presidency.html'
+        .state('region.presidium', {
+            templateUrl: '/client/templates/regions/presidium.html'
         })
         .state('region.branches', {
             templateUrl: '/client/templates/regions/branches.html'
@@ -84,13 +84,16 @@ function PeopleController($scope, $http, $stateParams, $filter) {
                 showFooter: true,
                 filterOptions: $scope.filterOptions,
                 columnDefs: [
+                    {field:'vs', displayName:'vs'},
                     {field:'first_name', displayName:'Jmeno'},
                     {field:'last_name', displayName:'Prijmeni'},
                     {field:'phone', displayName:'Telefon'},
                     {field:'email', displayName:'Email'},
                     {field:'domestic_region.name', displayName:'Domovsky kraj'},
                     {field:'domestic_branch.name', displayName:'Domovska pobocka'},
-                    {field:'type', displayName:'Typ'}
+                    {field:'type', visible:false},
+                    {field:'member_status', visible:false},
+                    {field:'supporter_status', visible:false}
                 ]
             };
     if ($stateParams.regionId) {

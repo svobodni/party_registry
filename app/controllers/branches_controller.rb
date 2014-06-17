@@ -13,7 +13,7 @@ class BranchesController < ApplicationController
   def show
     respond_to do |format|
       format.html
-      format.json { render json: @branch }
+      format.json
     end
   end
 

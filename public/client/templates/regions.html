@@ -12,7 +12,7 @@
 	</thead>
 	<tbody>
 		<tr data-ng-repeat="regional_committee in regional_committees">
-			<td><strong><a ui-sref="region.presidency({ regionId: regional_committee.organization.id })">{{ regional_committee.organization.name }}</a></strong></td>
+			<td><strong><a ui-sref="region.presidium({ regionId: regional_committee.organization.id })">{{ regional_committee.organization.name }}</a></strong></td>
 			<td>{{ regional_committee.president.name }}</td>
 			<td>{{ regional_committee.organization.members_count }}</td>
 			<td>{{ regional_committee.organization.branches_count }}</td>

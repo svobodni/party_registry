@@ -2,10 +2,11 @@
 <h2>Pobočky</h2>
 
 <table class="table table-striped">
-<thead><tr><th>Název pobočky</th><th>Koordinátor</th><th>Telefon</th><th>Email</th><th>Kmenoví členové</th></thead>
+<thead><tr><th>Název pobočky</th><th ng-show="region.organization.id==10">Náborář</th><th>Koordinátor</th><th>Telefon</th><th>Email</th><th>Kmenoví členové</th></thead>
 <tbody>
 <tr data-ng-repeat="branch in region.organization.branches">
 <th><a ui-sref="branch({ branchId: branch.id })">{{ branch.name }}</a></th>
+<td ng-show="region.organization.id==10">{{ branch.recruiter.name }}</td>
 <td>{{ branch.coordinator.name }}</td>
 <td>{{ branch.coordinator.phone }}</td>
 <td>{{ branch.coordinator.email }}</td>
