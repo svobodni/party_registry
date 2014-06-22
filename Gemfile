@@ -72,6 +72,9 @@ gem 'crack'
 gem 'geocoder'
 gem 'httparty'
 
+# konfigurace
+gem 'configatron'
+
 # [WEB] breadcrumbs
 gem 'gretel'
 # [WEB] layout
@@ -85,6 +88,8 @@ gem 'ruby-openid'
 # [INT] FIO banka
 gem 'fio_api' # gem 'fio_api', :git => 'https://github.com/kubicek/fio_api.git'
 
+# JSON API AUTH
+gem 'jwt'
 
 group :test do
   gem 'cucumber-rails', :require => false

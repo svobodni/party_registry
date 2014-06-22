@@ -1,5 +1,8 @@
 PartyRegistry::Application.routes.draw do
   get '/admin/person/:id/application' => 'people#application'
+  get '/auth/token'
+  get '/auth/public_key'
+  get '/auth/profile'
 
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
 
