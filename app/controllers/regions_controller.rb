@@ -1,8 +1,10 @@
 class RegionsController < ApplicationController
+
+  before_action :authenticate_person!, except: [:index, :show]
+
   # GET /regions.json
   def index
     @regions = Region.includes(:branches)
-    render json: @regions
   end
 
   # GET /regions/1.json
@@ -10,7 +12,7 @@ class RegionsController < ApplicationController
     @region = Region.find(params[:id])
     respond_to do |format|
       format.html
-      format.json { render json: @region }
+      format.json
     end
   end
 end
