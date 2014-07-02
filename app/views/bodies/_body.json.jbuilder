@@ -1,10 +1,10 @@
 json.id body.id
 json.name body.name.split('(').first
 json.president do |president|
-	json.name body.president.try(:person).try(:name)
+	json.partial! 'people/person', person: body.president.try(:person) if body.president
 end
 json.vicepresidents body.vicepresidents do |vicepresident|
-	json.name vicepresident.try(:person).try(:name)
+  json.partial! 'people/person', person: vicepresident.try(:person) if vicepresident.person
 end
 json.members body.members do |member|
 	json.name member.members.name
