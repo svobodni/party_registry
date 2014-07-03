@@ -4,6 +4,10 @@ json.person do
   json.last_name @person.last_name
   json.email @person.email
   json.phone @person.phone
+  json.homepage_url @person.homepage_url
+  json.fb_page_url @person.fb_page_url
+  json.fb_profile_url @person.fb_profile_url
+  json.photo_url @person.photo_url
   json.domestic_region do
     json.name @person.domestic_region.name
   end

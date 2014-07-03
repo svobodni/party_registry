@@ -9,6 +9,10 @@ json.people @people do |person|
   json.last_name person.last_name
   json.email person.email
   json.phone person.phone
+  json.domestic_address do
+    json.latitude person.domestic_ruian_address.try(:latitude)
+    json.longitude person.domestic_ruian_address.try(:longitude)
+  end
   json.domestic_region do
     json.name person.domestic_region.name
   end

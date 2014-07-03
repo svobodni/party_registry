@@ -1,1 +1,3 @@
-json.partial! 'branches/branch',  branch: @branch
+json.branch do
+  json.partial! 'branches/branch',  branch: @branch
+end
