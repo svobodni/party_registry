@@ -1,6 +1,7 @@
 class RegionsController < ApplicationController
 
   before_action :authenticate_person!, except: [:index, :show]
+  before_action :authenticate_person!, only: [:show], unless: proc { params[:format]=='json' }
 
   # GET /regions.json
   def index
