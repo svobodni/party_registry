@@ -59,6 +59,9 @@ gem 'paper_trail', '~> 3.0.0'
 # Stavovy stroj
 gem 'aasm'
 
+# [API] CORS
+gem 'rack-cors', :require => 'rack/cors'
+
 # JSON serializer
 gem 'active_model_serializers'
 

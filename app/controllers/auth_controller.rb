@@ -19,7 +19,14 @@ class AuthController < ApplicationController
       typ: "https://registr.svobodni.cz/auth"
     }
     @token = JWT.encode(@payload, configatron.auth.private_key, "RS256")
-    render text: @token
+
+    respond_to do |format|
+      format.html {
+        uri = URI.parse(params[:redirect_uri])
+        redirect_to (params[:redirect_uri]+"?jwt="+@token)
+      }
+      format.json {render text: @token}
+    end
   end
 
   def public_key
@@ -37,7 +44,7 @@ class AuthController < ApplicationController
 private
   def validate_token
     begin
-      token = request.headers['Auth'].split(' ').last
+      token = request.headers['Authorization'].split(' ').last
       @jwt = JWT.decode(token, configatron.auth.private_key, nil).first
     rescue JWT::DecodeError
       render nothing: true, status: :unauthorized

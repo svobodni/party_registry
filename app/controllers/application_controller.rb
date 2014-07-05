@@ -5,6 +5,8 @@ class ApplicationController < ActionController::Base
 
   before_action :authenticate_person!
 
+  before_action :authenticate_person!, unless: Proc.new {  request.headers['Authorization'] }
+  before_action :authorize_token!, if: Proc.new { request.headers['Authorization'] }
 
   def current_user
   	current_person
@@ -17,5 +19,11 @@ class ApplicationController < ActionController::Base
     respond_to do |format|
       format.json{ render :json => 'Access Denied', :status => 403 }
     end
+  end
+
+  def authorize_token!
+    token = request.headers['Authorization'].split(' ').last
+    jwt = JWT.decode(token, configatron.auth.private_key, nil).first
+    @current_person = Person.find(jwt['sub'].split('|').last)
   end
 end
