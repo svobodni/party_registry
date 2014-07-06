@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140405000202) do
+ActiveRecord::Schema.define(version: 20140618015407) do
 
   create_table "bank_payments", force: true do |t|
     t.integer  "account_id"
@@ -101,6 +101,9 @@ ActiveRecord::Schema.define(version: 20140405000202) do
     t.integer  "guest_branch_id"
     t.string   "member_status"
     t.string   "supporter_status"
+    t.string   "homepage_url"
+    t.string   "fb_profile_url"
+    t.string   "fb_page_url"
   end
 
   add_index "people", ["reset_password_token"], name: "index_people_on_reset_password_token", unique: true
