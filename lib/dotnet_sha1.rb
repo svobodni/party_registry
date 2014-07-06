@@ -13,9 +13,6 @@ module Devise
         end
 
         def self.encode_password(password, salt)
-          puts "jedu!"
-          puts password
-          puts salt
           bytes = ""
           password.each_char { |c| bytes += c + "\x00" }
           salty = Base64.decode64(salt)

@@ -3,10 +3,9 @@
 
 class AuthController < ApplicationController
 
-  before_action :authenticate_person!, except: [:public_key, :profile]
-  before_action :validate_token, only: :profile
+  before_action :authenticate_person!, except: [:public_key]
 
-  # GET /token.json
+  # GET /auth/token.json
   def token
     subject = "db|#{current_user.id}"
     @payload = {
@@ -18,36 +17,37 @@ class AuthController < ApplicationController
       jti: SecureRandom.uuid,
       typ: "https://registr.svobodni.cz/auth"
     }
+
+    if params[:redirect_uri]
+      if system = configatron.auth.systems.detect{|handle, uri| uri == params[:redirect_uri]}
+        @payload[:aud] = system.first
+      end
+    end
+
     @token = JWT.encode(@payload, configatron.auth.private_key, "RS256")
 
     respond_to do |format|
       format.html {
-        uri = URI.parse(params[:redirect_uri])
+        #uri = URI.parse(params[:redirect_uri])
         redirect_to (params[:redirect_uri]+"?jwt="+@token)
       }
       format.json {render text: @token}
     end
   end
 
+
+  # GET /auth/public_key
   def public_key
     public_key = configatron.auth.private_key.public_key.to_s
     render text: public_key
   end
 
+  # GET /auth/profile
   def profile
-    @person = Person.find(@jwt['sub'].split('|').last)
+    @person = current_person
     respond_to do |format|
       format.json {render template: "people/profile"}
     end
   end
 
-private
-  def validate_token
-    begin
-      token = request.headers['Authorization'].split(' ').last
-      @jwt = JWT.decode(token, configatron.auth.private_key, nil).first
-    rescue JWT::DecodeError
-      render nothing: true, status: :unauthorized
-    end
-  end
 end

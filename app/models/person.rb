@@ -45,7 +45,7 @@ class Person < ActiveRecord::Base
 
   # sestaví jméno osoby včetně titulů, vhodné pro zobrazování
   def name
-  	[[name_prefix, first_name, last_name].reject(&:empty?).join(' '),name_suffix].reject(&:empty?).join(', ')
+  	[[name_prefix, first_name, last_name].reject(&:blank?).join(' '),name_suffix].reject(&:blank?).join(', ')
   end
 
   def domestic_address_line
