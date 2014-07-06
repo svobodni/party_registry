@@ -100,6 +100,7 @@ group :test do
   gem 'database_cleaner'
   gem 'cucumber-api-steps', :require => false
   gem 'shoulda-context'
+  gem 'sqlite3'
 end
 
 group :development do
