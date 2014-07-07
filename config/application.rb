@@ -26,5 +26,10 @@ module PartyRegistry
         resource '*', :headers => :any, :methods => [:get, :post, :options], :expose  => ['Content-Type']
       end
     end
+
+    config.to_prepare do
+      Devise::SessionsController.layout "session"
+    end
+
   end
 end

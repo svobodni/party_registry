@@ -344,7 +344,7 @@
 
 <ul class="breadcrumb"><%= breadcrumbs separator: " / " %></ul>
 <% if current_person %>
-Přihlášen <%= current_person.name %> <%= link_to "[Odhlásit]", destroy_person_session_path, :method =>:delete  %>
+Přihlášen <%= current_person.name %> <%= link_to "[Odhlásit]", destroy_person_session_path  %>
 <% else %>
 <%= link_to "[Přihlásit]", new_person_session_path %>
 <% end %>
