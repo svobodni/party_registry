@@ -1,5 +1,6 @@
 json.person do
   json.name @person.name
+  json.type @person.is_member? ? "member" : "supporter"
   json.first_name @person.first_name
   json.last_name @person.last_name
   json.email @person.email
