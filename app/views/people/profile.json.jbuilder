@@ -11,6 +11,9 @@ json.person do
   json.domestic_region do
     json.name @person.domestic_region.name
   end
+  json.guest_region do
+    json.name @person.guest_region.name
+  end if @person.guest_region
   json.domestic_branch do
     json.name @person.domestic_branch.try(:name)
   end
