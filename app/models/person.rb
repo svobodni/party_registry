@@ -60,6 +60,14 @@ class Person < ActiveRecord::Base
     (is_member? ? "1" : "5") + id.to_s.rjust(4,"0")
   end
 
+  def status
+    if is_member?
+      member_status == "regular" ? "valid" : "other"
+    else
+      supporter_status == "regular" ? "valid" : "other"
+    end
+  end
+
   def status_text
     if is_member?
       if member_status == "regular"
