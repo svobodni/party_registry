@@ -12,7 +12,7 @@
 		<tr>
 			<td><strong><%= body.name.split("(").first %></strong></td>
 			<td><%= body.president.try(:name) %></td>
-			<td><%= body.vicepresidents.collect(&:name).join(', ') %></td>
+			<td><%= (body.vicepresidents.collect(&:name)+body.members.collect(&:name)).join(', ') %></td>
 		</tr>
 		<% end %>
 	</tbody>
