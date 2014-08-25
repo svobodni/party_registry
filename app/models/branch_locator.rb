@@ -1,3 +1,5 @@
+# -*- encoding : utf-8 -*-
+
 class BranchLocator
   attr_accessor :mestska_cast, :obec, :obec_id, :okres, :kraj, :branch
 
