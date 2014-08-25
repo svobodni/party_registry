@@ -30,6 +30,9 @@ class Person < ActiveRecord::Base
   before_save :set_domestic_ruian_address,
     if: Proc.new { |person| person.domestic_address_street_changed? } 
 
+  before_update :import_domestic_ruian_address,
+    if: Proc.new { |person| person.domestic_address_ruian_id_changed? }
+
   # změny evidujeme
   has_paper_trail
 
@@ -54,6 +57,10 @@ class Person < ActiveRecord::Base
 
   def is_member?
     legacy_type == "member"
+  end
+
+  def membership_type
+    legacy_type == "member" ? :member : :supporter
   end
 
   def vs
@@ -161,7 +168,11 @@ class Person < ActiveRecord::Base
   end
 
   def set_domestic_ruian_address
-    self.domestic_ruian_address = RuianAddress.find_or_create_by_address_line(domestic_address_line) if domestic_region_id==10
+    self.domestic_ruian_address = RuianAddress.find_or_create_by_address_line(domestic_address_line)
+  end
+
+  def import_domestic_ruian_address
+    RuianAddress.import(domestic_address_ruian_id) unless domestic_address_ruian_id.blank?
   end
 
 end
