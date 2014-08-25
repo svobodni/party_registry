@@ -39,6 +39,7 @@ GEM
     arel (4.0.2)
     atomic (1.1.14)
     bcrypt-ruby (3.1.2)
+    bower-rails (0.7.3)
     builder (3.1.4)
     cancan (1.6.10)
     capistrano (3.1.0)
@@ -93,8 +94,18 @@ GEM
     devise-encryptable (0.1.2)
       devise (>= 2.1.0)
     diff-lcs (1.2.5)
+    elasticsearch (1.0.1)
+      elasticsearch-api (= 1.0.1)
+      elasticsearch-transport (= 1.0.1)
+    elasticsearch-api (1.0.1)
+      multi_json
+    elasticsearch-transport (1.0.1)
+      faraday
+      multi_json
     erubis (2.7.0)
     execjs (2.0.2)
+    faraday (0.9.0)
+      multipart-post (>= 1.2, < 3)
     fio_api (0.0.4)
       httparty (>= 0.9.0)
     font-awesome-rails (4.0.3.1)
@@ -130,12 +141,16 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    metaclass (0.0.1)
     mime-types (1.25.1)
     mini_portile (0.5.2)
     minitest (4.7.5)
+    mocha (0.14.0)
+      metaclass (~> 0.0.1)
     multi_json (1.9.0)
     multi_test (0.0.3)
     multi_xml (0.5.5)
+    multipart-post (2.0.0)
     mysql2 (0.3.14)
     nested_form (0.3.2)
     net-scp (1.1.2)
@@ -143,6 +158,8 @@ GEM
     net-ssh (2.8.0)
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
+    oat (0.4.4)
+      activesupport
     orm_adapter (0.5.0)
     paper_trail (3.0.0)
       activerecord (>= 3.0, < 5.0)
@@ -236,7 +253,7 @@ GEM
       polyglot
       polyglot (>= 0.3.1)
     ttfunk (1.1.0)
-    turbolinks (2.2.1)
+    turbolinks (2.2.2)
       coffee-rails
     tzinfo (0.3.38)
     uglifier (2.4.0)
@@ -254,6 +271,7 @@ PLATFORMS
 DEPENDENCIES
   aasm
   active_model_serializers
+  bower-rails (~> 0.7.3)
   cancan
   capistrano-bundler (~> 1.1)
   capistrano-rails (~> 1.1)
@@ -265,6 +283,7 @@ DEPENDENCIES
   database_cleaner
   devise
   devise-encryptable
+  elasticsearch
   fio_api
   geocoder
   gmaps4rails
@@ -273,13 +292,16 @@ DEPENDENCIES
   jbuilder (~> 1.2)
   jquery-rails
   jwt
+  mocha
   mysql2
+  oat
   paper_trail (~> 3.0.0)
   prawn
   prawn-rails
   rack-cors
   rails (= 4.0.3)
   rails_admin
+  rake
   ruby-openid
   sass-rails (~> 4.0.0)
   sdoc

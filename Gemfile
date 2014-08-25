@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem 'rake'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.3'
 
@@ -64,6 +66,7 @@ gem 'rack-cors', :require => 'rack/cors'
 
 # JSON serializer
 gem 'active_model_serializers'
+gem 'oat'
 
 # PDF generator
 gem 'prawn'
@@ -94,6 +97,10 @@ gem 'fio_api' # gem 'fio_api', :git => 'https://github.com/kubicek/fio_api.git'
 # JSON API AUTH
 gem 'jwt'
 
+gem 'elasticsearch'
+
+gem 'bower-rails', '~> 0.7.3'
+
 group :test do
   gem 'cucumber-rails', :require => false
   # database_cleaner is not required, but highly recommended
@@ -101,6 +108,7 @@ group :test do
   gem 'cucumber-api-steps', :require => false
   gem 'shoulda-context'
   gem 'sqlite3'
+  gem 'mocha', :require => false
 end
 
 group :development do
