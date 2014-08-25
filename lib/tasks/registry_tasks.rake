@@ -1,7 +1,7 @@
 namespace :registry do
   desc "Imports new data into current db"
-  	sh 'curl --request POST -d "district=0&key='+configatron.old_web.sync_pass+'" https://openid.svobodni.cz/TotalExport.ashx > last_export.xml'
   task :import => :environment do
+  	sh 'curl --request POST -d "district=0&key='+configatron.old_web.sync_pass+'" https://openid.svobodni.cz/TotalExport.ashx > last_export.xml'
   	sh 'rails r import.rb'
   end
 
@@ -15,6 +15,14 @@ namespace :registry do
         end
       end
     }
+  end
+
+  desc "Imports from FIO"
+  task :import_fio => :environment do
+    FioAPI.token=Region.find_by_name("Praha").fio_token
+    f=FioAPI::List.new
+    #f.set_last_fetch_date "2013-01-01"
+    FioPayment.import
   end
 
 end
