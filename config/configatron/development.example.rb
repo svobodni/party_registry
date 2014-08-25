@@ -9,3 +9,5 @@ configatron.auth.private_key = OpenSSL::PKey::RSA.new("-----BEGIN RSA PRIVATE KE
 configatron.auth.systems = {
 	'knownsystem' => 'https://knownsystem.svobodni.cz/callback.php'
 }
+
+configatron.old_web.sync_pass = "tajneheslo"
