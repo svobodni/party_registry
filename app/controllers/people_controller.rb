@@ -32,6 +32,7 @@ class PeopleController < ApplicationController
     authorize!(:show, @person)
     respond_to do |format|
       format.json
+      format.html
     end
   end
 

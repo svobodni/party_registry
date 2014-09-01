@@ -344,7 +344,7 @@
 
 <ul class="breadcrumb"><%= breadcrumbs separator: " / " %></ul>
 <% if current_person %>
-Přihlášen <%= current_person.name %> <%= link_to "[Odhlásit]", destroy_person_session_path  %>
+Přihlášen <%= link_to current_person.name, profile_people_path  %> <%= link_to "[Odhlásit]", destroy_person_session_path  %>
 <% else %>
 <%= link_to "[Přihlásit]", new_person_session_path %>
 <% end %>
@@ -357,6 +357,10 @@ Přihlášen <%= current_person.name %> <%= link_to "[Odhlásit]", destroy_perso
 
 		<div class="row">
 <div class="col-md-12">
+	<% flash.each do |name, msg| -%>
+      <%= content_tag :div, msg, class: name %>
+    <% end -%>
+
 	<%= yield %>
 </div>
 		</div>

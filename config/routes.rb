@@ -8,6 +8,7 @@ PartyRegistry::Application.routes.draw do
 
   devise_for :people
 
+  resources :webdav_passwords
   resources :bodies
   resources :branches do
     resources :people
