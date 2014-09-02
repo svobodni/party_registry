@@ -16,8 +16,8 @@ class WebdavPasswordsController < ApplicationController
     }
     @password = SecureRandom.hex(10)
     @token = JWT.encode(@payload, configatron.auth.private_key, "RS256")
-    data = HTTParty.post(configatron.webdav.post_uri,
-        query: {
+    response = HTTParty.post(configatron.webdav.post_uri,
+        body: {
           jwt: @token,
           pwd: Digest::SHA1.hexdigest(@password)
         }
