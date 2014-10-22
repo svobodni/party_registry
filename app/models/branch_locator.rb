@@ -58,6 +58,10 @@ class BranchLocator
     return "okres Jindřichův Hradec" if okres=="Jindřichův Hradec"
     return "Okres Jihlava" if okres=="Jihlava"
     return "okres České Budějovice" if okres =="České Budějovice"
+    return "okres Vsetín" if okres =="Vsetín"
+    return "okres Zlín" if okres =="Zlín"
+    return "okres Kroměříž" if okres =="Kroměříž"
+    return "okres Uherské Hradiště" if okres =="Uherské Hradiště"
   end
 
   def self.find_by_person(person)
