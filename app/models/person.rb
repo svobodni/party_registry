@@ -26,6 +26,8 @@ class Person < ActiveRecord::Base
   # má adresy (bydliště, poštovní)
   belongs_to :domestic_ruian_address, class_name: :RuianAddress, foreign_key: :domestic_address_ruian_id
   belongs_to :postal_ruian_address, class_name: :RuianAddress, foreign_key: :postal_address_ruian_id
+  # má záznamy o přihlášení do systémů
+  has_many :issued_token_log_entries
 
   before_save :set_domestic_ruian_address,
     if: Proc.new { |person| person.domestic_address_street_changed? } 

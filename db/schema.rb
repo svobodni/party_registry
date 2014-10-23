@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140618015407) do
+ActiveRecord::Schema.define(version: 20141023140247) do
 
   create_table "bank_payments", force: true do |t|
     t.integer  "account_id"
@@ -47,6 +47,16 @@ ActiveRecord::Schema.define(version: 20140618015407) do
     t.datetime "updated_at"
   end
 
+  create_table "issued_token_log_entries", force: true do |t|
+    t.integer  "person_id"
+    t.datetime "issued_at"
+    t.string   "token_id"
+    t.string   "audience"
+    t.string   "ip_address"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "organizations", force: true do |t|
     t.string   "type"
     t.string   "name"
@@ -58,6 +68,7 @@ ActiveRecord::Schema.define(version: 20140618015407) do
     t.string   "fio_account_number"
     t.string   "fio_token"
     t.string   "address_line"
+    t.string   "homepage_url"
   end
 
   create_table "people", force: true do |t|

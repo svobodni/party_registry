@@ -8,12 +8,13 @@ class AuthController < ApplicationController
   # GET /auth/token.json
   def token
     subject = "db|#{current_user.id}"
+    now = Time.now
     @payload = {
       iss: "https://registr.svobodni.cz",
       sub: subject,
-      nbf: Time.now.to_i,
-      exp: (Time.now+1.hour).to_i,
-      iat: Time.now.to_i,
+      nbf: now.to_i,
+      exp: (now+1.hour).to_i,
+      iat: now.to_i,
       jti: SecureRandom.uuid,
       typ: "https://registr.svobodni.cz/auth"
     }
@@ -21,10 +22,19 @@ class AuthController < ApplicationController
     if params[:redirect_uri]
       if system = configatron.auth.systems.detect{|handle, uri| uri == params[:redirect_uri]}
         @payload[:aud] = system.first
+      else
+        @payload[:aud] = params[:redirect_uri]
       end
     end
 
     @token = JWT.encode(@payload, configatron.auth.private_key, "RS256")
+    IssuedTokenLogEntry.create!(
+      person: current_user,
+      issued_at: now,
+      token_id: @payload[:jti],
+      audience: @payload[:aud],
+      ip_address: request.remote_ip
+    )
 
     respond_to do |format|
       format.html {
