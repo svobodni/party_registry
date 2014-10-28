@@ -13,11 +13,9 @@ module Devise
         end
 
         def self.encode_password(password, salt)
-          bytes = ""
-          password.each_char { |c| bytes += c + "\x00" }
-          salty = Base64.decode64(salt)
-          concat = salty+bytes
-          sha1 = Digest::SHA1.digest(concat)
+          pass_a = password.encode("UTF-16LE").bytes.to_a
+          salt_a = Base64.decode64(salt).force_encoding("utf-8").bytes.to_a
+          sha1 = Digest::SHA1.digest((salt_a+pass_a).pack('C*'))
           encoded = Base64.encode64(sha1).strip()
         end
 
