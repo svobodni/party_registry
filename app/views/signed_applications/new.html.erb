@@ -1,0 +1,30 @@
+<h1>Nová přihláška</h1>
+
+<%= form_for(@signed_application) do |f| %>
+  <% if @signed_application.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@signed_application.errors.count, "error") %> prohibited this signed_application from being saved:</h2>
+
+      <ul>
+      <% @signed_application.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :person_id %><br>
+    <%= f.number_field :person_id %>
+  </div>
+  <div class="field">
+    <%= f.label :scan %><br>
+    <%= f.file_field :scan %>
+  </div>
+  <div class="actions">
+    <%= f.submit "OK" %>
+  </div>
+<% end %>
+
+
+<%= link_to 'Back', signed_applications_path %>

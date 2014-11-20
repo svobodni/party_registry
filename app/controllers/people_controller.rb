@@ -1,5 +1,5 @@
 class PeopleController < ApplicationController
-  before_action :set_branch, only: [:show, :edit, :update, :destroy, :application]
+  before_action :set_person, only: [:show, :edit, :update, :destroy, :application, :signed_application]
 
   # GET /people.json
   def index
@@ -73,6 +73,10 @@ class PeopleController < ApplicationController
   end
 
   def application
+  end
+
+  def signed_application
+    send_file  @person.signed_application.scan.path, type: @person.signed_application.scan_content_type, disposition: :inline
   end
 
   private

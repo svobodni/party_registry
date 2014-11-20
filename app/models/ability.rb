@@ -27,5 +27,9 @@ class Ability
       end
     end
 
+    if user.id==342
+      can :upload, SignedApplication
+    end
+
   end
 end

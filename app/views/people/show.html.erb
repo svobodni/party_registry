@@ -8,6 +8,12 @@
 <div>Typ:<%= @person.member_status %></div>
 <div>Typ:<%= @person.supporter_status %></div>
 
+<% if @person.signed_application %>
+[<%=link_to "Podepsaná přihláška", signed_application_person_path(@person, format: :pdf)%>]
+<% else %>
+[<%=link_to "Přihláška", application_person_path(@person, format: :pdf)%>]
+<% end %>
+
 <h2>Bydliště</h2>
 <div>v db: <%= @person.domestic_address_line %></div>
 

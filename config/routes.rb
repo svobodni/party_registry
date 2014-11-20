@@ -1,4 +1,6 @@
 PartyRegistry::Application.routes.draw do
+  resources :signed_applications
+
   get '/admin/person/:id/application' => 'people#application'
   get '/auth/token'
   get '/auth/public_key'
@@ -17,6 +19,7 @@ PartyRegistry::Application.routes.draw do
   resources :people do
     member do
       get 'application'
+      get 'signed_application'
     end
     collection do
       get 'profile'

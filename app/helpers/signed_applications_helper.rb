@@ -1,0 +1,2 @@
+module SignedApplicationsHelper
+end
