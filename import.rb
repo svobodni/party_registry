@@ -69,9 +69,9 @@ def import_person(type, member)
 end
 
 puts "LOADING OLD DATA"
-known = Crack::XML.parse(File.open("old_export.xml").read)
+known = Crack::XML.parse(File.open("data/old_export.xml").read)
 puts "LOADING NEW DATA"
-data = Crack::XML.parse(File.open("last_export.xml").read)
+data = Crack::XML.parse(File.open("data/last_export.xml").read)
 
 puts "IMPORT - MEMBERS"
 puts data["users"]["member"].size
@@ -102,4 +102,4 @@ end
 puts "Central DB: #{data['users']['member'].size+data['users']['sympathizer'].size}"
 puts "Our DB: #{Person.count}"
 
-File.rename("last_export.xml","old_export.xml")
+File.rename("data/last_export.xml","data/old_export.xml")

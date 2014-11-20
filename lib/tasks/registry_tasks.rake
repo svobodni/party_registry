@@ -1,7 +1,7 @@
 namespace :registry do
   desc "Imports new data into current db"
   task :import => :environment do
-  	sh 'curl --request POST -d "district=0&key='+configatron.old_web.sync_pass+'" https://openid.svobodni.cz/TotalExport.ashx > last_export.xml'
+  	sh 'curl --request POST -d "district=0&key='+configatron.old_web.sync_pass+'" https://openid.svobodni.cz/TotalExport.ashx > data/last_export.xml'
   	sh 'rails r import.rb'
   end
 
