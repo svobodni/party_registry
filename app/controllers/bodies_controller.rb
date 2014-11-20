@@ -10,6 +10,9 @@ class BodiesController < ApplicationController
   # GET /bodies/1.json
   def show
     @body = Body.find(params[:id])
-    render json: @body
+    respond_to do |format|
+      format.html
+      format.json { render json: @body }
+    end
   end
 end

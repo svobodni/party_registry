@@ -1,24 +1,3 @@
-<h1>Republikové orgány</h1>
-<table class="table">
-	<thead>
-		<tr>
-			<th>Kraj</th>
-			<th>Předseda</th>
-			<th>Členové</th>
-		</tr>
-	</thead>
-	<tbody>
-		<% for body in @country.bodies %>
-		<tr>
-			<td><strong><%= body.name.split("(").first %></strong></td>
-			<td><%= body.president.try(:name) %></td>
-			<td><%= (body.vicepresidents.collect(&:name)+body.members.collect(&:name)).join(', ') %></td>
-		</tr>
-		<% end %>
-	</tbody>
-</table>
-
-
 <h1>Krajská sdružení</h1>
 <table class="table">
 	<thead>
@@ -36,6 +15,7 @@
 			<td><%= region.presidium.president.try(:name) %></td>
 			<td><%= region.domestic_members.count %></td>
 			<td><%= region.branches.count %></td>
+			<td><%= region.domestic_people.reject{|p| p.domestic_address_ruian_id}.count %></td>
 		</tr>
 		<% end %>
 	</tbody>

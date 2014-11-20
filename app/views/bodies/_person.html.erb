@@ -1,0 +1,4 @@
+<div class="col-md-3">
+<h3><%= person.name %></h3>
+<img src="<%= person.try(:photo_url) || person.person.try(:photo_url) %>"/>
+</div>

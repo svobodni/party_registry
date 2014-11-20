@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :null_session
 
   before_action :authenticate_person!
+  before_action :load_country
 
   def current_user
   	current_person
@@ -37,4 +38,8 @@ class ApplicationController < ActionController::Base
     jwt = JWT.decode(token, configatron.auth.private_key.public_key, true).first
     @current_person = Person.find(jwt['sub'].split('|').last)
   end
+  def load_country
+    @country = Country.first
+  end
+
 end

@@ -3,23 +3,36 @@
   breadcrumb :person, @person
 %>
 
-<h3><%= @page_title %></h3>
-<dd><img src="<%= @person.photo_url %>"></dd>
-<dl class="dl-horizontal">
-<dt>VS</dt><dd><%= @person.vs %></dd>
-<dt>Jméno</dt><dd><%= @person.name %></dd>
-<dt>Email</dt><dd><%= mail_to @person.email %></dd>
-<dt>Telefon</dt><dd><%= @person.phone %></dd>
-<dt>Domovská stránka</dt><dd><%= link_to @person.homepage_url %></dd>
-<dt>fb stránka</dt><dd><%= link_to @person.fb_page_url %></dd>
-<dt>fb profil</dt><dd><%= link_to @person.fb_profile_url %></dd>
-<dt>Kraj</dt><dd><%= @person.domestic_region.name %></dd>
-</dl>
+<div class="row">
 
-<h4>Heslo pro webdav</h4>
-<dl class="dl-horizontal">
-<dt>Heslo</dt><dd><% unless flash[:password].blank? %><%= flash[:password] %><% else %>***********<% end %></dd>
-</dl>
-<%= form_tag("/webdav_passwords", method: "post") do %>
-  <%= submit_tag("Vygenerovat nové heslo") %>
-<% end %>
+  <div class="col-md-4">
+    <h3><%= @page_title %></h3>
+    <img src="<%= @person.photo_url %>">
+
+  	<table class="table table-striped">
+  	  <tr><th>VS</th><td><%= @person.vs %></td></tr>
+  	  <tr><th>Jméno</th><td><%= @person.name %></td></tr>
+  	  <tr><th>Email</th><td><%= mail_to @person.email %></td></tr>
+  	  <tr><th>Telefon</th><td><%= @person.phone %></td></tr>
+  	  <tr><th>Domovská stránka</th><td><%= link_to @person.homepage_url %></td>    </tr>
+  	  <tr><th>fb stránka</th><td><%= link_to @person.fb_page_url %></td></tr>
+  	  <tr><th>fb profil</th><td><%= link_to @person.fb_profile_url %></td></tr>
+  	  <tr><th>Kraj</th><td><%= @person.domestic_region.name %></td></tr>
+  	</table>
+  </div>
+
+  <div class="col-md-4">
+    <% if can? :upload, SignedApplication %>
+    <h4>Akce</h4>
+    <%= button_to "Nahrát novou přihlášku", new_signed_application_path, method: :get %>
+    <% end %>
+
+    <h4>Heslo pro webdav</h4>
+    <dl class="dl-horizontal">
+    <dt>Heslo</dt><dd><% unless flash[:password].blank? %><%= flash[:password]   %>  <% else %>***********<% end %></dd></tr>
+    </dl>
+    <%= form_tag("/webdav_passwords", method: "post") do %>
+      <%= submit_tag("Vygenerovat nové heslo") %>
+    <% end %>
+    </div>
+</div>

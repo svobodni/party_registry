@@ -1,0 +1,23 @@
+<h1><%= @body.name %></h1>
+
+<% if @body.president %>
+<h2>Předseda</h2>
+<div class="row">
+	<%= render partial: "person", object: @body.president %>
+</div>
+<% end %>
+
+
+<% if @body.vicepresidents %>
+<h2>Místopředsedové</h2>
+<div class="row">
+<%= render partial: "person", collection: @body.vicepresidents %>
+</div>
+<% end %>
+
+<% unless @body.try(:members).empty? %>
+<h2>Členové</h2>
+<div class="row">
+<%= render partial: "person", collection: @body.members %>
+</div>
+<% end %>

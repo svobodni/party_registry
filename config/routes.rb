@@ -38,5 +38,5 @@ PartyRegistry::Application.routes.draw do
   get 'server/decision' => 'server#decision'
   post 'server/decision' => 'server#decision'
 
-  root 'welcome#index'
+  root 'regions#index'
 end
