@@ -97,6 +97,9 @@ gem 'fio_api' # gem 'fio_api', :git => 'https://github.com/kubicek/fio_api.git'
 # JSON API AUTH
 gem 'jwt'
 
+# přílohy
+gem "paperclip", "~> 4.2"
+
 gem 'elasticsearch'
 
 gem 'bower-rails', '~> 0.7.3'

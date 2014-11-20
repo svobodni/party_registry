@@ -58,6 +58,10 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
+    climate_control (0.0.3)
+      activesupport (>= 3.0)
+    cocaine (0.5.4)
+      climate_control (>= 0.0.3, < 1.0)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.0)
@@ -164,6 +168,11 @@ GEM
     paper_trail (3.0.0)
       activerecord (>= 3.0, < 5.0)
       activesupport (>= 3.0, < 5.0)
+    paperclip (4.2.0)
+      activemodel (>= 3.0.0)
+      activesupport (>= 3.0.0)
+      cocaine (~> 0.5.3)
+      mime-types
     pdf-core (0.1.6)
     polyglot (0.3.4)
     prawn (0.15.0)
@@ -296,6 +305,7 @@ DEPENDENCIES
   mysql2
   oat
   paper_trail (~> 3.0.0)
+  paperclip (~> 4.2)
   prawn
   prawn-rails
   rack-cors

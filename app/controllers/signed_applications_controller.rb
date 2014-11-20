@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class SignedApplicationsController < ApplicationController
   # GET /signed_applications/new
   def new

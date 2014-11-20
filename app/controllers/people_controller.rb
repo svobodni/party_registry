@@ -62,8 +62,8 @@ class PeopleController < ApplicationController
     end
   end
 
-  # DELETE /branches/1
-  # DELETE /branches/1.json
+  # DELETE /people/1
+  # DELETE /people/1.json
   def destroy
     authorize!(:destroy, @person)
     @person.destroy
@@ -76,12 +76,13 @@ class PeopleController < ApplicationController
   end
 
   def signed_application
+    authorize!(:show, @person)
     send_file  @person.signed_application.scan.path, type: @person.signed_application.scan_content_type, disposition: :inline
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_branch
+    def set_person
       @person = Person.find(params[:id])
     end
 
