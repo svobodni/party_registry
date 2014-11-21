@@ -52,7 +52,7 @@
 <td><%= member.member_status%></td>
 <td><%= member.phone %></td>
 <td><%= mail_to member.email %></td>
-<td>[<%=link_to "Přihláška", application_person_path(member, format: :pdf)%>]</td>
+<td>[<%=link_to_member_application(member)%>]</td>
 </tr>
 <% end %>
 </tbody>

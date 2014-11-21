@@ -137,12 +137,8 @@
 <td><%= member.member_status%></td>
 <td><%= member.domestic_ruian_address.try(:mestska_cast) %></td>
 <td><%= member.domestic_branch.try(:name) %></td>
-<% if member.signed_application %>
-<td>[<%=link_to "Podepsaná přihláška", signed_application_person_path(member, format: :pdf)%>]</td>
+<td>[<%=link_to_member_application(member)%>]</td>
 </tr>
-<% else %>
-<td>[<%=link_to "Přihláška", application_person_path(member, format: :pdf)%>]</td>
-<% end %>
 
 <% end %>
 </tbody>
