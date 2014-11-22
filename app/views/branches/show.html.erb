@@ -3,6 +3,7 @@
   breadcrumb :branch, @branch
 %>
 
+<h1><%=link_to @branch.region.name, @branch.region %> / <%= @page_title %></h1>
 <ul class="nav nav-tabs">
   <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
   <li><a href="#domestic_members" data-toggle="tab">Kmenoví členové</a></li>
@@ -13,7 +14,11 @@
 
 <!-- Tab panes -->
 <div class="tab-content">
-  <div class="tab-pane active" id="home">Koordinátor: <%= @branch.coordinator.try(:name) %><div><%= link_to "Export", branch_people_path(@branch, format: :xls), class: "btn btn-primary btn-lg active" %></div></div>
+  <div class="tab-pane active" id="home">
+    <h2>Koordinátor</h2>
+    <%= render partial: "bodies/person", object: @branch.coordinator.person %>
+    <p>Web: <%= link_to(@branch.homepage_url, @branch.homepage_url) if @branch.homepage_url %></p>
+    <div><%= link_to "Export", branch_people_path(@branch, format: :xls), class: "btn btn-primary btn-lg active" %></div></div>
 
   <div class="tab-pane" id="domestic_members">
     <h2>Kmenoví členové</h2>
