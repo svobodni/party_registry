@@ -10,6 +10,7 @@ class PeopleController < ApplicationController
     else
       @people = Person.accessible_by(current_ability)
     end
+    @people = @people.includes([:domestic_region, :domestic_branch, :domestic_ruian_address])
     respond_to do |format|
       format.xls
       format.json

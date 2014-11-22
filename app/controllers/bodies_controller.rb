@@ -4,7 +4,7 @@ class BodiesController < ApplicationController
 
   # GET /bodies.json
   def index
-    @bodies = Body.all
+    @bodies = Body.includes(:people, :organization, :roles).all
   end
 
   # GET /bodies/1.json
