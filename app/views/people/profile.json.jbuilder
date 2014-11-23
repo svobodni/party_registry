@@ -13,12 +13,15 @@ json.person do
   json.photo_url @person.photo_url
   json.domestic_region do
     json.name @person.domestic_region.name
+    json.id @person.domestic_region.id
   end
   json.guest_region do
     json.name @person.guest_region.name
+    json.id @person.guest_region.id
   end if @person.guest_region
   json.domestic_branch do
     json.name @person.domestic_branch.try(:name)
+    json.id @person.domestic_branch.try(:id)
   end
   json.roles @person.roles do |role|
     json.name role.type
