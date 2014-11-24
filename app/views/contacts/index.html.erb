@@ -29,7 +29,7 @@
         <td><%= [person.domestic_region.try(:name), person.guest_region.try(:name)].compact.join(' / ') %></td>
         <td><%= [person.domestic_branch.try(:name), person.guest_branch.try(:name)].compact.join(' / ') %></td>
         
-        <% %w{phone email fb web}.each do |col| %>
+        <% %w{phone email}.each do |col| %>
         <td><%= cs.select{|c| c.contact_type==col}.collect(&:contact).join(', ') %></td>
         <% end %>
       </tr>

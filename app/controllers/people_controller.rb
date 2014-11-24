@@ -20,10 +20,11 @@ class PeopleController < ApplicationController
 
   # GET /people/1.json
   def show
-    authorize!(:show, @person)
+    #authorize!(:show, @person)
     respond_to do |format|
-      format.html
-      format.json { render json: @person }
+      format.html {
+          render(text: 'Not found', status: 404) if @person.contacts.accessible_by(current_ability).empty?
+      }
     end
   end
 
