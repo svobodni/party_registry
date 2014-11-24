@@ -5,11 +5,12 @@
 
 <div class="row">
 
-  <div class="col-md-4">
+  <div class="col-md-6">
+    Údaje z <a href="https://www.svobodni.cz/po-prihlaseni/muj-profil/">republikové databáze</a>:
     <h3><%= @page_title %></h3>
-    <img src="<%= @person.photo_url %>">
 
   	<table class="table table-striped">
+      <tr><th></th><td><img src="<%= @person.photo_url %>"></td></tr>
   	  <tr><th>VS</th><td><%= @person.vs %></td></tr>
   	  <tr><th>Jméno</th><td><%= @person.name %></td></tr>
   	  <tr><th>Email</th><td><%= mail_to @person.email %></td></tr>
@@ -17,22 +18,69 @@
   	  <tr><th>Domovská stránka</th><td><%= link_to @person.homepage_url %></td>    </tr>
   	  <tr><th>fb stránka</th><td><%= link_to @person.fb_page_url %></td></tr>
   	  <tr><th>fb profil</th><td><%= link_to @person.fb_profile_url %></td></tr>
-  	  <tr><th>Kraj</th><td><%= @person.domestic_region.name %></td></tr>
+  	  <tr><th>Kraj</th><td><%= link_to @person.domestic_region.name, @person.domestic_region %></td></tr>
+      <% if @person.guest_region %>
+      <tr><th>Hostujete v kraji</th><td><%= link_to @person.guest_region.try(:name), @person.guest_region %></td></tr>
+      <% end %>
+      <tr><th></th><td><%= button_to "Upravit", "https://www.svobodni.cz/po-prihlaseni/muj-profil/" %></td></tr>
   	</table>
+
   </div>
 
-  <div class="col-md-4">
+  <div class="col-md-6">
+    Doplňující údaje z registru:
+
+    <% if @person.domestic_branch || @person.guest_branch %>
+    <h4>Pobočka</h4>
+    <% if @person.domestic_branch %>
+    <div>Spadáte do pobočky <%= link_to @person.domestic_branch.try(:name), @person.domestic_branch %></div>
+    <% end %>
+    <% if @person.guest_branch %>
+    <div>Hostujete v pobočce <%= link_to @person.guest_branch.try(:name), @person.guest_branch %></div>
+    <% end %>
+    <% end %>
+
+    <% unless @person.roles.blank? %>
+    <h4>Vaše role ve Svobodných</h4>
+    <ul>
+      <% for role in @person.roles %>
+      <li><%= link_to role.role_name, role.body || role.branch %></li>
+      <% end %>
+    </ul>
+    <% end %>
+    <h4>Sdílení kontaktů - Vaše kontaktní údaje</h4>
+    <table class="table table-striped">
+      <% for contact in @person.contacts %>
+      <tr><th><%=contact.contact_type%></th>
+      <td>
+        <% if contact.contact_type == "email" %>
+          <%= mail_to contact.contact, contact.contact %>
+        <% else %>
+          <%= contact.contact %>
+        <% end %>
+      </td>
+      <td><%= contact.privacy %></td>
+        <td><%= button_to 'Upravit', edit_contact_path(contact), method: :get %></td>
+        <td><%= button_to 'Smazat', contact, method: :delete, data: { confirm: 'Opravdu chcete smazat tento kontakt?' } %></td>
+      </tr>
+      <% end %>
+    </table>
+    <%= button_to 'Přidat kontakt', new_person_contact_path(current_person), method: :get %>
+
+    <h4>Další funkce registru</h4>
     <% if can? :upload, SignedApplication %>
-    <h4>Akce</h4>
     <%= button_to "Nahrát novou přihlášku", new_signed_application_path, method: :get %>
     <% end %>
 
+    <% unless flash[:password].blank? %>
     <h4>Heslo pro webdav</h4>
     <dl class="dl-horizontal">
-    <dt>Heslo</dt><dd><% unless flash[:password].blank? %><%= flash[:password]   %>  <% else %>***********<% end %></dd></tr>
+    <dt>Heslo</dt><dd><%= flash[:password] %></dd></tr>
     </dl>
-    <%= form_tag("/webdav_passwords", method: "post") do %>
-      <%= submit_tag("Vygenerovat nové heslo") %>
     <% end %>
-    </div>
+
+    <%= form_tag("/webdav_passwords", method: "post") do %>
+      <%= submit_tag("Vygenerovat nové heslo pro webdav", data: { confirm: "Heslo slouží pro přístup na files.svobodni.cz protokolem webdav. Vygenerováním nového hesla zneplatníte předchozí (pokud už nějaké máte). Opravdu chcete vygenerovat nové heslo?" }) %>
+    <% end %>
+  </div>
 </div>

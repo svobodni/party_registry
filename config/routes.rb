@@ -1,4 +1,6 @@
 PartyRegistry::Application.routes.draw do
+  resources :contacts
+
   resources :signed_applications
 
   get '/admin/person/:id/application' => 'people#application'
@@ -14,9 +16,11 @@ PartyRegistry::Application.routes.draw do
   resources :bodies
   resources :branches do
     resources :people
+    resources :contacts, only: :index
   end
   resources :organizations
   resources :people do
+    resources :contacts
     member do
       get 'application'
       get 'signed_application'
@@ -28,6 +32,7 @@ PartyRegistry::Application.routes.draw do
   resources :regions do
     resources :branches
     resources :people
+    resources :contacts, only: :index
   end
 
   get 'server' => 'server#index'

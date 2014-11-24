@@ -1,13 +1,13 @@
 crumb :root do
-  link "Home", root_path
+  link "Registr", root_path
 end
 
 crumb :regions do
-  link "Kraje", regions_path
+  link "Kraje" #, regions_path
 end
 
 crumb :people do
-  link "Lidé", people_path
+  link "Lidé"
 end
 
 crumb :person do |person|
@@ -17,19 +17,28 @@ end
 
 crumb :region do |region|
   link region.name, region_path(region)
-  #parent :regions
-  parent :root
+  parent :regions
+  #parent :root
 end
 
 crumb :region_branches do |region|
-  link "Pobočky", region_branches_path(region)
+  link "Pobočky" #, region_branches_path(region)
+  parent :region, region
+end
+
+crumb :region_contacts do |region|
+  link "Sdílené kontakty", region_contacts_path(region)
   parent :region, region
 end
 
 crumb :branch do |branch|
   link branch.name, branch_path(branch)
-  #parent :region_branches, branch.region
-  parent :region, branch.region
+  parent :region_branches, branch.region
+end
+
+crumb :branch_contacts do |branch|
+  link "Sdílené kontakty", branch_contacts_path(branch)
+  parent :branch, branch
 end
 
 # crumb :project_issues do |project|

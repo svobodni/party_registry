@@ -1,0 +1,52 @@
+<%= form_for(@contact, html: {class: 'form-inline', role: 'form'}) do |f| %>
+  <% if @contact.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@contact.errors.count, "error") %> prohibited this contact from being saved:</h2>
+
+      <ul>
+      <% @contact.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  
+  <div class="form-group">
+    <div class="input-group">    
+    <%= f.label :contact_type, class: 'sr-only' %><br>
+    <%= f.select :contact_type, 
+    options_for_select([
+     ['Telefon', 'phone'],
+     ['Email','email'],
+     ['FB profil','facebook_profile'],
+     ['Twitter','twitter'],
+     ['Web','web'],
+     ['Blog','blog'],
+     ['FB stránka','facebook_page'],
+     ['Linked in','linked_in']], @contact.contact_type) %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="input-group">    
+      <%= f.label :contact, class: 'sr-only' %></label>
+      <%= f.text_field :contact, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="input-group">    
+    <%= f.label :privacy, class: 'sr-only' %><br>
+    <%= f.select :privacy, 
+      options_for_select([
+        ['Veřejný kontakt','public'],
+        ['Jen pro členy a příznivce','supporters'],
+        ['Jen pro členy','members'],
+        ['Jen pro orgány a koordinátora','coordinator'],
+        ['Jen pro orgány','regional']
+      ], @contact.privacy) %>
+    </div>
+  </div>
+  <%= f.submit class: "btn btn-default"%>
+<% end %>

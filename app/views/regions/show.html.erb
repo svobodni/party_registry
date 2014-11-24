@@ -9,10 +9,10 @@
   height:480px;
 }
 </style>
-<h1><%= @region.name %></h1>
 <ul class="nav nav-tabs">
   <li class="active"><a href="#presidium" data-toggle="tab">Předsednictvo</a></li>
   <li><a href="#branches" data-toggle="tab">Pobočky</a></li>
+  <li><%= link_to "Sdílené kontakty", region_contacts_path(@region) %></li>
   <li><a href="#mestska_cast" data-toggle="tab">Městské části</a></li>
   <li><a href="#okres" data-toggle="tab">Okresy</a></li>
   <li><a href="#awaiting_domestic_people" data-toggle="tab">Zájemci o členství</a></li>

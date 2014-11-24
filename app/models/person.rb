@@ -30,6 +30,8 @@ class Person < ActiveRecord::Base
   has_many :issued_token_log_entries
   # má v systému scan přihlášky
   has_one :signed_application
+  # má kontaktní údaje
+  has_many :contacts, :as => :contactable
 
   before_save :set_domestic_ruian_address,
     if: Proc.new { |person| person.domestic_address_street_changed? } 
@@ -67,6 +69,14 @@ class Person < ActiveRecord::Base
     legacy_type == "member" ? :member : :supporter
   end
 
+  def is_regular_member?
+    is_member? && status == "valid"
+  end
+
+  def is_regular_supporter?
+    !is_member? && status == "valid"
+  end
+
   def vs
     (is_member? ? "1" : "5") + id.to_s.rjust(4,"0")
   end
@@ -93,6 +103,10 @@ class Person < ActiveRecord::Base
         "nezaplacený příznivec"
       end
     end
+  end
+
+  def region
+    guest_region || domestic_region
   end
 
   include AASM

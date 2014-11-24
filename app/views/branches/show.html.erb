@@ -3,9 +3,9 @@
   breadcrumb :branch, @branch
 %>
 
-<h1><%=link_to @branch.region.name, @branch.region %> / <%= @page_title %></h1>
 <ul class="nav nav-tabs">
   <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
+  <li><%= link_to "Sdílené kontakty", branch_contacts_path(@branch)%></li>
   <li><a href="#domestic_members" data-toggle="tab">Kmenoví členové</a></li>
   <li><a href="#domestic_supporters" data-toggle="tab">Kmenoví příznivci</a></li>
   <li><a href="#guest_people" data-toggle="tab">Hostující</a></li>

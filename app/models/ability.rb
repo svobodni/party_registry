@@ -9,6 +9,8 @@ class Ability
     can [:read, :update], Person, :id => user.id
     can :read, [Body, Branch, Region, Role]
 
+    can :read, Contact, privacy: 'public'
+    can [:create, :update, :destroy], Contact, {contactable_id: user.id, contactable_type: 'Person'}
 #    user ||= User.new # guest user (not logged in)
 
     user.roles.each do |role|
@@ -25,6 +27,12 @@ class Ability
         # Členové republikového předsednictva
         can :manage, :all
       end
+    end
+
+    if user.is_regular_member?
+      can :read, Contact, privacy: ['members','supporters']
+    elsif user.is_regular_supporter?
+      can :read, Contact, privacy: 'supporters'
     end
 
     if user.id==342
