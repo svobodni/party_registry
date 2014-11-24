@@ -3,65 +3,9 @@
   breadcrumb :branch, @branch
 %>
 
-<ul class="nav nav-tabs">
-  <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
-  <li><%= link_to "Sdílené kontakty", branch_contacts_path(@branch)%></li>
-  <li><a href="#domestic_members" data-toggle="tab">Kmenoví členové</a></li>
-  <li><a href="#domestic_supporters" data-toggle="tab">Kmenoví příznivci</a></li>
-  <li><a href="#guest_people" data-toggle="tab">Hostující</a></li>
-  <li><a href="#awaiting_domestic_people" data-toggle="tab">Zájemci o členství</a></li>
-</ul>
+<%= render('branches/nav') %>
 
-<!-- Tab panes -->
-<div class="tab-content">
-  <div class="tab-pane active" id="home">
-    <h2>Koordinátor</h2>
-    <%= render partial: "bodies/person", object: @branch.coordinator.person %>
-    <p>Web: <%= link_to(@branch.homepage_url, @branch.homepage_url) if @branch.homepage_url %></p>
-    <div><%= link_to "Export", branch_people_path(@branch, format: :xls), class: "btn btn-primary btn-lg active" %></div></div>
+<h2>Koordinátor</h2>
+<%= render partial: "bodies/person", object: @branch.coordinator.person %>
+<p>Web: <%= link_to(@branch.homepage_url, @branch.homepage_url) if @branch.homepage_url %></p>
 
-  <div class="tab-pane" id="domestic_members">
-    <h2>Kmenoví členové</h2>
-    <table class="table table-striped">
-      <thead><tr><th>Jméno</th><th>Email</th><th>Telefon</th><th>Městská část</th></tr></thead>
-      <tbody><%=render @branch.domestic_members.accessible_by(current_ability) %></tbody>
-    </table>
-  </div>
-
-  <div class="tab-pane" id="domestic_supporters">
-    <h2>Kmenoví příznivci</h2>
-    <table class="table table-striped">
-      <thead><tr><th>Jméno</th><th>Email</th><th>Telefon</th><th>Městská část</th></tr></thead>
-      <tbody><%=render @branch.domestic_supporters.accessible_by(current_ability) %></tbody>
-    </table>
-  </div>
-
-  <div class="tab-pane" id="guest_people">
-    <h2>Hostující</h2>
-    <table class="table table-striped">
-      <thead><tr><th>Jméno</th><th>Email</th><th>Telefon</th><th>Městská část</th></tr></thead>
-      <tbody><%=render @branch.guest_people.accessible_by(current_ability) %></tbody>
-    </table>
-  </div>
-
-  <div class="tab-pane" id="awaiting_domestic_people">
-<h2>Zájemci o členství</h2>
-<table class="table table-striped">
-	<thead>
-		<tr><th>Jméno</th><th>Stav</th><th>Telefon</th><th>Email</th><th></th></tr>
-	</thead>
-	<tbody>
-<% @branch.awaiting_domestic_people.accessible_by(current_ability).reverse.each do |member| %>
-<tr>
-<td><%= member.name %></td>
-<td><%= member.member_status%></td>
-<td><%= member.phone %></td>
-<td><%= mail_to member.email %></td>
-<td>[<%=link_to_member_application(member)%>]</td>
-</tr>
-<% end %>
-</tbody>
-</table>
-  </div>
-
-</div>

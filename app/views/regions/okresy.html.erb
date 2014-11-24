@@ -1,0 +1,15 @@
+<% 
+	page_title 'Okresy'
+  	breadcrumb(:region_okresy, @region)
+%>
+<%= render('nav') %>
+<table class="table table-striped">
+  <thead>
+    <tr><th>Okres</th><th>Kmenoví členové</th></tr>
+  </thead>
+  <tbody>
+<% @region.domestic_members.includes(:domestic_ruian_address).group_by{|m| m.domestic_ruian_address.try(:okres)}.each do |okres,members| %>
+<tr><th><%= okres %></th><td><%= members.size %></td></tr>
+<% end %>
+</tbody>
+</table>

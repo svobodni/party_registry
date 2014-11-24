@@ -1,0 +1,11 @@
+<%
+  page_title "Hostující"
+  breadcrumb(:branch, @branch)
+%>
+
+<%= render('branches/nav') %>
+
+<table class="table table-striped">
+  <thead><tr><th>Jméno</th><th>Email</th><th>Telefon</th><th>Městská část</th></tr></thead>
+  <tbody><%=render @branch.guest_people.accessible_by(current_ability) %></tbody>
+</table>

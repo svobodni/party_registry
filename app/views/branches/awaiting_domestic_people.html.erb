@@ -1,0 +1,24 @@
+<%
+  page_title "Zájemci o členství"
+  breadcrumb(:branch, @branch)
+%>
+
+<%= render('branches/nav') %>
+
+<table class="table table-striped">
+  <thead>
+	<tr><th>Jméno</th><th>Stav</th><th>Telefon</th><th>Email</th><th></th></tr>
+  </thead>
+  <tbody>
+  <% @branch.awaiting_domestic_people.accessible_by(current_ability).reverse.each do |member| %>
+    <tr>
+      <td><%= member.name %></td>
+      <td><%= member.member_status%></td>
+      <td><%= member.phone %></td>
+      <td><%= mail_to member.email %></td>
+      <td>[<%=link_to_member_application(member)%>]</td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+  

@@ -1,12 +1,24 @@
 class BranchesController < ApplicationController
-  before_action :set_branch, only: [:show, :update, :destroy]
+  before_action :set_branch, only: [:show, :update, :destroy, :coordinator, :awaiting_domestic_people, :domestic_members, :domestic_supporters, :guest_people, :map]
 
   before_action :authenticate_person!, except: :show
 
   # GET /branches.json
   def index
-    @branches = Branch.all
-    render json: @branches
+    if params[:region_id]
+      @region = Region.find(params[:region_id])
+      @branches = @region.branches
+    else
+      @branches = Branch.all
+    end
+    respond_to do |format|
+      format.html
+      format.json {render json: @branches}
+    end
+  end
+
+  def map
+    render 'people/map'
   end
 
   # GET /branches/1.json

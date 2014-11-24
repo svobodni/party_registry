@@ -9,7 +9,12 @@ class BodiesController < ApplicationController
 
   # GET /bodies/1.json
   def show
-    @body = Body.find(params[:id])
+    if params[:region_id]
+      @region = Region.find(params[:region_id])
+      @body = @region.presidium
+    else
+      @body = Body.find(params[:id])
+    end
     respond_to do |format|
       format.html
       format.json { render json: @body }

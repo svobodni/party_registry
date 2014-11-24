@@ -17,6 +17,14 @@ PartyRegistry::Application.routes.draw do
   resources :branches do
     resources :people
     resources :contacts, only: :index
+    member do
+      get 'coordinator'
+      get 'map'
+      get 'awaiting_domestic_people'
+      get 'domestic_members'
+      get 'domestic_supporters'
+      get 'guest_people'
+    end
   end
   resources :organizations
   resources :people do
@@ -30,9 +38,16 @@ PartyRegistry::Application.routes.draw do
     end
   end
   resources :regions do
-    resources :branches
     resources :people
+    resources :branches, only: :index
     resources :contacts, only: :index
+    resource :body, only: :show
+    member do
+      get 'mestske_casti'
+      get 'okresy'
+      get 'map'
+      get 'awaiting_domestic_people'
+    end
   end
 
   get 'server' => 'server#index'

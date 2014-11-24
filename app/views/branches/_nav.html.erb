@@ -1,0 +1,16 @@
+<% content_for :nav do %>
+  <h1><%=@branch.name%></h1>
+  <ul class="nav nav-tabs" style="margin-top: 30px">
+    <li><%= link_to "Koordinátor", branch_path(@branch) %></li>
+    <li><%= link_to "Sdílené kontakty", branch_contacts_path(@branch) %></li>
+    <% if can? :supervise, @branch  %>
+    <li><%= link_to "Členové", domestic_members_branch_path(@branch) %></li>
+    <li><%= link_to "Příznivci", domestic_supporters_branch_path(@branch) %></li>
+    <li><%= link_to "Hostující", guest_people_branch_path(@branch) %></li>
+    <li><%= link_to "Zájemci o členství", awaiting_domestic_people_branch_path(@branch) %></li>
+    <li><%= link_to "Mapa", map_branch_path(@branch) %></li>
+    <li><%= link_to "Export", branch_people_path(@branch, format: :xls) %></li>
+
+    <% end %>
+  </ul>
+<% end %>

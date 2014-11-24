@@ -126,7 +126,10 @@
 					<div class="pull-right">
 						<ul class="breadcrumb"><%= breadcrumbs separator: " / " %></ul>
 					</div>
-					<h1><%= @page_title || "Svobodní" %></h1>
+					<%= yield :nav %>
+				</div>
+				<div class="page-header">
+					<h2><%= @page_title || "Svobodní" %></h2>
 				</div>
 			</div>
 		</div>

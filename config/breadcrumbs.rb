@@ -31,6 +31,16 @@ crumb :region_contacts do |region|
   parent :region, region
 end
 
+crumb :region_mestske_casti do |region|
+  link "Městské části", mestske_casti_region_path(region)
+  parent :region, region
+end
+
+crumb :region_okresy do |region|
+  link "Okresy", okresy_region_path(region)
+  parent :region, region
+end
+
 crumb :branch do |branch|
   link branch.name, branch_path(branch)
   parent :region_branches, branch.region

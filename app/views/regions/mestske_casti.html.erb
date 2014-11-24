@@ -1,0 +1,15 @@
+<% 
+	page_title 'Městské části'
+  	breadcrumb(:region_mestske_casti, @region)
+%>
+<%= render('nav') %>
+<table class="table table-striped">
+	<thead>
+		<tr><th>Městská část</th><th>Kmenoví členové</th></tr>
+	</thead>
+	<tbody>
+<% @region.domestic_members.includes(:domestic_ruian_address).group_by{|m| m.domestic_ruian_address.try(:mestska_cast)}.each do |mestska_cast,members| %>
+<tr><th><%= mestska_cast %></th><td><%= members.size %></td></tr>
+<% end %>
+</tbody>
+</table>

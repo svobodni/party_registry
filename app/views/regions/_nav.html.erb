@@ -1,0 +1,14 @@
+<% content_for :nav do %>
+    <h1><%=@region.name%></h1>
+  	<ul class="nav nav-tabs" style="margin-top: 30px">
+      <li><%= link_to "Předsednictvo", region_body_path(@region) %></li>
+      <li><%= link_to "Pobočky", region_branches_path(@region) %></li>
+      <li><%= link_to "Sdílené kontakty", region_contacts_path(@region) %></li>
+      <% if can? :supervise, @region  %>
+      <li><%= link_to "Městské části", mestske_casti_region_path(@region) %></li>
+      <li><%= link_to "Okresy", okresy_region_path(@region) %></li>
+      <li><%= link_to "Zájemci o členství", awaiting_domestic_people_region_path(@region) %></li>
+      <li><%= link_to "Mapa", map_region_path(@region) %></li>
+      <% end %>
+    </ul>
+<% end %>

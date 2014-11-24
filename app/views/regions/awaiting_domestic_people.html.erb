@@ -1,0 +1,24 @@
+<% 
+	page_title 'Zájemci o členství'
+  	breadcrumb(:region, @region)
+%>
+<%= render('nav') %>
+
+<table class="table table-striped">
+	<thead>
+		<tr><th>ID</th><th>Jméno</th><th>Stav</th><th>Městská část</th><th>Pobočka</th><th></th></tr>
+	</thead>
+	<tbody>
+<% @region.awaiting_domestic_people.includes(:domestic_ruian_address).accessible_by(current_ability).reverse.each do |member| %>
+<tr>
+<td><%= member.vs %></td>
+<td><%= link_to member.name, member %></td>
+<td><%= member.member_status%></td>
+<td><%= member.domestic_ruian_address.try(:mestska_cast) %></td>
+<td><%= member.domestic_branch.try(:name) %></td>
+<td>[<%=link_to_member_application(member)%>]</td>
+</tr>
+
+<% end %>
+</tbody>
+</table>

@@ -4,6 +4,9 @@
   breadcrumb(:region_contacts, @region) if @region
 %>
 
+<%= render('regions/nav') if @region %>
+<%= render('branches/nav') if @branch %>
+
 <table class="table table-striped">
   <thead>
     <tr>
