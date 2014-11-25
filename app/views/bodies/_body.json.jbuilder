@@ -6,6 +6,11 @@ end
 json.vicepresidents body.vicepresidents do |vicepresident|
   json.partial! 'people/person', person: vicepresident.try(:person) if vicepresident.person
 end
+
 json.members body.members do |member|
-	json.name member.members.name
-end
+  if member.try(:members)
+  	json.name member.members.name
+  else
+  	json.name member.name
+  end
+end 
