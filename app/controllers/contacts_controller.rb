@@ -5,7 +5,7 @@ class ContactsController < ApplicationController
   # GET /contacts
   # GET /contacts.json
   def index
-    @contacts = Contact.accessible_by(current_ability).includes(:person)
+    @contacts = Contact.accessible_by(current_ability).includes(:person).references(:person)
     if params[:region_id]
       @region = Region.find(params[:region_id])
       @contacts = @contacts.where("people.domestic_region_id=? or people.guest_region_id=?", params[:region_id], params[:region_id])

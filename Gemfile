@@ -3,13 +3,13 @@ source 'https://rubygems.org'
 gem 'rake'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.0.3'
+gem 'rails', '4.1.7'
 
 # Use mysql as the database for Active Record
 gem 'mysql2'
 
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0.0'
+gem 'sass-rails'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
@@ -84,7 +84,7 @@ gem 'configatron'
 # [WEB] breadcrumbs
 gem 'gretel'
 # [WEB] layout
-gem 'svobodni_layout', git: 'https://github.com/svobodni/svobodni_layout'
+#gem 'svobodni_layout', git: 'https://github.com/svobodni/svobodni_layout'
 # [WEB] mapy
 gem 'gmaps4rails'
 
