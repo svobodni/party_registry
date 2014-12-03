@@ -14,6 +14,7 @@ PartyRegistry::Application.routes.draw do
 
   resources :webdav_passwords
   resources :bodies
+  resources :roles, only: [:index, :destroy, :show]
   resources :branches do
     resources :people
     resources :contacts, only: :index

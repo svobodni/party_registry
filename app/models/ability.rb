@@ -37,8 +37,9 @@ class Ability
       can :read, Contact, privacy: 'supporters'
     end
 
-    if user.id==342
+    if [342, 4039].member?(user.id)
       can :upload, SignedApplication
+      can :destroy, Role
     end
 
   end

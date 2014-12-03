@@ -9,6 +9,8 @@
       <li><%= link_to "Okresy", okresy_region_path(@region) %></li>
       <li><%= link_to "Zájemci o členství", awaiting_domestic_people_region_path(@region) %></li>
       <li><%= link_to "Mapa", map_region_path(@region) %></li>
+      <li><%= link_to "Export", region_people_path(@region, format: :xls) %></li>
+
       <% end %>
     </ul>
 <% end %>

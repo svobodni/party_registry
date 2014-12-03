@@ -8,6 +8,8 @@ class Role < ActiveRecord::Base
   # /nebo/ v jaké pobočce
   belongs_to :branch
 
+  scope :current, -> { where("since < ? and till > ?", Date.today, Date.today) }
+
   def name
   	person.try(:name)
   end
@@ -22,9 +24,12 @@ class Role < ActiveRecord::Base
       "Člen"
     when "Coordinator"
       "Koordinátor"
+    when "Recruiter"
+      "Zástupce koordinátora"
     else  self.class.to_s
     end
-  	"#{role} #{body.try(:acronym) || branch.try(:name)}"
+
+    "#{role} #{body.try(:acronym)}"
   end
 
 end

@@ -11,6 +11,10 @@
 
 		<link rel="stylesheet" href="//web.svobodni.cz/resources/siteModule/font-awesome/css/font-awesome.css" />
 
+<link rel="stylesheet" href="//cdn.datatables.net/plug-ins/9dcbecd42ad/integration/bootstrap/3/dataTables.bootstrap.css">
+
+
+
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="robots" content="index, follow" />
 
@@ -18,10 +22,6 @@
 
 <script type="text/javascript" src="//web.svobodni.cz/cache/jsloader-d41d8cd98f00.js?0"></script>
 
-	<link rel="alternate" title="Články" href="//web.svobodni.cz/rss/clanky" type="application/rss+xml" />
-	<link rel="alternate" title="Události" href="//web.svobodni.cz/rss/udalosti" type="application/rss+xml" />
-	<link rel="alternate" title="TV" href="//web.svobodni.cz/rss/tv" type="application/rss+xml" />
-	<link rel="alternate" title="Celý web" href="//web.svobodni.cz/rss/cely-web" type="application/rss+xml" />
 
 	<title><%= @page_title || "Svobodní" %></title>
 
@@ -39,7 +39,9 @@
           <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery.ui.all.css" type="css">
      <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.0.min.js"></script>
      <script type="text/javascript" src="https://code.jquery.com/ui/1.10.4/jquery-ui.min.js"></script>
-    
+<script type="text/javascript" src="//cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="//cdn.datatables.net/plug-ins/9dcbecd42ad/integration/bootstrap/3/dataTables.bootstrap.js"></script>
+
 </head>
 <body>
 
@@ -179,13 +181,7 @@
 						<li><a href="https://www.svobodni.cz/po-prihlaseni/volebni-mistnost/"><i class="fa fa-thumbs-up"></i> Volební místnost</a></li>
 					</ul>
 				</div>
-				<div class="col-md-4 col-sm-12">
-						<div class="fb_iframe_widget">
-					<span>
-						<iframe id="iframe-likebox" src="//web.svobodni.cz//www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2Fsvobodni&amp;width=590&amp;height=258&amp;colorscheme=light&amp;show_faces=true&amp;header=false&amp;stream=false&amp;show_border=false" style="border:none; overflow:hidden; width:940px; height:258px; background-color:transparent;"></iframe>
-						<!--[if lt IE 9]><script> $("#iframe-likebox").attr("allowTransparency", "true"); </script><![endif]-->
-					</span>
-						</div>
+				<div class="col-md-4 col-sm-12">			
 				</div>
 			</div>
 

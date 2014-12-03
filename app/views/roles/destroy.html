@@ -1,0 +1,19 @@
+<% page_title "Ukončení funkce" %>
+<p>Formulář vyplňuje pověřená osoba (kancelář) ve chvíli, kdy je informována o rezignaci nebo odvolání nebo zániku mandátu z jiného důvodu.</p>
+
+<table class="table">
+  <tr><th>Role</th><td><%= @role.role_name %></td></tr>
+  <tr><th>Osoba</th><td><%= @role.person.name %></td></tr>
+  <tr><th>Kraj</th><td><%= @role.body.organization.name || @role.branch.region.name %></td></tr>
+  <tr><th>Funkce</th><td><%= @role.body.organization.name || @role.branch.name%></td></tr>
+  <tr><th>Ukončení funkce ke dni</th><td><%= form_for(@role, as: :role, method: :delete, url: role_path(@role), html: {class: 'form-inline', role: 'form'}) do |f| %>
+  <div class="form-group">
+    <div class="input-group">    
+      <%= f.label :till, class: 'sr-only' %></label>
+      <%= f.text_field :till, class: 'form-control' %>
+    </div>
+  </div>
+  <%= f.submit "Ukončit funkci",class: "btn btn-default"%>
+<% end %></td></tr>
+<table>
+
