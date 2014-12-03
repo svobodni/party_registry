@@ -25,9 +25,10 @@ class Ability
         can [:read, :application, :export], Person, guest_region_id: role.body.organization_id
         can [:create, :update, :destroy, :supervise], Branch, parent_id: role.body.organization_id
         can [:supervise], Region, id: role.body.organization_id
-      elsif (role.type == "President" || role.type == "Vicepresident") && role.body.organization.type=="Country"
-        # Členové republikového předsednictva
-        can :manage, :all
+        #can :manage, :all
+      elsif role.body.organization.type=="Country"
+        # Členové republikového předsednictva, RK, VK, KK
+        can [:read, :application, :export], Person
       end
     end
 
