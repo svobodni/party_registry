@@ -14,7 +14,7 @@
     <tr>
       <td><%= member.name %></td>
       <td><%= member.member_status%></td>
-      <td><%= member.phone %></td>
+      <td><%= tel_to member.phone %></td>
       <td><%= mail_to member.email %></td>
       <td>[<%=link_to_member_application(member)%>]</td>
     </tr>

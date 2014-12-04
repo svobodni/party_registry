@@ -1,6 +1,6 @@
 <div>Název: <%= link_to branch.name, branch %></div>
 <% if branch.coordinator.try(:person) %>
 <div>Kooridnátor: <%= link_to branch.coordinator.person.name %></div>
-<div>Telefon: <%= branch.coordinator.person.phone %></div>
+<div>Telefon: <%= tel_to branch.coordinator.person.phone %></div>
 <div>Email: <%= mail_to branch.coordinator.person.email %></div>
 <% end %>

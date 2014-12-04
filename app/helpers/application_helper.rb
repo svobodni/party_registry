@@ -11,4 +11,12 @@ module ApplicationHelper
 		link_to "Přihláška", application_person_path(member, format: :pdf)
 	end
   end
+
+  def tel_to(number=nil)
+    if number
+      phone = number.gsub(/\.- /,'')
+      phone = '+420'+phone if phone.length==9
+      link_to phone, "tel:#{phone}"
+    end
+  end
 end

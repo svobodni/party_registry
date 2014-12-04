@@ -25,13 +25,13 @@
       <tr>
         <td><%= image_tag person.photo_url, width: '50px' %></td>
         <td><%= link_to person.name, person %></td>
-        <td><%= person.roles.collect(&:role_name).join(', ') %></td>
+        <td><%= person.roles.collect(&:role_name).uniq.join(', ') %></td>
         <td><%= [person.domestic_region.try(:name), person.guest_region.try(:name)].compact.join(' / ') %></td>
         <td><%= [person.domestic_branch.try(:name), person.guest_branch.try(:name)].compact.join(' / ') %></td>
         
-        <% %w{phone email}.each do |col| %>
-        <td><%= cs.select{|c| c.contact_type==col}.collect(&:contact).join(', ') %></td>
-        <% end %>
+        <td><%= cs.select{|c| c.contact_type=='phone'}.collect{|c| tel_to c.contact}.join(', ') %></td>
+        <td><%= cs.select{|c| c.contact_type=='email'}.collect{|c| mail_to c.contact}.join(', ') %></td>
+
       </tr>
     <% end %>
   </tbody>
