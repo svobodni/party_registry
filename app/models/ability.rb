@@ -26,7 +26,7 @@ class Ability
         can [:create, :update, :destroy, :supervise], Branch, parent_id: role.body.organization_id
         can [:supervise], Region, id: role.body.organization_id
         #can :manage, :all
-      elsif role.body.organization.type=="Country"
+      elsif role.body.try(:organization).try(:type)=="Country"
         # Členové republikového předsednictva, RK, VK, KK
         can [:read, :application, :export], Person
       end
