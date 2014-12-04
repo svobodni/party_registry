@@ -29,8 +29,8 @@
         <td><%= [person.domestic_region.try(:name), person.guest_region.try(:name)].compact.join(' / ') %></td>
         <td><%= [person.domestic_branch.try(:name), person.guest_branch.try(:name)].compact.join(' / ') %></td>
         
-        <td><%= cs.select{|c| c.contact_type=='phone'}.collect{|c| tel_to c.contact}.join(', ') %></td>
-        <td><%= cs.select{|c| c.contact_type=='email'}.collect{|c| mail_to c.contact}.join(', ') %></td>
+        <td><%= cs.select{|c| c.contact_type=='phone'}.collect{|c| tel_to c.contact}.join(', ').html_safe %></td>
+        <td><%= cs.select{|c| c.contact_type=='email'}.collect{|c| mail_to c.contact}.join(', ').html_safe %></td>
 
       </tr>
     <% end %>
