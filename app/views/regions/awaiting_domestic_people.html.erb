@@ -4,7 +4,7 @@
 %>
 <%= render('nav') %>
 
-<table class="table table-striped">
+<table id="awaiting_domestic_people" class="table table-striped">
 	<thead>
 		<tr><th>ID</th><th>Jméno</th><th>Stav</th><th>Městská část</th><th>Pobočka</th><th></th></tr>
 	</thead>
@@ -22,3 +22,5 @@
 <% end %>
 </tbody>
 </table>
+
+<%= datatable :awaiting_domestic_people %>
