@@ -10,6 +10,8 @@ class Role < ActiveRecord::Base
 
   scope :current, -> { where("since < ? and till > ?", Date.today, Date.today) }
 
+  delegate :contacts, to: :person
+
   def name
   	person.try(:name)
   end
