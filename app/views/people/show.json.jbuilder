@@ -3,10 +3,8 @@ json.person do
   json.name @person.name
   json.photo_url @person.photo_url
   json.cv_url @person.cv_url
-  json.contacts do
-  @person.contacts.accessible_by(current_ability).each do |contact|
-    json.set! contact.contact_type, contact.contact
-  end
+  json.contacts @person.contacts.accessible_by(current_ability) do |contact|
+    json.type contact.contact_type
+    json.value contact.contact
   end
 end
-
