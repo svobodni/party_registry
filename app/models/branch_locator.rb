@@ -23,7 +23,9 @@ class BranchLocator
   def name_by_mestska_cast
     return mestska_cast if ["Praha 2", "Praha 3", "Praha 4", "Praha 5",
       "Praha 6", "Praha 8", "Praha 10", "Praha 11", "Praha 12", "Praha 13", 
-      "Praha 14"].member?(mestska_cast)
+      "Praha 14",
+      "Brno-střed", "Brno-Žabovřesky", "Brno-Kohoutovice"
+    ].member?(mestska_cast)
     return "Praha 1 a 5" if ["Praha 1", "Praha 16", "Praha-Lipence", "Praha-Lochkov", "Praha-Slivenec", "Praha-Velká Chuchle", "Praha-Zbraslav", "Praha-Zličín", "Praha-Řeporyje"].member?(mestska_cast)
     return "Zbytek Prahy 4" if ["Praha-Kunratice", "Praha-Libuš", "Praha-Újezd", "Praha-Šeberov"].member?(mestska_cast)
     return "Zbytek Prahy 3 a Praha 10" if ["Praha 15","Praha 22","Praha-Benice","Praha-Dolní Měcholupy","Praha-Dubeč","Praha-Kolovraty","Praha-Královice","Praha-Křeslice","Praha-Nedvězí","Praha-Petrovice","Praha-Štěrboholy"].member?(mestska_cast)
@@ -32,14 +34,17 @@ class BranchLocator
     return "Městský obvod Plzeň 1" if mestska_cast=="Plzeň 1"
     return "Městská část Plzeň 2" if mestska_cast=="Plzeň 2-Slovany"
     return "Městská část Plzeň 3" if mestska_cast=="Plzeň 3"
+    return "Brno-Bystrc" if ["Brno-Bystrc", "Brno-Kníničky", "Brno-Komín", "Brno-Žebětín"].member?(mestska_cast)
+    return "Brno-východ" if ["Brno-Líšeň", "Brno-Vinohrady", "Brno-Židenice", "Brno-Slatina"].member?(mestska_cast)
   end
 
   # Pobočky na celém území obce
   def name_by_obec
     return obec if ["Hradec Králové", "Nový Bydžov", "Chlumec", "Hořice", "Týniště", "Vrchlabí", "Tětín", "Vítězná", 
-      "Olomouc", "Přerov", "České Budějovice"].member?(obec)
+      "Olomouc", "Přerov", "České Budějovice","Břeclav", "Hodonín", "Moravský Krumlov"].member?(obec)
     return "Město Jihlava" if obec=="Jihlava"
     return "Týn nad Vltavou" if [544281, 551503, 544515, 544540, 544639, 535982, 544809, 544817, 544868, 544884, 535231, 535699, 545023, 545104, 545171, 545376].include?(obec_id)
+    return "Kuřimsko" if [583251, 583430, 583791, 583171, 584151].include?(obec_id)
   end
 
   # Pobočky na celém okresu
@@ -49,7 +54,8 @@ class BranchLocator
     return "Okres Rokycany" if okres == "Rokycany"
     return "Hodonínsko" if okres == "Hodonín"
     return "Znojemsko" if okres == "Znojmo"
-    return "Vyškovsko" if okres == "Vyškov"
+    return "Břeclavsko" if okres == "Břeclav"
+    return "Blanensko" if okres == "Blansko"
     return "okres Český Krumlov" if okres=="Český Krumlov"
     return "okres Prachatice" if okres=="Prachatice"
     return "okres Písek" if okres=="Písek"
