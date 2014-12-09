@@ -185,6 +185,11 @@ class Person < ActiveRecord::Base
 
   end
 
+  def cv_url
+    uuid = photo_url.match(/memberid=(.*)/)[1]
+    "https://www.svobodni.cz/Files/CV/#{uuid}.pdf"
+  end
+
   def set_domestic_ruian_address
     self.domestic_ruian_address = RuianAddress.find_or_create_by_address_line(domestic_address_line)
   end
