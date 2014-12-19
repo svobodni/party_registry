@@ -100,6 +100,9 @@ gem 'jwt'
 # přílohy
 gem "paperclip", "~> 4.2"
 
+# formuláře
+gem 'simple_form'
+
 gem 'elasticsearch'
 
 gem 'bower-rails', '~> 0.7.3'
@@ -118,4 +121,3 @@ group :development do
   gem 'capistrano-rails',   '~> 1.1', require: false
   gem 'capistrano-bundler', '~> 1.1', require: false
 end
-
