@@ -23,7 +23,7 @@ class RuianAddress < ActiveRecord::Base
   end
 
   def self.import(id)
-    find_or_create_by_id(id)
+    RuianAddress.where(id: id).first_or_create
   end
 
   def self.find_in_es_by_id(id)
