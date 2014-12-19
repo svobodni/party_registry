@@ -23,7 +23,7 @@ class Ability
         # Členové krajského předsednictva
         can [:read, :application, :export, :update], Person, domestic_region_id: role.body.organization_id
         can [:read, :application, :export], Person, guest_region_id: role.body.organization_id
-        can [:create, :update, :destroy, :supervise], Branch, parent_id: role.body.organization_id
+        can [:create, :supervise], Branch, parent_id: role.body.organization_id
         can [:supervise], Region, id: role.body.organization_id
         #can :manage, :all
       elsif role.body.try(:organization).try(:type)=="Country"
@@ -38,7 +38,8 @@ class Ability
       can :read, Contact, privacy: 'supporters'
     end
 
-    if [342, 4039].member?(user.id)
+    if [342, 344, 4039].member?(user.id)
+      can :create, Branch
       can :upload, SignedApplication
       can :destroy, Role
     end
