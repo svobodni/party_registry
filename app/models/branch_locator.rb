@@ -21,16 +21,8 @@ class BranchLocator
 
   # Pobočky na celém území městské části
   def name_by_mestska_cast
-    return mestska_cast if ["Praha 2", "Praha 3", "Praha 4", "Praha 5",
-      "Praha 6", "Praha 8", "Praha 10", "Praha 11", "Praha 12", "Praha 13", 
-      "Praha 14",
-      "Brno-střed", "Brno-Žabovřesky", "Brno-Kohoutovice"
-    ].member?(mestska_cast)
-    return "Praha 1 a 5" if ["Praha 1", "Praha 16", "Praha-Lipence", "Praha-Lochkov", "Praha-Slivenec", "Praha-Velká Chuchle", "Praha-Zbraslav", "Praha-Zličín", "Praha-Řeporyje"].member?(mestska_cast)
-    return "Zbytek Prahy 4" if ["Praha-Kunratice", "Praha-Libuš", "Praha-Újezd", "Praha-Šeberov"].member?(mestska_cast)
-    return "Zbytek Prahy 3 a Praha 10" if ["Praha 15","Praha 22","Praha-Benice","Praha-Dolní Měcholupy","Praha-Dubeč","Praha-Kolovraty","Praha-Královice","Praha-Křeslice","Praha-Nedvězí","Praha-Petrovice","Praha-Štěrboholy"].member?(mestska_cast)
-    return "Zbytek Prahy 6 a Praha 7" if ["Praha 17", "Praha 7", "Praha-Lysolaje", "Praha-Nebušice", "Praha-Přední Kopanina", "Praha-Suchdol", "Praha-Troja"].member?(mestska_cast)
-    return "Zbytek Prahy 8 a Praha 9" if ["Praha 18", "Praha 19", "Praha 20", "Praha 21", "Praha 9", "Praha-Běchovice", "Praha-Březiněves", "Praha-Dolní Chabry", "Praha-Dolní Počernice", "Praha-Klánovice", "Praha-Koloděje", "Praha-Satalice", "Praha-Vinoř", "Praha-Čakovice", "Praha-Ďáblice"].member?(mestska_cast)
+    return mestska_cast if obec=="Praha"
+    return mestska_cast if ["Brno-střed", "Brno-Žabovřesky", "Brno-Kohoutovice"].member?(mestska_cast)
     return "Městský obvod Plzeň 1" if mestska_cast=="Plzeň 1"
     return "Městská část Plzeň 2" if mestska_cast=="Plzeň 2-Slovany"
     return "Městská část Plzeň 3" if mestska_cast=="Plzeň 3"
@@ -40,7 +32,7 @@ class BranchLocator
 
   # Pobočky na celém území obce
   def name_by_obec
-    return obec if ["Hradec Králové", "Nový Bydžov", "Chlumec", "Hořice", "Týniště", "Vrchlabí", "Tětín", "Vítězná", 
+    return obec if ["Hradec Králové", "Nový Bydžov", "Chlumec", "Hořice", "Týniště", "Vrchlabí", "Tětín", "Vítězná",
       "Olomouc", "Přerov", "České Budějovice","Břeclav", "Hodonín", "Moravský Krumlov"].member?(obec)
     return "Město Jihlava" if obec=="Jihlava"
     return "Týn nad Vltavou" if [544281, 551503, 544515, 544540, 544639, 535982, 544809, 544817, 544868, 544884, 535231, 535699, 545023, 545104, 545171, 545376].include?(obec_id)
