@@ -72,6 +72,10 @@
     <%= button_to "Nahrát novou přihlášku", new_signed_application_path, method: :get %>
     <% end %>
 
+    <% if can? :create, Branch %>
+    <%= button_to "Nová pobočka", new_branch_path, method: :get %>
+    <% end %>
+
     <% if can? :destroy, Role %>
     <%= button_to "Správa funkcí", roles_path, method: :get %>
     <% end %>

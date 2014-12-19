@@ -11,6 +11,7 @@ class BranchesController < ApplicationController
     else
       @branches = Branch.all
     end
+    @branches = @branches.order(:name)
     respond_to do |format|
       format.html
       format.json {render json: @branches}
@@ -29,14 +30,22 @@ class BranchesController < ApplicationController
     end
   end
 
+  # GET /roles/new
+  def new
+    authorize!(:create, Branch)
+    @branch = Branch.new
+  end
+
   # POST /branches.json
   def create
     @branch = Branch.new(branch_params)
     authorize!(:create, @branch)
     respond_to do |format|
       if @branch.save
+        format.html { redirect_to @branch, notice: 'Pobočka byla úspěšně založena.' }
         format.json { render json: @branch, status: :created, location: @branch }
       else
+        format.html { render :new }
         format.json { render json: @branch.errors, status: :unprocessable_entity }
       end
     end

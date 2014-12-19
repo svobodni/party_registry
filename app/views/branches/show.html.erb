@@ -5,7 +5,9 @@
 
 <%= render('branches/nav') %>
 
+<% if @branch.coordinator %>
 <h2>Koordinátor</h2>
 <%= render partial: "bodies/person", object: @branch.coordinator.person %>
-<p>Web: <%= link_to(@branch.homepage_url, @branch.homepage_url) if @branch.homepage_url %></p>
+<% end %>
 
+<p>Web: <%= link_to(@branch.homepage_url, @branch.homepage_url) if @branch.homepage_url %></p>

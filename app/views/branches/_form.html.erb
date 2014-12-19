@@ -1,0 +1,5 @@
+<%= simple_form_for @branch do |f| %>
+<%= f.association :region %>
+<%= f.input :name %>
+<%= f.button :submit %>
+<% end %>
