@@ -1,4 +1,4 @@
-<% 
+<%
 	page_title 'Zájemci o členství'
   	breadcrumb(:region, @region)
 %>
@@ -16,7 +16,7 @@
 <td><%= member.member_status%></td>
 <td><%= member.domestic_ruian_address.try(:mestska_cast) %></td>
 <td><%= member.domestic_branch.try(:name) %></td>
-<td>[<%=link_to_member_application(member)%>]</td>
+<td><%=link_to_member_application(member)%></td>
 </tr>
 
 <% end %>

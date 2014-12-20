@@ -6,9 +6,9 @@ module ApplicationHelper
 
   def link_to_member_application(member)
   if member.signed_application
-    link_to "Podepsaná přihláška", signed_application_person_path(member, format: :pdf)
+    link_to "Podepsaná btn", signed_application_person_path(member, format: :pdf), class: 'btn btn-default btn-xs'
   else
-    link_to "Přihláška", application_person_path(member, format: :pdf)
+    link_to "Přihláška k podpisu", application_person_path(member, format: :pdf), class: 'btn btn-default btn-xs'
   end
   end
 
