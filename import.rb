@@ -7,7 +7,7 @@ def import_person(type, member)
   person = Person.find_or_initialize_by(id: id)
   person.legacy_type = type.to_s
 
-  person.name_prefix = member["personalData"]["degreeBeforeName"]  
+  person.name_prefix = member["personalData"]["degreeBeforeName"]
   person.first_name = member["personalData"]["firstName"].strip
   person.last_name = member["personalData"]["lastName"]
   person.name_suffix = member["personalData"]["degreeAfterName"]
@@ -16,24 +16,25 @@ def import_person(type, member)
   person.public_email = member["contact"]["publicEmail"]
   person.phone = member["contact"]["phone"]
   person.phone_public = member["contact"]["isPhonePublic"]=="True"
-  
+
   person.username=member["login"]["userName"]
   person.encrypted_password = member["login"]["passwordHash"]
   person.password_salt=member["login"]["passwordSalt"]
 
   person.birth_number = member["personalData"]["birthCertificateNumber"]
-  person.date_of_birth = Time.strptime(member["personalData"]["birthDate"],"%m/%d/%Y %r") unless member["personalData"]["birthDate"].empty? 
+  person.date_of_birth = Time.strptime(member["personalData"]["birthDate"],"%m/%d/%Y %r") unless member["personalData"]["birthDate"].empty?
   person.previous_political_parties=member["membership"]["politicalParties"]
- 
+  person.previous_candidatures=member["membership"]["candidatures"]
+
   person.domestic_region_id=member["contact"]["districtId"]
   person.guest_region_id=member["membership"]["guestDistrictId"]
- 
+
   person.domestic_address_street = member["contact"]["street"]
   person.domestic_address_city = member["contact"]["town"]
   person.domestic_address_zip = member["contact"]["postalCode"]
 
   person.photo_url = member["web"]["photoURL"]
-  person.homepage_url = 'http://'+member["web"]["homepage"] unless member["web"]["homepage"].blank? 
+  person.homepage_url = 'http://'+member["web"]["homepage"] unless member["web"]["homepage"].blank?
   person.fb_profile_url = member["web"]["facebookProfileURL"]
   person.fb_page_url = member["web"]["facebookPageURL"]
 
@@ -52,7 +53,7 @@ def import_person(type, member)
       end
     else
       person.member_status="awaiting_presidium_decision"
-    end   
+    end
   else
     if member["membership"]["paymentAccepted"]=="True"
       person.supporter_status="regular"
@@ -63,7 +64,7 @@ def import_person(type, member)
   print "."
   if person.changed?
     puts ''
-    puts person.changes 
+    puts person.changes
     person.save!
   end
 end
@@ -97,7 +98,7 @@ if ids_to_delete.size < 265
   }
 else
   puts "Should destroy #{ids_to_delete.join(', ')}"
-end 
+end
 
 puts "Central DB: #{data['users']['member'].size+data['users']['sympathizer'].size}"
 puts "Our DB: #{Person.count}"

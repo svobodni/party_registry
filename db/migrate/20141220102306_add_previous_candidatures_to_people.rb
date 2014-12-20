@@ -1,0 +1,5 @@
+class AddPreviousCandidaturesToPeople < ActiveRecord::Migration
+  def change
+    add_column :people, :previous_candidatures, :string
+  end
+end
