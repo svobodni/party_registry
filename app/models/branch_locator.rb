@@ -22,7 +22,7 @@ class BranchLocator
   # Pobočky na celém území městské části
   def name_by_mestska_cast
     return mestska_cast if obec=="Praha"
-    return mestska_cast if ["Brno-střed", "Brno-Žabovřesky", "Brno-Kohoutovice"].member?(mestska_cast)
+    return mestska_cast if ["Brno-střed", "Brno-sever", "Brno-Žabovřesky", "Brno-Kohoutovice"].member?(mestska_cast)
     return "Městský obvod Plzeň 1" if mestska_cast=="Plzeň 1"
     return "Městská část Plzeň 2" if mestska_cast=="Plzeň 2-Slovany"
     return "Městská část Plzeň 3" if mestska_cast=="Plzeň 3"
