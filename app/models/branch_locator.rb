@@ -33,7 +33,7 @@ class BranchLocator
   # Pobočky na celém území obce
   def name_by_obec
     return obec if ["Hradec Králové", "Nový Bydžov", "Chlumec", "Hořice", "Týniště", "Vrchlabí", "Tětín", "Vítězná",
-      "Olomouc", "Přerov", "České Budějovice","Břeclav", "Hodonín", "Moravský Krumlov"].member?(obec)
+      "Olomouc", "Přerov", "České Budějovice","Břeclav", "Hodonín", "Moravský Krumlov", "Chrudim"].member?(obec)
     return "Město Jihlava" if obec=="Jihlava"
     return "Týn nad Vltavou" if [544281, 551503, 544515, 544540, 544639, 535982, 544809, 544817, 544868, 544884, 535231, 535699, 545023, 545104, 545171, 545376].include?(obec_id)
     return "Kuřimsko" if [583251, 583430, 583791, 583171, 584151].include?(obec_id)
@@ -41,7 +41,7 @@ class BranchLocator
 
   # Pobočky na celém okresu
   def name_by_okres
-    return okres if ["Benešov", "Beroun", "Kolín", "Kutná Hora", "Mělník", "Mladá Boleslav", "Nymburk", "Praha-východ", "Praha-západ", "Příbram", "Rakovník", "Kladno"].member?(okres)
+    return okres if ["Benešov", "Beroun", "Kolín", "Kutná Hora", "Mělník", "Mladá Boleslav", "Nymburk", "Praha-východ", "Praha-západ", "Příbram", "Rakovník", "Kladno", "Pardubice"].member?(okres)
     return "Okres Plzeň-sever" if okres == "Plzeň-sever"
     return "Okres Rokycany" if okres == "Rokycany"
     return "Hodonínsko" if okres == "Hodonín"
