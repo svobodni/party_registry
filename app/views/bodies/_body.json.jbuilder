@@ -9,8 +9,8 @@ end
 
 json.members body.members do |member|
   if member.try(:members)
-  	json.name member.members.name
+    json.partial! 'people/person', person: member.members
   else
-  	json.name member.name
+    json.partial! 'people/person', person: member
   end
-end 
+end

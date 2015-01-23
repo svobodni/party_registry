@@ -36,6 +36,8 @@ class Ability
       can :read, Contact, privacy: ['members','supporters']
     elsif user.is_regular_supporter?
       can :read, Contact, privacy: 'supporters'
+    else
+      can :read, Contact, privacy: 'public'
     end
 
     if [342, 344, 4039].member?(user.id)
