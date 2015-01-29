@@ -20,10 +20,15 @@ module PartyRegistry
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     config.i18n.default_locale = :cs
 
-    config.middleware.use Rack::Cors do
+    config.middleware.insert_before 0, "Rack::Cors" do
       allow do
-        origins '*'
-        resource '*', :headers => :any, :methods => [:get, :post, :options], :expose  => ['Content-Type']
+        origins 'mailer.svobodni.cz'
+
+        resource '/auth/token',
+        :headers => :any,
+        :methods => [:get],
+        :credentials => true,
+        :max_age => 0
       end
     end
 
