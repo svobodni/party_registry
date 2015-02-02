@@ -22,7 +22,7 @@ module PartyRegistry
 
     config.middleware.insert_before 0, "Rack::Cors" do
       allow do
-        origins 'mailer.svobodni.cz'
+        origins '*'
 
         resource '/auth/token',
         :headers => :any,
