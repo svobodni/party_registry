@@ -1,4 +1,7 @@
 PartyRegistry::Application.routes.draw do
+
+  use_doorkeeper
+
   resources :contacts
 
   resources :signed_applications
