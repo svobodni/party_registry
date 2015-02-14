@@ -3,7 +3,8 @@
 
 class AuthController < ApplicationController
 
-  before_action :authenticate_person!, except: [:public_key]
+  before_action :authenticate_person!, except: [:public_key, :me]
+  before_action :doorkeeper_authorize!, only: [:me]
 
   # GET /auth/token.json
   def token
@@ -50,6 +51,14 @@ class AuthController < ApplicationController
   def public_key
     public_key = configatron.auth.private_key.public_key.to_s
     render text: public_key
+  end
+
+  # GET /auth/me
+  def me
+    @person = current_person
+    respond_to do |format|
+      format.json {render template: "people/profile"}
+    end
   end
 
   # GET /auth/profile

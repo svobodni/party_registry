@@ -29,6 +29,14 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def current_person
+    if doorkeeper_token && doorkeeper_token.accessible?
+      Person.find(doorkeeper_token.resource_owner_id)
+    else
+      super
+    end
+  end
+
   def authorize_token!
     token = request.headers['Authorization'].split(' ').last
 
