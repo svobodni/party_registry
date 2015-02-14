@@ -89,12 +89,12 @@ class PeopleController < ApplicationController
 
   def photo
     authenticate_person! if @person.roles.empty?
-    send_data HTTParty.get(@person.photo_url).body, filename: "#{@person.id}.png", type: 'image/png', disposition: :inline
+    send_data HTTParty.get(@person.files_photo_url).body, filename: "#{@person.id}.png", type: 'image/png', disposition: :inline
   end
 
   def cv
     authenticate_person! if @person.roles.empty?
-    send_data HTTParty.get(@person.cv_url).body, filename: "#{@person.id}.pdf", type: 'application/pdd', disposition: :inline
+    send_data HTTParty.get(@person.files_cv_url).body, filename: "#{@person.id}.pdf", type: 'application/pdd', disposition: :inline
   end
 
   private

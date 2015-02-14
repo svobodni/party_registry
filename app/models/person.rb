@@ -185,12 +185,20 @@ class Person < ActiveRecord::Base
 
   end
 
-  def photo_url
+  def files_photo_url
     "https://files.svobodni.cz/rep/is/member_photo/#{id}.png"
   end
 
-  def cv_url
+  def files_cv_url
     "https://files.svobodni.cz/rep/is/member_cv/#{id}.pdf"
+  end
+
+  def photo_url
+    "https://registr.svobodni.cz/people/#{id}/photo.png"
+  end
+
+  def cv_url
+    "https://registr.svobodni.cz/people/#{id}/cv.pdf"
   end
 
   def set_domestic_ruian_address
