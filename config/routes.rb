@@ -37,6 +37,7 @@ PartyRegistry::Application.routes.draw do
     member do
       get 'application'
       get 'signed_application'
+      get 'photo'
     end
     collection do
       get 'profile'

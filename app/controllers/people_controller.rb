@@ -1,5 +1,7 @@
 class PeopleController < ApplicationController
-  before_action :set_person, only: [:show, :edit, :update, :destroy, :application, :signed_application]
+  before_action :set_person, only: [:show, :edit, :update, :destroy, :application, :signed_application, :photo]
+
+  before_action :authenticate_person!, except: [:photo]
 
   # GET /people.json
   def index
@@ -83,6 +85,11 @@ class PeopleController < ApplicationController
   def signed_application
     authorize!(:show, @person)
     send_file  @person.signed_application.scan.path, type: @person.signed_application.scan_content_type, disposition: :inline
+  end
+
+  def photo
+    authenticate_person! if @person.roles.empty?
+    send_file HTTParty.get("https://files.svobodni.cz/rep/is/member_photo/#{id}.png").body, type: 'image/png', disposition: :inline
   end
 
   private
