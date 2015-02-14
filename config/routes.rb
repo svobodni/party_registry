@@ -38,6 +38,7 @@ PartyRegistry::Application.routes.draw do
       get 'application'
       get 'signed_application'
       get 'photo'
+      get 'cv'
     end
     collection do
       get 'profile'
