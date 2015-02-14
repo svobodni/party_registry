@@ -46,5 +46,9 @@ class Ability
       can :destroy, Role
     end
 
+    if [342].member?(user.id)
+      can :manage, Doorkeeper::Application
+    end
+
   end
 end
