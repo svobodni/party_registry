@@ -77,14 +77,14 @@ cs:
 
     authorizations:
       buttons:
-        authorize: 'Authorize'
-        deny: 'Deny'
+        authorize: 'Schválit'
+        deny: 'Zakázat'
       error:
         title: 'An error has occurred'
       new:
-        title: 'Authorize required'
-        prompt: 'Authorize %{client_name} to use your account?'
-        able_to: 'This application will be able to'
+        title: 'Vyžadováno schválení'
+        prompt: 'Chcete povolit aplikaci %{client_name} používat Váš účet?'
+        able_to: 'Této aplikaci bude umožněn'
       show:
         title: 'Authorization code'
 
@@ -151,6 +151,7 @@ cs:
         title: 'OAuth authorize required'
 
     scopes:
-      public: 'Access your public data'
-      write: 'Update your information'
-      admin: 'Change your preferences'
+      public: 'Přístup k Vašim veřejným údajům'
+      private: 'Přístup k Vašim osobním údajům'
+      roles: 'Přístup k seznamu Vašich funkcí'
+      people: 'Přístup k údajům členů a příznivců'
