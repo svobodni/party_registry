@@ -29,6 +29,13 @@ module PartyRegistry
         :methods => [:get],
         :credentials => true,
         :max_age => 0
+
+        resource '/people/*/private.json',
+        :headers => :any,
+        :methods => [:get],
+        :credentials => true,
+        :max_age => 0
+
       end
     end
 

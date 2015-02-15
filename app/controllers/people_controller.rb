@@ -1,7 +1,7 @@
 class PeopleController < ApplicationController
-  before_action :set_person, only: [:show, :edit, :update, :destroy, :application, :signed_application, :photo, :cv]
+  before_action :set_person, only: [:show, :edit, :update, :destroy, :application, :signed_application, :private, :photo, :cv]
 
-  before_action :authenticate_person!, except: [:photo, :cv]
+  before_action :authenticate_person!, except: [:payments, :private, :photo, :cv]
 
   # GET /people.json
   def index
@@ -40,6 +40,13 @@ class PeopleController < ApplicationController
     respond_to do |format|
       format.json
       format.html
+    end
+  end
+
+  def private
+    authorize!(:show, @person)
+    respond_to do |format|
+      format.json
     end
   end
 

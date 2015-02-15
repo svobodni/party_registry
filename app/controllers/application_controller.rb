@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
       authorize_token!
     else
       super
-    end
+    end unless doorkeeper_token && doorkeeper_token.accessible?
   end
 
   def current_person
