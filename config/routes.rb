@@ -6,13 +6,10 @@ PartyRegistry::Application.routes.draw do
 
   resources :signed_applications
 
-  get '/admin/person/:id/application' => 'people#application'
   get '/auth/token'
   get '/auth/public_key'
   get '/auth/profile'
   get '/auth/me'
-
-  mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
 
   devise_for :people
 

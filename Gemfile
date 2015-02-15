@@ -46,8 +46,6 @@ end
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
-gem 'rails_admin'
-
 # Autentizace
 gem 'devise'
 gem 'devise-encryptable'
