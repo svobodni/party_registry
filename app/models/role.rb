@@ -12,6 +12,12 @@ class Role < ActiveRecord::Base
 
   delegate :contacts, to: :person
 
+  after_create :create_rev_membership
+  before_update :cancel_rev_membership
+
+  validates :person_id, presence: true
+  validates_associated :person
+
   def name
   	person.try(:name)
   end
@@ -32,6 +38,18 @@ class Role < ActiveRecord::Base
     end
 
     "#{role} #{body.try(:acronym)}"
+  end
+
+  def create_rev_membership
+    if self.class==President && body.organization.class==Region
+      Member.create(body_id: 5, person_id: person_id, since: since, till: till)
+    end
+  end
+
+  def cancel_rev_membership
+    if till_changed? && self.class==President && body.organization.class==Region
+      Member.current.where(body_id: 5, person_id: person_id).first.update_attribute :till, till
+    end
   end
 
 end
