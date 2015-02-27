@@ -41,9 +41,10 @@ class Ability
     end
 
     if [342, 344, 4039].member?(user.id)
-      can :create, Branch
+      can :read, Person
       can :upload, SignedApplication
       can [:create, :destroy], Role
+      can :create, Branch
       #can :manage, :all
     end
 
