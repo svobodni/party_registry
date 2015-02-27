@@ -15,7 +15,10 @@ PartyRegistry::Application.routes.draw do
 
   resources :webdav_passwords
   resources :bodies
-  resources :roles, only: [:index, :destroy, :show]
+  resources :roles, only: [:index, :destroy, :new, :create] do
+    get :autocomplete_person_last_name, :on => :collection
+  end
+
   resources :branches do
     resources :people
     resources :contacts, only: :index
