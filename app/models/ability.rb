@@ -22,6 +22,9 @@ class Ability
         can [:read, :application, :export], Person, guest_region_id: role.body.organization_id
         can [:create, :supervise], Branch, parent_id: role.body.organization_id
         can [:supervise], Region, id: role.body.organization_id
+        can [:create, :destroy], Role do |r|
+          role.body.organization.branch_ids.member?(r.branch_id)
+        end
         #can :manage, :all
       elsif role.body.try(:organization).try(:type)=="Country"
         # Členové republikového předsednictva, RK, VK, KK
