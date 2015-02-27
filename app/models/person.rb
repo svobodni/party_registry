@@ -209,4 +209,7 @@ class Person < ActiveRecord::Base
     RuianAddress.import(domestic_address_ruian_id) unless domestic_address_ruian_id.blank?
   end
 
+  def name_id_region
+    "#{id}: #{name} (#{domestic_region.name})"
+  end
 end
