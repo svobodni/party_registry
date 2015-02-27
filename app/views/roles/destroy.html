@@ -10,7 +10,7 @@
   <div class="form-group">
     <div class="input-group">
       <%= f.label :till, class: 'sr-only' %></label>
-      <%= f.text_field :till, class: 'form-control' %>
+      <%= f.text_field :till, class: 'form-control', value: Date.today %>
     </div>
   </div>
   <%= f.submit "Ukončit funkci",class: "btn btn-default"%>
