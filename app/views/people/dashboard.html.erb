@@ -1,0 +1,231 @@
+<div class="col-sm-3 sidebar">
+  <!--
+  <a href="">
+    <img src="<%= @person.photo_url %>" width="200">
+  </a>
+  -->
+  <h2><%= @person.first_name %> <%= @person.last_name %></h2>
+  <p><%= @person.name %><!-- TODO , student --></p>
+  <% unless @person.roles.blank? %>
+  <ul>
+    <% for role in @person.roles %>
+    <li>
+      <% if role.branch %>
+        <%= link_to role.role_name, role.branch %>
+      <% elsif role.body.organization.class==Region %>
+        <%= link_to role.role_name, role.body %>
+        <%= link_to "Finance", "https://finance.svobodni.cz/organizations/#{role.body.organization.id}", class: "btn btn-info btn-xs" %>
+        <%= link_to "Kraj", region_path(role.body.organization), class: "btn btn-info btn-xs" %>
+      <% else %>
+        <%= link_to role.role_name, role.body %>
+      <% end %>
+    </li>
+    <% end %>
+  </ul>
+  <% end %>
+  <!-- TODO
+  <ul>
+    <li>příznivce Svobodných</li>
+    <li>zájemce o členství</li>
+    <li>místopředseda KrP Praha</li>
+  </ul>
+-->
+  <hr>
+  <h3>Vaše údaje&nbsp;</h3>
+  <p>Podle adresy trvalého bydliště <b><%= @person.domestic_address_line %></b> jste zařazen/a do krajského sdružení <%= link_to @person.domestic_region.name, @person.domestic_region %>
+    <% if @person.domestic_branch.nil? %>
+     a v místě není žádná pobočka.
+    <% else %>
+     do pobočky <%= link_to @person.domestic_branch.name, @person.domestic_branch %>.
+    <% end %>
+  </p>
+  <!-- TODO
+  <p>Výše uvedená adresa je i korespondenční a budeme Vám na ni zasílat občasník Beran.</p>
+-->
+  <p>
+    <% if @person.guest_branch.nil? %>
+      <% if @person.guest_region.nil? %>
+        Nehostujete v žádném jiném kraji nebo pobočce.
+      <% else %>
+        Hostujete v krajském sdružení <%= link_to @person.guest_region.name, @person.guest_region %>
+      <% end %>
+    <% else %>
+      Hostujete v pobočce <%= link_to @person.guest_branch.name, @person.guest_branch %>.
+    <% end %>
+  </p>
+  <p>S ostatními členy a příznivci sdílíte tyto Vaše kontakty:</p>
+  <table class="table">
+    <% for contact in @person.contacts %>
+    <tr>
+      <td>
+        <% if contact.contact_type =="mobile-phone" %>
+          <span class="glyphicon glyphicon-phone"></span>
+        <% elsif contact.contact_type =="email" %>
+          <span class="glyphicon glyphicon-envelope"></span>
+        <% elsif contact.contact_type =="web" %>
+          <span class="glyphicon glyphicon-globe"></span>
+        <% else %>
+          <span class="glyphicon glyphicon-star"></span>
+        <% end %>
+        <br>
+      </td>
+      <td>
+        <% if contact.contact_type == "xemail" %>
+        <%= mail_to contact.contact, contact.contact %>
+        <% else %>
+        <%= contact.contact %>
+        <% end %>
+      </td>
+      <td><%= contact.privacy %></td>
+    </tr>
+    <% end %>
+  </table>
+<!--
+  <a class="btn btn-success">Aktualizovat</a> -->
+</div>
+
+<div class="col-sm-9 main">
+  <h1 class="page-header">Hlavní rozcestník člena</h1>
+  <div class="row placeholders">
+    <div class="col-xs-6 col-sm-3 placeholder bg-success dashboardbox">
+      <a href="https://vs.svobodni.cz">
+        <span class="glyphicon glyphicon-thumbs-up"></span>
+        <span class="glyphicon glyphicon-thumbs-down"></span>
+        <h4>Volební místnost</h4>
+        <span class="text-muted">Ve volební místnosti naleznete seznam právě probíhajících voleb, kterých se můžete účastnit.</span>
+      </a>
+    </div>
+    <div class="col-xs-6 col-sm-3 placeholder bg-info dashboardbox">
+      <a href="https://files.svobodni.cz/pro_cleny/">
+        <span class="glyphicon glyphicon-folder-open"></span>
+        <span class="glyphicon glyphicon-certificate"></span>
+        <span class="glyphicon glyphicon-eye-close"></span>
+        <h4>Files</h4>
+        <span class="text-muted">Sdílené úložiště pro uveřejňování dokumentů orgánů.</span>
+      </a>
+    </div>
+    <div class="col-xs-6 col-sm-3 placeholder bg-warning dashboardbox">
+      <a href="https://forum.svobodni.cz">
+        <span class="glyphicon glyphicon-bullhorn"></span>
+        <span class="glyphicon glyphicon-resize-small"></span>
+        <span class="glyphicon glyphicon-user"></span>
+        <h4>Fórum</h4>
+        <font color="#777777">Diskusní fórum se sekcemi pro členy, příznivce, orgány strany a pro prezentaci kandidátů.</font>
+      </a>
+    </div>
+    <div class="col-xs-6 col-sm-3 placeholder bg-danger dashboardbox">
+      <a href="https://wiki.svobodni.cz/index.php?title=Speciáln%C3%AD:Přihlásit">
+        <span class="glyphicon glyphicon-pushpin"></span>
+        <span class="glyphicon glyphicon-education"></span>
+        <h4>Wiki</h4>
+        <span class="text-muted">Systém pro kolaborativní úpravy dokumentů.</span>
+      </a>
+    </div>
+  </div>
+  <!--
+  <h2 class="sub-header">Nadcházející události</h2>
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Datum</th>
+          <th>Čas</th>
+          <th>Popis</th>
+          <th>Místo</th>
+          <th>Akce</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1. dubna 2015</td>
+          <td>18:00-19:30</td>
+          <td>Beseda s Petrem Machem
+            <br>
+          </td>
+          <td>Opletalova 55, Praha 1
+            <br>
+          </td>
+          <td>
+            <a class="btn btn-xs btn-success">Přihlásit se</a>
+          </td>
+        </tr>
+        <tr>
+          <td>1. května 2015
+            <br>
+          </td>
+          <td>14:00-16:30
+            <br>
+          </td>
+          <td>Oslava</td>
+          <td>Jungmannovo nám.</td>
+          <td>
+            <a class="btn btn-xs btn-success">Přihlásit se</a>
+            <br>
+          </td>
+        </tr>
+        <tr>
+          <td>8. května 2015
+            <br>
+          </td>
+          <td>14:00-16:30
+            <br>
+          </td>
+          <td>Oslava
+            <br>
+          </td>
+          <td>Jungmannovo nám.
+            <br>
+          </td>
+          <td>
+            <a class="btn btn-xs btn-success">Přihlásit se</a>&nbsp;
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  -->
+  <h2 class="sub-header">Nejnovější zprávy</h2>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Datum</th>
+        <th>Popis</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% cache(:expires_in => 5.minutes) do %>
+      <% for item in NewsFeed.items %>
+      <tr>
+        <td>před <%= distance_of_time_in_words_to_now item.created_at %></td>
+        <td><%= auto_link item.text %></td>
+      </tr>
+      <% end %>
+      <% end %>
+    </tbody>
+  </table>
+
+  <h4>Další funkce registru</h4>
+  <% if can? :upload, SignedApplication %>
+  <%= button_to "Nahrát novou přihlášku", new_signed_application_path, method: :get, class: "btn btn-info"  %>
+  <% end %>
+
+  <% if can? :create, Branch %>
+  <%= button_to "Nová pobočka", new_branch_path, method: :get, class: "btn btn-info" %>
+  <% end %>
+
+  <% if can? :destroy, Role %>
+  <%= button_to "Správa funkcí", roles_path, method: :get, class: "btn btn-info"  %>
+  <% end %>
+
+  <% unless flash[:password].blank? %>
+  <h4>Heslo pro webdav</h4>
+  <dl class="dl-horizontal">
+    <dt>Heslo</dt><dd><%= flash[:password] %></dd></tr>
+  </dl>
+  <% end %>
+
+  <%= form_tag("/webdav_passwords", method: "post") do %>
+  <%= submit_tag("Vygenerovat nové heslo pro webdav", class: "btn btn-warning", data: { confirm: "Heslo slouží pro přístup na files.svobodni.cz protokolem webdav. Vygenerováním nového hesla zneplatníte předchozí (pokud už nějaké máte). Opravdu chcete vygenerovat nové heslo?" }) %>
+  <% end %>
+
+</div>

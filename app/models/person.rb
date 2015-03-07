@@ -34,7 +34,7 @@ class Person < ActiveRecord::Base
   has_many :contacts, :as => :contactable
 
   before_save :set_domestic_ruian_address,
-    if: Proc.new { |person| person.domestic_address_street_changed? } 
+    if: Proc.new { |person| person.domestic_address_street_changed? }
 
   before_update :import_domestic_ruian_address,
     if: Proc.new { |person| person.domestic_address_ruian_id_changed? }
@@ -56,6 +56,12 @@ class Person < ActiveRecord::Base
   def name
   	[[name_prefix, first_name, last_name].reject(&:blank?).join(' '),name_suffix].reject(&:blank?).join(', ')
   end
+
+  # sestaví jméno osoby, vhodné pro zobrazování
+  def short_name
+    [first_name, last_name].join(' ')
+  end
+
 
   def domestic_address_line
     "#{domestic_address_street}, #{domestic_address_zip} #{domestic_address_city}"

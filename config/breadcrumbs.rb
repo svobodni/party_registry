@@ -10,6 +10,15 @@ crumb :people do
   link "Lidé"
 end
 
+crumb :bodies do
+  link "Orgány"
+end
+
+crumb :body do |body|
+  link body.name
+  parent :bodies
+end
+
 crumb :person do |person|
   link person.name, person_path(person)
   parent :people
@@ -19,6 +28,11 @@ crumb :region do |region|
   link region.name, region_path(region)
   parent :regions
   #parent :root
+end
+
+crumb :region_presidium do |region|
+  link "Předsednictvo" #, region_branches_path(region)
+  parent :region, region
 end
 
 crumb :region_branches do |region|

@@ -21,8 +21,8 @@
 				<td><%= link_to role.branch.name, role.branch %></td>
 			<% end %>
 			<td><%= role.role_name %></td>
-			<td><%= link_to role.person.try(:name), person_path(role.person) %></td>
-			<td><%= link_to("Ukončit funkci", role_path(role), {method: :delete, class: 'btn btn-default btn-xs'}) if can?(:destroy, role) %></td> 
+			<td><%= link_to(role.person.name, person_path(role.person)) %></td>
+			<td><%= link_to("Ukončit funkci", role_path(role), {method: :delete, class: 'btn btn-default btn-xs'}) if can?(:destroy, role) %></td>
 		</tr>
 		<% end %>
 	</tbody>

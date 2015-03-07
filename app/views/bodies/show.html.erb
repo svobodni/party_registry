@@ -1,9 +1,15 @@
 <%
   page_title @body.name
-  #breadcrumb :branch, @branch
+  if @region
+    breadcrumb :region_presidium, @region
+  else
+    breadcrumb :body, @body
+  end
 %>
 
 <%= render('regions/nav') if @region %>
+
+<%= link_to_member_documents(@body) unless @region %>
 
 <% if @body.president %>
 <h2>Předseda</h2>
@@ -13,16 +19,16 @@
 <% end %>
 
 
-<% if @body.vicepresidents %>
+<% unless @body.try(:vicepresidents).empty? %>
 <h2>Místopředsedové</h2>
 <div class="row">
-<%= render partial: "person", collection: @body.vicepresidents %>
+<%= render partial: "person", collection: @body.vicepresidents.order(:last_name) %>
 </div>
 <% end %>
 
 <% unless @body.try(:members).empty? %>
 <h2>Členové</h2>
 <div class="row">
-<%= render partial: "person", collection: @body.members %>
+<%= render partial: "person", collection: @body.members.order(:last_name) %>
 </div>
 <% end %>

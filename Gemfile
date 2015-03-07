@@ -122,3 +122,11 @@ group :development do
   gem 'capistrano-rails',   '~> 1.1', require: false
   gem 'capistrano-bundler', '~> 1.1', require: false
 end
+
+gem 'bootstrap-sass', '~> 3.3.3'
+
+gem 'twitter'
+gem 'rails_autolink'
+gem 'underscore-rails'
+gem 'jquery-datatables-rails', '~> 3.1.1'
+gem 'font-awesome-sass'

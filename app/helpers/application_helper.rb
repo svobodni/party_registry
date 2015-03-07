@@ -38,11 +38,6 @@ module ApplicationHelper
     end
   end
 
-
-
-
-
-
   def tel_to(number=nil)
     if number
       phone = number.gsub(/\.- /,'')
@@ -52,7 +47,7 @@ module ApplicationHelper
   end
 
   def draw_contacts(contacts)
-    social = %w(facebook_profile facebook_page twitter google_plus linked_in)
+    social = %w(facebook_profile facebook_page twitter google_plus linked_in web blog)
     order = %w(phone email web blog)+social
     contacts.sort_by{|element|
       order.index(element.contact_type)
@@ -60,7 +55,9 @@ module ApplicationHelper
       if social.member?(contact.contact_type)
         content_tag :a, href: contact.contact, type: :button, class: 'btn btn-default' do
           case contact.contact_type
-          when 'facebook_page', 'facebook_profile'
+          when 'facebook_profile'
+            content_tag(:i, class: 'fa fa-facebook'){}
+          when 'facebook_page'
             content_tag(:i, class: 'fa fa-facebook'){}
           when 'twitter'
             content_tag(:i, class: 'fa fa-twitter'){}
@@ -68,11 +65,19 @@ module ApplicationHelper
             content_tag(:i, class: 'fa fa-linkedin'){}
           when 'google_plus'
             content_tag(:i, class: 'fa fa-google-plus'){}
+          when 'blog'
+            'blog'
+          when 'web'
+            'web'
           end
         end
       else
         content_tag :div do
           case contact.contact_type
+          when 'web'
+            link_to "web", contact.contact, class: 'btn btn-default'
+          when 'blog'
+            link_to "blog", contact.contact, class: 'btn btn-default'
           when 'email'
             mail_to contact.contact, contact.contact
           when 'phone'
@@ -91,6 +96,10 @@ module ApplicationHelper
         end
       end
     end.join.html_safe
+  end
+
+  def link_to_member_documents(body)
+    link_to "Dokumenty pro členy", "https://files.svobodni.cz/#{body.acronym.downcase}/pro-členy/"
   end
 
 end

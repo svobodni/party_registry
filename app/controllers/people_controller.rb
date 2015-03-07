@@ -28,7 +28,7 @@ class PeopleController < ApplicationController
     else
       respond_to do |format|
         format.html
-        format.json
+        format.json {render template: "people/profile"}
       end
     end
   end
@@ -40,6 +40,15 @@ class PeopleController < ApplicationController
     respond_to do |format|
       format.json
       format.html
+    end
+  end
+
+  # GET /people/dashboard.json
+  def dashboard
+    @person = current_user
+    authorize!(:show, @person)
+    respond_to do |format|
+      format.html # {render layout: "dashboard"}
     end
   end
 

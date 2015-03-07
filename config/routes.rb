@@ -43,6 +43,7 @@ PartyRegistry::Application.routes.draw do
     end
     collection do
       get 'profile'
+      get 'dashboard'
     end
   end
   resources :regions do

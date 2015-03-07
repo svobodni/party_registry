@@ -10,10 +10,14 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require gmaps/google
+
 //= require jquery
 //= require jquery_ujs
+//= require dataTables/jquery.dataTables
 //= require jquery-ui
+//= require bootstrap-sprockets
 //= require autocomplete-rails
+//= require underscore
+//= require gmaps/google
 //= require turbolinks
 //= require_tree .
