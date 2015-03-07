@@ -60,5 +60,5 @@ PartyRegistry::Application.routes.draw do
   end
 
 
-  root 'regions#index'
+  root 'people#dashboard'
 end
