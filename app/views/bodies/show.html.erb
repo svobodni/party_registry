@@ -22,7 +22,7 @@
 <% unless @body.try(:vicepresidents).empty? %>
 <h2>Místopředsedové</h2>
 <div class="row">
-<%= render partial: "person", collection: @body.vicepresidents.order(:last_name) %>
+<%= render partial: "person", collection: @body.vicepresidents.sort{|a,b| a.person.last_name<=>b.person.last_name} %>
 </div>
 <% end %>
 
