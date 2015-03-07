@@ -3,6 +3,8 @@ PartyRegistry::Application.routes.draw do
   use_doorkeeper
 
   resources :contacts
+  require 'sidekiq/web'
+  mount Sidekiq::Web => '/sidekiq'
 
   resources :signed_applications
 

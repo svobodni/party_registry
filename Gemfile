@@ -121,7 +121,17 @@ end
 group :development do
   gem 'capistrano-rails',   '~> 1.1', require: false
   gem 'capistrano-bundler', '~> 1.1', require: false
+  gem 'capistrano-sidekiq', require: false
 end
+
+# sidekiq UI
+gem 'sinatra', :require => nil
+
+# sidekiq scheduler
+gem "sidekiq-cron", "~> 0.2.0"
+
+# notifikace chyb
+gem 'exception_notification'
 
 gem 'bootstrap-sass', '~> 3.3.3'
 
