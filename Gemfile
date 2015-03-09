@@ -130,6 +130,9 @@ gem 'sinatra', :require => nil
 # sidekiq scheduler
 gem "sidekiq-cron", "~> 0.2.0"
 
+# form wizzard
+gem 'wicked'
+
 # notifikace chyb
 gem 'exception_notification'
 

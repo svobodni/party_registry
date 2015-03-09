@@ -1,0 +1,26 @@
+<%
+page_title "Adresy"
+#breadcrumb(:branch, @branch)
+%>
+
+<%= render('profiles/nav') %>
+
+<%= simple_form_for current_person, url: people_path, as: 'user_horizontal' do |f| %>
+<%= f.error_notification %>
+<%= field_set_tag "Adresa bydliště" do %>
+<p>Adresa Vašeho trvalého bydliště tak, jak ji máte zapsanou v občanském průkazu.
+Podle této adresy příslušíte ke krajskému sdružení.</p>
+<%= f.input :domestic_address_street %>
+<%= f.input :domestic_address_city %>
+<%= f.input :domestic_address_zip %>
+<%= f.association :domestic_region %>
+<% end %>
+<%= field_set_tag "Korespondenční adresa" do %>
+<p>Vaše korespondenční adresa, na kterou Vám můžeme zasílat časopis Beran.</p>
+<%= f.input :postal_address_street %>
+<%= f.input :postal_address_city %>
+<%= f.input :postal_address_zip %>
+<% end %>
+
+<%= f.button :submit, value: "Uložit", class: 'btn btn-success' %>
+<% end %>

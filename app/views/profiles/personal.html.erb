@@ -1,0 +1,17 @@
+<%
+page_title "Osobní údaje"
+#breadcrumb(:branch, @branch)
+%>
+
+<%= render('profiles/nav') %>
+
+<%= simple_form_for current_person, url: wizard_path, as: 'person' do |f| %>
+  <%= f.error_notification %>
+  <%= f.input :id, disabled: true %>
+  <%= f.input :name_prefix, hint: "Ing. / Bc. / Mgr." %>
+  <%= f.input :first_name, disabled: true %>
+  <%= f.input :last_name, disabled: true %>
+  <%= f.input :name_suffix, hint: "CSc. / PhD." %>
+  <%= f.input :date_of_birth, disabled: true %>
+  <%= f.button :submit, value: "Uložit", class: 'btn btn-success' %>
+  <% end %>
