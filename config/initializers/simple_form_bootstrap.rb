@@ -3,6 +3,7 @@ SimpleForm.setup do |config|
   config.error_notification_class = 'alert alert-danger'
   config.button_class = 'btn btn-default'
   config.boolean_label_class = nil
+  config.default_form_class = 'form-horizontal'
 
   config.wrappers :vertical_form, tag: 'div', class: 'form-group', error_class: 'has-error' do |b|
     b.use :html5
@@ -126,11 +127,24 @@ SimpleForm.setup do |config|
   # Check the Bootstrap docs (http://getbootstrap.com)
   # to learn about the different styles for forms and inputs,
   # buttons and other elements.
-  config.default_wrapper = :vertical_form
+  config.default_wrapper = :horizontal_form
   config.wrapper_mappings = {
-    check_boxes: :vertical_radio_and_checkboxes,
-    radio_buttons: :vertical_radio_and_checkboxes,
-    file: :vertical_file_input,
-    boolean: :vertical_boolean,
+    check_boxes: :horizontal_radio_and_checkboxes,
+    radio_buttons: :horizontal_radio_and_checkboxes,
+    file: :horizontal_file_input,
+    boolean: :horizontal_boolean,
   }
+end
+
+# bootstrap
+configatron.bootstrap.input_class = 'form-control'
+
+SimpleForm::FormBuilder.class_eval do
+  def bootstrap_input_field(attribute_name, options = {})
+    classes = Array(options[:class]).compact
+    classes << configatron.bootstrap.input_class
+    options[:class] = classes.join(' ')
+
+    input_field(attribute_name, options)
+  end
 end
