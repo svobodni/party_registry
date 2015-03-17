@@ -11,9 +11,6 @@
 }
 </style>
 
-<%= render('branches/nav') if @branch %>
-<%= render('regions/nav') if @region %>
-
 <div id="map">
     <div id="map-canvas"></div>
 </div>
@@ -50,4 +47,3 @@ $('#mapa').on('shown.bs.tab', function (e) {});
 
 initialize();
 </script>
-

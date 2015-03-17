@@ -1,10 +1,10 @@
-<div class="col-xs-3 card">
+<div class="col-xs-4 card">
 	<div class="row">
 		<div class="col-xs-4">
 			<img src="<%= person.try(:photo_url) || person.person.try(:photo_url) %>"/>
 		</div>
 		<div class="col-xs-8">
-			<h3><%= person.name %></h3>
+			<h3><%= link_to person.name, person_path(person.try(:person) || person) %></h3>
 			<table>
 			<%=draw_contacts(person.contacts.accessible_by(current_ability))%>
 </table>

@@ -7,9 +7,7 @@
   end
 %>
 
-<%= render('regions/nav') if @region %>
-
-<%= link_to_member_documents(@body) unless @region %>
+<%= link_to_member_documents(@body) unless @body.acronym=="KrP" unless @region %>
 
 <% if @body.president %>
 <h2>Předseda</h2>
@@ -20,7 +18,11 @@
 
 
 <% unless @body.try(:vicepresidents).empty? %>
+<% if @body.vicepresidents.size == 1 %>
+<h2>Místopředseda</h2>
+<% else %>
 <h2>Místopředsedové</h2>
+<% end %>
 <div class="row">
 <%= render partial: "person", collection: @body.vicepresidents.sort{|a,b| a.person.last_name<=>b.person.last_name} %>
 </div>

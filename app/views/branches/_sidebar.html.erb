@@ -1,0 +1,16 @@
+<!-- Sidebar -->
+<div id="sidebar-wrapper">
+  <ul class="sidebar-nav">
+    <li class="sidebar-brand"><%=@branch.name%></li>
+    <li><%= link_to_unless_current "Koordinátor", branch_path(@branch) %></li>
+    <li><%= link_to_unless_current "Sdílené kontakty", branch_contacts_path(@branch) %></li>
+    <% if can? :supervise, @branch  %>
+    <li><%= link_to_unless_current "Členové", domestic_members_branch_path(@branch) %></li>
+    <li><%= link_to_unless_current "Příznivci", domestic_supporters_branch_path(@branch) %></li>
+    <li><%= link_to_unless_current "Hostující", guest_people_branch_path(@branch) %></li>
+    <li><%= link_to_unless_current "Zájemci o členství", awaiting_domestic_people_branch_path(@branch) %></li>
+    <li><%= link_to_unless_current "Mapa", map_branch_path(@branch) %></li>
+    <li><%= link_to_unless_current "Export", branch_people_path(@branch, format: :xls) %></li>
+    <% end %>
+  </ul>
+</div>

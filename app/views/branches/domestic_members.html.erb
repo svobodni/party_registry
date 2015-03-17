@@ -3,8 +3,6 @@
   breadcrumb(:branch, @branch)
 %>
 
-<%= render('branches/nav') %>
-
 <table id="domestic_members" class="table table-striped">
   <thead><tr><th>Foto</th><th>Jméno</th><th>Email</th><th>Telefon</th><th>Městská část</th></tr></thead>
   <tbody><%=render @branch.domestic_members.accessible_by(current_ability) %></tbody>

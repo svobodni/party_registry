@@ -1,0 +1,16 @@
+<!-- Sidebar -->
+<div id="sidebar-wrapper">
+  <ul class="sidebar-nav">
+    <li class="sidebar-brand"><%=@region.name%></li>
+    <li><%= link_to_unless_current "Předsednictvo", region_body_path(@region) %></li>
+    <li><%= link_to_unless_current "Pobočky", region_branches_path(@region) %></li>
+    <li><%= link_to_unless_current "Sdílené kontakty", region_contacts_path(@region) %></li>
+    <% if can? :supervise, @region  %>
+    <li><%= link_to_unless_current "Městské části", mestske_casti_region_path(@region) %></li>
+    <li><%= link_to_unless_current "Okresy", okresy_region_path(@region) %></li>
+    <li><%= link_to_unless_current "Zájemci o členství", awaiting_domestic_people_region_path(@region) %></li>
+    <li><%= link_to_unless_current "Mapa", map_region_path(@region) %></li>
+    <li><%= link_to_unless_current "Export", region_people_path(@region, format: :xls) %></li>
+    <% end %>
+  </ul>
+</div>

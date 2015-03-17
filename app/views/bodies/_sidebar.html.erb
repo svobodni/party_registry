@@ -1,0 +1,13 @@
+<!-- Sidebar -->
+<div id="sidebar-wrapper">
+  <ul class="sidebar-nav">
+    <li class="sidebar-brand">Republikové orgány</li>
+    <% for body in @country.bodies %>
+    <li><%= link_to body.name.split("(").first, body %></a></li>
+    <% end %>
+    <li class="sidebar-brand">Krajská sdružení</li>
+    <% for region in @country.regions.order(:nuts3_id) %>
+    <li><%= link_to region.name, body_path(region.presidium) %></a></li>
+    <% end %>
+  </ul>
+</div>
