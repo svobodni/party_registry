@@ -3,15 +3,13 @@ page_title "Hostování v jiném kraji a/nebo pobočce"
 #breadcrumb(:branch, @branch)
 %>
 
-<%= render('profiles/nav') %>
-
-<%= simple_form_for current_person, url: wizard_path, as: 'person' do |f| %>
+<%= simple_form_for current_person, url: request.original_url, as: 'person' do |f| %>
 <%= f.error_notification %>
 <p>Pokud se zdržujete jinde než na adrese bydliště, můžete si nastavit hostování v jiném kraji a v jiné pobočce, pokud je v místě založena.
   Vaše kontaktní údaje se pak budou zobrazovat v seznamech předsednictva daného kraje resp. koordinátora pobočky.
   Mohou Vás tak zvát na místní akce a zapojit do dění.</p>
 
-  <%= f.association :guest_region %>
-  <%= f.input :guest_branch_id, collection: Region.all, as: :grouped_select, group_method: :branches, order: :name %>
+  <%= f.association :guest_region, disabled: !configatron.migrated %>
+  <%= f.input :guest_branch_id, collection: Region.all, as: :grouped_select, group_method: :branches, order: :name, disabled: !configatron.migrated %>
   <%= f.button :submit, value: "Uložit", class: 'btn btn-success' %>
   <% end %>

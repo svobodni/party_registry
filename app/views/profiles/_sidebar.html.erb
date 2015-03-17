@@ -1,0 +1,21 @@
+<!-- Sidebar -->
+<div id="sidebar-wrapper">
+  <ul class="sidebar-nav">
+    <li>
+      <%=link_to_unless_current '<span class="glyphicon glyphicon-user"></span> Osobní'.html_safe, personal_profiles_path %>
+    </li>
+    <li>
+      <%=link_to_unless_current '<span class="glyphicon glyphicon-lock"></span> Přihlašování'.html_safe, credentials_profiles_path %>
+    </li>
+    <li>
+      <%=link_to_unless_current '<span class="glyphicon glyphicon-phone"></span> Kontakty'.html_safe, contacts_profiles_path %>
+    </li>
+    <li>
+      <%=link_to_unless_current '<span class="glyphicon glyphicon-envelope"></span> Adresy'.html_safe, addresses_profiles_path %>
+    </li>
+    <li>
+      <%=link_to_unless_current '<span class="glyphicon glyphicon-globe"></span> Hostování'.html_safe, guesting_profiles_path %>
+    </li>
+  </ul>
+</div>
+<!-- /#sidebar-wrapper -->

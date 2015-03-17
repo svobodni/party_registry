@@ -1,6 +1,16 @@
 PartyRegistry::Application.routes.draw do
 
-  resources :profiles
+  resources :profiles do
+    collection do
+      get 'personal'
+      get 'credentials'
+      get 'addresses'
+      get 'contacts'
+      get 'guesting'
+    end
+  end
+
+  patch '/profiles', to: 'profiles#update'
   use_doorkeeper
 
   resources :contacts

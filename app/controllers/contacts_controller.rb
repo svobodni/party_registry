@@ -11,8 +11,8 @@ class ContactsController < ApplicationController
       @contacts = @contacts.where("people.domestic_region_id=? or people.guest_region_id=?", params[:region_id], params[:region_id])
     elsif params[:branch_id]
       @branch = Organization.find(params[:branch_id])
-      @contacts = @contacts.where("people.domestic_branch_id=? or people.guest_branch_id=?", params[:branch_id], params[:branch_id]) 
-    end    
+      @contacts = @contacts.where("people.domestic_branch_id=? or people.guest_branch_id=?", params[:branch_id], params[:branch_id])
+    end
     @contacts = @contacts.group_by(&:contactable)
   end
 
@@ -34,7 +34,7 @@ class ContactsController < ApplicationController
 
     respond_to do |format|
       if @contact.save
-        format.html { redirect_to profile_people_path, notice: 'Kontakt byl úspěšně přidán.' }
+        format.html { redirect_to contacts_profiles_path, notice: 'Kontakt byl úspěšně přidán.' }
         format.json { render action: 'show', status: :created, location: @contact }
       else
         format.html { render action: 'new' }
@@ -49,7 +49,7 @@ class ContactsController < ApplicationController
     authorize!(:update, @contact)
     respond_to do |format|
       if @contact.update(contact_params)
-        format.html { redirect_to profile_people_path, notice: 'Kontakt byl úspěšně aktualizován.' }
+        format.html { redirect_to contacts_profiles_path, notice: 'Kontakt byl úspěšně aktualizován.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -64,7 +64,7 @@ class ContactsController < ApplicationController
     authorize!(:destroy, @contact)
     @contact.destroy
     respond_to do |format|
-      format.html { redirect_to profile_people_path, notice: 'Kontakt byl úspěšně zrušen.' }
+      format.html { redirect_to contacts_profiles_path, notice: 'Kontakt byl úspěšně zrušen.' }
       format.json { head :no_content }
     end
   end

@@ -3,16 +3,16 @@ page_title "Sdílení kontaktů - Vaše kontaktní údaje"
 #breadcrumb(:branch, @branch)
 %>
 
-<%= render('profiles/nav') %>
-
 <table class="table table-striped">
   <% for contact in current_person.contacts %>
   <tr><th><%=contact.contact_type%></th>
     <td><%= auto_link contact.contact %></td>
-    <td><%= contact.privacy %></td>
-    <td><%= button_to 'Upravit', edit_contact_path(contact), method: :get %></td>
-    <td><%= button_to 'Smazat', contact, method: :delete, data: { confirm: 'Opravdu chcete smazat tento kontakt?' } %></td>
+    <td><%= Contact.privacies.detect{|p| p[1]==contact.privacy}.try(:first) %></td>
+    <td><%= button_to 'Upravit', edit_contact_path(contact), class: "btn btn-xs btn-default", method: :get %></td>
+    <td><%= button_to 'Smazat', contact, class: "btn btn-xs btn-danger", method: :delete, data: { confirm: 'Opravdu chcete smazat tento kontakt?' } %></td>
   </tr>
   <% end %>
 </table>
-<%= button_to 'Přidat kontakt', new_person_contact_path(current_person), method: :get %>
+<h3>Přidat nový kontakt</h3>
+<% @contact = Contact.new %>
+<%= render "contacts/form" %>

@@ -112,4 +112,12 @@ module ApplicationHelper
       }[flash_type.to_sym] || flash_type.to_s
   end
 
+  def current_controller?(*args)
+    args.any? { |v| v.to_s.downcase == controller.controller_name }
+  end
+
+  def current_action?(*args)
+    args.any? { |v| v.to_s.downcase == action_name }
+  end
+
 end

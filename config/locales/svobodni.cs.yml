@@ -1,4 +1,9 @@
 cs:
+  personal: "Osobní"
+  credentials: "Přihlašování"
+  contacts: "Kontakty"
+  addresses: "Adresy"
+  guesting: "Hostování"
   admin:
     actions:
       application:
@@ -19,11 +24,25 @@ cs:
 
     attributes:
       person:
+        username: "Přihlašovací jméno"
+        name_prefix: "Titul"
         first_name: "Jméno"
         last_name: "Příjmení"
+        name_suffix: "Titul"
         domestic_region: "Kmenový kraj"
         guest_region: "Hostuje v kraji"
+        guest_branch: "Hostuje v pobočce"
         domestic_branch: "Kmenová pobočka"
+        password: "Heslo"
+        password_confirmation: "Potvrzení hesla"
+        date_of_birth: "Datum narození"
+        domestic_address_street: Ulice a číslo
+        domestic_address_city: Obec
+        domestic_address_zip: PSČ
+        postal_address_street: Ulice a číslo
+        postal_address_city: Obec
+        postal_address_zip: PSČ
+        phone: Telefon
       organization:
         name: "Název"
         region: "Kraj"
@@ -33,4 +52,10 @@ cs:
         body: "Orgán"
         person: "Osoba"
         branch: "Pobočka"
+        since: "Od"
+        till: "Do"
+      contact:
+        contact_type: "Typ kontaktu"
+        contact: "Kontakt"
+        privacy: "Viditelnost kontaktu"
       # will translate User attribute "login" as "Handle"

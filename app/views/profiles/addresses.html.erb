@@ -3,24 +3,21 @@ page_title "Adresy"
 #breadcrumb(:branch, @branch)
 %>
 
-<%= render('profiles/nav') %>
-
-<%= simple_form_for current_person, url: people_path, as: 'user_horizontal' do |f| %>
+<%= simple_form_for current_person, url: request.original_url, as: 'person' do |f| %>
 <%= f.error_notification %>
-<%= field_set_tag "Adresa bydliště" do %>
-<p>Adresa Vašeho trvalého bydliště tak, jak ji máte zapsanou v občanském průkazu.
-Podle této adresy příslušíte ke krajskému sdružení.</p>
-<%= f.input :domestic_address_street %>
-<%= f.input :domestic_address_city %>
-<%= f.input :domestic_address_zip %>
-<%= f.association :domestic_region %>
-<% end %>
-<%= field_set_tag "Korespondenční adresa" do %>
-<p>Vaše korespondenční adresa, na kterou Vám můžeme zasílat časopis Beran.</p>
-<%= f.input :postal_address_street %>
-<%= f.input :postal_address_city %>
-<%= f.input :postal_address_zip %>
-<% end %>
+  <%= field_set_tag "Adresa bydliště" do %>
+    <p>Adresa Vašeho trvalého bydliště tak, jak ji máte zapsanou v občanském průkazu. Podle této adresy příslušíte ke krajskému sdružení.</p>
+    <%= f.input :domestic_address_street, disabled: !configatron.migrated %>
+    <%= f.input :domestic_address_city, disabled: !configatron.migrated %>
+    <%= f.input :domestic_address_zip, disabled: !configatron.migrated %>
+    <%= f.association :domestic_region, disabled: !configatron.migrated %>
+  <% end %>
+  <%= field_set_tag "Korespondenční adresa" do %>
+    <p>Vaše korespondenční adresa, na kterou Vám můžeme zasílat časopis Beran.</p>
+    <%= f.input :postal_address_street, disabled: !configatron.migrated %>
+    <%= f.input :postal_address_city, disabled: !configatron.migrated %>
+    <%= f.input :postal_address_zip, disabled: !configatron.migrated %>
+    <% end %>
 
-<%= f.button :submit, value: "Uložit", class: 'btn btn-success' %>
+  <%= f.button :submit, value: "Uložit", class: 'btn btn-success' %>
 <% end %>

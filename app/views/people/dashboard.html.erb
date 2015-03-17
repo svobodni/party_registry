@@ -32,11 +32,12 @@
 -->
   <hr>
   <h3>Vaše údaje&nbsp;</h3>
-  <p>Podle adresy trvalého bydliště <b><%= @person.domestic_address_line %></b> jste zařazen/a do krajského sdružení <%= link_to @person.domestic_region.name, @person.domestic_region %>
-    <% if @person.domestic_branch.nil? %>
+  <p>Adresa bydliště: <b><%= @person.domestic_address_line %></b></p>
+  <p>Krajské sdružení: <%= link_to @person.domestic_region.name, @person.domestic_region %></p>
+  <p>Pobočka: <% if @person.domestic_branch.nil? %>
      a v místě není žádná pobočka.
     <% else %>
-     do pobočky <%= link_to @person.domestic_branch.name, @person.domestic_branch %>.
+     <%= link_to @person.domestic_branch.name, @person.domestic_branch %>
     <% end %>
   </p>
   <!-- TODO
@@ -69,19 +70,12 @@
         <% end %>
         <br>
       </td>
-      <td>
-        <% if contact.contact_type == "xemail" %>
-        <%= mail_to contact.contact, contact.contact %>
-        <% else %>
-        <%= contact.contact %>
-        <% end %>
-      </td>
-      <td><%= contact.privacy %></td>
+      <td><%= auto_link contact.contact %></td>
+      <td><%= Contact.privacies.detect{|p| p[1]==contact.privacy}.try(:first) %></td>
     </tr>
     <% end %>
   </table>
-<!--
-  <a class="btn btn-success">Aktualizovat</a> -->
+  <%= link_to "Aktualizovat", profiles_path, class: "btn btn-info" %>
 </div>
 
 <div class="col-sm-9 main">
@@ -96,7 +90,7 @@
       </a>
     </div>
     <div class="col-xs-6 col-sm-3 placeholder bg-info dashboardbox">
-      <a href="https://files.svobodni.cz/pro_cleny/">
+      <a href="https://files.svobodni.cz/">
         <span class="glyphicon glyphicon-folder-open"></span>
         <span class="glyphicon glyphicon-certificate"></span>
         <span class="glyphicon glyphicon-eye-close"></span>
