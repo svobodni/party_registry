@@ -29,7 +29,7 @@ class RolesController < ApplicationController
   # POST /roles
   # POST /roles.json
   def create
-    if params[:role].try(:type)=="Coordinator"
+    if params[:role][:type]=="Coordinator"
       @role = Coordinator.new(params.require(:role).permit(:person_id, :branch_id, :since))
       @role.till = "2099-01-01"
     else
