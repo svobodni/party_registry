@@ -9,7 +9,7 @@
 <% @branches.each do |branch| %>
 <tr>
 <th><%= link_to branch.name, branch %></th>
-<td><%= branch.coordinator.try(:person).try(:name) %></td>
+<td><%= link_to(branch.coordinator.try(:person).try(:name), branch.coordinator.try(:person)) if branch.coordinator %></td>
 <td><%= tel_to branch.coordinator.try(:person).try(:phone) %></td>
 <td><%= mail_to branch.coordinator.try(:person).try(:email) %></td>
 <td>  <% unless branch.homepage_url.blank? %>

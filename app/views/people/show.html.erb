@@ -39,7 +39,7 @@
     <h4>Moje role ve Svobodných</h4>
     <ul>
       <% for role in @person.roles %>
-      <li><%= link_to role.role_name, role.body || role.branch %></li>
+      <li><%= link_to role.role_long_name, role.body || role.branch %></li>
       <% end %>
     </ul>
     <% end %>

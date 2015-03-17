@@ -37,7 +37,17 @@ class Role < ActiveRecord::Base
     else  self.class.to_s
     end
 
-    "#{role} #{body.try(:acronym)}"
+    [role, body.try(:acronym)].compact.join(' ')
+  end
+
+  def role_long_name
+    if %w(Coordinator Recruiter).member?(self.class.to_s)
+      "#{role_name} pobočky #{branch.name}"
+    elsif body.try(:acronym)=="KrP"
+      "#{role_name} #{body.organization.name}"
+    else
+      role_name
+    end
   end
 
   def create_rev_membership

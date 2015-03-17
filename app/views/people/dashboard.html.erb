@@ -11,7 +11,7 @@
     <% for role in @person.roles %>
     <li>
       <% if role.branch %>
-        <%= link_to role.role_name, role.branch %>
+        <%= link_to role.role_long_name, role.branch %>
       <% elsif role.body.organization.class==Region %>
         <%= link_to role.role_name, role.body %>
         <%= link_to "Finance", "https://finance.svobodni.cz/organizations/#{role.body.organization.id}", class: "btn btn-info btn-xs" %>
