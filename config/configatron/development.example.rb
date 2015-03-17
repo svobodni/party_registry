@@ -1,5 +1,5 @@
 # Override your default settings for the Development environment here.
-# 
+#
 # Example:
 #   configatron.file.storage = :local
 
@@ -11,3 +11,8 @@ configatron.auth.systems = {
 }
 
 configatron.old_web.sync_pass = "tajneheslo"
+
+configatron.twitter.consumer_key        = "mG3Bni2iKZv70UkzeZwFZjVPu"
+configatron.twitter.consumer_secret     = "YNl25W1vzlmNHUWLzfKfKWVTiZYRskby5D8dbGvyueukpEu3k9"
+configatron.twitter.access_token        = "3072281596-MEipY28e9A4lUKuaH23PNQ00Vhcm9fBh0pUNCEB"
+configatron.twitter.access_token_secret = "kGIHmBjIdTPcWwDR36hZQzS8LjBsyM77611EL29QX6tPL"
