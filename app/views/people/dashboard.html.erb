@@ -187,7 +187,7 @@
       </tr>
     </thead>
     <tbody>
-      <% cache(:expires_in => 5.minutes) do %>
+      <% cache(:news_feed, :expires_in => 5.minutes) do %>
       <% for item in NewsFeed.items %>
       <tr>
         <td>před <%= distance_of_time_in_words_to_now item.created_at %></td>
