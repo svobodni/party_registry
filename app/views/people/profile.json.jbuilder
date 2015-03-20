@@ -6,11 +6,12 @@ json.person do
   json.first_name @person.first_name
   json.last_name @person.last_name
   json.email @person.email
-  json.phone @person.phone
-  json.homepage_url @person.homepage_url
-  json.fb_page_url @person.fb_page_url
-  json.fb_profile_url @person.fb_profile_url
   json.photo_url @person.photo_url
+  json.cv_url @person.cv_url
+  json.contacts @person.contacts.accessible_by(current_ability) do |contact|
+    json.type contact.contact_type
+    json.value contact.contact
+  end
   json.domestic_region do
     json.name @person.domestic_region.name
     json.id @person.domestic_region.id
