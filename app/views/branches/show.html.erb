@@ -1,6 +1,7 @@
 <%
   page_title "Pobočka #{@branch.name}"
   breadcrumb :branch, @branch
+  render 'sidebar'
 %>
 
 <% if @branch.coordinator %>

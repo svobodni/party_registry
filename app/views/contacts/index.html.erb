@@ -1,7 +1,13 @@
 <%
   page_title "Sdílení kontaktů Svobodných"
-  breadcrumb(:branch_contacts, @branch) if @branch
-  breadcrumb(:region_contacts, @region) if @region
+  if @branch
+    breadcrumb(:branch_contacts, @branch)
+    render 'branches/sidebar'
+  elsif @region
+    breadcrumb(:region_contacts, @region)
+    render 'regions/sidebar'
+  end
+
 %>
 
 <table id="contacts" class="table table-striped">

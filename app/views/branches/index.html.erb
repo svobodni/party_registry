@@ -1,6 +1,7 @@
 <%
 	page_title 'Pobočky'
-  	breadcrumb(:region_branches, @region) if @region
+  breadcrumb(:region_branches, @region) if @region
+	render 'regions/sidebar'
 %>
 
 <table class="table table-striped">

@@ -2,8 +2,10 @@
   page_title @body.name
   if @region
     breadcrumb :region_presidium, @region
+    render 'regions/sidebar'
   else
     breadcrumb :body, @body
+    render 'sidebar'
   end
 %>
 

@@ -68,24 +68,12 @@
   <main role="main">
   <div class="container-fluid">
     <div class="row">
-      <div class="col-md-12">
-          <%= yield :nav %>
-      </div>
-    </div>
-
-    <div class="row">
-      <% if current_controller?(:profiles,:branches, :bodies) || (current_controller?(:contacts) && (@branch || @region))  %>
+      <% if content_for('sidebar') %>
 
         <div id="wrapper">
-
-        <% if @region %>
-          <%= render('regions/sidebar') %>
-        <% elsif @branch %>
-          <%= render('branches/sidebar') %>
-        <% else %>
-          <%#= content_for?(:nav) ? yield(:nav) : render('sidebar') %>
-          <%= render('sidebar') %>
-        <% end %>
+        <!-- Sidebar -->
+        <%= content_for('sidebar') %>
+        <!-- /#sidebar-wrapper -->
 
         <!-- Page Content -->
         <div id="page-content-wrapper">
