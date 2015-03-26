@@ -1,0 +1,61 @@
+<%
+  page_title 'Vyhledání adres'
+  render 'backoffice/sidebar'
+%>
+
+<table id="people" class="table table-striped table-bordered" cellspacing="0" width="100%">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Jméno</th>
+      <th>Adresa</th>
+      <th>Adresa</th>
+      <th>RUIAN ID</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for person in @people %>
+
+    <tr>
+      <td><%= person.vs %></td>
+      <td><%= person.name %></td>
+      <td><%= person.domestic_address_line %></td>
+      <td><input id="address_line" class="address_line" value="<%= person.domestic_address_line %>" size="60"></td>
+      <td><%= form_for person, url: backoffice_person_path(person), as: 'person' do |f| %>
+          <%= f.text_field :domestic_address_ruian_id, value: person.domestic_address_ruian_id %>
+          <%= f.button :submit, value: "Uložit", class: 'btn btn-success' %>
+          <% end %>
+      </td>
+    </tr>
+
+    <% end %>
+  </tbody>
+</table>
+
+<%#= datatable :people %>
+
+<script>
+$(function() {
+  $(".address_line").autocomplete({
+    source: function(request, response) {
+      $.ajax({
+        url: "http://openapi.xnet.cz/api/adresy/naseptavac/"+encodeURIComponent(request.term),
+        type: "GET",
+        dataType: "JSON",
+        success: function(data) {
+          response($.map(data["adresy"], function(item) {
+            return {
+              label: item["radka"],
+              id: item["kod_adm"]
+            }
+          }));
+        },
+      });
+    },
+    minLength: 2,
+    change: function(event, ui) {
+      $(this).parent().parent().find('#person_domestic_address_ruian_id').val(ui.item.id);
+    }
+  })
+});
+</script>

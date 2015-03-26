@@ -12,6 +12,10 @@ class Backoffice::PeopleController < ApplicationController
     @people = Person.paginate(page: params[:page], per_page: 10)
   end
 
+  def with_unknown_address
+    @people = Person.includes([:domestic_ruian_address]).select{|p| p.domestic_ruian_address.nil?}
+  end
+
   # GET /people/1
   # GET /people/1.json
   def show
@@ -26,28 +30,12 @@ class Backoffice::PeopleController < ApplicationController
   def edit
   end
 
-  # POST /people
-  # POST /people.json
-  def create
-    @person = Person.new(person_params)
-
-    respond_to do |format|
-      if @person.save
-        format.html { redirect_to @person, notice: 'Person was successfully created.' }
-        format.json { render :show, status: :created, location: @person }
-      else
-        format.html { render :new }
-        format.json { render json: @person.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
   # PATCH/PUT /people/1
   # PATCH/PUT /people/1.json
   def update
     respond_to do |format|
       if @person.update(person_params)
-        format.html { redirect_to @person, notice: 'Person was successfully updated.' }
+        format.html { redirect_to :back, notice: 'Person was successfully updated.' }
         format.json { render :show, status: :ok, location: @person }
       else
         format.html { render :edit }
@@ -74,7 +62,7 @@ class Backoffice::PeopleController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def person_params
-      params.require(:person).permit(:first_name, :last_name)
+      params.require(:person).permit(:domestic_address_ruian_id)
     end
 
     def authorize_backoffice

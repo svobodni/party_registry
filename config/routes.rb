@@ -2,8 +2,11 @@ PartyRegistry::Application.routes.draw do
 
   namespace :backoffice do
     resources :people do
-      get :autocomplete_person_email, :on => :collection
-      get :autocomplete_person_last_name, :on => :collection
+      collection do
+        get :autocomplete_person_email
+        get :autocomplete_person_last_name
+        get :with_unknown_address
+      end
     end
   end
 
