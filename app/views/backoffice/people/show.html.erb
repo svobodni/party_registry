@@ -1,0 +1,101 @@
+<% render 'backoffice/sidebar' %>
+
+<%= image_tag @person.photo_url %>
+
+<div class="row">
+  <div class="col-md-6">
+
+<p>
+  <strong>Jméno:</strong>
+  <%= @person.name %>
+</p>
+
+<p>
+  <strong>Datum narození:</strong>
+  <%= l @person.date_of_birth %>
+</p>
+
+<p>
+  <strong>Typ členství:</strong>
+  <%= @person.legacy_type %>
+</p>
+
+<p>
+  <strong>Stav členství:</strong>
+  <%= @person.member_status %>
+</p>
+
+<p>
+  <strong>Stav příznivectví:</strong>
+  <%= @person.supporter_status %>
+</p>
+
+<p>
+  <strong>Přihlašovací jméno:</strong>
+  <%= @person.username %>
+</p>
+
+<p>
+  <strong>Telefonní číslo:</strong>
+  <%= @person.phone %>
+</p>
+
+<p>
+  <strong>Telefonní číslo:</strong>
+  <%= @person.phone %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @person.email %>
+</p>
+
+<p>
+  <strong>Korespondenční adresa:</strong>
+  <%= @person.domestic_address_line %>
+</p>
+
+<p>
+  <strong>Kraj:</strong>
+  <%= @person.domestic_region.try(:name) %>
+</p>
+
+<p>
+  <strong>Pobočka:</strong>
+  <%= @person.domestic_branch.try(:name) %>
+</p>
+
+<p>
+  <strong>Hostuje v kraji:</strong>
+  <%= @person.guest_region.try(:name) %>
+</p>
+
+<p>
+  <strong>Hostuje v pobočce:</strong>
+  <%= @person.guest_branch.try(:name) %>
+</p>
+
+<p>
+  <strong>Dřívější kandidatury:</strong>
+  <%= @person.previous_candidatures %>
+</p>
+
+<p>
+  <strong>Dřívější členství v politických stranách:</strong>
+  <%= @person.previous_political_parties %>
+</p>
+</div>
+<div class="col-md-6">
+<h2>Aktuální funkce</h2>
+<% for role in @person.roles %>
+<li><%= link_to role.role_long_name, role.body || role.branch %></li>
+<% end %>
+<h2>Historické funkce</h2>
+<% for role in @person.historic_roles %>
+<li><%= link_to role.role_long_name, role.body || role.branch %></li>
+<% end %>
+</div>
+</div>
+
+<%= link_to 'Edit', edit_backoffice_person_path(@person) %> |
+<%= link_to 'Back', backoffice_people_path %>

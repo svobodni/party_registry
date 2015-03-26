@@ -1,4 +1,7 @@
-<% page_title 'Funkce ve Svobodných' %>
+<%
+	page_title 'Funkce ve Svobodných'
+	render 'backoffice/sidebar'
+%>
 <%=link_to "Nová funkce", new_role_path, class: "btn"%>
 <table id="roles" class="table table-striped table-bordered" cellspacing="0" width="100%">
 	<thead>

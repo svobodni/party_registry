@@ -46,6 +46,7 @@ class Ability
       can [:create, :destroy], Role
       can :create, Branch
       #can :manage, :all
+      can :backoffice, :all
     end
 
     if [342].member?(user.id)

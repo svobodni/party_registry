@@ -42,9 +42,9 @@ class Role < ActiveRecord::Base
 
   def role_long_name
     if %w(Coordinator Recruiter).member?(self.class.to_s)
-      "#{role_name} pobočky #{branch.name}"
+      "#{role_name} pobočky #{branch.try(:name)}"
     elsif body.try(:acronym)=="KrP"
-      "#{role_name} #{body.organization.name}"
+      "#{role_name} #{body.try(:organization).try(:name)}"
     else
       role_name
     end

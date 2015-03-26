@@ -1,0 +1,9 @@
+<%
+  page_title 'Editace osoby'
+  render 'backoffice/sidebar'
+%>
+
+<%= render 'form' %>
+
+<%= link_to 'Show', backoffice_person_path(@person) %> |
+<%= link_to 'Back', backoffice_people_path %>

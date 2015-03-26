@@ -1,0 +1,26 @@
+<% render 'backoffice/sidebar' %>
+<p id="notice"><%= notice %></p>
+
+<h1>Vyhledání osoby</h1>
+
+<%= simple_form_for Person.new, url: backoffice_people_path, method: :get do |f| %>
+  <%= f.input :id, :input_html => {:maxlength => 6, :size => 10}%>
+  <%= f.input :last_name, as: :autocomplete, url: autocomplete_person_last_name_backoffice_people_path,
+    input_html: { :size => 40, 'data-id-element' => '#person_id', 'data-auto-focus' => true }, required: false %>
+  <%= f.input :email, as: :autocomplete,
+    url: autocomplete_person_email_backoffice_people_path,
+    input_html: { :size => 40, 'data-id-element' => '#person_id', 'data-auto-focus' => true }, required: false %>
+  <%#= f.input :legacy_type, collection: { "Předseda" => "President", "Místopředseda" => "Vicepresident", "Člen" => "Member", "Koordinátor"=>"Coordinator"} %>
+  <%#= f.association :domestic_region, :label_method => lambda { |region| "#{region.name} (#{region.name})" } %>
+  <%= f.submit 'Vyhledat', class: "submit" %>
+<% end %>
+
+
+<script>
+$(document).ready(function() {
+  $(".submit").on("click", function(e){
+    e.preventDefault();
+    $('#new_person').attr('action', "/backoffice/people/"+$("#person_id").val()).submit();
+  });
+});
+</script>

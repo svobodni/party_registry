@@ -1,0 +1,28 @@
+<% content_for 'sidebar' do %>
+<div id="sidebar-wrapper">
+  <ul class="sidebar-nav">
+    <li class="sidebar-brand">Backoffice</li>
+    <li><%= link_to_unless_current "Osoby", backoffice_people_path %></li>
+    <% if can? :destroy, Role %>
+    <li><%= link_to_unless_current "Funkce", roles_path %>
+      <ul>
+        <li><%= link_to_unless_current "Nová funkce", new_role_path %>
+      </ul>
+    </li>
+    <% end %>
+    <li><%= link_to_unless_current "Pobočky", branches_path %></li>
+    <ul>
+      <% if can? :create, Branch %>
+      <li><%= link_to_unless_current "Nová pobočka", new_branch_path %>
+      <% end %>
+    </ul>
+    <li><%= link_to_unless_current "Přihlášky", roles_path %>
+      <ul>
+      <% if can? :upload, SignedApplication %>
+      <li><%= link_to_unless_current "Nová přihláška", new_signed_application_path %>
+      <% end %>
+      </ul>
+    </li>
+  </ul>
+</div>
+<% end %>
