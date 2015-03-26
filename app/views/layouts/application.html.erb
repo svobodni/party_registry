@@ -44,7 +44,7 @@
           <li class="dropdown">
             <a href="#" class="dropdown-toogle" data-toggle="dropdown">Kraje</a>
             <ul class="dropdown-menu">
-              <% for region in @country.regions.order(:nuts3_id) %>
+              <% for region in @country.regions.sorted %>
               <li><%= link_to region.name, region %></a></li>
               <% end %>
             </ul>

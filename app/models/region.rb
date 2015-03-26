@@ -27,4 +27,7 @@ class Region < Organization
   # Krajské sdružení má adresy (sídla, poštovní)
   has_many :addresses,  :as => :addressable, :dependent => :destroy
 
+  # Třídíme podle abecedy
+  scope :sorted, -> { order(name: :asc) }
+
 end
