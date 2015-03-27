@@ -9,7 +9,6 @@ class Backoffice::PeopleController < ApplicationController
   # GET /people
   # GET /people.json
   def index
-    @people = Person.paginate(page: params[:page], per_page: 10)
   end
 
   def with_unknown_address
