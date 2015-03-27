@@ -1,4 +1,32 @@
 <h1>Krajská sdružení</h1>
+
+<div class="cezetmap_area" style="margin: 2em">
+<div class="cezetmap">
+	<ul class="kraje">
+			<li class="kraj zlinsky"><%=link_to "Zlínský kraj", region_path(14), title: "Zlínský kraj" %></li>
+			<li class="kraj moravskoslezsky"><%=link_to "Moravskoslezský kraj", region_path(6), title: "Moravskoslezský kraj" %></li>
+			<li class="kraj jihomoravsky"><%=link_to "Jihomoravský kraj", region_path(2), title: "Jihomoravský kraj" %></li>
+			<li class="kraj olomoucky"><%=link_to "Olomoucký kraj", region_path(7), title: "Olomoucký kraj" %></li>
+			<li class="kraj vysocina"><%=link_to "Vysočina", region_path(13), title: "Vysočina" %></li>
+			<li class="kraj pardubicky"><%=link_to "Pardubický kraj", region_path(8), title: "Pardubický kraj" %></li>
+			<li class="kraj kralovehradecky"><%=link_to "Královehradecký kraj", region_path(4), title: "Královehradecký kraj" %></li>
+			<li class="kraj jihocesky"><%=link_to "Jihočeský kraj", region_path(1), title: "Jihočeský kraj" %></li>
+			<li class="kraj hlavni-mesto-praha"><%=link_to "Hlavní město Praha", region_path(10), title: "Hlavní město Praha" %></li>
+			<li class="kraj stredocesky"><%=link_to "Středočeský kraj", region_path(11), title: "Středočeský kraj" %></li>
+			<li class="kraj liberecky"><%=link_to "Liberecký kraj", region_path(5), title: "Liberecký kraj" %></li>
+			<li class="kraj plzensky"><%=link_to "Plzeňský kraj", region_path(9), title: "Plzeňský kraj" %></li>
+			<li class="kraj ustecky"><%=link_to "Ústecký kraj", region_path(12), title: "Ústecký kraj" %></li>
+			<li class="kraj karlovarsky"><%=link_to "Karlovarský kraj", region_path(3), title: "Karlovarský kraj" %></li>
+		</ul>
+</div>
+</div>
+
+<script>
+$(".cezetmap").click(function(e){
+	window.location = $(".kraj_hover a").attr("href");
+});
+</script>
+
 <table class="table">
 	<thead>
 		<tr>

@@ -3,7 +3,7 @@ crumb :root do
 end
 
 crumb :regions do
-  link "Kraje" #, regions_path
+  link "Kraje", regions_path
 end
 
 crumb :people do
