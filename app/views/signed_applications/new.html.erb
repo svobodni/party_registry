@@ -3,10 +3,12 @@
   render 'backoffice/sidebar'
 %>
 
+<p>Pokud jste přijali podepsanou přihlášku v listinné podobě, musíte ji nascanovat a nahrát do systému.</p>
+
 <%= simple_form_for(@signed_application) do |f| %>
-  <%= f.input :person, as: :autocomplete, hint: "Pište jen příjmení",
-  url: autocomplete_person_last_name_roles_path,
-  input_html: { :size => 40, 'data-id-element' => '#role_person_id', 'data-auto-focus' => true } %>
-  <%= f.input :scan %>
-  <%= f.button :submit %>
+  <%= f.input :person, as: :autocomplete, label: "Příjmení", url: autocomplete_person_last_name_roles_path,
+  input_html: { :size => 40, 'data-id-element' => '#signed_application_person_id', 'data-auto-focus' => true }, required: false %>
+  <%= f.input :person_id, label: "ID" %>
+  <%= f.input :scan, label: "Scan přihlášky" %>
+  <%= f.button :submit, "Uložit nascanovanou přihlášku" %>
 <% end %>

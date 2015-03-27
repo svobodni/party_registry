@@ -1,5 +1,5 @@
 <%= simple_form_for @branch do |f| %>
 <%= f.association :region %>
-<%= f.input :name %>
-<%= f.button :submit %>
+<%= f.input :name, label: "Název pobočky" %>
+<%= f.button :submit, "Uložit" %>
 <% end %>
