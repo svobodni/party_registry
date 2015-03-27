@@ -1,9 +1,10 @@
-<div class="col-sm-3 sidebar">
-  <!--
-  <a href="">
-    <img src="<%= @person.photo_url %>" width="200">
-  </a>
-  -->
+<% content_for 'sidebar' do %>
+<div id="sidebar-wrapper" style="padding: 1em">
+    <!--
+<a href="">
+<img src="<%= @person.photo_url %>" width="200">
+</a>
+-->
   <h2><%= @person.first_name %> <%= @person.last_name %></h2>
   <p><%= @person.name %><!-- TODO , student --></p>
   <% unless @person.roles.blank? %>
@@ -31,7 +32,7 @@
   </ul>
 -->
   <hr>
-  <h3>Vaše údaje&nbsp;</h3>
+  <h3>Vaše údaje&nbsp;<%= link_to "Aktualizovat", profiles_path, class: "btn btn-info btn-xs pull-right" %></h3>
   <p>Adresa bydliště: <b><%= @person.domestic_address_line %></b></p>
   <p>Krajské sdružení: <%= link_to @person.domestic_region.name, @person.domestic_region %></p>
   <p>Pobočka: <% if @person.domestic_branch.nil? %>
@@ -77,8 +78,9 @@
   </table>
   <%= link_to "Aktualizovat", profiles_path, class: "btn btn-info" %>
 </div>
+<% end %>
 
-<div class="col-sm-9 main">
+
   <h1 class="page-header">Hlavní rozcestník člena</h1>
   <div class="row placeholders">
     <div class="col-xs-6 col-sm-3 placeholder bg-success dashboardbox">
@@ -221,5 +223,3 @@
   <%= form_tag("/webdav_passwords", method: "post") do %>
   <%= submit_tag("Vygenerovat nové heslo pro webdav", class: "btn btn-warning", data: { confirm: "Heslo slouží pro přístup na files.svobodni.cz protokolem webdav. Vygenerováním nového hesla zneplatníte předchozí (pokud už nějaké máte). Opravdu chcete vygenerovat nové heslo?" }) %>
   <% end %>
-
-</div>
