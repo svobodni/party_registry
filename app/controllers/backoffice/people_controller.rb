@@ -61,7 +61,7 @@ class Backoffice::PeopleController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def person_params
-      params.require(:person).permit(:domestic_address_ruian_id, :first_name, :last_name, :email, :name_prefix, :name_suffix, :domestic_address_street, :domestic_address_city, :domestic_address_zip, :domestic_region_id)
+      params.require(:person).permit(:domestic_address_ruian_id, :first_name, :last_name, :email, :name_prefix, :name_suffix, :domestic_address_street, :domestic_address_city, :domestic_address_zip, :postal_address_street, :postal_address_city, :postal_address_zip, :domestic_region_id)
     end
 
     def authorize_backoffice

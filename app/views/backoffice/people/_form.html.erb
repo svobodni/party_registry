@@ -4,9 +4,20 @@
 <%= f.input :last_name %>
 <%= f.input :name_suffix, label: "Titul za jménem" %>
 <%= f.input :email %>
+<%= f.association :domestic_region %>
+
+<%= field_set_tag "Adresa bydliště" do %>
 <%= f.input :domestic_address_street %>
 <%= f.input :domestic_address_city %>
 <%= f.input :domestic_address_zip %>
-<%= f.association :domestic_region %>
+<% end %>
+
+
+<%= field_set_tag "Korespondenční adresa" do %>
+<%= f.input :postal_address_street %>
+<%= f.input :postal_address_city %>
+<%= f.input :postal_address_zip %>
+<% end %>
+
 <%= f.button :submit, "Uložit" %>
 <% end %>
