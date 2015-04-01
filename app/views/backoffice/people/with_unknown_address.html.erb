@@ -39,7 +39,7 @@ $(function() {
   $(".address_line").autocomplete({
     source: function(request, response) {
       $.ajax({
-        url: "http://openapi.xnet.cz/api/adresy/naseptavac/"+encodeURIComponent(request.term),
+        url: "https://openapi.cz/api/adresy/naseptavac/"+encodeURIComponent(request.term),
         type: "GET",
         dataType: "JSON",
         success: function(data) {
