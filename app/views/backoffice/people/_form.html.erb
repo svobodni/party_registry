@@ -1,8 +1,8 @@
 <%= simple_form_for @person, url: backoffice_person_path(@person) do |f| %>
-<%= f.input :name_prefix %>
+<%= f.input :name_prefix, label: "Titul před jménem" %>
 <%= f.input :first_name %>
 <%= f.input :last_name %>
-<%= f.input :name_suffix %>
+<%= f.input :name_suffix, label: "Titul za jménem" %>
 <%= f.input :email %>
 <%= f.input :domestic_address_street %>
 <%= f.input :domestic_address_city %>
