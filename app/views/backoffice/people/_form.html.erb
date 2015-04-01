@@ -1,25 +1,12 @@
-<%= form_for(@person) do |f| %>
-  <% if @person.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@person.errors.count, "error") %> prohibited this person from being saved:</h2>
-
-      <ul>
-      <% @person.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :first_name %><br>
-    <%= f.text_field :first_name %>
-  </div>
-  <div class="field">
-    <%= f.label :last_name %><br>
-    <%= f.text_field :last_name %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+<%= simple_form_for @person, url: backoffice_person_path(@person) do |f| %>
+<%= f.input :name_prefix %>
+<%= f.input :first_name %>
+<%= f.input :last_name %>
+<%= f.input :name_suffix %>
+<%= f.input :email %>
+<%= f.input :domestic_address_street %>
+<%= f.input :domestic_address_city %>
+<%= f.input :domestic_address_zip %>
+<%= f.association :domestic_region %>
+<%= f.button :submit, "Uložit" %>
 <% end %>
