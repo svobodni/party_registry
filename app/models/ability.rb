@@ -40,7 +40,7 @@ class Ability
       can :read, Contact, privacy: 'public'
     end
 
-    if [342, 344, 4039].member?(user.id)
+    if [342, 344, 4039, 2804].member?(user.id)
       can :read, Person
       can :upload, SignedApplication
       can [:create, :destroy], Role
