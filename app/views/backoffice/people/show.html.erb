@@ -17,27 +17,26 @@
 
 <p>
   <strong>Typ členství:</strong>
-  <%= @person.legacy_type %>
+  <%= t @person.legacy_type, scope: :legacy_type %>
 </p>
 
+<% if @person.member_status %>
 <p>
   <strong>Stav členství:</strong>
-  <%= @person.member_status %>
+  <%= t @person.member_status, scope: :member_status %>
 </p>
+<% end %>
 
+<% if @person.supporter_status %>
 <p>
   <strong>Stav příznivectví:</strong>
-  <%= @person.supporter_status %>
+  <%= t @person.supporter_status, scope: :supporter_status %>
 </p>
+<% end %>
 
 <p>
   <strong>Přihlašovací jméno:</strong>
   <%= @person.username %>
-</p>
-
-<p>
-  <strong>Telefonní číslo:</strong>
-  <%= @person.phone %>
 </p>
 
 <p>
@@ -84,18 +83,42 @@
   <strong>Dřívější členství v politických stranách:</strong>
   <%= @person.previous_political_parties %>
 </p>
+
+<% if @person.member_status %>
+  <% if @person.signed_application %>
+    <%= link_to "Podepsaná přihláška", signed_application_person_path(@person, format: :pdf), class: 'btn btn-default btn-xs' %>
+  <% else %>
+    <%= link_to "Přihláška k podpisu", application_person_path(@person, format: :pdf), class: 'btn btn-default btn-xs' %>
+    <%= link_to "Nahrát scan podepsané přihlášky", new_signed_application_path(person_id: @person.id), class: 'btn btn-default btn-xs' %>
+  <% end %>
+<% end %>
+
 </div>
 <div class="col-md-6">
+<% unless @person.roles.empty? %>
 <h2>Aktuální funkce</h2>
-<% for role in @person.roles %>
-<li><%= link_to role.role_long_name, role.body || role.branch %></li>
+<table class="table">
+  <thead><tr><th></th><th>Od</th><th>Do</th><th></th></tr></thead>
+  <% for role in @person.roles %>
+  <tr>
+    <td><%= link_to role.role_long_name, role.body || role.branch %></td><td><%= l role.since %></td><td><%= l role.till %></td>
+    <td><%= link_to("Ukončit funkci", role_path(role), {method: :delete, class: 'btn btn-default btn-xs'}) if can?(:destroy, role) %></td></td>
+  </tr>
+  <% end %>
+</table>
 <% end %>
+
+<% unless @person.historic_roles.empty? %>
 <h2>Historické funkce</h2>
-<% for role in @person.historic_roles %>
-<li><%= link_to role.role_long_name, role.body || role.branch %></li>
+<table class="table">
+<thead><tr><th></th><th>Od</th><th>Do</th></tr></thead>
+<% for role in @person.historic_roles.order(till: :desc) %>
+<tr><td><%= link_to role.role_long_name, role.body || role.branch %></td><td><%= l role.since %></td><td><%= l role.till %></td></tr>
+<% end %>
+</table>
 <% end %>
 </div>
 </div>
 
-<%= link_to 'Edit', edit_backoffice_person_path(@person) %> |
-<%= link_to 'Back', backoffice_people_path %>
+<hr>
+<%= link_to 'Upravit', edit_backoffice_person_path(@person), class: "btn btn-default btn-xs" %>
