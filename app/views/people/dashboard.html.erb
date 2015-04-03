@@ -201,17 +201,6 @@
   </table>
 
   <h4>Další funkce registru</h4>
-  <% if can? :upload, SignedApplication %>
-  <%= button_to "Nahrát novou přihlášku", new_signed_application_path, method: :get, class: "btn btn-info"  %>
-  <% end %>
-
-  <% if can? :create, Branch %>
-  <%= button_to "Nová pobočka", new_branch_path, method: :get, class: "btn btn-info" %>
-  <% end %>
-
-  <% if can? :destroy, Role %>
-  <%= button_to "Správa funkcí", roles_path, method: :get, class: "btn btn-info"  %>
-  <% end %>
 
   <% unless flash[:password].blank? %>
   <h4>Heslo pro webdav</h4>

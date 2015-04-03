@@ -2,7 +2,7 @@
 class SignedApplicationsController < ApplicationController
   # GET /signed_applications/new
   def new
-    @signed_application = SignedApplication.new
+    @signed_application = SignedApplication.new(person_id: params[:person_id])
     authorize!(:upload, @signed_application)
   end
 

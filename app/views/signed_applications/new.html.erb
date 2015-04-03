@@ -7,7 +7,7 @@
 
 <%= simple_form_for(@signed_application) do |f| %>
   <%= f.input :person, as: :autocomplete, label: "Příjmení", url: autocomplete_person_last_name_roles_path,
-  input_html: { :size => 40, 'data-id-element' => '#signed_application_person_id', 'data-auto-focus' => true }, required: false %>
+  input_html: { :size => 40, 'data-id-element' => '#signed_application_person_id', 'data-auto-focus' => true,  value: @signed_application.person.try(:name_id_region) }, required: false%>
   <%= f.input :person_id, label: "ID" %>
   <%= f.input :scan, label: "Scan přihlášky" %>
   <%= f.button :submit, "Uložit nascanovanou přihlášku" %>
