@@ -1,4 +1,19 @@
 cs:
+  legacy_type:
+    member: "člen"
+    sympathizer: "příznivce"
+  member_status:
+    awaiting_presidium_decision: "Čeká na rozhodnutí krajského předsednictva"
+    awaiting_first_payment: "Čekáme na první úhradu členského příspěvku"
+    regular: "Řádný člen"
+    cancelled: "Ukončené členství"
+
+  supporter: "příznivce"
+  supporter_status:
+    registered: "Nezaplacený příznivce"
+    regular: "Příznivce"
+    cancelled: "Zrušený příznivce"
+
   personal: "Osobní"
   credentials: "Přihlašování"
   contacts: "Kontakty"
