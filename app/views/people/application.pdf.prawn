@@ -14,7 +14,7 @@ pdf.table([
 		["Obec", @person.domestic_address_city],
 		["PSČ", @person.domestic_address_zip],
 		["Kraj", @person.domestic_region.try(:name)],
-		["Datum narození", @person.date_of_birth],
+		["Datum narození", l(@person.date_of_birth)],
 		["Telefon", @person.phone],
 		["Email", @person.email],
 		[{ colspan: 2, content: "Dřívější členství v politických stranách"}],
