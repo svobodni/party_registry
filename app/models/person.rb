@@ -33,8 +33,8 @@ class Person < ActiveRecord::Base
   # má kontaktní údaje
   has_many :contacts, :as => :contactable
 
-  before_save :set_domestic_ruian_address,
-    if: Proc.new { |person| person.domestic_address_street_changed? }
+#  before_save :set_domestic_ruian_address,
+#    if: Proc.new { |person| person.domestic_address_street_changed? }
 
   before_update :import_domestic_ruian_address,
     if: Proc.new { |person| person.domestic_address_ruian_id_changed? }
