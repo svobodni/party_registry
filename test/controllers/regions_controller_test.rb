@@ -5,8 +5,9 @@ class RegionsControllerTest < ActionController::TestCase
   include Devise::TestHelpers
 
   setup do
-    @region = organizations(:praha)
-    sign_in people(:mach)
+    @region = FactoryGirl.create(:region)
+    @user = FactoryGirl.create(:person)
+    sign_in @user
   end
 
   test "should get index" do

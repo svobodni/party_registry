@@ -4,8 +4,8 @@ class BodiesControllerTest < ActionController::TestCase
   include Devise::TestHelpers
 
   setup do
-    @body = bodies(:rk)
-    sign_in people(:mach)
+    @body = FactoryGirl.create(:rk)
+    sign_in FactoryGirl.create(:person)
   end
 
   test "should get index" do
@@ -15,7 +15,7 @@ class BodiesControllerTest < ActionController::TestCase
   end
 
   test "should show body" do
-    get :show, id: @body, format: :json
+    get :show, id: @body.id, format: :json
     assert_response :success
   end
 
