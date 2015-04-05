@@ -11,6 +11,6 @@
   Mohou Vás tak zvát na místní akce a zapojit do dění.</p>
 
   <%= f.association :guest_region, disabled: !configatron.migrated %>
-  <%= f.input :guest_branch_id, collection: Region.all, as: :grouped_select, group_method: :branches, order: :name, disabled: !configatron.migrated %>
+  <%= f.association :guest_branch, collection: Region.all, as: :grouped_select, group_method: :branches, order: :name %>
   <%= f.button :submit, value: "Uložit", class: 'btn btn-success' %>
   <% end %>
