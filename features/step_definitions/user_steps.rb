@@ -22,6 +22,10 @@ Pak(/^bych měl být zařazen jako hostující do pobočky "([^"]*)"$/) do |name
   Person.find($user_id).guest_branch.name == name
 end
 
+A(/^měl bych být zařazen jako hostující do kraje, ve kterém je pobočka "([^"]*)"$/) do |name|
+  Person.find($user_id).guest_region.name == Branch.find_by_name(name).region.name
+end
+
 def log_user_in(username, password)
   visit new_person_session_path
   fill_in('person_username', :with => username)
