@@ -1,20 +1,16 @@
 # -*- encoding : utf-8 -*-
 FactoryGirl.define do
 
-  #sequence :email do |n|
-  #  "user#{n}@example.com"
-  #end
-
   factory :coordinator do
-    person { create(:person) }
-
-#    factory :regional_president do
-#      type 'President'
-#      region { Region.first || create(:region) }
-#    end
-
+    person{ create(:person) }
+    since { 6.months.ago }
+    till { 1.year.since }
   end
 
-
+  factory :president do
+    person { create(:person) }
+    since { 6.months.ago }
+    till { 1.year.since }
+  end
 
 end

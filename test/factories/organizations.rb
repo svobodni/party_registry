@@ -7,7 +7,9 @@ FactoryGirl.define do
       name "Praha"
     end
     country { Country.first || create(:country) }
-    association :presidium, name: "Krajské předsednictvo", acronym: "KrP"
+    after(:create) do |region, evaluator|
+      region.presidium = create :presidium, name: "Krajské předsednictvo", acronym: "KrP", organization: region
+    end
   end
 
   factory :country do

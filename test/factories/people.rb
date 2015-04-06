@@ -5,10 +5,14 @@ FactoryGirl.define do
     "user#{n}@example.com"
   end
 
+  sequence :username do |n|
+    "user#{n}"
+  end
+
   factory :person do
     legacy_type "member"
     email
-    username "test"
+    username
     password 'password'
     first_name "Jan"
     last_name "Novák"

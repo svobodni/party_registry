@@ -2,12 +2,12 @@ require 'test_helper'
 
 class BranchesControllerTest < ActionController::TestCase
   include Devise::TestHelpers
-  
+
   context 'An KrP member' do
 
     setup do
-      @branch = organizations(:praha4)
-      sign_in people(:kubicek)
+      @branch = FactoryGirl.create(:branch)
+      sign_in @branch.region.presidium.president.person
     end
 
     should "get index" do
@@ -29,24 +29,24 @@ class BranchesControllerTest < ActionController::TestCase
       assert_response :success
     end
 
-    should "update branch" do
+    should "not update branch" do
       patch :update, id: @branch, branch: { name: @branch.name, parent_id: @branch.parent_id }, format: :json
-      assert_response :no_content
+      assert_response :forbidden
     end
 
-    should "destroy branch" do
-      assert_difference('Branch.count', -1) do
+    should "not destroy branch" do
+      assert_no_difference('Branch.count', -1) do
         delete :destroy, id: @branch, format: :json
       end
 
-      assert_response :no_content
+      assert_response :forbidden
     end
   end
 
   context 'An coordinator' do
 
     setup do
-      @branch = organizations(:praha4)
+      @branch = FactoryGirl.create(:branch)
       sign_in @branch.coordinator.person
     end
 

@@ -15,7 +15,7 @@ Pak(/^měl bych vidět dashboard$/) do
 end
 
 def create_user(username, password)
-  $user_id = FactoryGirl.create(:person, :username => username, :password => password).id
+  $user_id = FactoryGirl.create(:person, username: username, password: password).id
 end
 
 Pak(/^bych měl být zařazen jako hostující do pobočky "([^"]*)"$/) do |name|
