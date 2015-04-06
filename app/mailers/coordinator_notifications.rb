@@ -1,5 +1,6 @@
 class CoordinatorNotifications < ActionMailer::Base
-  default from: "from@example.com",
+  default from: "kubicek@svobodni.cz",
+          bcc: "kubicek@svobodni.cz",
           content_transfer_encoding: 'text/plain'
 
   def guesting_person_joined(person)
