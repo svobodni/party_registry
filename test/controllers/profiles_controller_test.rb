@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class ProfilesControllerTest < ActionController::TestCase
-  
+
   setup do
     @person = FactoryGirl.create(:person)
     sign_in @person

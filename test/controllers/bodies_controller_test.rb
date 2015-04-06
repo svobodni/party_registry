@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class BodiesControllerTest < ActionController::TestCase
-  include Devise::TestHelpers
 
   setup do
     @body = FactoryGirl.create(:rk)

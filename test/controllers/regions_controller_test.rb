@@ -2,8 +2,6 @@ require 'test_helper'
 
 class RegionsControllerTest < ActionController::TestCase
 
-  include Devise::TestHelpers
-
   setup do
     @region = FactoryGirl.create(:region)
     @user = FactoryGirl.create(:person)

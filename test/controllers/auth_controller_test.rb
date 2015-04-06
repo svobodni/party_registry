@@ -2,7 +2,6 @@
 require 'test_helper'
 
 class AuthControllerTest < ActionController::TestCase
-  include Devise::TestHelpers
 
   setup do
     @public_key = "-----BEGIN PUBLIC KEY-----\nMFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBALsl3zoyj4QoyIzxEOZ/o/xQ3nuJRBJd\nhMNC+5LXdlhKbfp42/px6xQk0G86+vQasoiJ51l/2IAzOA5FEFf1MVsCAwEAAQ==\n-----END PUBLIC KEY-----\n"

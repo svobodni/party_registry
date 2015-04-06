@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class BranchesControllerTest < ActionController::TestCase
-  include Devise::TestHelpers
 
   context 'An KrP member' do
 
