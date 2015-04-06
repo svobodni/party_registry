@@ -5,8 +5,7 @@ FactoryGirl.define do
     factory :country_bodies do
       factory :rk do
         name "Rozhodčí komise"
-        acronym "RK"
-        organization { Country.first || create(:country) }
+        acronym "RK"        
       end
       organization { Country.first || create(:country) }
     end

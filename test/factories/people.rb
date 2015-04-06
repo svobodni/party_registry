@@ -6,6 +6,7 @@ FactoryGirl.define do
   end
 
   factory :person do
+    legacy_type "member"
     email
     username "test"
     password 'password'
@@ -16,7 +17,7 @@ FactoryGirl.define do
     domestic_address_street "Dlouhá 23/312"
     domestic_address_city "Starý Františkov"
     domestic_address_zip "123 98"
-    association :domestic_region, factory: :praha
+    domestic_region { Region.find_by_name("Praha") || create(:praha) }
 
     factory :office_worker do
       id 342

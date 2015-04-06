@@ -39,6 +39,8 @@ class Person < ActiveRecord::Base
   before_update :import_domestic_ruian_address,
     if: Proc.new { |person| person.domestic_address_ruian_id_changed? }
 
+  before_save :notify_coordinator
+
   # změny evidujeme
   has_paper_trail
 
@@ -218,4 +220,9 @@ class Person < ActiveRecord::Base
   def name_id_region
     "#{id}: #{name} (#{domestic_region.name})"
   end
+
+  def notify_coordinator
+    CoordinatorNotifications.guesting_person_joined(self).deliver if guest_branch_id_changed?
+  end
+
 end

@@ -5,13 +5,16 @@ FactoryGirl.define do
   #  "user#{n}@example.com"
   #end
 
-  factory :role do
-    person { FactoryGirl.create(:person) }
+  factory :coordinator do
+    person { create(:person) }
 
-    factory :regional_president do
-      type 'President'
-      region { FactoryGirl.create(:region) }
-    end
+#    factory :regional_president do
+#      type 'President'
+#      region { Region.first || create(:region) }
+#    end
+
   end
+
+
 
 end
