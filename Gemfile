@@ -117,6 +117,7 @@ group :test do
   gem 'sqlite3'
   gem 'mocha', :require => false
   gem 'factory_girl_rails'
+  gem 'email_spec'
 end
 
 group :development do
@@ -136,7 +137,6 @@ gem 'wicked'
 
 # notifikace chyb
 gem 'exception_notification'
-
 
 gem 'bootstrap-sass', '~> 3.3.3'
 
