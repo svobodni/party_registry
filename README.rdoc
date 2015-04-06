@@ -1,5 +1,7 @@
 == Political party registry
 
+[![Build Status](https://travis-ci.org/svobodni/party_registry.svg?branch=master)](https://travis-ci.org/svobodni/party_registry)
+
 * Ruby version
 
     2.1.0 + rubygems
@@ -19,28 +21,11 @@
 * Database initialization
 
     rake db:migrate
-    rake db:fixtures:load RAILS_ENV=development
 
 * How to run the test suite
 
-    rake test
+    rake
 
 * Services (job queues, cache servers, search engines, etc.)
 
 * Deployment instructions
-
-* API Examples
-
-    # registrace nove osoby
-    curl --include      --request POST      --data-binary " { \"person\": { \"first_name\": \"Pavel\", \"last_name\":   \"Novák\", \"email\": \"novak@svobodni.cz\", \"password\": \"noveheslo\" } } "      "http://kubicek%40svobodni.cz:hesloheslo@localhost:3000/people" --header "Content-Type:application/json"
-
-    # registrace nove pobocky
-    curl --include      --request POST      --data-binary " { \"branch\": { \"name\": \"Praha 3\", \"parent_id\": \"541224627\" } } "      "http://kubicek%40svobodni.cz:hesloheslo@localhost:3000/branches" --header "Content-Type:application/json"
-
-    # vypis pobocek
-    curl --include "http://kubicek%40svobodni.cz:hesloheslo@localhost:3000/branches" --header "Content-Type:application/json"
-    # vypis osob v pobocce
-    curl --include "http://seckar%40svobodni.cz:hesloheslo@localhost:3000/branches/570342242/people" --header "Content-Type:application/json"
-    # vypis osob v kraji
-    curl --include "http://kubicek%40svobodni.cz:hesloheslo@localhost:3000/regions/541224627/people" --header "Content-Type:application/json"
-
