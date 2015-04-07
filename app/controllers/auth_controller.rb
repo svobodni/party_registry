@@ -8,6 +8,7 @@ class AuthController < ApplicationController
 
   # GET /auth/token.json
   def token
+    authorize!(:jwt_token, current_person)
     subject = "db|#{current_user.id}"
     now = Time.now
     @payload = {

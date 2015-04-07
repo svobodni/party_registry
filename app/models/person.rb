@@ -79,6 +79,10 @@ class Person < ActiveRecord::Base
     legacy_type == "member" ? :member : :supporter
   end
 
+  def regular?
+    member_status == "regular" || supporter_status == "regular"
+  end
+
   def is_regular_member?
     is_member? && status == "valid"
   end

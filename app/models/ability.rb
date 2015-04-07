@@ -4,6 +4,9 @@ class Ability
   def initialize(user)
 
     can [:read, :update, :application], Person, :id => user.id
+    can [:jwt_token], Person do |person|
+      person.id==user.id && user.regular?
+    end
     can :read, [Body, Branch, Region, Role]
 
     can :read, Contact, privacy: 'public'
