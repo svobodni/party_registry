@@ -37,6 +37,14 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def after_sign_in_path_for(resource)
+    if current_person.is_regular_member? || current_person.is_regular_supporter?
+      #request.env['omniauth.origin'] || stored_location_for(resource) || root_path
+      super
+    else
+      membership_profiles_path
+    end
+  end
   def authorize_token!
     token = request.headers['Authorization'].split(' ').last
 
