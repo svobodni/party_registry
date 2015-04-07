@@ -18,6 +18,7 @@ PartyRegistry::Application.routes.draw do
       get 'addresses'
       get 'contacts'
       get 'guesting'
+      get 'membership'
     end
   end
 
