@@ -37,6 +37,13 @@ class AuthControllerTest < ActionController::TestCase
     assert_equal '{"error":"Access Denied"}', response.body
   end
 
+  test "should not get token unless regular supporter" do
+    sign_in FactoryGirl.create(:person, supporter_status: "registered")
+    get :token, format: :json
+    assert_response 403
+    assert_equal '{"error":"Access Denied"}', response.body
+  end
+
   test "should get token with proper content" do
     sign_in @person
     get :token, format: :json

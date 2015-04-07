@@ -5,7 +5,7 @@ class Ability
 
     can [:read, :update, :application], Person, :id => user.id
     can [:jwt_token], Person do |person|
-      person.id==user.id && user.regular?
+      person.id==user.id && user.is_regular?
     end
     can :read, [Body, Branch, Region, Role]
 
