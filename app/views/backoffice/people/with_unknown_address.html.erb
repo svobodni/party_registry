@@ -18,7 +18,7 @@
 
     <tr>
       <td><%= person.vs %></td>
-      <td><%= person.name %></td>
+      <td><%= link_to person.name, backoffice_person_path(person) %></td>
       <td><%= person.domestic_address_line %></td>
       <td><input id="address_line" class="address_line" value="<%= person.domestic_address_line %>" size="60"></td>
       <td><%= form_for person, url: backoffice_person_path(person), as: 'person' do |f| %>
