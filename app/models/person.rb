@@ -33,6 +33,8 @@ class Person < ActiveRecord::Base
   # má kontaktní údaje
   has_many :contacts, :as => :contactable
 
+  scope :regular_members, -> { where("member_status = ?", "regular") }
+
 #  before_save :set_domestic_ruian_address,
 #    if: Proc.new { |person| person.domestic_address_street_changed? }
 

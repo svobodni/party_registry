@@ -6,6 +6,7 @@ PartyRegistry::Application.routes.draw do
         get :autocomplete_person_email
         get :autocomplete_person_last_name
         get :with_unknown_address
+        get :without_signed_application
       end
     end
   end

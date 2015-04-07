@@ -15,6 +15,10 @@ class Backoffice::PeopleController < ApplicationController
     @people = Person.includes([:domestic_ruian_address]).select{|p| p.domestic_ruian_address.nil?}
   end
 
+  def without_signed_application
+    @people = Person.includes([:domestic_region, :signed_application]).regular_members.order("domestic_region_id").select{|p| p.signed_application.blank?}
+  end
+
   # GET /people/1
   # GET /people/1.json
   def show
