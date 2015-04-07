@@ -1,0 +1,23 @@
+<%
+  page_title "Seznam řádných členů bez nascanované přihlášky"
+  render "backoffice/sidebar"
+%>
+
+<table id="people" class="table table-striped">
+  <thead>
+    <tr><th>ID</th><th>Jméno</th><th>Zařazen v kraji</th><th>Kraj podle adresy</th><th>Adresa</th></tr>
+  </thead>
+  <tbody>
+    <% @people.each do |person| %>
+    <tr>
+      <td><%=person.id%></td>
+      <td><%=link_to person.name, backoffice_person_path(person) %></td>
+      <td><%=person.domestic_region.try(:name)%></td>
+      <td><%=person.domestic_ruian_address.kraj%></td>
+      <td><%=person.domestic_address_line%></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= datatable "people", false %>

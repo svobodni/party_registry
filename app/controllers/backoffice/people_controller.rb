@@ -19,6 +19,10 @@ class Backoffice::PeopleController < ApplicationController
     @people = Person.includes([:domestic_region, :signed_application]).regular_members.order("domestic_region_id").select{|p| p.signed_application.blank?}
   end
 
+  def with_bad_region
+    @people = Person.includes([:domestic_ruian_address, :domestic_region]).reject{|p| p.domestic_ruian_address.nil?}.select{|p| p.domestic_ruian_address.kraj_id!=p.domestic_region.ruian_vusc_id}
+  end
+
   # GET /people/1
   # GET /people/1.json
   def show

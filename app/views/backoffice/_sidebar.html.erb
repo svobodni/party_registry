@@ -7,6 +7,7 @@
         <li><%= link_to_unless_current "Vyhledat", backoffice_people_path %></li>
         <li><%= link_to_unless_current "Bez adresy", with_unknown_address_backoffice_people_path %></li>
         <li><%= link_to_unless_current "Bez přihlášky", without_signed_application_backoffice_people_path %></li>
+        <li><%= link_to_unless_current "Špatný kraj", with_bad_region_backoffice_people_path %></li>
       </ul>
     </li>
     <% if can? :destroy, Role %>
