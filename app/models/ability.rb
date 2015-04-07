@@ -3,7 +3,7 @@ class Ability
 
   def initialize(user)
 
-    can [:read, :update], Person, :id => user.id
+    can [:read, :update, :application], Person, :id => user.id
     can :read, [Body, Branch, Region, Role]
 
     can :read, Contact, privacy: 'public'
@@ -41,7 +41,7 @@ class Ability
     end
 
     if [342, 344, 4039, 2804].member?(user.id)
-      can :read, Person
+      can [:read, :application], Person
       can :upload, SignedApplication
       can [:create, :destroy], Role
       can :create, Branch

@@ -96,6 +96,7 @@ class PeopleController < ApplicationController
   end
 
   def application
+    authorize!(:application, @person)
   end
 
   def signed_application
