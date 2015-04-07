@@ -24,6 +24,21 @@ crumb :person do |person|
   parent :people
 end
 
+crumb :profile do
+  link current_person.name, profiles_path
+  parent :root
+end
+
+crumb :profile_guesting do
+  link "Hostování", guesting_profiles_path
+  parent :profile
+end
+
+crumb :profile_membership do
+  link "Členství", membership_profiles_path
+  parent :profile
+end
+
 crumb :region do |region|
   link region.name, region_path(region)
   parent :regions

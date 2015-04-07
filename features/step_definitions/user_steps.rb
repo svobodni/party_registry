@@ -2,6 +2,14 @@ Pokud(/^existuje uživatel s přihlašovací jménem "(.*?)" a heslem "(.*?)"$/)
   create_user(username, password)
 end
 
+Pokud(/^existuje člen s přihlašovací jménem "(.*?)" a heslem "(.*?)"$/) do |username, password|
+  $user_id = FactoryGirl.create(:person, username: username, password: password, member_status: "regular").id
+end
+
+Pokud(/^existuje přijatý zájemce o členství s přihlašovací jménem "(.*?)" a heslem "(.*?)"$/) do |username, password|
+  $user_id = FactoryGirl.create(:person, username: username, password: password, member_status: "awaiting_first_payment").id
+end
+
 Pak(/^bych měl být úspešně přihlášen$/) do
   assert page.has_xpath?('//*', :text => 'Přihlášení úspěšné.')
 end

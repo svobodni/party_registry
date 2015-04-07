@@ -1,9 +1,9 @@
 # language: cs
 
-Požadavek: Členství ve straně
-  Pro rozšiřování členské základny
-  By každý plnoletý občan ČR
-  Měl mít možnost požádat o přijetí
+Požadavek: Jednoduchý vznik členství
+  Pro pohodlný přijímací proces
+  By každý zájemce o členství
+  Měl mít možnost získat informace o stavu své přihlášky
 
   Scénář: Zaregistrovaný, čekající na schválení bez nahrané přihlášky
     Když se přihlásím jako zájemce o členství

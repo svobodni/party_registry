@@ -6,7 +6,7 @@ Požadavek: Přihlašování uživatelů
   Měl být schopen se přihlásit
 
   Pozadí:
-    Pokud existuje uživatel s přihlašovací jménem "test" a heslem "testovaciheslo"
+    Pokud existuje člen s přihlašovací jménem "test" a heslem "testovaciheslo"
 
   Scénář: Přihlášení
     Když přijdu na domovskou stránku

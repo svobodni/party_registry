@@ -115,6 +115,18 @@ class Person < ActiveRecord::Base
     end
   end
 
+  def awaiting_membership?
+    ["awaiting_application", "awaiting_presidium_decision", "awaiting_first_payment"].member?(member_status)
+  end
+
+  def signed_application_expected?
+    awaiting_membership? && signed_application.blank?
+  end
+
+  def payment_expected?
+    (member_status == "awaiting_first_payment") && !signed_application.blank?
+  end
+
   def region
     guest_region || domestic_region
   end
