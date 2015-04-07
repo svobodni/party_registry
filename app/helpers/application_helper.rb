@@ -12,10 +12,12 @@ module ApplicationHelper
   end
   end
 
-  def datatable(id)
+  def datatable(id, paging=true)
+    paging_html = paging ? "" : "\"paging\":   false,"
     content_tag :script do
       "$(document).ready(function() {
         $('##{id}').DataTable( {
+           #{paging_html}
            \"language\": {
              \"sProcessing\":   \"Provádím...\",
              \"sLengthMenu\":   \"Zobraz záznamů _MENU_\",

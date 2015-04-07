@@ -3,7 +3,7 @@
   render "backoffice/sidebar"
 %>
 
-<table class="table table-striped">
+<table id="people" class="table table-striped">
   <thead>
     <tr><th>ID</th><th>Jméno</th><th>Kraj</th></tr>
   </thead>
@@ -13,3 +13,5 @@
     <% end %>
   </tbody>
 </table>
+
+<%= datatable "people", false %>
