@@ -122,6 +122,9 @@ group :test do
   gem 'mocha', :require => false
   gem 'factory_girl_rails'
   gem 'email_spec'
+  gem 'guard-minitest'
+  gem 'guard-cucumber'
+  gem 'terminal-notifier-guard'
 end
 
 group :development do
