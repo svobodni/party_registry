@@ -15,6 +15,7 @@ FactoryGirl.define do
   factory :country do
     id 1
     name "Republikové orgány"
+    fio_account_number "123456789"
   end
 
 end

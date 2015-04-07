@@ -10,7 +10,7 @@ Pak(/^bych měl být úspešně zaregistrován a přihlášen$/) do
   assert page.has_xpath?('//*', :text => 'Registrace byla úspěšná.')
 end
 
-Pak(/^měl bych vidět dashboard$/) do
+Pak(/^(?:|měl bych|bych měl) vidět dashboard$/) do
   assert page.has_xpath?('//h1', :text => 'Hlavní rozcestník')
 end
 

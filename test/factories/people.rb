@@ -26,6 +26,18 @@ FactoryGirl.define do
     factory :office_worker do
       id 342
     end
+
+    factory :signed_person do
+      signed_application
+    end
+
+  end
+
+  factory :signed_application do
+    person
+    scan_file_name { 'test.pdf' }
+    scan_content_type { 'application/pdf' }
+    scan_file_size { 1024 }
   end
 
 end

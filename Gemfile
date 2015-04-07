@@ -104,6 +104,10 @@ gem "paperclip", "~> 4.2"
 # formuláře
 gem 'simple_form'
 
+# qr kódy
+gem 'rspayd'
+gem 'rqrcode'
+
 gem 'elasticsearch'
 
 gem 'bower-rails', '~> 0.7.3'

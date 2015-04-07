@@ -1,0 +1,37 @@
+<%
+  page_title "Členství"
+  render 'sidebar'
+  breadcrumb(:profile_membership)
+%>
+
+<%  @qr = RQRCode::QRCode.new(Rspayd::CzechPayment.generate_string(
+:accountNumber=>@country.fio_account_number,
+:bankCode => '2010',
+:amount => current_person.amount.blank? ? 1000 : current_person.amount,
+:vs=>current_person.vs,
+:message => "clensky prispevek qr"
+), :size => 6, :level => :m) %>
+
+<% if current_person.is_member? %>
+  <% if current_person.is_regular_member? %>
+    Jste řádným členem se zaplacenými členskými příspěvky na tento rok.
+  <% end %>
+<% end %>
+
+<% if current_person.awaiting_presidium_decision? %>
+<p>Požádal jste o členství a čeká se na rozhodnutí krajského předsednictva.</p>
+<% end %>
+
+<% if current_person.awaiting_first_payment? %>
+<p>Vaše přihláška byla schválena krajským předsednictvem.</p>
+<% end %>
+
+<% if current_person.signed_application_expected? %>
+<p>Republiková kancelář zatím neobdržela Vaši podepsanou přihlášku. Prosím, stáhněte si <%= link_to "PDF s přihláškou", application_person_path(current_person, format: :pdf)%>, vytiskněte a podepsané odešlete na adresu kanceláře. Pokud máte zaručený kvalifikovaný podpis, můžete PDF podepsat elektronicky a odeslat na <%= mail_to "kancelar@svobodni.cz" %>.</p>
+<% end %>
+
+<% if current_person.payment_expected? %>
+<p>Uhraďte prosím členský příspěvek na rok 2015 ve výši <%= current_person.amount.blank? ? "1000 Kč (důchodci a studenti 300 Kč)" : "#{current_person.amount} Kč" %> pod variabilním symbolem <%= current_person.vs %> na účet č. <%= @country.fio_account_number %>/2010. Jakmile platbu obdržíme, stanete se plnoprávným členem Strany svobodných občanů.</p>
+<p>Prosím dodržte výše uvedený variabilní symbol, jinak bude problém vaši platbu příspěvku identifikovat.</p>
+<%= render :partial => 'qr_platba' %>
+<% end %>

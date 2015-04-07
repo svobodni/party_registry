@@ -242,6 +242,8 @@ GEM
     redis (3.2.1)
     redis-namespace (1.5.1)
       redis (~> 3.0, >= 3.0.4)
+    rqrcode (0.4.2)
+    rspayd (0.0.5)
     rspec (3.2.0)
       rspec-core (~> 3.2.0)
       rspec-expectations (~> 3.2.0)
@@ -385,6 +387,8 @@ DEPENDENCIES
   rails-jquery-autocomplete
   rails_autolink
   rake
+  rqrcode
+  rspayd
   ruby-openid
   sass-rails
   sdoc

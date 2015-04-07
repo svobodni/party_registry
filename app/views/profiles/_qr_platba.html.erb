@@ -1,0 +1,58 @@
+<style type="text/css">
+  .qr-platba {
+    float: left;
+    padding: 12px !important;
+    border: 1px solid #000000 !important;
+  }
+
+  .qr-platba div {
+    margin-top: 12px !important;
+  }
+
+  table.qr {
+    width: auto !important;
+    margin: 0 !important;
+    border-width: 0 !important;
+    border-style: none !important;
+    border-color: #0000ff !important;
+    border-collapse: collapse !important;
+  }
+
+  .qr td {
+    border-width: 0 !important;
+    border-style: none !important;
+    border-color: #0000ff !important;
+    border-collapse: collapse !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 3px !important;
+    height: 3px !important;
+  }
+
+  .qr td.black {
+    background-color: #000 !important;
+  }
+
+  .qr td.white {
+    background-color: #fff !important;
+  }
+</style>
+
+<div class="qr-platba">
+  <table class="qr">
+    <% @qr.modules.each_index do |x| -%>
+      <tr>
+        <% @qr.modules.each_index do |y| -%>
+          <% if @qr.dark?(x, y) -%>
+            <td class="black" />
+          <% else -%>
+            <td class="white" />
+          <% end -%>
+        <% end -%>
+      </tr>
+    <% end -%>
+  </table>
+  <div>QR Platba</div>
+</div>
+
+<div class="cl"></div>
