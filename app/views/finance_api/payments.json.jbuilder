@@ -1,5 +1,6 @@
 json.payment do
   json.region_id @person.domestic_region_id
+  json.id @person.id
   json.name @person.name
   json.street @person.domestic_address_street
   json.city @person.domestic_address_city
