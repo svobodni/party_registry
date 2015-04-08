@@ -7,3 +7,5 @@ configatron.twitter.consumer_key        = "key"
 configatron.twitter.consumer_secret     = "secret"
 configatron.twitter.access_token        = "token"
 configatron.twitter.access_token_secret = "token_secret"
+
+configatron.finance.password = "heslo"

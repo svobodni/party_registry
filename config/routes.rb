@@ -85,6 +85,7 @@ PartyRegistry::Application.routes.draw do
     end
   end
 
+  post "/people/:id/payments", to: "finance_api#payments"
 
   root 'people#dashboard'
 end
