@@ -22,7 +22,7 @@ Požadavek: Jednoduchý vznik členství
   Scénář: Zaregistrovaný, schválený s nahranou přihláškou, čekající na úhradu
     Když se přihlásím jako schválený zájemce o členství s nahranou přihláškou
     Pak bych měl být přesměrován na stránku Členství
-    A měl bych vidět "Vaše přihláška byla schválena krajským předsednictvem."
+    A měl bych vidět "Vaše členství bylo schváleno krajským předsednictvem."
     A neměl bych vidět "Republiková kancelář zatím neobdržela Vaši podepsanou přihlášku"
     A měl bych vidět "Uhraďte prosím členský příspěvek"
     A měl bych vidět číslo republikového účtu
