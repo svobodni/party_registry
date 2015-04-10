@@ -12,7 +12,7 @@ class Backoffice::PeopleController < ApplicationController
   end
 
   def with_unknown_address
-    @people = Person.includes([:domestic_ruian_address]).select{|p| p.domestic_ruian_address.nil?}.reject{|p| p.supporter_status=="registered"}
+    @people = Person.includes([:domestic_ruian_address]).select{|p| p.domestic_ruian_address.nil?}.reject{|p| p.status=="registered"}
   end
 
   def without_signed_application

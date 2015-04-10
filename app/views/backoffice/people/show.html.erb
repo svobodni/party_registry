@@ -20,17 +20,10 @@
   <%= t @person.legacy_type, scope: :legacy_type %>
 </p>
 
-<% if @person.member_status %>
+<% if @person.status %>
 <p>
-  <strong>Stav členství:</strong>
-  <%= t @person.member_status, scope: :member_status %>
-</p>
-<% end %>
-
-<% if @person.supporter_status %>
-<p>
-  <strong>Stav příznivectví:</strong>
-  <%= t @person.supporter_status, scope: :supporter_status %>
+  <strong>Stav:</strong>
+  <%= t @person.status, scope: :person_status %>
 </p>
 <% end %>
 
@@ -84,7 +77,7 @@
   <%= @person.previous_political_parties %>
 </p>
 
-<% if @person.member_status %>
+<% if @person.is_member? %>
   <% if @person.signed_application %>
     <%= link_to "Podepsaná přihláška", signed_application_person_path(@person, format: :pdf), class: 'btn btn-default btn-xs' %>
   <% else %>

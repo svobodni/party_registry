@@ -19,11 +19,11 @@ end
 
 Když(/^se přihlásím jako (|schválený )zájemce o členství(| s nahranou přihláškou)$/)  do |approved, signed|
   $user_id = FactoryGirl.create(signed.empty? ? :person : :signed_person, username: 'test', password: 'testovaciheslo',
-    member_status: approved.empty? ? "awaiting_presidium_decision" : "awaiting_first_payment").id
+    status: approved.empty? ? "awaiting_presidium_decision" : "awaiting_first_payment").id
   log_user_in('test', 'testovaciheslo')
 end
 
 Když(/^se přihlásím jako řádný člen bez nahrané přihlášky$/) do
-  $user_id = FactoryGirl.create(:person, username: 'test', password: 'testovaciheslo', member_status: "regular").id
+  $user_id = FactoryGirl.create(:person, username: 'test', password: 'testovaciheslo', status: "regular_member").id
   log_user_in('test', 'testovaciheslo')
 end

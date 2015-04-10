@@ -5,7 +5,6 @@ PaperTrail.whodunnit = 'Importer'
 def import_person(type, member)
   id = member["membership"]["variableSymbol"][1..-1]
   person = Person.find_or_initialize_by(id: id)
-  person.legacy_type = type.to_s
 
   person.name_prefix = member["personalData"]["degreeBeforeName"]
   person.first_name = member["personalData"]["firstName"].strip
@@ -47,18 +46,18 @@ def import_person(type, member)
   if type==:member
     if member["membership"]["approvedByBoard"]=="True"
       if member["membership"]["paymentAccepted"]=="True"
-        person.member_status="regular"
+        person.status="regular_member"
       else
-        person.member_status="awaiting_first_payment"
+        person.status="awaiting_first_payment"
       end
     else
-      person.member_status="awaiting_presidium_decision"
+      person.status="awaiting_presidium_decision"
     end
   else
     if member["membership"]["paymentAccepted"]=="True"
-      person.supporter_status="regular"
+      person.status="regular_supporter"
     else
-      person.supporter_status="registered"
+      person.status="registered"
     end
   end
   print "."

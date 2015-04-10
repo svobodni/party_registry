@@ -70,7 +70,7 @@ end
 
 context "Schválený zájemce o členství bez nahrané přihlášky" do
   should "should get membership info" do
-    @person = FactoryGirl.create(:person, member_status: "awaiting_first_payment")
+    @person = FactoryGirl.create(:person, status: "awaiting_first_payment")
     sign_in @person
     get :membership
     assert_response :success
@@ -124,7 +124,7 @@ end
 
 context "Nezaplacený příznivec" do
   should "should get membership info" do
-    @person = FactoryGirl.create(:supporter, supporter_status: "registered")
+    @person = FactoryGirl.create(:supporter, status: "registered")
     sign_in @person
     get :membership
     assert_response :success
@@ -142,7 +142,7 @@ end
 
 context "Zaplacený příznivec" do
   should "should get membership info" do
-    @person = FactoryGirl.create(:supporter, supporter_status: "regular")
+    @person = FactoryGirl.create(:supporter, status: "regular_supporter")
     sign_in @person
     get :membership
     assert_response :success
@@ -160,7 +160,7 @@ end
 
 context "Zaplacený příznivec zájemce o členství bez nahrané přihlášky" do
   should "should get membership info" do
-    @person = FactoryGirl.create(:supporter, supporter_status: "regular", member_status: "awaiting_presidium_decision")
+    @person = FactoryGirl.create(:supporter, status: "regular_supporter_awaiting_presidium_decision")
     sign_in @person
     get :membership
     assert_response :success
@@ -178,7 +178,7 @@ end
 
 context "Zaplacený příznivec zájemce o členství s nahranou přihláškou" do
   should "should get membership info" do
-    @person = FactoryGirl.create(:signed_person, supporter_status: "regular", member_status: "awaiting_presidium_decision")
+    @person = FactoryGirl.create(:signed_person, status: "regular_supporter_awaiting_presidium_decision")
     sign_in @person
     get :membership
     assert_response :success
@@ -196,7 +196,7 @@ end
 
 context "Zaplacený příznivec schválený zájemce o členství s nahranou přihláškou" do
   should "should get membership info" do
-    @person = FactoryGirl.create(:signed_person, supporter_status: "regular", member_status: "awaiting_first_payment")
+    @person = FactoryGirl.create(:signed_person, status: "regular_supporter_awaiting_first_payment")
     sign_in @person
     get :membership
     assert_response :success

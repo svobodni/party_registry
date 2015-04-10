@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150316231620) do
+ActiveRecord::Schema.define(version: 20150410145258) do
 
   create_table "bank_payments", force: true do |t|
     t.integer  "account_id"
@@ -78,7 +78,7 @@ ActiveRecord::Schema.define(version: 20150316231620) do
     t.string   "scopes"
   end
 
-  add_index "oauth_access_grants", ["token"], name: "index_oauth_access_grants_on_token", unique: true, using: :btree
+  add_index "oauth_access_grants", ["token"], name: "index_oauth_access_grants_on_token", unique: true
 
   create_table "oauth_access_tokens", force: true do |t|
     t.integer  "resource_owner_id"
@@ -91,9 +91,9 @@ ActiveRecord::Schema.define(version: 20150316231620) do
     t.string   "scopes"
   end
 
-  add_index "oauth_access_tokens", ["refresh_token"], name: "index_oauth_access_tokens_on_refresh_token", unique: true, using: :btree
-  add_index "oauth_access_tokens", ["resource_owner_id"], name: "index_oauth_access_tokens_on_resource_owner_id", using: :btree
-  add_index "oauth_access_tokens", ["token"], name: "index_oauth_access_tokens_on_token", unique: true, using: :btree
+  add_index "oauth_access_tokens", ["refresh_token"], name: "index_oauth_access_tokens_on_refresh_token", unique: true
+  add_index "oauth_access_tokens", ["resource_owner_id"], name: "index_oauth_access_tokens_on_resource_owner_id"
+  add_index "oauth_access_tokens", ["token"], name: "index_oauth_access_tokens_on_token", unique: true
 
   create_table "oauth_applications", force: true do |t|
     t.string   "name",                      null: false
@@ -105,7 +105,7 @@ ActiveRecord::Schema.define(version: 20150316231620) do
     t.datetime "updated_at"
   end
 
-  add_index "oauth_applications", ["uid"], name: "index_oauth_applications_on_uid", unique: true, using: :btree
+  add_index "oauth_applications", ["uid"], name: "index_oauth_applications_on_uid", unique: true
 
   create_table "organizations", force: true do |t|
     t.string   "type"
@@ -167,6 +167,7 @@ ActiveRecord::Schema.define(version: 20150316231620) do
     t.string   "fb_page_url"
     t.text     "previous_candidatures"
     t.integer  "amount"
+    t.string   "status"
   end
 
   add_index "people", ["reset_password_token"], name: "index_people_on_reset_password_token", unique: true

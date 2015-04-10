@@ -24,26 +24,26 @@ FactoryGirl.define do
     domestic_branch { Branch.find_by_name("Praha 7") || create(:praha_7) }
 
     factory :member_awaiting_decision do
-      member_status :awaiting_presidium_decision
+      status :awaiting_presidium_decision
     end
 
     factory :signed_member_awaiting_decision do
-      member_status :awaiting_presidium_decision
+      status :awaiting_presidium_decision
       signed_application
     end
 
     factory :member_awaiting_first_payment do
-      member_status :awaiting_first_payment
+      status :awaiting_first_payment
       signed_application
     end
 
     factory :party_member do
-      member_status :regular
+      status :regular_member
       signed_application
     end
 
     factory :supporter do
-      legacy_type "supporter"
+      status :regular_supporter
     end
 
     factory :office_worker do

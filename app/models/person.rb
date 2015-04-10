@@ -33,7 +33,7 @@ class Person < ActiveRecord::Base
   # má kontaktní údaje
   has_many :contacts, :as => :contactable
 
-  scope :regular_members, -> { where("member_status = ?", "regular") }
+  scope :regular_members, -> { where("status = ?", "regular_member") }
 
 #  before_save :set_domestic_ruian_address,
 #    if: Proc.new { |person| person.domestic_address_street_changed? }
@@ -72,27 +72,31 @@ class Person < ActiveRecord::Base
   end
 
   def is_member?
-    ["awaiting_presidium_decision", "awaiting_first_payment", "regular"].member?(member_status)
+    ["regular_member","awaiting_presidium_decision", "awaiting_first_payment", "regular_supporter_awaiting_presidium_decision", "regular_supporter_awaiting_first_payment"].member?(status)
   end
 
   def is_supporter?
-    ["registered", "regular"].member?(supporter_status)
+    ["registered", "regular_supporter", "regular_supporter_awaiting_presidium_decision", "regular_supporter_awaiting_first_payment"].member?(status)
   end
 
   def membership_type
-    legacy_type == "member" ? :member : :supporter
+    is_member? ? :member : :supporter
   end
 
   def is_regular?
-    member_status == "regular" || supporter_status == "regular"
+    is_regular_member? || is_regular_supporter?
   end
 
   def is_regular_member?
-    is_member? && status == "valid"
+    status == "regular_member"
+  end
+
+  def regular_supporter_states
+    ["regular_supporter","regular_supporter_awaiting_presidium_decision","regular_supporter_awaiting_first_payment"]
   end
 
   def is_regular_supporter?
-    supporter_status=="regular"
+    regular_supporter_states.member?(status)
   end
 
   def vs
@@ -107,23 +111,15 @@ class Person < ActiveRecord::Base
     "5" + id.to_s.rjust(4,"0")
   end
 
-  def status
-    if is_member?
-      member_status == "regular" ? "valid" : "other"
-    else
-      supporter_status == "regular" ? "valid" : "other"
-    end
-  end
-
   def status_text
     if is_member?
-      if member_status == "regular"
+      if status == "regular_member"
         "řádný člen"
       else
         "žadatel o členství"
       end
     else
-      if supporter_status == "regular"
+      if status == "regular_supporter"
         "příznivec"
       else
         "nezaplacený příznivec"
@@ -131,16 +127,28 @@ class Person < ActiveRecord::Base
     end
   end
 
-  def awaiting_membership?
-    ["awaiting_presidium_decision", "awaiting_first_payment"].member?(member_status)
+  def is_awaiting_presidium_decision?
+    ["awaiting_presidium_decision", "regular_supporter_awaiting_presidium_decision"].member?(status)
   end
 
-  def signed_application_expected?
-    awaiting_membership? && signed_application.blank?
+  def is_awaiting_first_payment?
+    ["awaiting_first_payment", "regular_supporter_awaiting_first_payment"].member?(status)
   end
 
-  def payment_expected?
-    ((member_status == "awaiting_first_payment") && !signed_application.blank?) || (supporter_status=="registered")
+  def awaiting_states
+    ["awaiting_presidium_decision", "awaiting_first_payment", "regular_supporter_awaiting_presidium_decision", "regular_supporter_awaiting_first_payment"]
+  end
+
+  def is_awaiting_membership?
+    awaiting_states.member?(status)
+  end
+
+  def is_signed_application_expected?
+    is_awaiting_membership? && signed_application.blank?
+  end
+
+  def is_payment_expected?
+    (["awaiting_first_payment", "regular_supporter_awaiting_first_payment"].member?(status) && !signed_application.blank?) || (status=="registered")
   end
 
   def region
@@ -149,71 +157,79 @@ class Person < ActiveRecord::Base
 
   include AASM
 
-  aasm :column => 'member_status' do
-    state :awaiting_presidium_decision, :initial => true
+  aasm :column => 'status' do
+    # zaregistrovaný nezaplacený příznivce (čeká se na platbu)
+    state :registered, :initial => true
+    # příznivce
+    state :regular_supporter
+    # zájemce o členství (čeká se na schválení a přihlášku)
+    state :awaiting_presidium_decision
+    # schválený zájemce o členství (čeká se na platbu a přihlášku)
     state :awaiting_first_payment
-    state :regular
-    state :cancelled
+    # člen
+    state :regular_member
+    # příznivce zájemce o členství (čeká se na schválení a přihlášku)
+    state :regular_supporter_awaiting_presidium_decision
+    # příznivce schválený zájemce o členství (čeká se na platbu a přihlášku)
+    state :regular_supporter_awaiting_first_payment
+
+    # Platba členského/registračního příspěvku
+    event :payment do
+      # Příznivec zaplatil
+      # (nezaplaceny priznivce)[uhrada 100]->(priznivce)
+      transitions from: :registered, to: :regular_supporter
+      # Příznivec zaplatil znovu
+      transitions from: :regular_supporter, to: :regular_supporter
+      # Přijatý člen zaplatil
+      # (schvaleny zajemce o clenstvi)[uhrada 1000]->(clen)
+      transitions from: :awaiting_first_payment, to: :regular_member
+      # Člen zaplatil znovu
+      transitions from: :regular_member, to: :regular_member
+      # (priznivce schvaleny zajemce o clenstvi)[uhrada doplatku]->(clen)
+      transitions from: :regular_supporter_awaiting_first_payment, to: :regular_member
+    end
+
+    # Žádost příznivce o členství
+    event :supporter_memberhip_requesed do
+      # (nezaplaceny priznivce)->(zajemce o clenstvi)
+      transitions :from => :registered, :to => :awaiting_presidium_decision
+      # (priznivce)->(priznivce zajemce o clenstvi)
+      transitions :from => :regular_supporter, :to => :regular_supporter_awaiting_presidium_decision
+    end
 
     # Členství schváleno KrP
     event :presidium_accepted do
+      # (zajemce o clenstvi)[prihlaska a usneseni]->(schvaleny zajemce o clenstvi)
       transitions :from => :awaiting_presidium_decision, :to => :awaiting_first_payment
-      # FIXME: obnoveni clenstvi
+      # (priznivce zajemce o clenstvi)->(priznivce schvaleny zajemce o clenstvi)
+      transitions :from => :regular_supporter_awaiting_presidium_decision, :to => :regular_supporter_awaiting_first_payment
     end
 
     # Členství neschváleno KrP
-    event :presidium_denied do
-      transitions :from => :awaiting_presidium_decision, :to => :cancelled
-    end
-
-    # Zaplacení členského příspěvku
-    event :payment do
-      transitions :from => :awaiting_first_payment, :to => :regular
-      transitions :from => :regular, :to => :regular
-      transitions :from => :cancelled, :to => :awaiting_presidium_decision
-    end
+    #event :presidium_denied do
+    #  transitions :from => :awaiting_presidium_decision, :to => :cancelled
+    #end
 
     # Roční deaktivace nezaplacených členů
     event :anual_check do
-      transitions :from => :regular, :to => :cancelled
+      # (clen)[neobnovil]->(nezaplaceny priznivce)
+      transitions :from => :regular_member, :to => :registered
+      # (priznivce)[neobnovil]->(nezaplaceny priznivce)
+      transitions :from => :regular_supporter, :to => :registered
     end
 
     # Zrušení členství nebo žádosti o členství na žádost člena
     event :cancel_request do
-      transitions :from => :awaiting_presidium_decision, :to => :cancelled
-      transitions :from => :awaiting_first_payment, :to => :cancelled
-      transitions :from => :regular, :to => :cancelled
+      # (clen)[ukoncil clenstvi]->(nezaplaceny priznivce)
+      transitions :from => :awaiting_presidium_decision, :to => :registered
+      transitions :from => :awaiting_first_payment, :to => :registered
+      transitions :from => :regular, :to => :registered
     end
 
     # Zrušení členství na základě rozhodnutí RK
     event :rk_cancel_decision do
-      transitions :from => :regular, :to => :cancelled
+      transitions :from => :regular, :to => :registered
     end
-
-  end
-
-  aasm :column => 'supporter_status' do
-    state :registered, :initial => true
-    state :regular
-    state :cancelled
-
-    # Zaplacení daru příznivce
-    event :payment do
-      transitions :from => :registered, :to => :regular
-      transitions :from => :cancelled, :to => :regular
-      transitions :from => :regular, :to => :regular
-    end
-
-    # Roční deaktivace nezaplacených členů
-    event :anual_check do
-      transitions :from => :regular, :to => :cancelled
-    end
-
-    # Zrušení členství na žádost člena
-    event :cancel_request do
-      transitions :from => :regular, :to => :cancelled
-    end
-
   end
 
   def guest_region_id
