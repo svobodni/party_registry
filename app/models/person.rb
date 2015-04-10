@@ -120,7 +120,7 @@ class Person < ActiveRecord::Base
   end
 
   def awaiting_membership?
-    ["awaiting_application", "awaiting_presidium_decision", "awaiting_first_payment"].member?(member_status)
+    ["awaiting_presidium_decision", "awaiting_first_payment"].member?(member_status)
   end
 
   def signed_application_expected?
@@ -138,16 +138,10 @@ class Person < ActiveRecord::Base
   include AASM
 
   aasm :column => 'member_status' do
-    state :awaiting_application, :initial => true
-    state :awaiting_presidium_decision
+    state :awaiting_presidium_decision, :initial => true
     state :awaiting_first_payment
     state :regular
     state :cancelled
-
-    # Přijatá přihláška
-    event :received_application do
-      transitions :from => :awaiting_application, :to => :awaiting_presidium_decision
-    end
 
     # Členství schváleno KrP
     event :presidium_accepted do
@@ -174,7 +168,6 @@ class Person < ActiveRecord::Base
 
     # Zrušení členství nebo žádosti o členství na žádost člena
     event :cancel_request do
-      transitions :from => :awaiting_application, :to => :cancelled
       transitions :from => :awaiting_presidium_decision, :to => :cancelled
       transitions :from => :awaiting_first_payment, :to => :cancelled
       transitions :from => :regular, :to => :cancelled
