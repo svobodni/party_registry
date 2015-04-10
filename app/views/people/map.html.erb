@@ -1,7 +1,12 @@
 <%
   page_title "Mapa členů a příznivců"
-  breadcrumb :region, @region if @region
-  breadcrumb :branch, @branch if @branch
+  if @region
+    breadcrumb :region, @region
+    render "regions/sidebar"
+  elsif @branch
+    breadcrumb :branch, @branch
+    render "branches/sidebar"
+  end
 %>
 
 <style type="text/css">
