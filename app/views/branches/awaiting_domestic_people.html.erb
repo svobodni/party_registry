@@ -1,6 +1,7 @@
 <%
   page_title "Zájemci o členství"
   breadcrumb(:branch, @branch)
+  render "sidebar"
 %>
 
 <table id="awaiting_domestic_people" class="table table-striped">
@@ -11,7 +12,7 @@
   <% @branch.awaiting_domestic_people.accessible_by(current_ability).reverse.each do |member| %>
     <tr>
       <td><%= member.name %></td>
-      <td><%= member.member_status%></td>
+      <td><%= t member.member_status, scope: :member_status%></td>
       <td><%= tel_to member.phone %></td>
       <td><%= mail_to member.email %></td>
       <td><%=link_to_member_application(member)%></td>

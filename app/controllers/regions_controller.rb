@@ -1,6 +1,6 @@
 class RegionsController < ApplicationController
 
-  before_action :set_region, only: [:show, :branches, :mestske_casti, :okresy, :map, :awaiting_domestic_people]
+  before_action :set_region, only: [:show, :branches, :mestske_casti, :okresy, :map, :awaiting_domestic_people, :domestic_members, :domestic_supporters, :guest_people]
 
   before_action :authenticate_person!, except: [:index, :show]
   before_action :authenticate_person!, only: [:show], unless: proc { params[:format]=='json' }

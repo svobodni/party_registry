@@ -122,4 +122,8 @@ module ApplicationHelper
     args.any? { |v| v.to_s.downcase == action_name }
   end
 
+  def glyph_link_to(icon, text, path)
+    link_to_unless_current ('<span class="glyphicon '+(current_page?(path) ? "active " : "")+'glyphicon-'+icon+'"></span> '+text).html_safe, path
+  end
+
 end

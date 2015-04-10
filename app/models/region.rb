@@ -16,7 +16,8 @@ class Region < Organization
   has_many :guest_people, class_name: "Person", foreign_key: "guest_region_id"
 
   # Krajské sdružení má kmenové členy
-  has_many :domestic_members, -> { where('legacy_type="member" and member_status="regular"') },class_name: "Person", foreign_key: "domestic_region_id"
+  has_many :domestic_members, -> { where('member_status="regular"') },class_name: "Person", foreign_key: "domestic_region_id"
+  has_many :domestic_supporters, -> { where('supporter_status="regular"') },class_name: "Person", foreign_key: "domestic_region_id"
   has_many :awaiting_domestic_people, -> { where('legacy_type="member" and member_status!="regular"') },class_name: "Person", foreign_key: "domestic_region_id"
 
   # Krajské sdružení má kmenové a hostující členy a příznivce

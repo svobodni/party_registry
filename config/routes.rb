@@ -78,6 +78,9 @@ PartyRegistry::Application.routes.draw do
     resources :contacts, only: :index
     resource :body, only: :show
     member do
+      get 'domestic_members'
+      get 'domestic_supporters'
+      get 'guest_people'
       get 'mestske_casti'
       get 'okresy'
       get 'map'

@@ -6,11 +6,15 @@
     <li><%= link_to_unless_current "Pobočky", region_branches_path(@region) %></li>
     <li><%= link_to_unless_current "Sdílené kontakty", region_contacts_path(@region) %></li>
     <% if can? :supervise, @region  %>
-    <li><%= link_to_unless_current "Městské části", mestske_casti_region_path(@region) %></li>
-    <li><%= link_to_unless_current "Okresy", okresy_region_path(@region) %></li>
-    <li><%= link_to_unless_current "Zájemci o členství", awaiting_domestic_people_region_path(@region) %></li>
-    <li><%= link_to_unless_current "Mapa", map_region_path(@region) %></li>
-    <li><%= link_to_unless_current "Export", region_people_path(@region, format: :xls) %></li>
+    <hr>
+    <%#= glyph_link_to 'lock', "Městské části", mestske_casti_region_path(@region) %>
+    <%#= glyph_link_to 'lock', "Okresy", okresy_region_path(@region) %>
+    <li><%= glyph_link_to 'lock', "Zájemci o členství", awaiting_domestic_people_region_path(@region) %></li>
+    <li><%= glyph_link_to 'lock', "Členové", domestic_members_region_path(@region) %></li>
+    <li><%= glyph_link_to 'lock', "Příznivci", domestic_supporters_region_path(@region) %></li>
+    <li><%= glyph_link_to 'lock', "Hostující", guest_people_region_path(@region) %></li>
+    <li><%= glyph_link_to 'lock', "Mapa", map_region_path(@region) %></li>
+    <li><%= glyph_link_to 'lock', "Export", region_people_path(@region, format: :xls) %></li>
     <% end %>
   </ul>
 </div>

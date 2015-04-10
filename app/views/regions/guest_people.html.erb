@@ -1,12 +1,12 @@
 <%
   page_title "Hostující"
-  breadcrumb(:branch, @branch)
+  breadcrumb(:region, @region)
   render "sidebar"
 %>
 
 <table id="guest_people" class="table table-striped">
   <thead><tr><th>Foto</th><th>Jméno</th><th>Email</th><th>Telefon</th><th>Městská část</th></tr></thead>
-  <tbody><%=render @branch.guest_people.accessible_by(current_ability) %></tbody>
+  <tbody><%=render @region.guest_people.accessible_by(current_ability) %></tbody>
 </table>
 
 <%= datatable :guest_people %>

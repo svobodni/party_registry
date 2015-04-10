@@ -13,7 +13,7 @@
 <tr>
 <td><%= member.vs %></td>
 <td><%= link_to member.name, member %></td>
-<td><%= member.member_status%></td>
+<td><%= t member.member_status, scope: :member_status %></td>
 <td><%= member.domestic_ruian_address.try(:mestska_cast) %></td>
 <td><%= member.domestic_branch.try(:name) %></td>
 <td><%=link_to_member_application(member)%></td>
