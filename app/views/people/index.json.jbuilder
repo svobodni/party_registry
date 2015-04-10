@@ -1,8 +1,11 @@
 json.people @people do |person|
   json.id person.id
   json.vs person.vs
-  json.type @person.is_member? ? "member" : "supporter"
+  json.type person.is_member? ? "member" : "sympathizer"
+  json.person_type person.is_member? ? "member" : "supporter"
   json.status person.status
+  json.member_status person.member_status
+  json.supporter_status person.supporter_status
   json.name person.name
   json.first_name person.first_name
   json.last_name person.last_name

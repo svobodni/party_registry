@@ -2,7 +2,10 @@ json.person do
   json.id @person.id
   json.name @person.name
   json.type @person.is_member? ? "member" : "supporter"
-  json.status @person.status
+  json.status @person.is_regular? ? "valid" : "other"
+  json.person_status @person.status
+  json.member_status @person.member_status
+  json.supporter_status @person.supporter_status
   json.first_name @person.first_name
   json.last_name @person.last_name
   json.email @person.email

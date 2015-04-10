@@ -3,7 +3,7 @@ require 'test_helper'
 class PeopleControllerTest < ActionController::TestCase
 
   setup do
-    @person = FactoryGirl.create(:person)
+    @person = FactoryGirl.create(:party_member)
     sign_in @person
   end
 
@@ -24,9 +24,30 @@ class PeopleControllerTest < ActionController::TestCase
       get :show, id: @another_person
       assert_response :success
     end
+
+    should "get json with profile" do
+      get :profile, format: :json
+      assert_response :success
+      person = JSON.parse(response.body)['person']
+      assert_equal @person.email, person['email']
+      assert_equal "member", person['type']
+      assert_equal "valid", person['status']
+    end
   end
 
   context "Branch coordinator" do
+    should "get json with people list with regular_member" do
+      @coordinator = @person.domestic_branch.coordinator.person
+      sign_in @coordinator
+      get :index, format: :json
+      assert_response :success
+      person = JSON.parse(response.body)['people'].detect{|p| p['id']==@person.id}
+      assert_equal @person.email, person['email']
+      assert_equal "member", person['type']
+      assert_nil person['supporter_status']
+      assert_equal "regular_member", person['member_status']
+    end
+
     should "get info on person in own branch without shared contact" do
       @coordinator = @person.domestic_branch.coordinator.person
       sign_in @coordinator

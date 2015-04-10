@@ -111,6 +111,19 @@ class Person < ActiveRecord::Base
     "5" + id.to_s.rjust(4,"0")
   end
 
+  # podpora starého formátu
+  def supporter_status
+    return status if ["registered", "regular_supporter"].member?(status)
+    return "regular_supporter" if ["regular_supporter_awaiting_presidium_decision","regular_supporter_awaiting_first_payment"].member?(status)
+  end
+
+  # podpora starého formátu
+  def member_status
+    return status if ["regular_member","awaiting_presidium_decision", "awaiting_first_payment"].member?(status)
+    return "awaiting_presidium_decision" if status == "regular_supporter_awaiting_presidium_decision"
+    return "awaiting_first_payment" if status == "regular_supporter_awaiting_first_payment"
+  end
+
   def status_text
     if is_member?
       if status == "regular_member"
