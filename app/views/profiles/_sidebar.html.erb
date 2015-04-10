@@ -1,24 +1,12 @@
 <% content_for 'sidebar' do %>
 <div id="sidebar-wrapper">
   <ul class="sidebar-nav">
-    <li>
-      <%=link_to_unless_current '<span class="glyphicon glyphicon-user"></span> Osobní'.html_safe, personal_profiles_path %>
-    </li>
-    <li>
-      <%=link_to_unless_current '<span class="glyphicon glyphicon-lock"></span> Přihlašování'.html_safe, credentials_profiles_path %>
-    </li>
-    <li>
-      <%=link_to_unless_current '<span class="glyphicon glyphicon-phone"></span> Kontakty'.html_safe, contacts_profiles_path %>
-    </li>
-    <li>
-      <%=link_to_unless_current '<span class="glyphicon glyphicon-envelope"></span> Adresy'.html_safe, addresses_profiles_path %>
-    </li>
-    <li>
-      <%=link_to_unless_current '<span class="glyphicon glyphicon-globe"></span> Hostování'.html_safe, guesting_profiles_path %>
-    </li>
-    <li>
-      <%=link_to_unless_current '<span class="glyphicon glyphicon-globe"></span> Členství'.html_safe, membership_profiles_path %>
-    </li>
+    <li><%=glyph_link_to "user", "Osobní", personal_profiles_path %></li>
+    <li><%=glyph_link_to "lock","Přihlašování", credentials_profiles_path %></li>
+    <li><%=glyph_link_to "phone","Kontakty", contacts_profiles_path %></li>
+    <li><%=glyph_link_to "envelope","Adresy", addresses_profiles_path %></li>
+    <li><%=glyph_link_to "globe","Hostování", guesting_profiles_path %></li>
+    <li><%=glyph_link_to "globe","Členství", membership_profiles_path %></li>
   </ul>
 </div>
 <% end %>

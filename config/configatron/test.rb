@@ -1,5 +1,5 @@
 # Override your default settings for the Test environment here.
-# 
+#
 # Example:
 #   configatron.file.storage = :local
 
@@ -8,3 +8,4 @@ configatron.auth.systems = {
 	'knownsystem' => 'https://knownsystem.svobodni.cz/callback.php'
 }
 configatron.migrated = false
+configatron.finance.password = "testovaciheslo"

@@ -32,6 +32,7 @@
 
     <% if @person.domestic_branch || @person.guest_branch %>
     <h4>Pobočka</h4>
+    <div>Spadáte do kraje <%= link_to @person.domestic_region.name, @person.domestic_region %></div>
     <% if @person.domestic_branch %>
     <div>Spadáte do pobočky <%= link_to @person.domestic_branch.try(:name), @person.domestic_branch %></div>
     <% end %>
@@ -44,7 +45,7 @@
     <h4>Vaše role ve Svobodných</h4>
     <ul>
       <% for role in @person.roles %>
-      <li><%= link_to role.role_name, role.body || role.branch %></li>
+      <li><%= link_to role.role_long_name, role.body || role.branch %></li>
       <% end %>
     </ul>
     <% end %>
