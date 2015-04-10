@@ -1,5 +1,5 @@
 <%
-  page_title "Seznam řádných členů bez nascanované přihlášky"
+  page_title "Seznam osob zařazených ve špatném kraji"
   render "backoffice/sidebar"
 %>
 
@@ -10,7 +10,7 @@
   <tbody>
     <% @people.each do |person| %>
     <tr>
-      <td><%=person.id%></td>
+      <td><%=person.vs%></td>
       <td><%=link_to person.name, backoffice_person_path(person) %></td>
       <td><%=person.domestic_region.try(:name)%></td>
       <td><%=person.domestic_ruian_address.kraj%></td>
