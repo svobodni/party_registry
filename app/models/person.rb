@@ -91,12 +91,12 @@ class Person < ActiveRecord::Base
     status == "regular_member"
   end
 
-  def regular_supporter_states
+  def self.regular_supporter_states
     ["regular_supporter","regular_supporter_awaiting_presidium_decision","regular_supporter_awaiting_first_payment"]
   end
 
   def is_regular_supporter?
-    regular_supporter_states.member?(status)
+    Person.regular_supporter_states.member?(status)
   end
 
   def vs
@@ -148,12 +148,12 @@ class Person < ActiveRecord::Base
     ["awaiting_first_payment", "regular_supporter_awaiting_first_payment"].member?(status)
   end
 
-  def awaiting_states
+  def self.awaiting_states
     ["awaiting_presidium_decision", "awaiting_first_payment", "regular_supporter_awaiting_presidium_decision", "regular_supporter_awaiting_first_payment"]
   end
 
   def is_awaiting_membership?
-    awaiting_states.member?(status)
+    Person.awaiting_states.member?(status)
   end
 
   def is_signed_application_expected?
