@@ -21,6 +21,7 @@ FactoryGirl.define do
     domestic_address_city "Starý Františkov"
     domestic_address_zip "123 98"
     domestic_region { Region.find_by_name("Praha") || create(:praha) }
+    domestic_branch { Branch.find_by_name("Praha 7") || create(:praha_7) }
 
     factory :member_awaiting_decision do
       member_status :awaiting_presidium_decision
@@ -51,6 +52,24 @@ FactoryGirl.define do
 
     factory :signed_person do
       signed_application
+    end
+
+    factory :person_with_public_contact do
+      after(:create) do |person, evaluator|
+        person.contacts << create(:contact, contact_type: "email", privacy: "public", contact: person.email)
+      end
+    end
+
+    factory :person_with_coordinator_contact do
+      after(:create) do |person, evaluator|
+        person.contacts << create(:contact, contact_type: "email", privacy: "coordinator", contact: person.email)
+      end
+    end
+
+    factory :person_with_regional_contact do
+      after(:create) do |person, evaluator|
+        person.contacts << create(:contact, contact_type: "email", privacy: "regional", contact: person.email)
+      end
     end
 
   end
