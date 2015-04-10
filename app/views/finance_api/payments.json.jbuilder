@@ -8,7 +8,7 @@ json.payment do
   json.email @person.email
   json.membership_type @person.membership_type
   json.date_of_birth @person.date_of_birth
-  if @person.membership_type == :member
+  if @person.is_member?
     note = "Členský příspěvek - #{@person.name}"
   else
     note = "Příspěvek příznivce - #{@person.name}"

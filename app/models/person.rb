@@ -72,7 +72,11 @@ class Person < ActiveRecord::Base
   end
 
   def is_member?
-    legacy_type == "member"
+    ["awaiting_presidium_decision", "awaiting_first_payment", "regular"].member?(member_status)
+  end
+
+  def is_supporter?
+    ["registered", "regular"].member?(supporter_status)
   end
 
   def membership_type
@@ -88,11 +92,19 @@ class Person < ActiveRecord::Base
   end
 
   def is_regular_supporter?
-    !is_member? && status == "valid"
+    supporter_status=="regular"
   end
 
   def vs
     (is_member? ? "1" : "5") + id.to_s.rjust(4,"0")
+  end
+
+  def member_vs
+    "1" + id.to_s.rjust(4,"0")
+  end
+
+  def supporter_vs
+    "5" + id.to_s.rjust(4,"0")
   end
 
   def status
@@ -128,7 +140,7 @@ class Person < ActiveRecord::Base
   end
 
   def payment_expected?
-    (member_status == "awaiting_first_payment") && !signed_application.blank?
+    ((member_status == "awaiting_first_payment") && !signed_application.blank?) || (supporter_status=="registered")
   end
 
   def region

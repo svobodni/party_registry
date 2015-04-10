@@ -16,6 +16,10 @@ class ProfilesController < ApplicationController
     end
   end
 
+  def membership
+    @person = current_person
+  end
+
   private
   def person_params
     params.require(:person).permit(:name_prefix, :name_suffix, :date_of_birth, :domestic_address_street, :guest_region_id, :guest_branch_id)

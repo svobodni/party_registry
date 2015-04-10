@@ -10,7 +10,6 @@ FactoryGirl.define do
   end
 
   factory :person do
-    legacy_type "member"
     email
     username
     password 'password'
@@ -22,6 +21,29 @@ FactoryGirl.define do
     domestic_address_city "Starý Františkov"
     domestic_address_zip "123 98"
     domestic_region { Region.find_by_name("Praha") || create(:praha) }
+
+    factory :member_awaiting_decision do
+      member_status :awaiting_presidium_decision
+    end
+
+    factory :signed_member_awaiting_decision do
+      member_status :awaiting_presidium_decision
+      signed_application
+    end
+
+    factory :member_awaiting_first_payment do
+      member_status :awaiting_first_payment
+      signed_application
+    end
+
+    factory :party_member do
+      member_status :regular
+      signed_application
+    end
+
+    factory :supporter do
+      legacy_type "supporter"
+    end
 
     factory :office_worker do
       id 342

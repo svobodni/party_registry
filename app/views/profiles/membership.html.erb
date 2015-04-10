@@ -4,34 +4,74 @@
   breadcrumb(:profile_membership)
 %>
 
-<%  @qr = RQRCode::QRCode.new(Rspayd::CzechPayment.generate_string(
-:accountNumber=>@country.fio_account_number,
-:bankCode => '2010',
-:amount => current_person.amount.blank? ? 1000 : current_person.amount,
-:vs=>current_person.vs,
-:message => "clensky prispevek qr"
-), :size => 6, :level => :m) %>
-
-<% if current_person.is_member? %>
-  <% if current_person.is_regular_member? %>
-    Jste řádným členem se zaplacenými členskými příspěvky na tento rok.
+<div class="profile membership">
+<% if @person.is_member? %>
+  <% if @person.is_regular_member? %>
+    <p class="bg-info">Jste řádným členem se zaplacenými členskými příspěvky na tento rok.</p>
   <% end %>
 <% end %>
 
-<% if current_person.awaiting_presidium_decision? %>
-<p>Požádal jste o členství a čeká se na rozhodnutí krajského předsednictva.</p>
+<% if @person.is_supporter? %>
+  <% if @person.is_regular? %>
+    <p class="bg-info">Jste příznivce Svobodných se řádně zaplaceným příspěvkem na tento rok. Děkujeme.</p>
+  <% end %>
 <% end %>
 
-<% if current_person.awaiting_first_payment? %>
-<p>Vaše přihláška byla schválena krajským předsednictvem.</p>
+<% if @person.awaiting_presidium_decision? %>
+<p class="bg-info">Požádal jste o členství a čeká se na rozhodnutí krajského předsednictva.</p>
 <% end %>
 
-<% if current_person.signed_application_expected? %>
-<p>Republiková kancelář zatím neobdržela Vaši podepsanou přihlášku. Prosím, stáhněte si <%= link_to "PDF s přihláškou", application_person_path(current_person, format: :pdf)%>, vytiskněte a podepsané odešlete na adresu kanceláře. Pokud máte zaručený kvalifikovaný podpis, můžete PDF podepsat elektronicky a odeslat na <%= mail_to "kancelar@svobodni.cz" %>.</p>
+<% if @person.awaiting_first_payment? %>
+<p class="bg-success">Vaše členství bylo schváleno krajským předsednictvem.</p>
 <% end %>
 
-<% if current_person.payment_expected? %>
-<p>Uhraďte prosím členský příspěvek na rok 2015 ve výši <%= current_person.amount.blank? ? "1000 Kč (důchodci a studenti 300 Kč)" : "#{current_person.amount} Kč" %> pod variabilním symbolem <%= current_person.vs %> na účet č. <%= @country.fio_account_number %>/2010. Jakmile platbu obdržíme, stanete se plnoprávným členem Strany svobodných občanů.</p>
-<p>Prosím dodržte výše uvedený variabilní symbol, jinak bude problém vaši platbu příspěvku identifikovat.</p>
-<%= render :partial => 'qr_platba' %>
+<% if @person.signed_application_expected? %>
+<p class="bg-warning">Republiková kancelář zatím neobdržela Vaši podepsanou přihlášku. Prosím, stáhněte si <%= link_to "PDF s přihláškou", application_person_path(@person, format: :pdf)%>, vytiskněte a podepsané odešlete na adresu kanceláře. Pokud máte zaručený kvalifikovaný podpis, můžete PDF podepsat elektronicky a odeslat na <%= mail_to "kancelar@svobodni.cz" %>.</p>
+<% end %>
+
+<% if @person.payment_expected? %>
+
+  <% if @person.is_supporter? && !@person.regular? && !@person.awaiting_membership? %>
+    <% vs = @person.supporter_vs %>
+    <% amount = @person.amount.blank? ? 100 : @person.amount %>
+    <p class="bg-primary">Registrační příspěvek na rok 2015 ve výši <%= amount %> Kč prosím uhraďte pod variabilním symbolem <%= vs %> na účet <%= @country.fio_account_number %>/2010. Jakmile platbu obdržíme, bude registrace kompletní. Budeme Vás o tom informovat dalším emailem. Získáte pak přístup přes web do sekce pro registrované uživatele, kde se mj. budete moci účastnit některých hlasování a účastnit se diskusí.</p>
+  <% else %>
+    <% vs = @person.member_vs %>
+    <% amount = @person.amount.blank? ? 1000 : @person.amount %>
+    <p class="bg-primary">Uhraďte prosím členský příspěvek na rok 2015 ve výši <%= amount %> Kč pod variabilním symbolem <%= vs %> na účet č. <%= @country.fio_account_number %>/2010. Jakmile platbu obdržíme, stanete se plnoprávným členem Strany svobodných občanů.</p>
+  <% end %>
+
+  <% @qr = RQRCode::QRCode.new(Rspayd::CzechPayment.generate_string(
+    :accountNumber=>@country.fio_account_number,
+    :bankCode => '2010',
+    :amount => amount,
+    :vs=>vs,
+    :message => "prispevek qr"
+    ), :size => 6, :level => :m) %>
+
+  <div class="row jumbotron" style="margin: 2.5em;">
+    <div class="col-md-5">
+      <%= render :partial => 'qr_platba' %>
+    </div>
+    <div class="col-md-7">
+      <table class="table table-condensed">
+        <tr><th>Číslo účtu</th><td><%= @country.fio_account_number %>/2010</td></tr>
+        <tr><th>Částka</th><td><%= amount %> Kč</td></tr>
+        <tr><th>Variabilní symbol</th><td><%= vs %></td></tr>
+      </table>
+      <!--<a target='_blank' href='https://testgw.gopay.cz/gw/pay-base-v2?paymentCommand.targetGoId=8409367912&paymentCommand.totalPrice=10000&paymentCommand.currency=CZK&paymentCommand.productName=dar&paymentCommand.orderNumber=1234&paymentCommand.successURL=http%3A%2F%2Ffinance.svobodni.cz&paymentCommand.failedURL=http%3A%2F%2Ffinance.svobodni.cz&paymentCommand.encryptedSignature=d34dc125154f41264accd5000d5660e97845223e6a3db7be9dfb3fdb43842c10e8aee9fb8ff572ca6fa551d2550b605b' > <img src='https://www.gopay.cz/download/PT_rychloplatba.png' alt='Platba' title='Platba' border='0' style='border:none;'/> </a>-->
+    </div>
+  </div>
+
+  <p class="bg-warning">Prosím dodržte výše uvedený variabilní symbol, jinak bude problém vaši platbu příspěvku identifikovat.</p>
+
+<% end %>
+</div>
+
+<% if @person.is_supporter? && !@person.awaiting_membership? %>
+<div class="jumbotron">
+  <h2>Staňte se členem Svobodných</h2>
+  <p>Děkujeme za Vaši přízniveckou podporu. Zapojte se ještě více. Staňte se členem.</p>
+  <p><a class="btn btn-primary btn-lg" href="#" role="button">Doplnit údaje přihlášky</a></p>
+</div>
 <% end %>

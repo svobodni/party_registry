@@ -1,4 +1,4 @@
-// Place all the styles related to the Profile controller here.
+  // Place all the styles related to the Profile controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
@@ -10,6 +10,9 @@
 
 /* Toggle Styles */
 
+.profile.membership p{
+  padding: 1em;
+}
 #wrapper {
   padding-left: 0;
   -webkit-transition: all 0.5s ease;
