@@ -41,6 +41,10 @@ class BranchLocator
 
   # Pobočky na celém okresu
   def name_by_okres
+    # Ustecky kraj
+    return okres if ["Děčín", "Chomutov", "Litoměřice", "Most", "Roudnice nad Labem", "Ústí nad Labem", "Žatec"].member?(okres)
+    return "Bílina" if okres == "Teplice"
+    # Dalsi
     return okres if ["Benešov", "Beroun", "Kolín", "Kutná Hora", "Mělník", "Mladá Boleslav", "Nymburk", "Praha-východ", "Praha-západ", "Příbram", "Rakovník", "Kladno", "Pardubice"].member?(okres)
     return "Okres Plzeň-sever" if okres == "Plzeň-sever"
     return "Okres Rokycany" if okres == "Rokycany"
