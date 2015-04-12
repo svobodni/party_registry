@@ -1,5 +1,5 @@
 class PeopleController < ApplicationController
-  before_action :set_person, only: [:show, :edit, :update, :destroy, :application, :signed_application, :private, :photo, :cv]
+  before_action :set_person, only: [:show, :edit, :update, :destroy, :application, :signed_application, :private, :photo, :cv, :approve]
 
   before_action :authenticate_person!, except: [:payments, :private, :photo, :cv]
 
@@ -49,6 +49,19 @@ class PeopleController < ApplicationController
     authorize!(:show, @person)
     respond_to do |format|
       format.html # {render layout: "dashboard"}
+    end
+  end
+
+  # POST /people/123/approve
+  def approve
+    authorize!(:approve, @person)
+    @person.presidium_accepted!
+    respond_to do |format|
+      if @person.errors.empty?
+        format.html { redirect_to :back, notice: 'Členství bylo úspěšně schváleno.'}
+      else
+        format.html { redirect_to :back, alert: 'Změnu se nepodařilo uložit: '+@person.errors.full_messages.join("<br/>") }
+      end
     end
   end
 

@@ -75,6 +75,7 @@ PartyRegistry::Application.routes.draw do
   resources :regions do
     resources :people
     resources :branches, only: :index
+      post 'approve'
     resources :contacts, only: :index
     resource :body, only: :show
     member do
