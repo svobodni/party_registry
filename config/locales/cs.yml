@@ -36,18 +36,18 @@ cs:
       short: ! '%d %b'
     month_names:
     -
-    - Leden
-    - Únor
-    - Březen
-    - Duben
-    - Květen
-    - Červen
-    - Červenec
-    - Srpen
+    - Ledna
+    - Února
+    - Března
+    - Dubna
+    - Května
+    - Června
+    - Července
+    - Srpna
     - Září
-    - Říjen
-    - Listopad
-    - Prosinec
+    - Října
+    - Listopadu
+    - Prosince
     order:
     - :day
     - :month
