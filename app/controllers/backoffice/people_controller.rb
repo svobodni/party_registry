@@ -1,6 +1,6 @@
 class Backoffice::PeopleController < ApplicationController
 
-  before_action :set_person, only: [:show, :edit, :update, :destroy]
+  before_action :set_person, only: [:show, :edit, :update, :destroy, :paid]
   before_action :authorize_backoffice
 
   autocomplete :person, :email, :display_value => :email_name_id_region, :extra_data => [:name_prefix, :first_name, :last_name, :name_suffix, :domestic_region_id]
@@ -48,6 +48,14 @@ class Backoffice::PeopleController < ApplicationController
         format.html { render :edit }
         format.json { render json: @person.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  # POST /people/1/paid
+  def paid
+    @person.paid!
+    respond_to do |format|
+      format.html { redirect_to :back, notice: 'Úhrada byla úspěšně vyznačena.' }
     end
   end
 

@@ -2,6 +2,9 @@ PartyRegistry::Application.routes.draw do
 
   namespace :backoffice do
     resources :people do
+      member do
+        post 'paid'
+      end
       collection do
         get :autocomplete_person_email
         get :autocomplete_person_last_name
@@ -66,6 +69,7 @@ PartyRegistry::Application.routes.draw do
       get 'private'
       get 'photo'
       get 'cv'
+      post 'approve'
     end
     collection do
       get 'profile'
@@ -75,7 +79,6 @@ PartyRegistry::Application.routes.draw do
   resources :regions do
     resources :people
     resources :branches, only: :index
-      post 'approve'
     resources :contacts, only: :index
     resource :body, only: :show
     member do

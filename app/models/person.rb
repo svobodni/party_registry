@@ -187,7 +187,7 @@ class Person < ActiveRecord::Base
     state :regular_supporter_awaiting_first_payment
 
     # Platba členského/registračního příspěvku
-    event :payment do
+    event :paid do
       # Příznivec zaplatil
       # (nezaplaceny priznivce)[uhrada 100]->(priznivce)
       transitions from: :registered, to: :regular_supporter
