@@ -10,7 +10,9 @@ cs:
   coordinator_notifications:
     guesting_person_joined:
       subject: "[SVOBODNI-REGISTR] Ve Vasi pobocce hostuje nova osoba"
-
+  roles_notifications:
+    reminder:
+      subject: "[SVOBODNI-REGISTR] blizici se konec mandatu"
   personal: "Osobní"
   credentials: "Přihlašování"
   contacts: "Kontakty"

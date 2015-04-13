@@ -62,4 +62,8 @@ class Role < ActiveRecord::Base
     end
   end
 
+  def self.notify_expiring
+    Role.where("till=?",Time.now-45.days).where("type != 'Coordinator'").find_each{|r| RolesNofications.reminder(r).deliver }
+  end
+
 end
