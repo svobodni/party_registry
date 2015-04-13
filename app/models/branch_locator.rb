@@ -80,6 +80,7 @@ class BranchLocator
     return okres if ["Benešov", "Beroun", "Kolín", "Kutná Hora", "Mělník", "Mladá Boleslav", "Nymburk", "Praha-východ", "Praha-západ", "Příbram", "Rakovník", "Kladno"].member?(okres)
     # Ústecký kraj
     return okres if ["Děčín", "Chomutov", "Litoměřice", "Most", "Roudnice nad Labem", "Ústí nad Labem", "Žatec"].member?(okres)
+    return "Žatec" if okres == "Louny"
     return "Bílina" if okres == "Teplice"
     # Zlínský kraj
     return "okres Vsetín" if okres =="Vsetín"
