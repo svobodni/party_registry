@@ -8,9 +8,7 @@ class RolesNotifications < ActionMailer::Base
     if role.body.organization==Country.first
       mail to: "predseda@svobodni.cz"
     else
-      emails = role.body.vicepresidents.collect{|vp| vp.person.email}
-      emails<< role.body.president.try(:person).try(:email)
-      mail to: emails
+      mail to: role.body.presidium_emails
     end
   end
 end

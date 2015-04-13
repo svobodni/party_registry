@@ -23,4 +23,9 @@ class Body < ActiveRecord::Base
   	people.where("type='Member'")
   end
 
+  def presidium_emails
+    emails = vicepresidents.collect{|vp| vp.person.email}
+    emails << president.try(:person).try(:email)
+    emails
+  end
 end
