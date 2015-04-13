@@ -1,13 +1,14 @@
 # -*- encoding : utf-8 -*-
 
 class BranchLocator
-  attr_accessor :mestska_cast, :obec, :obec_id, :okres, :kraj, :branch
+  attr_accessor :mestska_cast, :obec, :obec_id, :okres, :kraj, :kraj_id, :branch
 
   def initialize(options)
     @mestska_cast = options[:mestska_cast]
     @obec = options[:obec]
     @obec_id = options[:obec_id]
     @okres = options[:okres]
+    @kraj_id = options[:kraj_id]
     @kraj = options[:kraj]
   end
 
@@ -44,7 +45,7 @@ class BranchLocator
     # kraj Vysočina
     return "Město Jihlava" if obec=="Jihlava"
     # Královehradecký kraj
-    return obec if ["Hradec Králové", "Nový Bydžov", "Chlumec", "Hořice", "Týniště", "Vrchlabí", "Tětín", "Vítězná"].member?(obec)
+    return obec if ["Hradec Králové", "Nový Bydžov", "Chlumec", "Hořice", "Týniště", "Vrchlabí", "Tětín", "Vítězná"].member?(obec) && kraj_id==86
     # Olomoucký kraj
     return obec if ["Olomouc", "Přerov"].member?(obec)
     # Pardubický kraj
