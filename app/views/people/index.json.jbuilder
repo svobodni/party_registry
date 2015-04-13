@@ -16,9 +16,19 @@ json.people @people do |person|
     json.longitude person.domestic_ruian_address.try(:longitude)
   end
   json.domestic_region do
+    json.id person.domestic_region_id
     json.name person.domestic_region.name
   end
   json.domestic_branch do
+    json.id person.domestic_branch_id
     json.name person.domestic_branch.try(:name)
   end
+  json.guest_region do
+    json.id person.guest_region_id
+    json.name person.guest_region.try(:name)
+  end if person.guest_region
+  json.guest_branch do
+    json.id person.guest_branch_id
+    json.name person.guest_branch.try(:name)
+  end if person.guest_branch
 end
