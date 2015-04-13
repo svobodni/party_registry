@@ -22,6 +22,9 @@ class Branch < Organization
   # má hostující členy a příznivce
   has_many :guest_people, class_name: "Person", foreign_key: "guest_branch_id"
 
+  # validace na unikatni jmeno pobocky
+  validates :name, uniqueness: true
+
   # má kmenové a hostující členy a příznivce
   def people
   	domestic_people+guest_people
