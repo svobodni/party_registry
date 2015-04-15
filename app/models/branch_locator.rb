@@ -44,12 +44,18 @@ class BranchLocator
     return "Kuřimsko" if [583251, 583430, 583791, 583171, 584151].include?(obec_id)
     # kraj Vysočina
     return "Město Jihlava" if obec=="Jihlava"
+    # Karlovarský kraj
+    return obec if obec=="Cheb"
     # Královehradecký kraj
     return obec if ["Hradec Králové", "Nový Bydžov", "Chlumec", "Hořice", "Týniště", "Vrchlabí", "Tětín", "Vítězná"].member?(obec) && kraj_id==86
+    # Liberecký kraj
+    return obec if ["Jablonec nad Nisou", "Česká Lípa"].member?(obec)
     # Olomoucký kraj
     return obec if ["Olomouc", "Přerov"].member?(obec)
     # Pardubický kraj
     return obec if obec=="Chrudim"
+    # Středočeský kraj
+    return obec if ["Slaný", "Řevnice"].member?(obec)
     # Zlínský kraj
     return obec if obec=="Ostrožská Nová Ves"
   end
@@ -71,11 +77,14 @@ class BranchLocator
     return "Břeclavsko" if okres == "Břeclav"
     # kraj Vysočina
     return "Okres Jihlava" if okres=="Jihlava"
+    # Liberecký kraj
+    return "Liberec" if okres=="Liberec"
     # Pardubická kraj
     return okres if okres == "Pardubice"
     # Plzeňský kraj
     return "Okres Plzeň-sever" if okres == "Plzeň-sever"
     return "Okres Rokycany" if okres == "Rokycany"
+    return "Okres Klatovy" if okres == "Klatovy"
     # Středočeský kraj
     return okres if ["Benešov", "Beroun", "Kolín", "Kutná Hora", "Mělník", "Mladá Boleslav", "Nymburk", "Praha-východ", "Praha-západ", "Příbram", "Rakovník", "Kladno"].member?(okres)
     # Ústecký kraj
