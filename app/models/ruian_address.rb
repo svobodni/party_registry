@@ -19,6 +19,8 @@ class RuianAddress < ActiveRecord::Base
       self.obec_id         = data["kod_obce"]
       self.kraj            = data["nazev_kraje"]
       self.kraj_id         = data["kod_kraje"]
+      self.orp             = data["nazev_orp"]
+      self.orp_id          = data["kod_orp"]
     else
       puts "#{self.id} NOT FOUND"
     end

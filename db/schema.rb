@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150410145258) do
+ActiveRecord::Schema.define(version: 20150415210403) do
 
   create_table "bank_payments", force: true do |t|
     t.integer  "account_id"
@@ -196,6 +196,8 @@ ActiveRecord::Schema.define(version: 20150410145258) do
     t.datetime "updated_at"
     t.string   "okres"
     t.integer  "okres_id"
+    t.string   "orp"
+    t.integer  "orp_id"
   end
 
   create_table "signed_applications", force: true do |t|
