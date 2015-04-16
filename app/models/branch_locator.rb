@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 
 class BranchLocator
-  attr_accessor :mestska_cast, :obec, :obec_id, :okres, :kraj, :kraj_id, :branch
+  attr_accessor :mestska_cast, :obec, :obec_id, :okres, :kraj, :kraj_id, :orp, :orp_id, :branch
 
   def initialize(options)
     @mestska_cast = options[:mestska_cast]
@@ -10,10 +10,12 @@ class BranchLocator
     @okres = options[:okres]
     @kraj_id = options[:kraj_id]
     @kraj = options[:kraj]
+    @orp = options[:orp]
+    @orp_id = options[:or=_id]
   end
 
   def name
-    name_by_mestska_cast || name_by_obec || name_by_okres
+    name_by_mestska_cast || name_by_obec || name_by_orp || name_by_okres
   end
 
   def branch
@@ -58,6 +60,32 @@ class BranchLocator
     return obec if ["Slaný", "Řevnice"].member?(obec)
     # Zlínský kraj
     return obec if obec=="Ostrožská Nová Ves"
+  end
+
+  # Pobočky na celém území působnosti obce s rozšířenou působností
+  def name_by_orp
+    # Jihočeský kraj
+    if kraj_id == 35
+      return "Blatensko" if orp=="Blatná"
+      return "Českobudějovicko" if orp=="České Budějovice"
+      return "Českokrumlovsko" if orp=="Český Krumlov"
+      return "Dačicko" if orp=="Dačice"
+      return "Jindřichohradecko" if orp=="Jindřichův Hradec"
+      return "Kaplicko" if orp=="Kaplice"
+      return "Milevsko" if orp=="Milevsko"
+      return "Písecko" if orp=="Písek"
+      return "Prachaticko" if orp=="Prachatice"
+      return "Soběslavsko" if orp=="Soběslav"
+      return "Strakonicko" if orp=="Strakonice"
+      return "Táborsko" if orp=="Tábor"
+      return "Trhosvinensko" if orp=="Trhové Sviny"
+      return "Třeboňsko" if orp=="Třeboň"
+      return "Vimpersko" if orp=="Vimperk"
+      return "Vltavotýnsko" if orp=="Týn nad Vltavou"
+      return "Vodňansko" if orp=="Vodňany"
+    end
+    # kraj Vysočina
+    return orp if orp=="Třebíč"
   end
 
   # Pobočky na celém okresu
