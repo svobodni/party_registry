@@ -11,7 +11,7 @@ class BranchLocator
     @kraj_id = options[:kraj_id]
     @kraj = options[:kraj]
     @orp = options[:orp]
-    @orp_id = options[:or=_id]
+    @orp_id = options[:orp_id]
   end
 
   def name
@@ -38,9 +38,6 @@ class BranchLocator
 
   # Pobočky na celém území obce
   def name_by_obec
-    # Jihočeský kraj
-    return obec if obec=="České Budějovice"
-    return "Týn nad Vltavou" if [544281, 551503, 544515, 544540, 544639, 535982, 544809, 544817, 544868, 544884, 535231, 535699, 545023, 545104, 545171, 545376].include?(obec_id)
     # Jihomoravský kraj
     return obec if ["Břeclav", "Hodonín", "Moravský Krumlov"].member?(obec)
     return "Kuřimsko" if [583251, 583430, 583791, 583171, 584151].include?(obec_id)
@@ -90,14 +87,6 @@ class BranchLocator
 
   # Pobočky na celém okresu
   def name_by_okres
-    # Jihočeský kraj
-    return "okres Český Krumlov" if okres=="Český Krumlov"
-    return "okres Prachatice" if okres=="Prachatice"
-    return "okres Písek" if okres=="Písek"
-    return "okres Strakonice" if okres=="Strakonice"
-    return "okres Tábor" if okres=="Tábor"
-    return "okres Jindřichův Hradec" if okres=="Jindřichův Hradec"
-    return "okres České Budějovice" if okres =="České Budějovice"
     # Jihomoravský kraj
     return "Blanensko" if okres == "Blansko"
     return "Hodonínsko" if okres == "Hodonín"
