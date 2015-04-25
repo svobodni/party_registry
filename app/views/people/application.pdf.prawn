@@ -19,9 +19,9 @@ pdf.table([
 		["Telefon", @person.phone],
 		["Email", @person.email],
 		[{ colspan: 2, content: "Dřívější členství v politických stranách"}],
-		[{ colspan: 2, content: @person.previous_political_parties.empty? ? "-" : @person.previous_political_parties }],
+		[{ colspan: 2, content: @person.previous_political_parties.blank? ? "-" : @person.previous_political_parties }],
 		[{ colspan: 2, content: "Dřívější kandidatury ve volbách"}],
-		[{ colspan: 2, content: @person.previous_candidatures.empty? ? "-" : @person.previous_candidatures}],
+		[{ colspan: 2, content: @person.previous_candidatures.blank? ? "-" : @person.previous_candidatures}],
 		[{ colspan: 2, content: "Prohlašuji, že nejsem členem jiné politické strany, že souhlasím se stanovami, programovým prohlášením, že jsem nebyl členem Lidových milicí ani spolupracovníkem či agentem STB, že všechny uvedené údaje jsou pravdivé a že souhlasím se zpracováním a správou uvedených údajů Stranou svobodných občanů"}],
 		["Datum:","Podpis:"]], position: :center, column_widths: [100, 300])
 pdf.move_down 20
