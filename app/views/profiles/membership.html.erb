@@ -14,7 +14,7 @@
 <% end %>
 
 <% if @person.is_awaiting_presidium_decision? %>
-  <p class="bg-info">Požádal jste o členství a čeká se na rozhodnutí krajského předsednictva.</p>
+  <p class="bg-info">Požádal jste o členství a čeká se na rozhodnutí <%=link_to "krajského předsednictva", region_body_path(@person.domestic_region)%>.</p>
 <% end %>
 
 <% if @person.is_awaiting_first_payment? %>
@@ -22,7 +22,7 @@
 <% end %>
 
 <% if @person.is_signed_application_expected? %>
-  <p class="bg-warning">Republiková kancelář zatím neobdržela Vaši podepsanou přihlášku. Prosím, stáhněte si <%= link_to "PDF s přihláškou", application_person_path(@person, format: :pdf)%>, vytiskněte a podepsané odešlete na adresu kanceláře. Pokud máte zaručený kvalifikovaný podpis, můžete PDF podepsat elektronicky a odeslat na <%= mail_to "kancelar@svobodni.cz" %>.</p>
+  <p class="bg-warning">Prosím, stáhněte si <%= link_to "PDF s přihláškou", application_person_path(@person, format: :pdf)%>, vytiskněte ji a podepsanou odešlete na adresu kanceláře. Pokud máte zaručený kvalifikovaný podpis, můžete PDF podepsat elektronicky a odeslat na <%= mail_to "kancelar@svobodni.cz" %>.</p>
 <% end %>
 
 <% if @person.is_payment_expected? %>
