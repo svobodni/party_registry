@@ -290,6 +290,10 @@ class Person < ActiveRecord::Base
     "#{id}: #{name} (#{domestic_region.name})"
   end
 
+  def name_id_region_status
+    "#{name_id_region} - [#{I18n.t(status, scope: :person_status)}]"
+  end
+
   def notify_coordinator
     CoordinatorNotifications.guesting_person_joined(self).deliver if guest_branch_id_changed?
   end
