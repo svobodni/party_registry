@@ -8,6 +8,7 @@ class Backoffice::StatsController < ApplicationController
     @stats[:totals][:regular_members]=Person.regular_members.count
     @stats[:totals][:regular_supporters]=Person.regular_supporters.count
     @stats[:totals][:unpaid_supporters]=Person.where(status: "registered").count
+    @stats[:totals][:awaiting_people]=Person.all.select{|p| p.is_awaiting_membership?}.size
     @stats[:regions]=Region.all.collect{|region|
       {
         id: region.id,
