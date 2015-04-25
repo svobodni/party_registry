@@ -1,0 +1,25 @@
+<%
+  render 'backoffice/sidebar'
+  page_title 'Statistiky'
+%>
+
+<h3>Celá strana</h3>
+<table class="table">
+<tr><th>Počet členů:</th><td><%= @stats[:totals][:regular_members] %></td></tr>
+<tr><th>Počet příznivců:</th><td><%= @stats[:totals][:regular_supporters] %></td></tr>
+</table>
+
+<h3>Kraje</h3>
+<table class="table">
+<thead><tr><th>Kraj</th><th align="right">Počet členů</th><th align="right">Počet příznivců</th><th>Počet zájemců o členství</th></tr></thead>
+<tbody>
+<% @stats[:regions].each do |region| %>
+<tr>
+  <th><%= link_to region[:name], region_path(region[:id]) %></th>
+  <td align="right"><%= region[:regular_members] %></td>
+  <td align="right"><%= region[:regular_supporters] %></td>
+  <td align="right"><%= link_to region[:awaiting_people], awaiting_domestic_people_region_path(region[:id]) %></td>
+</tr>
+<% end %>
+</tbody>
+</table>

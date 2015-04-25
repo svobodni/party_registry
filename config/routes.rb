@@ -1,6 +1,7 @@
 PartyRegistry::Application.routes.draw do
 
   namespace :backoffice do
+    resources :stats, only: :index
     resources :people do
       member do
         post 'paid'

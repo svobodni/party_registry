@@ -34,6 +34,7 @@ class Person < ActiveRecord::Base
   has_many :contacts, :as => :contactable
 
   scope :regular_members, -> { where("status = ?", "regular_member") }
+  scope :regular_supporters, -> { where("status = ?", "regular_supporter") }
 
 #  before_save :set_domestic_ruian_address,
 #    if: Proc.new { |person| person.domestic_address_street_changed? }
