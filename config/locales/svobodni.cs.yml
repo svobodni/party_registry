@@ -6,7 +6,9 @@ cs:
     awaiting_presidium_decision: "Čeká na rozhodnutí krajského předsednictva"
     awaiting_first_payment: "Čekáme na první úhradu členského příspěvku"
     regular_member: "Řádný člen"
-  supporter: "příznivce"
+  person_type:
+    member: "člen"
+    supporter: "příznivce"
   coordinator_notifications:
     guesting_person_joined:
       subject: "[SVOBODNI-REGISTR] Ve Vasi pobocce hostuje nova osoba"
