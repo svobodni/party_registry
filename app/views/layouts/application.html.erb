@@ -52,12 +52,12 @@
           <li>
             <%= link_to "Kontakty", contacts_path %>
           </li>
-          <% if can? :backoffice, :all %>
-          <li>
-            <%= link_to "Backoffice", backoffice_people_path %>
-          </li>
-          <% end %>
           <% if current_person %>
+            <% if can? :backoffice, :all %>
+            <li>
+              <%= link_to "Backoffice", backoffice_people_path %>
+            </li>
+            <% end %>
             <li><%= link_to current_person.name, profiles_path %></li>
             <li><%= link_to "Odhlásit se", destroy_person_session_path  %></li>
           <% else %>
