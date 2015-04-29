@@ -3,7 +3,7 @@ class Backoffice::PeopleController < ApplicationController
   before_action :set_person, only: [:show, :edit, :update, :destroy, :paid]
   before_action :authorize_backoffice
 
-  autocomplete :person, :email, :display_value => :email_name_id_region, :extra_data => [:name_prefix, :first_name, :last_name, :name_suffix, :domestic_region_id]
+  autocomplete :person, :email, :display_value => :email_name_id_region, :extra_data => [:name_prefix, :first_name, :last_name, :name_suffix, :domestic_region_id, :status]
   autocomplete :person, :last_name, :display_value => :name_id_region_status, :extra_data => [:name_prefix, :first_name, :last_name, :name_suffix, :domestic_region_id, :status]
 
   # GET /people
@@ -16,7 +16,11 @@ class Backoffice::PeopleController < ApplicationController
   end
 
   def without_signed_application
-    @people = Person.includes([:domestic_region, :signed_application]).regular_members.order("domestic_region_id").select{|p| p.signed_application.blank?}
+    @people = Person.includes([:domestic_region, :signed_application]).select{|p| p.is_awaiting_membership?}.select{|p| p.signed_application.blank?}
+  end
+
+  def members_without_signed_application
+    @people = Person.includes([:domestic_region, :signed_application]).regular_members.order("domestic_region_id ").select{|p| p.signed_application.blank?}
   end
 
   def with_bad_region

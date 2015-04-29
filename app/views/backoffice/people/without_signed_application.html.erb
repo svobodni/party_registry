@@ -1,15 +1,15 @@
 <%
-  page_title "Seznam řádných členů bez nascanované přihlášky"
+  page_title "Seznam zájemců o členství bez nascanované přihlášky"
   render "backoffice/sidebar"
 %>
 
 <table id="people" class="table table-striped">
   <thead>
-    <tr><th>ID</th><th>Jméno</th><th>Kraj</th></tr>
+    <tr><th>ID</th><th>Jméno</th><th>Kraj</th><th>Stav</th></tr>
   </thead>
   <tbody>
     <% @people.each do |person| %>
-    <tr><td><%=person.id%></td><td><%=link_to person.name, backoffice_person_path(person) %></td><td><%=person.domestic_region.try(:name)%></td></tr>
+    <tr><td><%=person.id%></td><td><%=link_to person.name, backoffice_person_path(person) %></td><td><%=person.domestic_region.try(:name)%></td><td><%=t person.status, scope: :person_status %></td></tr>
     <% end %>
   </tbody>
 </table>
