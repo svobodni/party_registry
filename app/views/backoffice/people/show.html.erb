@@ -75,7 +75,7 @@
   <%= @person.previous_political_parties %>
 </p>
 
-<% if @person.is_member? %>
+<% if @person.is_member? || @person.is_awaiting_membership? %>
   <% if @person.signed_application %>
     <%= link_to "Podepsaná přihláška", signed_application_person_path(@person, format: :pdf), class: 'btn btn-default btn-xs' %>
   <% else %>
