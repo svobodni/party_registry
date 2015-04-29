@@ -36,12 +36,12 @@
     <% end %>
 
     <% unless @person.roles.blank? %>
-    <h4>Moje role ve Svobodných</h4>
-    <ul>
+    <h4>Moje funkce ve Svobodných</h4>
+    <table class="table">
       <% for role in @person.roles %>
-      <li><%= link_to role.role_long_name, role.body || role.branch %></li>
+      <tr><td><%= link_to role.role_long_name, role.body || role.branch %></td><td>od <%= l role.since %> <%= role.till.to_s=="2099-01-01" ? nil : "- do #{l role.till}" %></td></tr>
       <% end %>
-    </ul>
+    </table>
     <% end %>
     <h4>Sdílení kontaktů - Moje kontaktní údaje</h4>
     <table class="table table-striped">
