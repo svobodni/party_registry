@@ -124,7 +124,12 @@ class PeopleController < ApplicationController
 
   def cv
     authenticate_person! if @person.roles.empty?
-    send_data HTTParty.get(@person.files_cv_url).body, filename: "#{@person.id}.pdf", type: 'application/pdd', disposition: :inline
+    response = HTTParty.get(@person.files_cv_url)
+    if response.code == 200
+      send_data response.body, filename: "#{@person.id}.pdf", type: 'application/pdf', disposition: :inline
+    else
+      render text: 'Not Found', status: '404', content_type: "text/html"
+    end
   end
 
   private
