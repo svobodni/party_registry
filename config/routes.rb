@@ -28,6 +28,9 @@ PartyRegistry::Application.routes.draw do
     end
   end
 
+  get '/registrations/member', to: 'registrations#member'
+  get '/registrations/supporter', to: 'registrations#supporter'
+
   patch '/profiles', to: 'profiles#update'
   use_doorkeeper
 
