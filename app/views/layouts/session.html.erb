@@ -19,6 +19,12 @@
   </head>
   <body>
     <h1>Vstup pro členy a příznivce</h1>
+    <% flash.each do |type, message| %>
+    <div class="alert <%= alert_class_for(type) %> alert-dismissible fade in">
+      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+      <%= message %>
+    </div>
+    <% end %>
     <%= yield %>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>

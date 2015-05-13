@@ -22,7 +22,7 @@ class ProfilesController < ApplicationController
 
   private
   def person_params
-    params.require(:person).permit(:name_prefix, :name_suffix, :date_of_birth, :domestic_address_street, :guest_region_id, :guest_branch_id)
+    params.require(:person).permit(:name_prefix, :name_suffix, :email, :phone, :domestic_address_street, :postal_address_street, :guest_region_id, :guest_branch_id, :username, :password, :password_confirmation)
   end
 
 end
