@@ -1,5 +1,5 @@
 class CoordinatorNotifications < ActionMailer::Base
-  default from: "kubicek@svobodni.cz",
+  default from: "kancelar@svobodni.cz",
           bcc: "kubicek@svobodni.cz",
           content_transfer_encoding: 'text/plain'
 
