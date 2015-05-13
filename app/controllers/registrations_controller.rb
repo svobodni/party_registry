@@ -4,12 +4,12 @@ class RegistrationsController < ApplicationController
 
   # GET /registrations/member
   def member
-    redirect_to "https://www.svobodni.cz/clenstvi/clen/"
+    redirect_to new_person_registration_path
   end
 
   # GET /registrations/supporter
   def supporter
-    redirect_to "https://www.svobodni.cz/clenstvi/priznivec/"
+    redirect_to new_person_registration_path(type: :supporter)
   end
 
 end

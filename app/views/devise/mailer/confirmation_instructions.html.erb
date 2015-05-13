@@ -1,5 +1,7 @@
-<p>Welcome <%= @email %>!</p>
+<p>Vítejte u Svobodných!</p>
 
-<p>You can confirm your account email through the link below:</p>
+<p>Svou registraci můžete potvrdit tomto odkazu:</p>
 
-<p><%= link_to 'Confirm my account', confirmation_url(@resource, :confirmation_token => @token) %></p>
+<p><%= link_to 'Potvrdit registraci', confirmation_url(@resource, :confirmation_token => @token) %></p>
+
+<p>Tento email Vám byl zaslán na základě registrace na www.svobodni.cz. Pokud jste se neregistrovali, kontaktujte prosím kancelar@svobodni.cz a záznam vymažeme.</p>

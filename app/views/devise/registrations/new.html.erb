@@ -1,18 +1,83 @@
-<h2>Sign up</h2>
-
-<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
-
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email, :autofocus => true %></div>
-
-  <div><%= f.label :password %><br />
-  <%= f.password_field :password %></div>
-
-  <div><%= f.label :password_confirmation %><br />
-  <%= f.password_field :password_confirmation %></div>
-
-  <div><%= f.submit "Sign up" %></div>
+<style>
+body{background: #005140 URL('http://klienti.visio-creative.com/sf/img/pozadi-1.jpg') no-repeat 20px 50px; background-attachment: fixed}
+h2{color: white}
+</style>
+<div class="authform">
+<% type = (params[:type]=="supporter" || resource.try(:is_supporter_registration?)) ? "supporter" : "member"%>
+<% if type == "supporter" %>
+<h2>Přihláška pro příznivce</h2>
+<% else %>
+<h2>Registrace člena</h2>
 <% end %>
 
-<%= render "devise/shared/links" %>
+<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+
+<div class="form-inputs">
+  <fieldset>
+    <legend>Základní údaje</legend>
+    <%= f.hidden_field :legacy_type, value: type %>
+    <%= f.input :first_name, required: true, :autofocus => true %>
+    <%= f.input :last_name, required: true %>
+    <%= f.input :date_of_birth, required: true, end_year: Date.today.year - 110, start_year: Date.today.year - 17, include_blank: true %>
+    <%= f.input :email, required: true %>
+    <%= f.input :phone, required: true %>
+    <% if type=="supporter" %>
+    <%= f.input :amount,
+          collection: %w(100 200 300 500 750 1000 1500 2000 5000).collect{|i| ["#{i} Kč", i]}.to_h,
+          hint: "minimálně 100 Kč" %>
+    <% else %>
+    <%= f.input :amount,
+          required: true,
+          label: "Členský příspěvek na rok 2015",
+          collection: %w(300 500 750 1000 1500 2000 5000 7500 10000 15000 20000 25000 30000 50000).collect{|i| ["#{i} Kč", i]}.to_h,
+          hint: "minimálně 1000 Kč<br>studenti a důchodci minimálně 300 Kč".html_safe %>
+    <% end %>
+  </fieldset>
+  <fieldset>
+    <legend>Trvalé bydliště</legend>
+    <p>Prosím, uvádějte své trvalé bydliště, a to pouze na území České republiky.</p>
+    <%= f.input :domestic_address_street, required: true %>
+    <%= f.input :domestic_address_city, required: true %>
+    <%= f.input :domestic_address_zip, required: true %>
+    <%= f.association :domestic_region, required: true, label: "Kraj" %>
+  </fieldset>
+  <fieldset>
+    <legend>Současné bydliště (pokud je jiné než trvalé)</legend>
+    <%= f.input :postal_address_street %>
+    <%= f.input :postal_address_city %>
+    <%= f.input :postal_address_zip %>
+    <%= f.association :guest_region, label: "Kraj" %>
+  </fieldset>
+  <fieldset>
+    <legend>Uživatelské údaje</legend>
+    <%= f.input :username, required: true %>
+    <%= f.input :password, required: true %>
+    <%= f.input :password_confirmation, :required => true %>
+  </fieldset>
+  <% if type=="member" %>
+  <fieldset>
+    <legend>Politická minulost</legend>
+    <%= f.input :previous_political_parties, label: "Byl jsem členem následujících stran", hint: "(např: OF 1989-1990, ...)" %>
+    <%= f.input :previous_candidatures, label: "Kandidoval jsem za tyto strany", hint: "(např: OF 1989-1990, ...)" %>
+  </fieldset>
+  <% end %>
+  <fieldset>
+    <legend>Prohlášení</legend>
+    <%= f.input :agree, inline_label: 'Prohlašuji, že', as: :boolean %>
+  <ul>
+  <small>
+  <li>nejsem členem jiné strany a splňuji podmínky příznivectví podle článku 4 <a target="_blank" href="http://files.svobodni.cz/svobodni/Stanovy-2011.pdf">stanov</a></li>
+  <li>se ztotožňuji s programem strany, především s programovým prohlášením článku 2 <a target="_blank" href="http://files.svobodni.cz/svobodni/Stanovy-2011.pdf">stanov</a></li>
+  <li>všechny údaje v tomto formuláři jsou pravdivé a souhlasím s jejich zpracováním Stranou svobodných občanů</li>
+  </small>
+  </ul>
+
+  </fieldset>
+</div>
+
+<div class="form-actions pull-right">
+  <%= f.button :submit, "Zaregistrovat" %>
+</div>
+
+<% end %>
+</div>

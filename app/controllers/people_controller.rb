@@ -46,9 +46,13 @@ class PeopleController < ApplicationController
   # GET /people/dashboard.json
   def dashboard
     @person = current_user
-    authorize!(:show, @person)
-    respond_to do |format|
-      format.html # {render layout: "dashboard"}
+    unless @person.is_regular?
+      redirect_to membership_profiles_path
+    else
+      authorize!(:show, @person)
+      respond_to do |format|
+        format.html # {render layout: "dashboard"}
+      end
     end
   end
 

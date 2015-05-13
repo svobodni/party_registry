@@ -2,10 +2,8 @@
 require Rails.root.join('lib', 'dotnet_sha1')
 # Třída Person reprezentuje osobu (členy a příznivce)
 class Person < ActiveRecord::Base
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable, :encryptable,
-         :recoverable, :rememberable, :trackable #, :validatable
+  devise :database_authenticatable, :registerable, :encryptable, :confirmable,
+      :lockable, :recoverable, :rememberable, :trackable, :validatable
 
   # může vykonávat funkci
   has_many :roles, -> { where("since < ? and till > ?", Time.now, Time.now ) }
@@ -42,20 +40,55 @@ class Person < ActiveRecord::Base
   before_update :import_domestic_ruian_address,
     if: Proc.new { |person| person.domestic_address_ruian_id_changed? }
 
+  after_create :set_membership_type
   before_save :notify_coordinator
+  after_create :notify_member_registered
 
   # změny evidujeme
   has_paper_trail
 
+  with_options if: :is_supporter_registration?, on: :create do |supporter|
+    supporter.validates :password, length: { minimum: 7 }
+    supporter.validates :email, presence: true
+    supporter.validates :phone, presence: true
+  end
+
+  # checkbox v registraci
+  attr_accessor :agree
+  validates :agree, presence: true, acceptance: true, on: :create
+  validates :amount, presence: true, on: :create
+
+  def is_supporter_registration?
+    legacy_type=="supporter"
+  end
+
+  with_options unless: :is_supporter_registration?, on: :create do |member|
+    member.validates :password, length: { minimum: 7 }
+    member.validates :email, presence: true
+    member.validates :phone, presence: true
+  end
+
+  # Přihlašovací jméno je povinný údaj
+  validates :username, presence: true, uniqueness: true
+
   # Jméno je povinný údaj, minimální délka 3
   validates_presence_of :first_name
-#  validates :first_name, length: { minimum: 3 }
+  validates :first_name, length: { minimum: 2 }
 
   # Příjmení je povinný údaj, minimální délka 3
   validates_presence_of :last_name
-  validates :last_name, length: { minimum: 3 }
+  validates :last_name, length: { minimum: 2 }
 
-  #validates :domestic_region, presence: true
+  # Datum narození je povinný údaj
+  validates_presence_of :date_of_birth
+
+  # Adresa bydliště je povinný údaj
+  validates_presence_of :domestic_address_street
+  validates_presence_of :domestic_address_city
+  validates_presence_of :domestic_address_zip
+
+  # Každá osoba je přiřazena do nějakého kraje
+  validates :domestic_region, presence: true
 
   # sestaví jméno osoby včetně titulů, vhodné pro zobrazování
   def name
@@ -204,7 +237,7 @@ class Person < ActiveRecord::Base
     end
 
     # Žádost příznivce o členství
-    event :supporter_memberhip_requesed do
+    event :membership_requested do
       # (nezaplaceny priznivce)->(zajemce o clenstvi)
       transitions :from => :registered, :to => :awaiting_presidium_decision
       # (priznivce)->(priznivce zajemce o clenstvi)
@@ -283,7 +316,10 @@ class Person < ActiveRecord::Base
   end
 
   def import_domestic_ruian_address
-    RuianAddress.import(domestic_address_ruian_id) unless domestic_address_ruian_id.blank?
+    begin
+      RuianAddress.import(domestic_address_ruian_id) unless domestic_address_ruian_id.blank?
+    rescue
+    end
   end
 
   def name_id_region
@@ -294,8 +330,20 @@ class Person < ActiveRecord::Base
     "#{name_id_region} - [#{I18n.t(status, scope: :person_status)}]"
   end
 
+  def email_name_id_region
+    "#{email}: #{name_id_region}"
+  end
+
+  def set_membership_type
+    membership_requested! if legacy_type=="member"
+  end
+
   def notify_coordinator
     CoordinatorNotifications.guesting_person_joined(self).deliver if guest_branch_id_changed?
+  end
+
+  def notify_member_registered
+    PresidiumNotifications.member_registered(self).deliver if awaiting_presidium_decision?
   end
 
 end

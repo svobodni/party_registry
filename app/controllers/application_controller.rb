@@ -6,6 +6,8 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_person!
   before_action :load_country
 
+  before_action :configure_permitted_parameters, if: :devise_controller?
+
   def current_user
   	current_person
   end
@@ -56,6 +58,13 @@ class ApplicationController < ActionController::Base
   end
   def load_country
     @country = Country.first
+  end
+
+  protected
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:legacy_type, :first_name, :last_name, :date_of_birth, :phone, :domestic_address_street, :domestic_address_city, :domestic_address_zip, :domestic_region_id, :postal_address_street, :postal_address_city, :postal_address_zip, :guest_region_id, :username, :email, :password, :password_confirmation, :remember_me, :agree, :amount, :previous_political_parties, :previous_candidatures) }
+    devise_parameter_sanitizer.for(:sign_in) { |u| u.permit(:login, :username, :email, :password, :remember_me) }
+    devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:username, :email, :password, :password_confirmation, :current_password) }
   end
 
 end
