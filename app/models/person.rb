@@ -247,7 +247,10 @@ class Person < ActiveRecord::Base
     # Členství schváleno KrP
     event :presidium_accepted do
       # (zajemce o clenstvi)[prihlaska a usneseni]->(schvaleny zajemce o clenstvi)
-      transitions :from => :awaiting_presidium_decision, :to => :awaiting_first_payment
+      transitions :from => :awaiting_presidium_decision,
+                  :to => :awaiting_first_payment,
+                  :after => Proc.new { MemberNotifications.accepted(self).deliver }
+
       # (priznivce zajemce o clenstvi)->(priznivce schvaleny zajemce o clenstvi)
       transitions :from => :regular_supporter_awaiting_presidium_decision, :to => :regular_supporter_awaiting_first_payment
     end
