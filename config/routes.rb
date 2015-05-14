@@ -80,6 +80,7 @@ PartyRegistry::Application.routes.draw do
     collection do
       get 'profile'
       get 'dashboard'
+      get 'beran_export'
     end
   end
   resources :regions do
