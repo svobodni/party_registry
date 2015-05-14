@@ -29,9 +29,13 @@ class Ability
           role.body.organization.branch_ids.member?(r.branch_id)
         end
         #can :manage, :all
+      elsif role.body.try(:id)==1
+        can [:supervise], Region
+        can [:supervise], Branch
+        can [:read, :application, :export], Person
       elsif role.body.try(:organization).try(:type)=="Country"
         # Členové republikového předsednictva, RK, VK, KK
-        can [:read, :application, :export], Person
+        can [:read], Person
       end
     end
 
