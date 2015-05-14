@@ -8,4 +8,9 @@ class MemberNotifications < ActionMailer::Base
     mail to: @person.email, subject: "Krajské předsednictvo schválilo Vaše členství"
   end
 
+  def regular(person)
+    @person = person
+    mail to: @person.email, subject: "Vaše úhrada byla úspěšně zpracována"
+  end
+
 end

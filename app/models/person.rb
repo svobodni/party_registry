@@ -229,7 +229,7 @@ class Person < ActiveRecord::Base
       transitions from: :regular_supporter, to: :regular_supporter
       # Přijatý člen zaplatil
       # (schvaleny zajemce o clenstvi)[uhrada 1000]->(clen)
-      transitions from: :awaiting_first_payment, to: :regular_member
+      transitions from: :awaiting_first_payment, to: :regular_member, :after => Proc.new { Notifier.new_regular_member(self) }
       # Člen zaplatil znovu
       transitions from: :regular_member, to: :regular_member
       # (priznivce schvaleny zajemce o clenstvi)[uhrada doplatku]->(clen)
