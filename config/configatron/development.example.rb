@@ -18,3 +18,5 @@ configatron.twitter.access_token        = "3072281596-MEipY28e9A4lUKuaH23PNQ00Vh
 configatron.twitter.access_token_secret = "kGIHmBjIdTPcWwDR36hZQzS8LjBsyM77611EL29QX6tPL"
 
 configatron.finance.password = "heslo"
+
+configatron.devise.secret_key = "pepazdepa"
