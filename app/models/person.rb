@@ -224,7 +224,7 @@ class Person < ActiveRecord::Base
     event :paid do
       # Příznivec zaplatil
       # (nezaplaceny priznivce)[uhrada 100]->(priznivce)
-      transitions from: :registered, to: :regular_supporter
+      transitions from: :registered, to: :regular_supporter, :after => Proc.new { Notifier.new_regular_supporter(self) }
       # Příznivec zaplatil znovu
       transitions from: :regular_supporter, to: :regular_supporter
       # Přijatý člen zaplatil
