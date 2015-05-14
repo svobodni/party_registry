@@ -1,0 +1,21 @@
+<%
+  page_title "Seznam nově registrovaných osob"
+  render "backoffice/sidebar"
+%>
+
+<table id="people" class="table table-striped">
+  <thead>
+    <tr><th>Před</th><th>ID</th><th>Jméno</th><th>Zařazen v kraji</th><th>Stav</th></tr>
+  </thead>
+  <tbody>
+    <% @people.each do |person| %>
+    <tr>
+      <td><%=time_ago_in_words(person.created_at)%></td>
+      <td><%=person.vs%></td>
+      <td><%=link_to person.name, backoffice_person_path(person) %></td>
+      <td><%=person.domestic_region.try(:name)%></td>
+      <td><%=t person.status, scope: :person_status%></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

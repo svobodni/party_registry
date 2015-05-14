@@ -9,6 +9,7 @@
         <li><%= link_to_unless_current "Bez přihlášky", without_signed_application_backoffice_people_path %></li>
         <li><%= link_to_unless_current "Členové bez přihlášky", members_without_signed_application_backoffice_people_path %></li>
         <li><%= link_to_unless_current "Špatný kraj", with_bad_region_backoffice_people_path %></li>
+        <li><%= link_to_unless_current "Nové registrace", new_registrations_backoffice_people_path %></li>
       </ul>
     </li>
     <% if can? :destroy, Role %>

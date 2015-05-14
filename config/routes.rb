@@ -13,6 +13,7 @@ PartyRegistry::Application.routes.draw do
         get :with_bad_region
         get :without_signed_application
         get :members_without_signed_application
+        get :new_registrations
       end
     end
   end
