@@ -41,8 +41,13 @@
 </p>
 
 <p>
+  <strong>Adresa bydliště:</strong>
+  <%= link_to @person.domestic_address_line, "http://vdp.cuzk.cz/vdp/ruian/adresnimista/#{@person.domestic_address_ruian_id}" %>
+</p>
+
+<p>
   <strong>Korespondenční adresa:</strong>
-  <%= @person.domestic_address_line %>
+  <%= @person.postal_address_line %>
 </p>
 
 <p>

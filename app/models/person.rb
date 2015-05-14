@@ -105,6 +105,10 @@ class Person < ActiveRecord::Base
     "#{domestic_address_street}, #{domestic_address_zip} #{domestic_address_city}"
   end
 
+  def postal_address_line
+    "#{postal_address_street}, #{postal_address_zip} #{postal_address_city}"
+  end
+
   def is_member?
     ["regular_member","awaiting_presidium_decision", "awaiting_first_payment", "regular_supporter_awaiting_presidium_decision", "regular_supporter_awaiting_first_payment"].member?(status)
   end
