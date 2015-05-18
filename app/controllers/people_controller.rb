@@ -22,6 +22,7 @@ class PeopleController < ApplicationController
   def beran_export
     @people = Person.accessible_by(current_ability).where(status: (Person.regular_supporter_states+["regular_member"]))
     respond_to do |format|
+      format.xls
       format.csv {
         render text: (CSV.generate do |csv|
           column_names=[:first_name, :last_name, :street, :city, :zip]
