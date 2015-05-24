@@ -45,7 +45,10 @@ ActiveRecord::Schema.define(version: 20150513195929) do
     t.integer  "organization_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "slug"
   end
+
+  add_index "bodies", ["slug"], name: "index_bodies_on_slug", unique: true, using: :btree
 
   create_table "contacts", force: true do |t|
     t.string   "contactable_type"
@@ -119,7 +122,10 @@ ActiveRecord::Schema.define(version: 20150513195929) do
     t.string   "fio_token"
     t.string   "address_line"
     t.string   "homepage_url"
+    t.string   "slug"
   end
+
+  add_index "organizations", ["slug"], name: "index_organizations_on_slug", unique: true, using: :btree
 
   create_table "people", force: true do |t|
     t.string   "name_prefix"
