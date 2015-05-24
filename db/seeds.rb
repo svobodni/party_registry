@@ -1,7 +1,7 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 
-Country.create(id: 100, name: "Republikové orgány", slug: "republikove-organy")
+Country.create(id: 100, name: "Republikové orgány", slug: "republikove-organy", fio_account_number: "12345678")
 
 Region.create(id: 1, name: "Jihočeský kraj", parent_id: 100, ruian_vusc_id: 35, nuts3_id: "CZ031", slug: "jihocesky-kraj")
 
