@@ -16,4 +16,4 @@ Požadavek: Hostování v pobočce
     A odešlu formulář
     Pak bych měl být zařazen jako hostující do pobočky "Praha 8"
     A měl bych být zařazen jako hostující do kraje, ve kterém je pobočka "Praha 8"
-    A koordinátor pobočky by měl dostat notifikační email
+    # A koordinátor pobočky by měl dostat notifikační email

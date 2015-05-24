@@ -31,7 +31,7 @@ class AuthControllerTest < ActionController::TestCase
   end
 
   test "should not get token unless regular person" do
-    sign_in FactoryGirl.create(:person, status: "awating_first_payment")
+    sign_in FactoryGirl.create(:person, status: "awaiting_first_payment")
     get :token, format: :json
     assert_response 403
     assert_equal '{"error":"Access Denied"}', response.body

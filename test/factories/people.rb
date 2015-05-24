@@ -10,6 +10,8 @@ FactoryGirl.define do
   end
 
   factory :person do
+    agree '1'
+    amount '1000'
     email
     username
     password 'password'

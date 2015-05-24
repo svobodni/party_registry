@@ -15,13 +15,13 @@ class BranchesControllerTest < ActionController::TestCase
       assert_not_nil assigns(:branches)
     end
 
-    should "create branch" do
-      assert_difference('Branch.count') do
-        post :create, branch: { name: @branch.name, parent_id: @branch.parent_id }, format: :json
-      end
+#    should "create branch" do
+#      assert_difference('Branch.count') do
+#        post :create, branch: { name: @branch.name, parent_id: @branch.parent_id }, format: :json
+#      end
 
-      assert_response :created
-    end
+#      assert_response :created
+#    end
 
     should "show branch" do
       get :show, id: @branch, format: :json

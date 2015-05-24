@@ -39,9 +39,9 @@ context "Zaregistrovaný zájemce o členství bez nahrané přihlášky" do
     get :membership
     assert_response :success
     refute_match "Jste řádným členem", response.body
-    assert_match "Požádal jste o členství a čeká se na rozhodnutí krajského předsednictva", response.body
+    assert_match "Požádal jste o členství a čeká se na rozhodnutí", response.body
     refute_match "Vaše členství bylo schváleno krajským předsednictvem", response.body
-    assert_match "Republiková kancelář zatím neobdržela Vaši podepsanou přihlášku", response.body
+    assert_match "vytiskněte ji a podepsanou odešlete na adresu kanceláře", response.body
     refute_match "Uhraďte prosím členský příspěvek", response.body
     refute_match "Jste příznivce Svobodných se řádně zaplaceným příspěvkem", response.body
     refute_match /Registrační příspěvek (.*) uhraďte/, response.body
@@ -57,9 +57,9 @@ context "Zaregistrovaný zájemce o členství s nahranou přihláškou" do
     get :membership
     assert_response :success
     refute_match "Jste řádným členem", response.body
-    assert_match "Požádal jste o členství a čeká se na rozhodnutí krajského předsednictva", response.body
+    assert_match "Požádal jste o členství a čeká se na rozhodnutí", response.body
     refute_match "Vaše členství bylo schváleno krajským předsednictvem", response.body
-    refute_match "Republiková kancelář zatím neobdržela Vaši podepsanou přihlášku", response.body
+    refute_match "vytiskněte ji a podepsanou odešlete na adresu kanceláře", response.body
     refute_match "Uhraďte prosím členský příspěvek", response.body
     refute_match "Jste příznivce Svobodných se řádně zaplaceným příspěvkem", response.body
     refute_match /Registrační příspěvek (.*) uhraďte/, response.body
@@ -75,9 +75,9 @@ context "Schválený zájemce o členství bez nahrané přihlášky" do
     get :membership
     assert_response :success
     refute_match "Jste řádným členem", response.body
-    refute_match "Požádal jste o členství a čeká se na rozhodnutí krajského předsednictva", response.body
+    refute_match "Požádal jste o členství a čeká se na rozhodnutí", response.body
     assert_match "Vaše členství bylo schváleno krajským předsednictvem", response.body
-    assert_match "Republiková kancelář zatím neobdržela Vaši podepsanou přihlášku", response.body
+    assert_match "vytiskněte ji a podepsanou odešlete na adresu kanceláře", response.body
     refute_match "Uhraďte prosím členský příspěvek", response.body
     refute_match "Jste příznivce Svobodných se řádně zaplaceným příspěvkem", response.body
     refute_match /Registrační příspěvek (.*) uhraďte/, response.body
@@ -93,9 +93,9 @@ context "Schválený zájemce o členství s nahranou přihláškou" do
     get :membership
     assert_response :success
     refute_match "Jste řádným členem", response.body
-    refute_match "Požádal jste o členství a čeká se na rozhodnutí krajského předsednictva", response.body
+    refute_match "Požádal jste o členství a čeká se na rozhodnutí", response.body
     assert_match "Vaše členství bylo schváleno krajským předsednictvem", response.body
-    refute_match "Republiková kancelář zatím neobdržela Vaši podepsanou přihlášku", response.body
+    refute_match "vytiskněte ji a podepsanou odešlete na adresu kanceláře", response.body
     assert_match "Uhraďte prosím členský příspěvek", response.body
     assert_match "pod variabilním symbolem 1#{@person.id.to_s.rjust(4,'0')}", response.body
     refute_match "Jste příznivce Svobodných se řádně zaplaceným příspěvkem", response.body
@@ -111,9 +111,9 @@ context "Řádný člen" do
     get :membership
     assert_response :success
     assert_match "Jste řádným členem", response.body
-    refute_match "Požádal jste o členství a čeká se na rozhodnutí krajského předsednictva", response.body
+    refute_match "Požádal jste o členství a čeká se na rozhodnutí", response.body
     refute_match "Vaše členství bylo schváleno krajským předsednictvem", response.body
-    refute_match "Republiková kancelář zatím neobdržela Vaši podepsanou přihlášku", response.body
+    refute_match "vytiskněte ji a podepsanou odešlete na adresu kanceláře", response.body
     refute_match "Uhraďte prosím členský příspěvek", response.body
     refute_match "Jste příznivce Svobodných se řádně zaplaceným příspěvkem", response.body
     refute_match /Registrační příspěvek (.*) uhraďte/, response.body
@@ -129,9 +129,9 @@ context "Nezaplacený příznivec" do
     get :membership
     assert_response :success
     refute_match "Jste řádným členem", response.body
-    refute_match "Požádal jste o členství a čeká se na rozhodnutí krajského předsednictva", response.body
+    refute_match "Požádal jste o členství a čeká se na rozhodnutí", response.body
     refute_match "Vaše členství bylo schváleno krajským předsednictvem", response.body
-    refute_match "Republiková kancelář zatím neobdržela Vaši podepsanou přihlášku", response.body
+    refute_match "vytiskněte ji a podepsanou odešlete na adresu kanceláře", response.body
     refute_match "Uhraďte prosím členský příspěvek", response.body
     refute_match "Jste příznivce Svobodných se řádně zaplaceným příspěvkem", response.body
     assert_match /Registrační příspěvek (.*) uhraďte/, response.body
@@ -147,9 +147,9 @@ context "Zaplacený příznivec" do
     get :membership
     assert_response :success
     refute_match "Jste řádným členem", response.body
-    refute_match "Požádal jste o členství a čeká se na rozhodnutí krajského předsednictva", response.body
+    refute_match "Požádal jste o členství a čeká se na rozhodnutí", response.body
     refute_match "Vaše členství bylo schváleno krajským předsednictvem", response.body
-    refute_match "Republiková kancelář zatím neobdržela Vaši podepsanou přihlášku", response.body
+    refute_match "vytiskněte ji a podepsanou odešlete na adresu kanceláře", response.body
     refute_match "Uhraďte prosím členský příspěvek", response.body
     assert_match "Jste příznivce Svobodných se řádně zaplaceným příspěvkem", response.body
     refute_match /Registrační příspěvek (.*) uhraďte/, response.body
@@ -165,9 +165,9 @@ context "Zaplacený příznivec zájemce o členství bez nahrané přihlášky"
     get :membership
     assert_response :success
     refute_match "Jste řádným členem", response.body
-    assert_match "Požádal jste o členství a čeká se na rozhodnutí krajského předsednictva", response.body
+    assert_match "Požádal jste o členství a čeká se na rozhodnutí", response.body
     refute_match "Vaše členství bylo schváleno krajským předsednictvem", response.body
-    assert_match "Republiková kancelář zatím neobdržela Vaši podepsanou přihlášku", response.body
+    assert_match "vytiskněte ji a podepsanou odešlete na adresu kanceláře", response.body
     refute_match "Uhraďte prosím členský příspěvek", response.body
     assert_match "Jste příznivce Svobodných se řádně zaplaceným příspěvkem", response.body
     refute_match /Registrační příspěvek (.*) uhraďte/, response.body
@@ -183,9 +183,9 @@ context "Zaplacený příznivec zájemce o členství s nahranou přihláškou" 
     get :membership
     assert_response :success
     refute_match "Jste řádným členem", response.body
-    assert_match "Požádal jste o členství a čeká se na rozhodnutí krajského předsednictva", response.body
+    assert_match "Požádal jste o členství a čeká se na rozhodnutí", response.body
     refute_match "Vaše členství bylo schváleno krajským předsednictvem", response.body
-    refute_match "Republiková kancelář zatím neobdržela Vaši podepsanou přihlášku", response.body
+    refute_match "vytiskněte ji a podepsanou odešlete na adresu kanceláře", response.body
     refute_match "Uhraďte prosím členský příspěvek", response.body
     assert_match "Jste příznivce Svobodných se řádně zaplaceným příspěvkem", response.body
     refute_match /Registrační příspěvek (.*) uhraďte/, response.body
@@ -201,9 +201,9 @@ context "Zaplacený příznivec schválený zájemce o členství s nahranou př
     get :membership
     assert_response :success
     refute_match "Jste řádným členem", response.body
-    refute_match "Požádal jste o členství a čeká se na rozhodnutí krajského předsednictva", response.body
+    refute_match "Požádal jste o členství a čeká se na rozhodnutí", response.body
     assert_match "Vaše členství bylo schváleno krajským předsednictvem", response.body
-    refute_match "Republiková kancelář zatím neobdržela Vaši podepsanou přihlášku", response.body
+    refute_match "vytiskněte ji a podepsanou odešlete na adresu kanceláře", response.body
     assert_match "Uhraďte prosím členský příspěvek", response.body
     assert_match "pod variabilním symbolem 1#{@person.id.to_s.rjust(4,'0')}", response.body
     assert_match "Jste příznivce Svobodných se řádně zaplaceným příspěvkem", response.body

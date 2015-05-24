@@ -9,3 +9,5 @@ configatron.auth.systems = {
 }
 configatron.migrated = false
 configatron.finance.password = "testovaciheslo"
+
+configatron.devise.secret_key = "pepazdepa"
