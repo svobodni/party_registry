@@ -1,6 +1,6 @@
 class Backoffice::PeopleController < ApplicationController
 
-  before_action :set_person, only: [:show, :edit, :update, :destroy, :paid]
+  before_action :set_person, only: [:edit, :update, :destroy, :paid]
   before_action :authorize_backoffice
 
   autocomplete :person, :email, :display_value => :email_name_id_region, :extra_data => [:name_prefix, :first_name, :last_name, :name_suffix, :domestic_region_id, :status]
@@ -34,6 +34,10 @@ class Backoffice::PeopleController < ApplicationController
   # GET /people/1
   # GET /people/1.json
   def show
+    id = params[:id]
+    id = id[1..4] if id.length==5 && (id[0]=="1" || id[0]=="5")
+    @person = Person.find_by_id(id)
+    redirect_to backoffice_people_path, notice: "Osoba #{params[:id]} nenalezena" unless @person
   end
 
   # GET /people/new

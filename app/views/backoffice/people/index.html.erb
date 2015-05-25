@@ -1,7 +1,7 @@
-<% render 'backoffice/sidebar' %>
-<p id="notice"><%= notice %></p>
-
-<h1>Vyhledání osoby</h1>
+<%
+  page_title 'Vyhledání osoby'
+  render 'backoffice/sidebar'
+%>
 
 <%= simple_form_for Person.new, url: backoffice_people_path, method: :get do |f| %>
   <%= f.input :id, :input_html => {:maxlength => 6, :size => 10}%>
