@@ -10,6 +10,9 @@
 			<th>Organizace/Pobočka</th>
 			<th>Funkce</th>
 			<th>Jméno</th>
+			<th>Telefon</th>
+			<th>Email</th>
+			<th>Adresa</th>
 			<th>Akce</th>
 		</tr>
 	</thead>
@@ -25,6 +28,9 @@
 			<% end %>
 			<td><%= role.role_name %></td>
 			<td><%= link_to(role.person.name, person_path(role.person)) %></td>
+			<td><%= role.person.phone %></td>
+			<td><%= role.person.email %></td>
+			<td><%= role.person.domestic_address_line %></td>
 			<td><%= link_to("Ukončit funkci", role_path(role), {method: :delete, class: 'btn btn-default btn-xs'}) if can?(:destroy, role) %></td>
 		</tr>
 		<% end %>
