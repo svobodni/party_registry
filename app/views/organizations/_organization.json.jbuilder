@@ -1,5 +1,7 @@
 json.id organization.id
 json.name organization.name
+json.bank_account_number organization.fio_account_number
+json.bank_code "2010"
 if organization.try(:domestic_members)
   json.members_count organization.domestic_members.count
 end
