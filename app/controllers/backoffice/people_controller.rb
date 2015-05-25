@@ -4,7 +4,7 @@ class Backoffice::PeopleController < ApplicationController
   before_action :authorize_backoffice
 
   autocomplete :person, :email, :display_value => :email_name_id_region, :extra_data => [:name_prefix, :first_name, :last_name, :name_suffix, :domestic_region_id, :status]
-  autocomplete :person, :last_name, :display_value => :name_id_region_status, :extra_data => [:name_prefix, :first_name, :last_name, :name_suffix, :domestic_region_id, :status]
+  autocomplete :person, :last_name, :display_value => :name_id_region_status, :extra_data => [:name_prefix, :first_name, :last_name, :name_suffix, :domestic_region_id, :status], :limit => 20
 
   # GET /people
   # GET /people.json
