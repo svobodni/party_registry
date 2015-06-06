@@ -4,7 +4,18 @@ class Backoffice::PeopleController < ApplicationController
   before_action :authorize_backoffice
 
   autocomplete :person, :email, :display_value => :email_name_id_region, :extra_data => [:name_prefix, :first_name, :last_name, :name_suffix, :domestic_region_id, :status]
-  autocomplete :person, :last_name, :display_value => :name_id_region_status, :extra_data => [:name_prefix, :first_name, :last_name, :name_suffix, :domestic_region_id, :status], :limit => 20
+
+  def autocomplete_person_name
+    term = params[:term]
+    name_parts = term.split(' ',2)
+    name_parts = name_parts.collect{|part| "%#{part}%"}
+    people = (if name_parts[1].blank?
+      people = Person.where('first_name LIKE ? OR last_name LIKE ?', name_parts[0], name_parts[0])
+    else
+      people = Person.where('(first_name LIKE ? and last_name LIKE ?) OR (first_name LIKE ? and last_name LIKE ?)', name_parts[0], name_parts[1], name_parts[1], name_parts[0])
+    end).includes(:domestic_region).order(:last_name, :first_name).limit(20).all
+    render :json => people.map { |person| {:id => person.id, :label => person.name_id_region_status}}, :root => false
+  end
 
   # GET /people
   # GET /people.json
