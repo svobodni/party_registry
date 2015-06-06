@@ -14,6 +14,7 @@ class Role < ActiveRecord::Base
 
   after_create :create_rev_membership
   before_update :cancel_rev_membership
+  before_create :set_person_name
 
   validates :person_id, presence: true
   validates_associated :person
@@ -60,6 +61,10 @@ class Role < ActiveRecord::Base
     if till_changed? && self.class==President && body.organization.class==Region
       Member.current.where(body_id: 5, person_id: person_id).first.update_attribute :till, till
     end
+  end
+
+  def set_person_name
+    self.person_name=person.name
   end
 
   def self.notify_expiring
