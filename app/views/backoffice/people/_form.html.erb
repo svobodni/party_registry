@@ -3,7 +3,7 @@
 <%= f.input :first_name %>
 <%= f.input :last_name %>
 <%= f.input :name_suffix, label: "Titul za jménem" %>
-<%= f.input :date_of_birth %>
+<%= f.input :date_of_birth, required: true, end_year: Date.today.year - 110, start_year: Date.today.year - 17, include_blank: true %>
 <%= f.input :email %>
 <%= f.association :domestic_region %>
 
