@@ -3,5 +3,5 @@
 	<td><%=link_to person.name, person%></td>
 	<td><%=mail_to person.email%></td>
 	<td><%=tel_to person.phone%></td>
-	<td><%=person.domestic_ruian_address.try(:mestska_cast)%></td>
+	<td><%=link_to(person.domestic_branch.try(:name), branch_path(person.domestic_branch)) if person.domestic_branch%></td>
 </tr>

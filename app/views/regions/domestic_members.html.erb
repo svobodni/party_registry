@@ -5,7 +5,7 @@
 %>
 
 <table id="domestic_members" class="table table-striped">
-  <thead><tr><th>Foto</th><th>Jméno</th><th>Email</th><th>Telefon</th><th>Městská část</th></tr></thead>
+  <thead><tr><th>Foto</th><th>Jméno</th><th>Email</th><th>Telefon</th><th>Pobočka</th></tr></thead>
   <tbody><%=render @region.domestic_members.accessible_by(current_ability) %></tbody>
 </table>
 
