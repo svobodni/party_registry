@@ -67,4 +67,15 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:username, :email, :password, :password_confirmation, :current_password) }
   end
 
+  def default_event_params
+    {
+    requestor_id: current_person.id,
+    params: params,
+    controller_path: controller_path,
+    action_name: action_name,
+    remote_ip: request.remote_ip,
+    referer: request.referer
+    }
+  end
+
 end

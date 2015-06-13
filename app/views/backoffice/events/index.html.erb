@@ -1,0 +1,26 @@
+<%
+  page_title 'Poslední doménové události'
+  render 'backoffice/sidebar'
+%>
+
+<table class="table">
+<thead>
+  <tr>
+    <th>Kdy</th>
+    <th>Jak</th>
+    <th>Kde</th>
+    <th>Co</th>
+    <th></th>
+</thead>
+<tbody>
+<% for event in @events %>
+<tr>
+  <td><%= distance_of_time_in_words_to_now event.created_at %></td>
+  <td><%= event.command %></td>
+  <td><%= link_to event.eventable.try(:name)||"#{event.eventable_type}##{event.eventable_id}", event.eventable %></td>
+  <td><%= event.changes.reject{|k,v| k=="updated_at"} %></td>
+  <td><%= link_to "Detail", backoffice_event_path(event), class: "btn btn-default btn-xs" %></td>
+</tr>
+<% end %>
+</tbody>
+</table>

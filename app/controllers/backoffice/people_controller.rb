@@ -65,6 +65,10 @@ class Backoffice::PeopleController < ApplicationController
   def update
     respond_to do |format|
       if @person.update(person_params)
+        @person.events.create(default_event_params.merge({
+          command: "update",
+          changes: @person.previous_changes
+        }))
         format.html { redirect_to :back, notice: 'Person was successfully updated.' }
         format.json { render :show, status: :ok, location: @person }
       else
@@ -78,6 +82,10 @@ class Backoffice::PeopleController < ApplicationController
   def paid
     @person.paid!
     respond_to do |format|
+      @person.events.create(default_event_params.merge({
+        command: "paid",
+        changes: @person.previous_changes
+      }))
       format.html { redirect_to :back, notice: 'Úhrada byla úspěšně vyznačena.' }
     end
   end
@@ -87,6 +95,11 @@ class Backoffice::PeopleController < ApplicationController
   def destroy
     @person.destroy
     respond_to do |format|
+      Event.create(default_event_params.merge({
+        command: "delete",
+        eventable_id: params[:id],
+        eventable_type: "Person"
+      }))
       format.html { redirect_to people_url, notice: 'Person was successfully destroyed.' }
       format.json { head :no_content }
     end
@@ -106,4 +119,5 @@ class Backoffice::PeopleController < ApplicationController
     def authorize_backoffice
       authorize!(:backoffice, :all)
     end
+
 end

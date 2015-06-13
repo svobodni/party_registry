@@ -9,6 +9,10 @@ class ProfilesController < ApplicationController
     authorize!(:update, current_person)
     respond_to do |format|
       if current_person.update(person_params)
+        current_person.events.create(default_event_params.merge({
+          command: "update",
+          changes: current_person.previous_changes
+        }))
         format.html { redirect_to :back, notice: 'Údaje úspěšně aktualizovány.' }
       else
         format.html { render action: params[:id] }

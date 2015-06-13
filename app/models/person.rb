@@ -5,6 +5,8 @@ class Person < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :encryptable, :confirmable,
       :lockable, :recoverable, :rememberable, :trackable, :validatable
 
+  has_many :events, as: :eventable
+
   # může vykonávat funkci
   has_many :roles, -> { where("since < ? and till > ?", Time.now, Time.now ) }
   # vykonával funkci

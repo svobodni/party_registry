@@ -1,0 +1,15 @@
+<%
+  page_title 'Detail doménové události'
+  render 'backoffice/sidebar'
+%>
+
+<table class="table">
+<tbody>
+  <tr><th>Kdy</th><td><%= distance_of_time_in_words_to_now @event.created_at %></td></tr>
+  <tr><th>Kdo</th><td><%= @event.requestor.try(:short_name) %></td></tr>
+  <tr><th>Odkud</th><td><%= @event.remote_ip %></td></tr>
+  <tr><th>Jak</th><td><%= @event.command %></td></tr>
+  <tr><th>Kde</th><td><%= link_to @event.eventable.try(:name), @event.eventable %></td></tr>
+  <tr><th>Co</th><td><% @event.changes.collect{|k,v| "#{k}: #{v[0]} -> #{v[1]}"}.each {|change| %><%=change%><br/><% }%></td></tr>
+</tbody>
+</table>

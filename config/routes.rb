@@ -1,6 +1,7 @@
 PartyRegistry::Application.routes.draw do
 
   namespace :backoffice do
+    resources :events, only: [:index, :show]
     resources :stats, only: :index
     resources :people do
       member do
