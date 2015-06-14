@@ -126,4 +126,22 @@ module ApplicationHelper
     link_to_unless_current ('<span class="glyphicon '+(current_page?(path) ? "active " : "")+'glyphicon-'+icon+'"></span> '+text).html_safe, path
   end
 
+  # vraci lokalizovany nazev attributu podle i18n
+  # vstup: ta(:paypal_notification, :paypal)
+  #        ta('paypal_notification', 'paypal')
+  def ta(model_name, attribute_name)
+    model_name.to_s.classify.constantize.human_attribute_name(attribute_name)
+  end
+
+  # vraci lokalizovany nazev modelu podle i18n
+  # singular, pokud nepredame 2. parametr nebo predame 1
+  # plural, v ostatnich pripadech
+  # (pri vychozim pluralizacnim nastaveni i18n)
+  # vstup: tm(:domain, 2)
+  #        tm(:domain)
+  #        tm('domain', 2)
+  #        tm('domain')
+  def tm(model_name, count = 1)
+    model_name.to_s.classify.constantize.model_name.human(:count => count)
+  end
 end
