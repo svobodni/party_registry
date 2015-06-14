@@ -13,11 +13,14 @@
 <%= f.input :domestic_address_zip %>
 <% end %>
 
-
 <%= field_set_tag "Korespondenční adresa" do %>
 <%= f.input :postal_address_street %>
 <%= f.input :postal_address_city %>
 <%= f.input :postal_address_zip %>
+<% end %>
+
+<%= field_set_tag "Stav" do %>
+<%= f.input :status, include_blank: false, collection: Person.aasm.states.map(&:name), label_method: lambda {|status| t status, scope: :person_status} %>
 <% end %>
 
 <%= f.button :submit, "Uložit" %>
