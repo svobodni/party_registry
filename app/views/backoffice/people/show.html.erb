@@ -119,4 +119,9 @@
 </div>
 
 <hr>
-<%= link_to 'Upravit', edit_backoffice_person_path(@person), class: "btn btn-default btn-xs" %>
+<%= link_to 'Upravit', edit_backoffice_person_path(@person), class: "btn btn-default" %>
+
+<% unless @person.status=="regular_member" %>
+<hr>
+<%= button_to 'Smazat', backoffice_person_path(@person), method: :delete, data: { confirm: 'Opravdu chcete smazat tuto osobu?'}, class: "btn btn-danger" %>
+<% end %>

@@ -93,14 +93,20 @@ class Backoffice::PeopleController < ApplicationController
   # DELETE /people/1
   # DELETE /people/1.json
   def destroy
+    previous_data = {
+      person_name: @person.name,
+      domestic_region_id: @person.domestic_region_id,
+      domestic_branch_id: @person.domestic_branch_id
+    }
     @person.destroy
     respond_to do |format|
       Event.create(default_event_params.merge({
         command: "delete",
         eventable_id: params[:id],
-        eventable_type: "Person"
+        eventable_type: "Person",
+        previous_data: previous_data
       }))
-      format.html { redirect_to people_url, notice: 'Person was successfully destroyed.' }
+      format.html { redirect_to backoffice_people_path, notice: 'Person was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

@@ -1,6 +1,6 @@
 class Event < ActiveRecord::Base
   store :metadata, accessors: [ :controller_path, :action_name, :remote_ip, :referer ], coder: JSON
-  store :data, accessors: [ :params, :permitted_params, :changes ], coder: JSON
+  store :data, accessors: [ :params, :permitted_params, :changes, :previous_data ], coder: JSON
 
   before_create :set_uuid
 
