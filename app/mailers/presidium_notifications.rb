@@ -18,4 +18,8 @@ class PresidiumNotifications < ActionMailer::Base
     mail to: @person.domestic_region.presidium.presidium_emails, subject: "svobodni.cz - nový příznivec zaplatil"
   end
 
+  def daily_event_notifier(region, events)
+    @events = events
+    mail to: region.presidium.presidium_emails, subject: "svobodni.cz - notifikace změn"
+  end
 end

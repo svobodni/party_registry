@@ -1,0 +1,14 @@
+Notifikační email pro koordinátora pobočky <%= @branch.name %>
+
+V databázi byly provedeny následující změny:
+
+Smazané osoby:
+
+<% @events.each do |event| %>
+ID <%=event[:eventable_id]%> - <%=event.previous_data[:person_name]%> <% if event.previous_data[:status] %>- (původní stav: <%=t event.previous_data[:status], scope: :person_status%>)<% end %>
+<% end %>
+
+S pozdravem
+
+Registr & kancelář
+Strana svobodných občanů

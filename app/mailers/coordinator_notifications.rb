@@ -9,4 +9,11 @@ class CoordinatorNotifications < ActionMailer::Base
     @coordinator = @branch.coordinator
     mail to: @coordinator.person.email
   end
+
+  def daily_event_notifier(branch, events)
+    @events = events
+    @branch = branch
+    mail to: branch.coordinator.person.email, subject: "svobodni.cz - notifikace změn"
+  end
+
 end
