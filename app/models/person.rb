@@ -36,8 +36,8 @@ class Person < ActiveRecord::Base
   scope :regular_members, -> { where("status = ?", "regular_member") }
   scope :regular_supporters, -> { where("status = ?", "regular_supporter") }
 
-#  before_save :set_domestic_ruian_address,
-#    if: Proc.new { |person| person.domestic_address_street_changed? }
+  before_save :unset_domestic_ruian_address,
+    if: Proc.new { |person| person.domestic_address_street_changed? }
 
   before_update :import_domestic_ruian_address,
     if: Proc.new { |person| person.domestic_address_ruian_id_changed? }
@@ -322,6 +322,10 @@ class Person < ActiveRecord::Base
 
   def set_domestic_ruian_address
     self.domestic_ruian_address = RuianAddress.find_or_create_by_address_line(domestic_address_line)
+  end
+
+  def unset_domestic_ruian_address
+    self.domestic_ruian_address = nil
   end
 
   def import_domestic_ruian_address
