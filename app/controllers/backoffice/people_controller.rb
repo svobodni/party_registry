@@ -95,6 +95,7 @@ class Backoffice::PeopleController < ApplicationController
   def destroy
     previous_data = {
       person_name: @person.name,
+      status: @person.status,
       domestic_region_id: @person.domestic_region_id,
       domestic_branch_id: @person.domestic_branch_id
     }
