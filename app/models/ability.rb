@@ -47,7 +47,7 @@ class Ability
       can :read, Contact, privacy: 'public'
     end
 
-    if [342, 344, 4039, 2804, 42].member?(user.id)
+    if ([342, 344, 4039, 2804].member?(user.id) || role.body.try(:id)==1)
       can [:read, :application], Person
       can :upload, SignedApplication
       can [:create, :destroy], Role
