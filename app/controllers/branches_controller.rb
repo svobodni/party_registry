@@ -43,6 +43,11 @@ class BranchesController < ApplicationController
     authorize!(:create, @branch)
     respond_to do |format|
       if @branch.save
+        @branch.events.create(default_event_params.merge({
+          command: "CreateBranch",
+          name: "BranchCreated",
+          changes: @branch.previous_changes
+        }))
         format.html { redirect_to @branch, notice: 'Pobočka byla úspěšně založena.' }
         format.json { render json: @branch, status: :created, location: @branch }
       else
