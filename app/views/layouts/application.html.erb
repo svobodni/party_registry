@@ -37,7 +37,7 @@
           <li class="dropdown">
             <a href="#" class="dropdown-toogle" data-toggle="dropdown">Republikové orgány</a>
             <ul class="dropdown-menu">
-              <% for body in @country.bodies %>
+              <% for body in @country.bodies.order_for_display %>
               <li><%= link_to body.name.split("(").first, body %></a></li>
               <% end %>
             </ul>

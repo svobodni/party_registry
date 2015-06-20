@@ -18,6 +18,8 @@ class Body < ActiveRecord::Base
   # Stávající místopředsedové orgánu (u předsednictev)
   has_many :vicepresidents, -> { where("since < ? and till > ?", Time.now, Time.now  ) }, class_name: Vicepresident
 
+  scope :order_for_display, -> { order(display_position: :asc) }
+
   # Stávající členové orgánu (u komisí)
   def members
   	people.where("type='Member'")

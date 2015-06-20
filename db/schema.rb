@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150620110655) do
+ActiveRecord::Schema.define(version: 20150620120545) do
 
   create_table "bank_payments", force: true do |t|
     t.integer  "account_id"
@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 20150620110655) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "slug"
+    t.integer  "display_position"
   end
 
   add_index "bodies", ["slug"], name: "index_bodies_on_slug", unique: true, using: :btree
