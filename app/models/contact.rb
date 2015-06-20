@@ -1,6 +1,8 @@
 class Contact < ActiveRecord::Base
   belongs_to :contactable, :polymorphic => true
 
+  has_many :events, as: :eventable
+
   belongs_to :person,
            foreign_key: 'contactable_id'
            #conditions: "contacts.contactable_type = 'Person'"

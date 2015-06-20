@@ -89,8 +89,6 @@
   <% end %>
 <% end %>
 
-<p><%= button_to("Vyznačit zaplacení", paid_backoffice_person_path(@person)) if @person.is_payment_expected? %></p>
-
 </div>
 <div class="col-md-6">
 <% unless @person.roles.empty? %>
@@ -120,6 +118,9 @@
 
 <hr>
 <%= link_to 'Upravit', edit_backoffice_person_path(@person), class: "btn btn-default" %>
+
+<hr>
+<p><%= button_to("Vyznačit zaplacení", paid_backoffice_person_path(@person)) if @person.is_payment_expected? %></p>
 
 <% unless @person.status=="regular_member" %>
 <hr>

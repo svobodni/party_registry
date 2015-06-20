@@ -8,6 +8,8 @@ class Role < ActiveRecord::Base
   # /nebo/ v jaké pobočce
   belongs_to :branch
 
+  has_many :events, as: :eventable
+
   scope :current, -> { where("since < ? and till > ?", Date.today, Date.today) }
 
   delegate :contacts, to: :person

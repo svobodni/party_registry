@@ -31,7 +31,7 @@ class Person < ActiveRecord::Base
   # má v systému scan přihlášky
   has_one :signed_application
   # má kontaktní údaje
-  has_many :contacts, :as => :contactable
+  has_many :contacts, as: :contactable, dependent: :destroy
 
   scope :regular_members, -> { where("status = ?", "regular_member") }
   scope :regular_supporters, -> { where("status = ?", "regular_supporter") }
