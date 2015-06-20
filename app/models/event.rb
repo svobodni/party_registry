@@ -10,4 +10,11 @@ class Event < ActiveRecord::Base
   def set_uuid
     self.uuid ||= SecureRandom.uuid
   end
+
+  def new_values
+    new_values={}
+    changes.each{|k,v| new_values[k]=v[1]}
+    new_values
+  end
+
 end

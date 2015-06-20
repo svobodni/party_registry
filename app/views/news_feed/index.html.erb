@@ -1,0 +1,5 @@
+<% for item in @news_feed %>
+<p><small><%= l item.created_at %>, <%= item.branch.try(:name) || item.region.try(:name) %></small></p>
+<p><%= item.content %></p>
+<hr>
+<% end %>

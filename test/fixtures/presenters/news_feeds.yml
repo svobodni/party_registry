@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  person_id: 1
+  branch_id: 1
+  region_id: 1
+  content: MyText
+  event_id: 1
+
+two:
+  person_id: 1
+  branch_id: 1
+  region_id: 1
+  content: MyText
+  event_id: 1

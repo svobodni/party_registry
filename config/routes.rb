@@ -1,5 +1,7 @@
 PartyRegistry::Application.routes.draw do
 
+  get 'news_feed/index'
+
   namespace :backoffice do
     resources :events, only: [:index, :show]
     resources :stats, only: :index

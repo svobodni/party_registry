@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150620120545) do
+ActiveRecord::Schema.define(version: 20150620204513) do
 
   create_table "bank_payments", force: true do |t|
     t.integer  "account_id"
@@ -197,6 +197,16 @@ ActiveRecord::Schema.define(version: 20150620120545) do
 
   add_index "people", ["confirmation_token"], name: "index_people_on_confirmation_token", unique: true, using: :btree
   add_index "people", ["reset_password_token"], name: "index_people_on_reset_password_token", unique: true, using: :btree
+
+  create_table "presenters_news_feeds", force: true do |t|
+    t.integer  "person_id"
+    t.integer  "branch_id"
+    t.integer  "region_id"
+    t.text     "content"
+    t.integer  "event_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "roles", force: true do |t|
     t.string   "type"
