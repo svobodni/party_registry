@@ -4,6 +4,10 @@ class Ability
   def initialize(user)
 
     can [:read, :update, :application, :cancel_membership], Person, :id => user.id
+    if user.status!="regular_member"
+      can [:destroy], Person, :id => user.id
+    end
+
     can [:jwt_token], Person do |person|
       person.id==user.id && user.is_regular?
     end

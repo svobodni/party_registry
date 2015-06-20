@@ -79,13 +79,20 @@
 <% end %>
 
 <div class="jumbotron">
-<p>Tip: Přečtěte si informační materiál "<a href="http://files.svobodni.cz/svobodni/Jak-to-chodi-u-Svobodnych.pdf">Jak to chodí u Svobodných</a>", který pomůže novým členům a příznivcům v základní orientaci, pokud jde o dění ve straně.</p>
+<h2>Tip</h2>
+<p>Přečtěte si informační materiál "<a href="http://files.svobodni.cz/svobodni/Jak-to-chodi-u-Svobodnych.pdf">Jak to chodí u Svobodných</a>", který pomůže novým členům a příznivcům v základní orientaci, pokud jde o dění ve straně.</p>
 </div>
 
 <% if @person.is_regular_member? %>
 <div class="jumbotron">
   <h2>Ukončení členství</h2>
   <p>Pokud jste se rozhodli ukončit členství ve Svobodných, můžete tak učinit zde a budete převeden na příznivce.</p>
-  <p><%= button_to "Oznámit ukončení členství", cancel_membership_person_path(current_person), class: "btn btn-primary btn-lg", data: { confirm: "Opravdu si přejete ukončit své členství ve Straně svobodných občanů?" }%></p>
+  <p><%= button_to "Oznámit ukončení členství", cancel_membership_person_path(current_person), class: "btn btn-primary btn-danger", data: { confirm: "Opravdu si přejete ukončit své členství ve Straně svobodných občanů?" }%></p>
+</div>
+<% else %>
+<div class="jumbotron">
+  <h2>Smazání osobních údajů</h2>
+  <p>Pokud jste se rozhodli ukončit svou podporu Svobodných, můžete nechat vymazat své údaje z databáze.</p>
+  <p><%= button_to "Vymazat mé údaje", person_path(current_person), class: "btn btn-primary btn-danger", method: :delete, data: { confirm: "Opravdu si smazat své údaje z databáze Strany svobodných občanů?" }%></p>
 </div>
 <% end %>

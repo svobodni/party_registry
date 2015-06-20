@@ -1,5 +1,5 @@
 class PeopleController < ApplicationController
-  before_action :set_person, only: [:show, :edit, :update, :destroy, :application, :signed_application, :private, :photo, :cv, :approve]
+  before_action :set_person, only: [:show, :edit, :update, :destroy, :application, :signed_application, :private, :photo, :cv, :approve, :cancel_membership]
 
   before_action :authenticate_person!, except: [:payments, :private, :photo, :cv]
 
@@ -144,8 +144,23 @@ class PeopleController < ApplicationController
   # DELETE /people/1.json
   def destroy
     authorize!(:destroy, @person)
+
+    previous_data = {
+      person_name: @person.name,
+      status: @person.status,
+      domestic_region_id: @person.domestic_region_id,
+      domestic_branch_id: @person.domestic_branch_id
+    }
+
     @person.destroy
     respond_to do |format|
+      Event.create(default_event_params.merge({
+        command: "delete",
+        eventable_id: params[:id],
+        eventable_type: "Person",
+        previous_data: previous_data
+      }))
+      format.html { redirect_to contacts_profiles_path, notice: 'Registrace osoby byla úspěšně zrušena.' }
       format.json { head :no_content }
     end
   end
