@@ -61,22 +61,23 @@
         <tr><th>Částka</th><td><%= amount %> Kč</td></tr>
         <tr><th>Variabilní symbol</th><td><%= vs %></td></tr>
       </table>
-      <a target='_blank' href='https://testgw.gopay.cz/gw/pay-base-v2?paymentCommand.targetGoId=8409367912&paymentCommand.totalPrice=10000&paymentCommand.currency=CZK&paymentCommand.productName=dar&paymentCommand.orderNumber=1234&paymentCommand.successURL=http%3A%2F%2Ffinance.svobodni.cz&paymentCommand.failedURL=http%3A%2F%2Ffinance.svobodni.cz&paymentCommand.encryptedSignature=d34dc125154f41264accd5000d5660e97845223e6a3db7be9dfb3fdb43842c10e8aee9fb8ff572ca6fa551d2550b605b' > <img src='https://www.gopay.cz/download/PT_rychloplatba.png' alt='Platba' title='Platba' border='0' style='border:none;'/> </a>
+      <!--
+      <a target='_blank' href='https://testgw.gopay.cz/gw/pay-base-v2?paymentCommand.targetGoId=8409367912&paymentCommand.totalPrice=10000&paymentCommand.currency=CZK&paymentCommand.productName=dar&paymentCommand.orderNumber=1234&paymentCommand.successURL=http%3A%2F%2Ffinance.svobodni.cz&paymentCommand.failedURL=http%3A%2F%2Ffinance.svobodni.cz&paymentCommand.encryptedSignature=d34dc125154f41264accd5000d5660e97845223e6a3db7be9dfb3fdb43842c10e8aee9fb8ff572ca6fa551d2550b605b' > <img src='https://www.gopay.cz/download/PT_rychloplatba.png' alt='Platba' title='Platba' border='0' style='border:none;'/> </a> -->
     </div>
   </div>
 
 
 <% end %>
 </div>
-<!--
+
 <% if @person.is_supporter? && !@person.is_awaiting_membership? %>
 <div class="jumbotron">
   <h2>Staňte se členem Svobodných</h2>
   <p>Děkujeme za Vaši přízniveckou podporu. Zapojte se ještě více. Staňte se členem.</p>
-  <p><a class="btn btn-primary btn-lg" href="#" role="button">Doplnit údaje přihlášky</a></p>
+  <p><%= link_to "Vyplnit žádost o členství", new_supporter_membership_path, class: "btn btn-primary btn-lg" %></p>
 </div>
 <% end %>
--->
+
 <div class="jumbotron">
 <p>Tip: Přečtěte si informační materiál "<a href="http://files.svobodni.cz/svobodni/Jak-to-chodi-u-Svobodnych.pdf">Jak to chodí u Svobodných</a>", který pomůže novým členům a příznivcům v základní orientaci, pokud jde o dění ve straně.</p>
 </div>

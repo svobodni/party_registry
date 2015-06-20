@@ -84,6 +84,9 @@ PartyRegistry::Application.routes.draw do
       get 'beran_export'
     end
   end
+
+  resources :supporter_memberships, only: [:new, :create]
+
   resources :regions do
     resources :people
     resources :branches, only: :index
