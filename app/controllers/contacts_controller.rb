@@ -34,6 +34,11 @@ class ContactsController < ApplicationController
 
     respond_to do |format|
       if @contact.save
+        @contact.events.create(default_event_params.merge({
+          command: "CreateContact",
+          name: "ContactCreated",
+          changes: @contact.previous_changes
+        }))
         format.html { redirect_to contacts_profiles_path, notice: 'Kontakt byl úspěšně přidán.' }
         format.json { render action: 'show', status: :created, location: @contact }
       else
@@ -49,6 +54,11 @@ class ContactsController < ApplicationController
     authorize!(:update, @contact)
     respond_to do |format|
       if @contact.update(contact_params)
+        @contact.events.create(default_event_params.merge({
+          command: "UpdateContact",
+          name: "ContactUpdated",
+          changes: @contact.previous_changes
+        }))
         format.html { redirect_to contacts_profiles_path, notice: 'Kontakt byl úspěšně aktualizován.' }
         format.json { head :no_content }
       else
@@ -64,6 +74,12 @@ class ContactsController < ApplicationController
     authorize!(:destroy, @contact)
     @contact.destroy
     respond_to do |format|
+      Event.create(default_event_params.merge({
+        command: "DeleteContact",
+        name: "ContactDeleted",
+        eventable_id: params[:id],
+        eventable_type: "Contact"
+      }))
       format.html { redirect_to contacts_profiles_path, notice: 'Kontakt byl úspěšně zrušen.' }
       format.json { head :no_content }
     end
