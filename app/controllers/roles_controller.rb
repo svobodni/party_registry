@@ -38,6 +38,11 @@ class RolesController < ApplicationController
     authorize!(:create, @role)
     respond_to do |format|
       if @role.save
+        @role.events.create(default_event_params.merge({
+          command: "CreateRole",
+          name: "RoleCreated",
+          changes: @role.previous_changes
+        }))
         format.html { redirect_to roles_url, notice: 'Role was successfully created.' }
         format.json { render json: @role, status: :created, location: role_path(@role) }
       else
@@ -54,6 +59,12 @@ class RolesController < ApplicationController
     authorize!(:destroy, @role)
     if params[:role] && params[:role][:till]
       @role.update_attribute :till, params[:role][:till]
+      Event.create(default_event_params.merge({
+        command: "CancelRole",
+        name: "RoleCancelled",
+        eventable_id: params[:id],
+        eventable_type: "Role"
+      }))
       respond_to do |format|
         format.html { redirect_to roles_url }
         format.json { head :no_content }
