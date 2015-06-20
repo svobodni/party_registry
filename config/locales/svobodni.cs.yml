@@ -1,14 +1,14 @@
 cs:
   person_status:
-    registered: "Nezaplacený příznivce"
-    regular_supporter: "Příznivce"
-    cancelled: "Zrušený příznivce"
+    registered: "Nezaplacený příznivec"
+    regular_supporter: "Příznivec"
+    cancelled: "Zrušený příznivec"
     awaiting_presidium_decision: "Čeká na rozhodnutí krajského předsednictva"
     awaiting_first_payment: "Čekáme na první úhradu členského příspěvku"
     regular_member: "Řádný člen"
   person_type:
     member: "člen"
-    supporter: "příznivce"
+    supporter: "příznivec"
   coordinator_notifications:
     guesting_person_joined:
       subject: "[SVOBODNI-REGISTR] Ve Vasi pobocce hostuje nova osoba"
