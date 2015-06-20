@@ -5,14 +5,20 @@
 %>
 
 <table class="table table-striped">
+  <thead>
+    <tr><th>Typ kontaktu</th><th>Kontakt</th><th>Viditelnost</th><th></th><th></th></tr>
+  </thead>
+  <tbody>
   <% for contact in current_person.contacts %>
-  <tr><th><%=contact.contact_type%></th>
+  <tr>
+    <th><%= ta :person, contact.contact_type %></th>
     <td><%= auto_link contact.contact %></td>
     <td><%= Contact.privacies.detect{|p| p[1]==contact.privacy}.try(:first) %></td>
     <td><%= button_to 'Upravit', edit_contact_path(contact), class: "btn btn-xs btn-default", method: :get %></td>
     <td><%= button_to 'Smazat', contact, class: "btn btn-xs btn-danger", method: :delete, data: { confirm: 'Opravdu chcete smazat tento kontakt?' } %></td>
   </tr>
   <% end %>
+  </tbody>
 </table>
 <div class="jumbotron">
 <h3>Přidat nový kontakt</h3>
