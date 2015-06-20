@@ -89,6 +89,24 @@ class PeopleController < ApplicationController
     end
   end
 
+  # POST /people/123/approve
+  def cancel_membership
+    authorize!(:cancel_membership, @person)
+    @person.cancel_request!
+    respond_to do |format|
+      if @person.errors.empty?
+        @person.events.create(default_event_params.merge({
+          command: "CancelMembership",
+          name: "MembershipCancelled",
+          changes: @person.previous_changes
+        }))
+        format.html { redirect_to :back, notice: 'Členství bylo úspěšně zrušeno.'}
+      else
+        format.html { redirect_to :back, alert: 'Změnu se nepodařilo uložit: '+@person.errors.full_messages.join("<br/>") }
+      end
+    end
+  end
+
   def private
     authorize!(:show, @person)
     respond_to do |format|

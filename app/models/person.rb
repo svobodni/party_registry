@@ -280,7 +280,7 @@ class Person < ActiveRecord::Base
       # (clen)[ukoncil clenstvi]->(nezaplaceny priznivce)
       transitions :from => :awaiting_presidium_decision, :to => :registered
       transitions :from => :awaiting_first_payment, :to => :registered
-      transitions :from => :regular, :to => :registered
+      transitions :from => :regular_member, :to => :regular_supporter
     end
 
     # Zrušení členství na základě rozhodnutí RK

@@ -77,6 +77,7 @@ PartyRegistry::Application.routes.draw do
       get 'photo'
       get 'cv'
       post 'approve'
+      post 'cancel_membership'
     end
     collection do
       get 'profile'

@@ -81,3 +81,11 @@
 <div class="jumbotron">
 <p>Tip: Přečtěte si informační materiál "<a href="http://files.svobodni.cz/svobodni/Jak-to-chodi-u-Svobodnych.pdf">Jak to chodí u Svobodných</a>", který pomůže novým členům a příznivcům v základní orientaci, pokud jde o dění ve straně.</p>
 </div>
+
+<% if @person.is_regular_member? %>
+<div class="jumbotron">
+  <h2>Ukončení členství</h2>
+  <p>Pokud jste se rozhodli ukončit členství ve Svobodných, můžete tak učinit zde a budete převeden na příznivce.</p>
+  <p><%= button_to "Oznámit ukončení členství", cancel_membership_person_path(current_person), class: "btn btn-primary btn-lg", data: { confirm: "Opravdu si přejete ukončit své členství ve Straně svobodných občanů?" }%></p>
+</div>
+<% end %>
