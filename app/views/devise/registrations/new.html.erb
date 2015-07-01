@@ -18,7 +18,11 @@ h2{color: white}
     <%= f.hidden_field :legacy_type, value: type %>
     <%= f.input :first_name, required: true, :autofocus => true %>
     <%= f.input :last_name, required: true %>
+    <% if type=="supporter" %>
+    <%= f.input :date_of_birth, required: true, end_year: Date.today.year - 110, start_year: Date.today.year - 6, include_blank: true %>
+    <% else %>
     <%= f.input :date_of_birth, required: true, end_year: Date.today.year - 110, start_year: Date.today.year - 17, include_blank: true %>
+    <% end %>
     <%= f.input :email, required: true %>
     <%= f.input :phone, required: true %>
     <% if type=="supporter" %>
