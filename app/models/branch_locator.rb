@@ -82,7 +82,7 @@ class BranchLocator
     # kraj Vysočina
     return orp if orp=="Třebíč"
     # Zlínský kraj
-    return orp if kraj_id == 14
+    return orp if kraj_id == 141
   end
 
   # Pobočky na celém okresu
