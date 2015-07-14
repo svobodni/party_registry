@@ -55,8 +55,6 @@ class BranchLocator
     return obec if obec=="Chrudim"
     # Středočeský kraj
     return obec if ["Slaný", "Řevnice"].member?(obec)
-    # Zlínský kraj
-    return obec if obec=="Ostrožská Nová Ves"
   end
 
   # Pobočky na celém území působnosti obce s rozšířenou působností
@@ -83,6 +81,8 @@ class BranchLocator
     end
     # kraj Vysočina
     return orp if orp=="Třebíč"
+    # Zlínský kraj
+    return orp if kraj_id == 14
   end
 
   # Pobočky na celém okresu
@@ -108,11 +108,6 @@ class BranchLocator
     return okres if ["Děčín", "Chomutov", "Litoměřice", "Most", "Roudnice nad Labem", "Ústí nad Labem", "Žatec"].member?(okres)
     return "Žatec" if okres == "Louny"
     return "Bílina" if okres == "Teplice"
-    # Zlínský kraj
-    return "okres Vsetín" if okres =="Vsetín"
-    return "okres Zlín" if okres =="Zlín"
-    return "okres Kroměříž" if okres =="Kroměříž"
-    return "okres Uherské Hradiště" if okres =="Uherské Hradiště"
   end
 
   def self.find_by_person(person)
