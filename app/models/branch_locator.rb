@@ -30,8 +30,8 @@ class BranchLocator
     return "Brno-východ" if ["Brno-Líšeň", "Brno-Vinohrady", "Brno-Židenice", "Brno-Slatina"].member?(mestska_cast)
     # Plzeňský kraj
     return "Městský obvod Plzeň 1" if mestska_cast=="Plzeň 1"
-    return "Městská část Plzeň 2" if mestska_cast=="Plzeň 2-Slovany"
-    return "Městská část Plzeň 3" if mestska_cast=="Plzeň 3"
+    return "Městský obvod Plzeň 2 – Slovany" if mestska_cast=="Plzeň 2-Slovany"
+    return "Městský obvod Plzeň 3" if mestska_cast=="Plzeň 3"
     # Praha
     return mestska_cast if obec=="Praha"
   end
