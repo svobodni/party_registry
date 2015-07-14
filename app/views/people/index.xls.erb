@@ -1,4 +1,3 @@
-<% attributes = ["id", "name", "phone", "email", "status", "domestic_address_street", "domestic_address_city", "domestic_address_zip", "postal_address_street", "postal_address_city", "postal_address_zip"] %>
 <?xml version="1.0"?>
 <Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
   xmlns:o="urn:schemas-microsoft-com:office:office"
@@ -8,6 +7,7 @@
   <Worksheet ss:Name="Sheet1">
     <Table>
       <Row>
+      <% attributes = ["id", "name", "phone", "email", "status", "domestic_address_street", "domestic_address_city", "domestic_address_zip", "postal_address_street", "postal_address_city", "postal_address_zip"] %>
       <% attributes.each do |a| %>
         <Cell><Data ss:Type="String"><%=a%></Data></Cell>
       <% end %>
