@@ -1,5 +1,7 @@
 == Political party registry
 
+pokus!!!!:
+
 [![Build Status](https://travis-ci.org/svobodni/party_registry.svg?branch=master)](https://travis-ci.org/svobodni/party_registry)
 
 * Ruby version
