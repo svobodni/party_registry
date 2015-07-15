@@ -16,7 +16,7 @@ class Role < ActiveRecord::Base
 
   after_create :create_rev_membership
   before_update :cancel_rev_membership
-  before_create :set_person_name
+  before_create :set_names
 
   validates :person_id, presence: true
   validates_associated :person
@@ -45,7 +45,7 @@ class Role < ActiveRecord::Base
 
   def role_long_name
     if %w(Coordinator Recruiter).member?(self.class.to_s)
-      "#{role_name} pobočky #{branch.try(:name)}"
+      "#{role_name} pobočky #{branch_name}"
     elsif body.try(:acronym)=="KrP"
       "#{role_name} #{body.try(:organization).try(:name)}"
     else
@@ -65,8 +65,9 @@ class Role < ActiveRecord::Base
     end
   end
 
-  def set_person_name
+  def set_names
     self.person_name=person.name
+    self.branch_name=branch.try(:name)
   end
 
   def self.notify_expiring
