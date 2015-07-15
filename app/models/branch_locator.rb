@@ -47,8 +47,6 @@ class BranchLocator
     return obec if obec=="Cheb"
     # Královehradecký kraj
     return obec if ["Hradec Králové", "Nový Bydžov", "Chlumec", "Hořice", "Týniště", "Vrchlabí", "Tětín", "Vítězná"].member?(obec) && kraj_id==86
-    # Liberecký kraj
-    return obec if ["Jablonec nad Nisou", "Česká Lípa"].member?(obec)
     # Olomoucký kraj
     return obec if ["Olomouc", "Přerov"].member?(obec)
     # Pardubický kraj
@@ -78,6 +76,9 @@ class BranchLocator
       return "Vimpersko" if orp=="Vimperk"
       return "Vltavotýnsko" if orp=="Týn nad Vltavou"
       return "Vodňansko" if orp=="Vodňany"
+    elsif kraj_id==78
+    # Liberecký kraj
+      return orp
     end
     # kraj Vysočina
     return orp if orp=="Třebíč"
@@ -94,8 +95,6 @@ class BranchLocator
     return "Břeclavsko" if okres == "Břeclav"
     # kraj Vysočina
     return "Okres Jihlava" if okres=="Jihlava"
-    # Liberecký kraj
-    return "Liberec" if okres=="Liberec"
     # Pardubická kraj
     return okres if okres == "Pardubice"
     # Plzeňský kraj
