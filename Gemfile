@@ -37,7 +37,7 @@ group :doc do
 end
 
 # Use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.1.2'
+gem 'bcrypt-ruby', '~> 3.1.5'
 
 # Use unicorn as the app server
 # gem 'unicorn'
@@ -118,7 +118,6 @@ group :test do
   gem 'database_cleaner'
   gem 'cucumber-api-steps', :require => false
   gem 'shoulda-context'
-  gem 'sqlite3'
   gem 'mocha', :require => false
   gem 'factory_girl_rails'
   gem 'email_spec'
@@ -152,3 +151,5 @@ gem 'rails_autolink'
 gem 'underscore-rails'
 gem 'jquery-datatables-rails', '~> 3.1.1'
 gem 'font-awesome-sass'
+
+gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw]

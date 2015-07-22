@@ -94,7 +94,7 @@ ActiveRecord::Schema.define(version: 20150715085037) do
     t.string   "scopes"
   end
 
-  add_index "oauth_access_grants", ["token"], name: "index_oauth_access_grants_on_token", unique: true
+  add_index "oauth_access_grants", ["token"], name: "index_oauth_access_grants_on_token", unique: true, using: :btree
 
   create_table "oauth_access_tokens", force: true do |t|
     t.integer  "resource_owner_id"
@@ -107,9 +107,9 @@ ActiveRecord::Schema.define(version: 20150715085037) do
     t.string   "scopes"
   end
 
-  add_index "oauth_access_tokens", ["refresh_token"], name: "index_oauth_access_tokens_on_refresh_token", unique: true
-  add_index "oauth_access_tokens", ["resource_owner_id"], name: "index_oauth_access_tokens_on_resource_owner_id"
-  add_index "oauth_access_tokens", ["token"], name: "index_oauth_access_tokens_on_token", unique: true
+  add_index "oauth_access_tokens", ["refresh_token"], name: "index_oauth_access_tokens_on_refresh_token", unique: true, using: :btree
+  add_index "oauth_access_tokens", ["resource_owner_id"], name: "index_oauth_access_tokens_on_resource_owner_id", using: :btree
+  add_index "oauth_access_tokens", ["token"], name: "index_oauth_access_tokens_on_token", unique: true, using: :btree
 
   create_table "oauth_applications", force: true do |t|
     t.string   "name",                      null: false
@@ -121,7 +121,7 @@ ActiveRecord::Schema.define(version: 20150715085037) do
     t.datetime "updated_at"
   end
 
-  add_index "oauth_applications", ["uid"], name: "index_oauth_applications_on_uid", unique: true
+  add_index "oauth_applications", ["uid"], name: "index_oauth_applications_on_uid", unique: true, using: :btree
 
   create_table "organizations", force: true do |t|
     t.string   "type"
@@ -218,8 +218,8 @@ ActiveRecord::Schema.define(version: 20150715085037) do
     t.integer  "obec_id"
     t.string   "kraj"
     t.integer  "kraj_id"
-    t.float    "latitude"
-    t.float    "longitude"
+    t.float    "latitude",        limit: 24
+    t.float    "longitude",       limit: 24
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "okres"
@@ -248,6 +248,6 @@ ActiveRecord::Schema.define(version: 20150715085037) do
     t.text     "object_changes"
   end
 
-  add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
+  add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id", using: :btree
 
 end
