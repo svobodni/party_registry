@@ -202,7 +202,7 @@ class Person < ActiveRecord::Base
 
   def is_payment_expected?
     #(["awaiting_first_payment", "regular_supporter_awaiting_first_payment"].member?(status) && !signed_application.blank?) || (status=="registered")
-    ["awaiting_first_payment", "regular_supporter_awaiting_first_payment"].member?(status) || (status=="registered")
+    ["registered", "awaiting_first_payment", "regular_supporter_awaiting_first_payment"].member?(status)
   end
 
   def region

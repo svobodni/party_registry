@@ -29,7 +29,7 @@
   <p class="bg-warning">Prosím, stáhněte si <%= link_to "PDF s přihláškou", application_person_path(@person, format: :pdf)%>, vytiskněte ji a podepsanou odešlete na adresu kanceláře. Pokud máte zaručený kvalifikovaný podpis, můžete PDF podepsat elektronicky a odeslat na <%= mail_to "kancelar@svobodni.cz" %>.</p>
 <% end %>
 
-<% if @person.is_payment_expected? %>
+<% if @person.is_payment_expected? && !@person.is_signed_application_expected? %>
 
   <% if @person.is_supporter? && !@person.regular_supporter? && !@person.is_awaiting_membership? %>
     <% vs = @person.supporter_vs %>

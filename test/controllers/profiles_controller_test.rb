@@ -51,7 +51,7 @@ context "Zaregistrovaný zájemce o členství bez nahrané přihlášky" do
 end
 
 context "Zaregistrovaný zájemce o členství s nahranou přihláškou" do
-  should "should get membership info" do
+  should "get membership info" do
     @person = FactoryGirl.create(:signed_member_awaiting_decision)
     sign_in @person
     get :membership
@@ -69,7 +69,7 @@ context "Zaregistrovaný zájemce o členství s nahranou přihláškou" do
 end
 
 context "Schválený zájemce o členství bez nahrané přihlášky" do
-  should "should get membership info" do
+  should "not get membership info" do
     @person = FactoryGirl.create(:person, status: "awaiting_first_payment")
     sign_in @person
     get :membership

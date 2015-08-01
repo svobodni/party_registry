@@ -3,20 +3,35 @@ class Ability
 
   def initialize(user)
 
+    # Každý může číst informace o orgánech, pobočkách, krajích a funkcích
+    can :read, [Body, Branch, Region, Role]
+
+    # Uživatel může číst a aktualizovat informace o sobě, stáhnout formulář přihlášky a ukončit členství
     can [:read, :update, :application, :cancel_membership], Person, :id => user.id
+
+    # Každý kromě řádného člena může nechat smazat své údaje z databáze
     if user.status!="regular_member"
       can [:destroy], Person, :id => user.id
     end
 
+    # Řádní členové a příznivci dostávají token pro přístup do dalších systémů
     can [:jwt_token], Person do |person|
       person.id==user.id && user.is_regular?
     end
-    can :read, [Body, Branch, Region, Role]
 
-    can :read, Contact, privacy: 'public'
+    # Uživatel může administrovat své sdílené kontakty
     can [:create, :update, :destroy], Contact, {contactable_id: user.id, contactable_type: 'Person'}
-#    user ||= User.new # guest user (not logged in)
 
+    # Uživatel má přístup ke kontaktům jiných osob podle nastavení viditelnosti
+    if user.is_regular_member?
+      can :read, Contact, privacy: ['members','supporters']
+    elsif user.is_regular_supporter?
+      can :read, Contact, privacy: 'supporters'
+    else
+      can :read, Contact, privacy: 'public'
+    end
+
+    # Role pro volené a jmenované funkce
     user.roles.each do |role|
       if role.type == "Coordinator"
         # Koordinátor pobočky
@@ -32,7 +47,6 @@ class Ability
         can [:create, :destroy], Role do |r|
           role.body.organization.branch_ids.member?(r.branch_id)
         end
-        #can :manage, :all
       elsif role.body.try(:id)==1
         can [:supervise], Region
         can [:supervise], Branch
@@ -43,23 +57,16 @@ class Ability
       end
     end
 
-    if user.is_regular_member?
-      can :read, Contact, privacy: ['members','supporters']
-    elsif user.is_regular_supporter?
-      can :read, Contact, privacy: 'supporters'
-    else
-      can :read, Contact, privacy: 'public'
-    end
-
+    # Speciální role pro kancelář
     if ([342, 344, 4039, 2804].member?(user.id) || user.roles.detect{|r| r.body_id==1})
       can [:read, :application], Person
       can :upload, SignedApplication
       can [:create, :destroy], Role
       can :create, Branch
-      #can :manage, :all
       can :backoffice, :all
     end
 
+    # Speciální role pro adminitrátora
     if [342].member?(user.id)
       can :manage, Doorkeeper::Application
     end
