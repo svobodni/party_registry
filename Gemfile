@@ -57,7 +57,7 @@ gem 'doorkeeper'
 gem 'cancan'
 
 # Verzování změn objektů
-gem 'paper_trail', '~> 3.0.0'
+gem 'paper_trail'
 
 # Stavovy stroj
 gem 'aasm'
@@ -122,6 +122,7 @@ group :test do
   gem 'mocha', :require => false
   gem 'factory_girl_rails'
   gem 'email_spec'
+  gem 'guard'
   gem 'guard-minitest'
   gem 'guard-cucumber'
   gem 'terminal-notifier-guard'
@@ -150,5 +151,5 @@ gem 'bootstrap-sass', '~> 3.3.3'
 gem 'twitter'
 gem 'rails_autolink'
 gem 'underscore-rails'
-gem 'jquery-datatables-rails', '~> 3.1.1'
+gem 'jquery-datatables-rails'
 gem 'font-awesome-sass'

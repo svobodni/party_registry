@@ -353,11 +353,11 @@ class Person < ActiveRecord::Base
   end
 
   def notify_coordinator
-    CoordinatorNotifications.guesting_person_joined(self).deliver if guest_branch_id_changed?
+    CoordinatorNotifications.guesting_person_joined(self).deliver_now if guest_branch_id_changed?
   end
 
   def notify_member_registered
-    PresidiumNotifications.member_registered(self).deliver if awaiting_presidium_decision?
+    PresidiumNotifications.member_registered(self).deliver_now if awaiting_presidium_decision?
   end
 
 end
