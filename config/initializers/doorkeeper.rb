@@ -1,12 +1,10 @@
 Doorkeeper.configure do
-  # Change the ORM that doorkeeper will use.
-  # Currently supported options are :active_record, :mongoid2, :mongoid3,
-  # :mongoid4, :mongo_mapper
+  # Change the ORM that doorkeeper will use (needs plugins)
   orm :active_record
 
   # This block will be called to check whether the resource owner is authenticated or not.
   resource_owner_authenticator do
-    #fail "Please configure doorkeeper resource_owner_authenticator block located in #{__FILE__}"
+    fail "Please configure doorkeeper resource_owner_authenticator block located in #{__FILE__}"
     # Put your resource owner authentication logic here.
     # Example implementation:
     current_person || warden.authenticate!(:scope => :person)
@@ -28,6 +26,10 @@ Doorkeeper.configure do
   # custom_access_token_expires_in do |oauth_client|
   #   oauth_client.application.additional_settings.implicit_oauth_expiration
   # end
+
+  # Use a custom class for generating the access token.
+  # https://github.com/doorkeeper-gem/doorkeeper#custom-access-token-generator
+  # access_token_generator "::Doorkeeper::JWT"
 
   # Reuse access token for the same resource owner within an application (disabled by default)
   # Rationale: https://github.com/doorkeeper-gem/doorkeeper/issues/383
