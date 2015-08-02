@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150715085037) do
+ActiveRecord::Schema.define(version: 20150722010039) do
 
   create_table "bank_payments", force: :cascade do |t|
     t.integer  "account_id",    limit: 4
@@ -73,6 +73,16 @@ ActiveRecord::Schema.define(version: 20150715085037) do
     t.datetime "updated_at"
     t.string   "name",           limit: 255
   end
+
+  create_table "identities", force: :cascade do |t|
+    t.string   "uid",        limit: 255
+    t.string   "provider",   limit: 255
+    t.integer  "person_id",  limit: 4
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "identities", ["person_id"], name: "index_identities_on_person_id", using: :btree
 
   create_table "issued_token_log_entries", force: :cascade do |t|
     t.integer  "person_id",  limit: 4

@@ -52,6 +52,9 @@ end
 gem 'devise'
 gem 'devise-encryptable'
 gem 'doorkeeper'
+gem 'omniauth-facebook'
+gem 'omniauth-twitter'
+gem 'omniauth-openid'
 
 # Autorizace
 gem 'cancan'

@@ -27,6 +27,7 @@ Rails.application.routes.draw do
       get 'contacts'
       get 'guesting'
       get 'membership'
+      get 'identities'
     end
   end
 
@@ -47,7 +48,7 @@ Rails.application.routes.draw do
   get '/auth/profile'
   get '/auth/me'
 
-  devise_for :people
+  devise_for :people, :controllers => { :omniauth_callbacks => "people/omniauth_callbacks" }
 
   resources :webdav_passwords
   resources :bodies
