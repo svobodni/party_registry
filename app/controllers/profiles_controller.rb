@@ -24,7 +24,7 @@ class ProfilesController < ApplicationController
     @person = current_person
   end
 
-  def identities
+  def credentials
     @identities = current_person.identities
   end
 

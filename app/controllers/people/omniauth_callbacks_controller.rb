@@ -26,12 +26,12 @@ class People::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       # nezname -> priradime nebo registrujeme
       if current_user
         current_user.identities.create(provider: provider, uid: uid)
-        redirect_to identities_profiles_path, notice: "Účet byl úspěšně navázán."
+        redirect_to credentials_profiles_path, notice: "#{provider} účet byl úspěšně navázán."
       else
         # TODO uchovat fb data
         # session["devise.facebook_data"] = request.env["omniauth.auth"]
         # redirect_to new_person_registration_url
-        redirect_to new_person_session_path, notice: "Neznámá identita. Nejprve se prosím přihlašte nebo zaregistrujte a provažte Váš účet, abyste se v budoucnu mohl/a přihlašovat přes #{provider}."
+        redirect_to new_person_session_path, notice: "Neznámý #{provider} účet. Nejprve se prosím přihlašte nebo zaregistrujte a provažte Váš účet, abyste se v budoucnu mohl/a přihlašovat přes #{provider}."
       end
     end
   end

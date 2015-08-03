@@ -27,7 +27,6 @@ Rails.application.routes.draw do
       get 'contacts'
       get 'guesting'
       get 'membership'
-      get 'identities'
     end
   end
 
