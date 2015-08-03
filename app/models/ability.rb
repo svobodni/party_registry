@@ -47,7 +47,7 @@ class Ability
         can [:create, :destroy], Role do |r|
           role.body.organization.branch_ids.member?(r.branch_id)
         end
-      elsif role.body.try(:id)==1
+      elsif role.body.try(:accronym)=="ReP"
         can [:supervise], Region
         can [:supervise], Branch
         can [:read, :application, :export], Person
@@ -58,7 +58,7 @@ class Ability
     end
 
     # Speciální role pro kancelář
-    if ([342, 344, 4039, 2804].member?(user.id) || user.roles.detect{|r| r.body_id==1})
+    if ([342, 344, 4039, 2804].member?(user.id) || user.roles.detect{|r| r.body.try(:acronym)=="ReP"})
       can [:read, :application], Person
       can :upload, SignedApplication
       can [:create, :destroy], Role
