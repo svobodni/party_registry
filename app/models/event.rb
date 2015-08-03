@@ -4,7 +4,7 @@ class Event < ActiveRecord::Base
 
   before_create :set_uuid
 
-  belongs_to :requestor, foreign_key: :requestor_id, class_name: :person
+  belongs_to :requestor, foreign_key: :requestor_id, class_name: 'Person'
   belongs_to :eventable, polymorphic: true
 
   def set_uuid
