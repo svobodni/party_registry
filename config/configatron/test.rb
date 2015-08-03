@@ -7,7 +7,15 @@ configatron.auth.private_key = OpenSSL::PKey::RSA.new("-----BEGIN RSA PRIVATE KE
 configatron.auth.systems = {
 	'knownsystem' => 'https://knownsystem.svobodni.cz/callback.php'
 }
-configatron.migrated = false
+configatron.migrated = true
 configatron.finance.password = "testovaciheslo"
 
 configatron.devise.secret_key = "pepazdepa"
+
+configatron.twitter.consumer_key        = "conskey"
+configatron.twitter.consumer_secret     = "seckey"
+configatron.twitter.access_token        = "acctok"
+configatron.twitter.access_token_secret = "acctoksec"
+
+configatron.facebook.app_id = 'appid'
+configatron.facebook.app_secret = 'appsec'
