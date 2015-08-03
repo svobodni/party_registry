@@ -15,7 +15,7 @@
 <td><%= link_to member.name, member %></td>
 <td><%= t member.status, scope: :person_status %></td>
 <td><%= member.domestic_branch.try(:name) %></td>
-<td><%= link_to_member_application(member)%><%=button_to("Vyznačit schválení", approve_person_path(member), class: "btn btn-xs", disabled: !configatron.migrated) if member.is_awaiting_presidium_decision?%></td>
+<td><%= link_to_member_application(member)%><%=button_to("Vyznačit schválení", approve_person_path(member), class: "btn btn-xs") if member.is_awaiting_presidium_decision?%></td>
 </tr>
 
 <% end %>

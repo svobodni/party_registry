@@ -294,22 +294,6 @@ class Person < ActiveRecord::Base
     end
   end
 
-  def guest_region_id
-    if configatron.migrated?
-      super
-    else
-      guest_branch_id.blank? ? super : guest_branch.region.id
-    end
-  end
-
-  def guest_region
-    if configatron.migrated?
-      super
-    else
-      guest_region_id.blank? ? super : Region.find_by_id(guest_region_id)
-    end
-  end
-
   def files_photo_url
     "https://files.svobodni.cz/rep/is/member_photo/#{id}.png"
   end
