@@ -42,6 +42,8 @@ class Person < ActiveRecord::Base
   before_save :unset_domestic_ruian_address,
     if: Proc.new { |person| person.domestic_address_street_changed? }
 
+  before_save :set_guest_region
+
   before_update :import_domestic_ruian_address,
     if: Proc.new { |person| person.domestic_address_ruian_id_changed? }
 
@@ -361,6 +363,10 @@ class Person < ActiveRecord::Base
 
   def notify_member_registered
     PresidiumNotifications.member_registered(self).deliver_now if awaiting_presidium_decision?
+  end
+
+  def set_guest_region
+    self.guest_region = guest_branch.region if guest_branch_id_changed?
   end
 
 end

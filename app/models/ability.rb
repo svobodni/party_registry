@@ -24,9 +24,9 @@ class Ability
 
     # Uživatel má přístup ke kontaktům jiných osob podle nastavení viditelnosti
     if user.is_regular_member?
-      can :read, Contact, privacy: ['members','supporters']
+      can :read, Contact, privacy: ['members', 'supporters', 'public']
     elsif user.is_regular_supporter?
-      can :read, Contact, privacy: 'supporters'
+      can :read, Contact, privacy: ['supporters', 'public']
     else
       can :read, Contact, privacy: 'public'
     end

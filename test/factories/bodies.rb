@@ -7,6 +7,11 @@ FactoryGirl.define do
       end
     end
     factory :country_bodies do
+      factory :rep do
+        id 1
+        name "Republikové předsednictvo"
+        acronym "ReP"
+      end
       factory :rk do
         name "Rozhodčí komise"
         acronym "RK"

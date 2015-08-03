@@ -9,7 +9,7 @@ class AuthControllerTest < ActionController::TestCase
     now = Time.now
     @token = JWT.encode({iss: "https://registr.svobodni.cz",
       sub: "db|#{@person.id}",
-      nbf: now.to_i,
+      nbf: now.to_i-1,
       exp: (now+1.hour).to_i,
       iat: now.to_i,
       jti: SecureRandom.uuid,
