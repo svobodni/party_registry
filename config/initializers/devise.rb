@@ -243,7 +243,7 @@ Devise.setup do |config|
   # up on your models and hooks.
   config.omniauth :facebook, configatron.facebook.app_id, configatron.facebook.app_secret
 
-  config.omniauth :twitter, configatron.twitter.consumer_key, configatron.twitter.consumer_secret, callback_url: "http://chata.dev/auth/twitter/callback"
+  config.omniauth :twitter, configatron.twitter.consumer_key, configatron.twitter.consumer_secret, callback_url: "https://registr.svobodni.cz/people/auth/twitter/callback"
 
   config.omniauth :open_id, store: OpenID::Store::Filesystem.new("/tmp"), name: 'mojeid', identifier: 'https://mojeid.cz/endpoint/'
 
