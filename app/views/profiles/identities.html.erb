@@ -1,15 +1,17 @@
 <%
-  page_title "Identity - externí autentizace"
+  page_title "Přihlašován přes sociální sítě"
   render 'sidebar'
 %>
 
-<p class="bg-info">Pro přihlašování do registru můžete využít i externí služby. Např. Facebook nebo Twitter. Provázání s Vaším účtem můžete spravovat zde.</p>
-
 <% providers = %w(Facebook Twitter MojeID)%>
+
+<% if @identities.size < providers.size %>
+<p class="bg-info">Pro přihlašování do registru můžete využít i externí služby. Např. Facebook nebo Twitter. Provázání s Vaším účtem můžete nastavit níže.</p>
+<% end %>
 
 <table class="table table-striped">
   <thead>
-    <tr><th>Služba</th><th>UID</th><th>Akce</th></tr>
+    <tr><th>Služba</th><th></th></tr>
   </thead>
   <tbody>
   <% for provider_name in providers %>
@@ -18,11 +20,10 @@
   <tr>
     <th><%= provider_name %></th>
     <% if identity %>
-      <td><%= identity.uid %></td>
-      <td><%#= button_to 'Odebrat', identity, class: "btn btn-xs btn-danger", method: :delete, data: { confirm: 'Opravdu chcete smazat tento kontakt?' } %>Provázáno</td>
+      <td>Nastaveno (<%= identity.uid %>)</td>
+      <%#= button_to 'Odebrat', identity, class: "btn btn-xs btn-danger", method: :delete, data: { confirm: 'Opravdu chcete smazat tento kontakt?' } %>
     <% else %>
-      <td>neprovázáno</td>
-      <td><%= button_to "Provázat", person_omniauth_authorize_path(provider) %></td>
+      <td><%= button_to "Nastavit", person_omniauth_authorize_path(provider) %></td>
     <% end %>
   </tr>
   <% end %>
