@@ -4,7 +4,7 @@
 class AuthController < ApplicationController
 
   before_action :authenticate_person!, except: [:public_key, :me]
-  before_action :doorkeeper_authorize!, only: [:me]
+  before_action -> {doorkeeper_authorize! :private }, only: [:me]
 
   # GET /auth/token.json
   def token
