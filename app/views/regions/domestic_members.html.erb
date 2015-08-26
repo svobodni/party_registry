@@ -5,8 +5,19 @@
 %>
 
 <table id="domestic_members" class="table table-striped">
-  <thead><tr><th>Foto</th><th>Jméno</th><th>Email</th><th>Telefon</th><th>Pobočka</th></tr></thead>
-  <tbody><%=render @region.domestic_members.accessible_by(current_ability) %></tbody>
+  <thead><tr><th>Foto</th><th>Jméno</th><th>Email</th><th>Telefon</th><th>Pobočka</th><th></th></tr></thead>
+  <tbody>
+    <% for person in @region.domestic_members.accessible_by(current_ability) %>
+    <tr>
+    	<td><%=image_tag person.photo_url, width: '50px' %></td>
+    	<td><%=link_to person.name, person%></td>
+    	<td><%=mail_to person.email%></td>
+    	<td><%=tel_to person.phone%></td>
+    	<td><%=link_to(person.domestic_branch.try(:name), branch_path(person.domestic_branch)) if person.domestic_branch%></td>
+      <td><%= link_to_member_application(person) unless person.signed_application %></td>
+    </tr>
+    <% end %>
+  </tbody>
 </table>
 
 <%= datatable :domestic_members %>
