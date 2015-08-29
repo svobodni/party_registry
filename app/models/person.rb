@@ -33,6 +33,9 @@ class Person < ActiveRecord::Base
   has_many :issued_token_log_entries
   # má v systému scan přihlášky
   has_one :signed_application
+  # má v systému životopis
+  has_attached_file :cv, path: ":rails_root/data/cvs/:id.pdf"
+  validates_attachment_content_type :cv, content_type: 'application/pdf'
   # má kontaktní údaje
   has_many :contacts, as: :contactable, dependent: :destroy
 

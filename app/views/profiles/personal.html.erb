@@ -15,4 +15,17 @@
   <%= f.input :email %>
   <%= f.input :phone %>
   <%= f.button :submit, value: "Uložit", class: 'btn btn-success' %>
-  <% end %>
+<% end %>
+
+<hr>
+<h2>Životopis</h2>
+<p>Do systému můžete uložit Váš životopis ve formátu PDF. Bude se pak zobrazovat vedle Vašeho záznamu např. i ve volebním systému, pokud budete kandidovat.</p>
+<% if current_person.cv %>
+<p>Aktuálně máte nahrán tento <%= link_to "Váš životopis", current_person.cv_url %></p>
+<% end %>
+
+<p>Zde můžete nahrát nový životopis: </p>
+<%= simple_form_for current_person, url: request.original_url, as: 'person' do |f| %>
+  <%= f.input :cv, label: "Soubor PDF s životopisem" %>
+  <%= f.button :submit, "Uložit životopis", class: 'btn btn-success'  %>
+<% end %>

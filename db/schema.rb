@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150722010039) do
+ActiveRecord::Schema.define(version: 20150828143707) do
 
   create_table "bank_payments", force: :cascade do |t|
     t.integer  "account_id",    limit: 4
@@ -204,6 +204,10 @@ ActiveRecord::Schema.define(version: 20150722010039) do
     t.integer  "failed_attempts",            limit: 4,     default: 0
     t.string   "unlock_token",               limit: 255
     t.datetime "locked_at"
+    t.string   "cv_file_name"
+    t.string   "cv_content_type"
+    t.integer  "cv_file_size"
+    t.datetime "cv_updated_at"
   end
 
   add_index "people", ["confirmation_token"], name: "index_people_on_confirmation_token", unique: true, using: :btree
