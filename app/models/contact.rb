@@ -34,6 +34,7 @@ class Contact < ActiveRecord::Base
       ['Google+','google_plus'],
       ['Web','web'],
       ['Blog','blog'],
+      ['Fórum - kandidátské vlákno','forum'],
       ['FB stránka','facebook_page'],
       ['Linked in','linked_in']
     ]

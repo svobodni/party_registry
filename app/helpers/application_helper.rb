@@ -49,7 +49,7 @@ module ApplicationHelper
   end
 
   def draw_contacts(contacts)
-    social = %w(facebook_profile facebook_page twitter google_plus linked_in web blog)
+    social = %w(facebook_profile facebook_page twitter google_plus linked_in forum web blog)
     order = %w(phone email web blog)+social
     contacts.sort_by{|element|
       order.index(element.contact_type)
@@ -67,6 +67,8 @@ module ApplicationHelper
             content_tag(:i, class: 'fa fa-linkedin'){}
           when 'google_plus'
             content_tag(:i, class: 'fa fa-google-plus'){}
+          when 'forum'
+            'forum'
           when 'blog'
             'blog'
           when 'web'
