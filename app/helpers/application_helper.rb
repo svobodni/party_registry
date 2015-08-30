@@ -68,20 +68,16 @@ module ApplicationHelper
           when 'google_plus'
             content_tag(:i, class: 'fa fa-google-plus'){}
           when 'forum'
-            'forum'
+            content_tag(:i, class: 'fa fa-users'){}
           when 'blog'
-            'blog'
+            content_tag(:i, class: 'fa fa-book'){}
           when 'web'
-            'web'
+            content_tag(:i, class: 'fa fa-globe'){}
           end
         end
       else
         content_tag :div do
           case contact.contact_type
-          when 'web'
-            link_to "web", contact.contact, class: 'btn btn-default'
-          when 'blog'
-            link_to "blog", contact.contact, class: 'btn btn-default'
           when 'email'
             mail_to contact.contact, contact.contact
           when 'phone'
