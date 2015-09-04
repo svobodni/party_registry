@@ -181,9 +181,9 @@ class PeopleController < ApplicationController
 
   def cv
     authenticate_person! if @person.roles.empty?
-    if @person.cv
+    if @person.cv.path
       # lokalne ulozeny zivotopis
-      redirect_to @person.cv.url
+      send_file  @person.cv.path, type: @person.cv.content_type, disposition: :inline
     else
       # zkusime zivotopis z files
       response = HTTParty.get(@person.files_cv_url)
