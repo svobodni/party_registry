@@ -11,6 +11,7 @@ Rails.application.routes.draw do
         get :autocomplete_person_id
         get :autocomplete_person_email
         get :autocomplete_person_name
+        get :autocomplete_person_phone
         get :with_unknown_address
         get :with_bad_region
         get :without_signed_application

@@ -11,6 +11,10 @@
   <%= f.input :email, as: :autocomplete,
     url: autocomplete_person_email_backoffice_people_path,
     input_html: { :size => 40, 'data-id-element' => '#person_id', 'data-auto-focus' => true }, required: false %>
+  <%= f.input :phone, as: :autocomplete,
+    url: autocomplete_person_phone_backoffice_people_path,
+    input_html: { :size => 40, 'data-id-element' => '#person_id', 'data-auto-focus' => true }, required: false %>
+
   <%#= f.input :legacy_type, collection: { "Předseda" => "President", "Místopředseda" => "Vicepresident", "Člen" => "Member", "Koordinátor"=>"Coordinator"} %>
   <%#= f.association :domestic_region, :label_method => lambda { |region| "#{region.name} (#{region.name})" } %>
   <%= f.submit 'Vyhledat', class: "submit" %>

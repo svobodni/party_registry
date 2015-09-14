@@ -328,6 +328,10 @@ class Person < ActiveRecord::Base
     end
   end
 
+  def phone_name_region
+    "#{phone}: #{name} (#{domestic_region.name})"
+  end
+
   def name_id_region
     "#{id}: #{name} (#{domestic_region.name})"
   end
