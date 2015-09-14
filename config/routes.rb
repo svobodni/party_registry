@@ -8,6 +8,7 @@ Rails.application.routes.draw do
         post 'paid'
       end
       collection do
+        get :autocomplete_person_id
         get :autocomplete_person_email
         get :autocomplete_person_name
         get :with_unknown_address
@@ -22,6 +23,7 @@ Rails.application.routes.draw do
   resources :profiles do
     collection do
       get 'personal'
+      get 'photos'
       get 'credentials'
       get 'addresses'
       get 'contacts'
@@ -41,6 +43,7 @@ Rails.application.routes.draw do
   mount Sidekiq::Web => '/sidekiq'
 
   resources :signed_applications
+  resources :profile_photos
 
   get '/auth/token'
   get '/auth/public_key'

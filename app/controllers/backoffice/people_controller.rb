@@ -5,6 +5,8 @@ class Backoffice::PeopleController < ApplicationController
 
   autocomplete :person, :email, :display_value => :email_name_id_region, :extra_data => [:name_prefix, :first_name, :last_name, :name_suffix, :domestic_region_id, :status]
 
+  autocomplete :person, :id, :display_value => :name_id_region, :extra_data => [:name_prefix, :first_name, :last_name, :name_suffix, :domestic_region_id, :status, :email]
+
   def autocomplete_person_name
     term = params[:term]
     name_parts = term.split(' ',2)
