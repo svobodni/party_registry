@@ -47,7 +47,10 @@ class Backoffice::PeopleController < ApplicationController
   end
 
   def new_registrations
-    @people = Person.order(id: :desc).limit(50)
+    # stara verze...
+    # @people = Person.order(id: :desc).limit(50)
+    # ukol zni: nove registrace za posledni 3 mesice => 50 je malo
+    @people = Person.order(id: :desc).limit(500)
   end
 
   # GET /people/1
