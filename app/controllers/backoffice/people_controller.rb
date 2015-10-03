@@ -94,6 +94,7 @@ class Backoffice::PeopleController < ApplicationController
         command: "paid",
         changes: @person.previous_changes
       }))
+      @person.update_attribute :paid_till, "2016-12-31"
       format.html { redirect_to :back, notice: 'Úhrada byla úspěšně vyznačena.' }
     end
   end
