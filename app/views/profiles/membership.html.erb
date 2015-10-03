@@ -6,11 +6,11 @@
 
 <div class="profile membership">
 <% if @person.is_regular_member? %>
-  <p class="bg-info">Jste řádným členem se zaplacenými členskými příspěvky na tento rok.</p>
+  <p class="bg-info">Jste řádným členem se zaplacenými členskými příspěvky do <%= l @person.paid_till %>.</p>
 <% end %>
 
 <% if @person.is_regular_supporter? %>
-  <p class="bg-info">Jste příznivce Svobodných se řádně zaplaceným příspěvkem na tento rok. Děkujeme.</p>
+  <p class="bg-info">Jste příznivce Svobodných se řádně zaplaceným příspěvkem do <%= l @person.paid_till %>. Děkujeme.</p>
 <% end %>
 
 <% if @person.is_awaiting_presidium_decision? %>
