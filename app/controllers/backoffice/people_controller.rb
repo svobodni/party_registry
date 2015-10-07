@@ -50,7 +50,7 @@ class Backoffice::PeopleController < ApplicationController
     @people = Person.order(id: :desc).limit(50)
   end
   
-  def with_unknown_address
+  def active_addresses
     @people = Person.includes([:domestic_region, :signed_application]).select{|p| p.is_regular?}
   end
 
