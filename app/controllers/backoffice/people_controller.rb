@@ -47,10 +47,11 @@ class Backoffice::PeopleController < ApplicationController
   end
 
   def new_registrations
-    # stara verze...
-    # @people = Person.order(id: :desc).limit(50)
-    # ukol zni: nove registrace za posledni 3 mesice => 50 je malo
-    @people = Person.order(id: :desc).limit(500)
+    @people = Person.order(id: :desc).limit(50)
+  end
+  
+  def with_unknown_address
+    @people = Person.includes([:domestic_region, :signed_application]).select{|p| p.is_regular?}
   end
 
   # GET /people/1
