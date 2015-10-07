@@ -1,0 +1,19 @@
+<%
+  page_title "Adresy aktivních členů a příznivců"
+  render "backoffice/sidebar"
+%>
+
+<table id="people" class="table table-striped">
+  <thead>
+    <tr><th>ID</th><th>Jméno</th><th>Kontaktní adresa</th></tr>
+  </thead>
+  <tbody>
+    <% @people.each do |person| %>
+    <tr>
+      <td><%=person.vs%></td>
+      <td><%=link_to person.name, backoffice_person_path(person) %></td>
+      <td><%=t person.postal_address_line%></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
