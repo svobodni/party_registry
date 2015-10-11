@@ -50,22 +50,55 @@
               <% end %>
             </ul>
           </li>
-          <li>
-            <%= link_to "Kontakty", contacts_path %>
-          </li>
             <% if can? :backoffice, :all %>
-            <li>
-              <%= link_to "Backoffice", backoffice_people_path %>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toogle" data-toggle="dropdown">Backoffice</a>
+              <ul class="dropdown-menu">
+                <li class="sidebar-brand">Backoffice</li>
+                <li><%= link_to_unless_current "Osoby", backoffice_people_path %>
+                  <ul>
+                    <li><%= link_to "Vyhledat", backoffice_people_path %></li>
+                    <li><%= link_to "Bez adresy", with_unknown_address_backoffice_people_path %></li>
+                    <li><%= link_to "Bez přihlášky", without_signed_application_backoffice_people_path %></li>
+                    <li><%= link_to "Členové bez přihlášky", members_without_signed_application_backoffice_people_path %></li>
+                    <li><%= link_to "Špatný kraj", with_bad_region_backoffice_people_path %></li>
+                    <li><%= link_to "Nové registrace", new_registrations_backoffice_people_path %></li>
+                  </ul>
+                </li>
+                <% if can? :destroy, Role %>
+                <li><%= link_to "Funkce", roles_path %>
+                  <ul>
+                    <li><%= link_to "Nová funkce", new_role_path %>
+                  </ul>
+                </li>
+                <% end %>
+                <li><%= link_to "Pobočky", branches_path %></li>
+                <ul>
+                  <% if can? :create, Branch %>
+                  <li><%= link_to "Nová pobočka", new_branch_path %>
+                  <% end %>
+                </ul>
+                <li><%= link_to "Statistika", backoffice_stats_path %></li>
+                <li><a href="http://finance.svobodni.cz/organizations/100">Finance</a></li>
+                <li><%= link_to "Logy", backoffice_events_path %></li>
+              </ul>
             </li>
             <% end %>
-            <li><%= link_to current_person.name, profiles_path %></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toogle" data-toggle="dropdown"><%=current_person.name%></a>
+              <ul class="dropdown-menu">
+                <li><%=glyph_nav_link_to "user", "Osobní údaje", personal_profiles_path %></li>
+                <li><%=glyph_nav_link_to "lock","Přihlašování", credentials_profiles_path %></li>
+                <li><%=glyph_nav_link_to "phone","Sdílené kontakty", contacts_profiles_path %></li>
+                <li><%=glyph_nav_link_to "envelope","Adresy", addresses_profiles_path %></li>
+                <li><%=glyph_nav_link_to "globe","Hostování", guesting_profiles_path %></li>
+                <li><%=glyph_nav_link_to "globe","Členství", membership_profiles_path %></li>
+              </ul>
             <li><%= link_to "Odhlásit se", destroy_person_session_path  %></li>
           <% else %>
             <li><%= link_to "Přihlásit se", new_person_session_path %></li>
           <% end %>
         </ul>
-        <form class="navbar-form navbar-right">
-        </form>
       </div>
     </div>
   </div>

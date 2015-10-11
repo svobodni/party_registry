@@ -1,123 +1,170 @@
-<% content_for 'sidebar' do %>
-<div id="sidebar-wrapper" style="padding: 1em">
-    <!--
-<a href="">
-<img src="<%= @person.photo_url %>" width="200">
-</a>
--->
-  <h2><%= @person.first_name %> <%= @person.last_name %></h2>
-  <p><%= @person.name %><!-- TODO , student --></p>
-  <% unless @person.roles.blank? %>
-  <ul>
-    <% for role in @person.roles %>
-    <li>
-      <% if role.branch %>
-        <%= link_to role.role_long_name, role.branch %>
-      <% elsif role.body.organization.class==Region %>
-        <%= link_to role.role_name, role.body %>
-        <%= link_to "Finance", "https://finance.svobodni.cz/organizations/#{role.body.organization.id}", class: "btn btn-info btn-xs" %>
-        <%= link_to "Kraj", region_path(role.body.organization), class: "btn btn-info btn-xs" %>
-      <% else %>
-        <%= link_to role.role_name, role.body %>
-      <% end %>
-    </li>
-    <% end %>
-  </ul>
-  <% end %>
-  <!-- TODO
-  <ul>
-    <li>příznivce Svobodných</li>
-    <li>zájemce o členství</li>
-    <li>místopředseda KrP Praha</li>
-  </ul>
--->
-  <hr>
-  <h3>Vaše údaje&nbsp;<%= link_to "Aktualizovat", profiles_path, class: "btn btn-info btn-xs pull-right" %></h3>
-  <p>Adresa bydliště: <b><%= @person.domestic_address_line %></b></p>
-  <p>Krajské sdružení: <%= link_to @person.domestic_region.name, @person.domestic_region %></p>
-  <p>Pobočka: <% if @person.domestic_branch.nil? %>
-     a v místě není žádná pobočka.
-    <% else %>
-     <%= link_to @person.domestic_branch.name, @person.domestic_branch %>
-    <% end %>
-  </p>
-  <!-- TODO
-  <p>Výše uvedená adresa je i korespondenční a budeme Vám na ni zasílat občasník Beran.</p>
--->
-  <p>
-    <% if @person.guest_branch.nil? %>
-      <% if @person.guest_region.nil? %>
-        Nehostujete v žádném jiném kraji nebo pobočce.
-      <% else %>
-        Hostujete v krajském sdružení <%= link_to @person.guest_region.name, @person.guest_region %>
-      <% end %>
-    <% else %>
-      Hostujete v pobočce <%= link_to @person.guest_branch.name, @person.guest_branch %>.
-    <% end %>
-  </p>
-  <p>S ostatními členy a příznivci sdílíte tyto Vaše kontakty:</p>
-  <table class="table">
-    <% for contact in @person.contacts %>
-    <tr>
-      <td>
-        <% if contact.contact_type =="mobile-phone" %>
-          <span class="glyphicon glyphicon-phone"></span>
-        <% elsif contact.contact_type =="email" %>
-          <span class="glyphicon glyphicon-envelope"></span>
-        <% elsif contact.contact_type =="web" %>
-          <span class="glyphicon glyphicon-globe"></span>
-        <% else %>
-          <span class="glyphicon glyphicon-star"></span>
-        <% end %>
-        <br>
-      </td>
-      <td><%= auto_link contact.contact %></td>
-      <td><%= Contact.privacies.detect{|p| p[1]==contact.privacy}.try(:first) %></td>
-    </tr>
-    <% end %>
-  </table>
-  <%= link_to "Aktualizovat", profiles_path, class: "btn btn-info" %>
-</div>
-<% end %>
+  <!-- <h1 class="page-header">Hlavní rozcestník člena</h1> -->
+  <div class="row" style="margin-top: 2.5em">
+    <div class="col-md-4">
+        <div class="panel panel-default" style="border: 1px solid #00654E">
+            <div class="panel-body bg-success">
+                <div class="text-center">
+                    <h3>Volební systém</h3>
+                    <p class="small">
+                        Ve volebním systému naleznete volební místnost, archiv volebních protokolů a možnost podání kandidatury do nadcházejících voleb.
+                    </p>
+                    <a href="https://vs.svobodni.cz" class="btn btn-success btn-lg"><i class="glyphicon glyphicon-hand-up fa-2x"></i> vs.svobodni.cz</a>
+                </div>
+            </div>
+        </div>
+        <div class="panel" style="border: 1px solid #00654E">
+            <div class="panel-body bg-success">
+                <div class="text-center">
+                    <h3>Úložiště</h3>
+                    <div class="m">
 
+                    </div>
+                    <p class="small">
+                        Zde najdete oficiální dokumenty centrálních i krajských orgánů, vybrané dokumenty a návody.
+                    </p>
+                    <a href="https://files.svobodni.cz" class="btn btn-success btn-lg"><span class="glyphicon glyphicon-save-file fa-2x"></span> files.svobodni.cz</a>
+                </div>
+            </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="panel" style="border: 1px solid #00654E">
+            <div class="panel-body bg-success">
+                <div class="text-center">
+                    <h3>Fórum</h3>
+                    <div class="m">
 
-  <h1 class="page-header">Hlavní rozcestník člena</h1>
-  <div class="row placeholders">
-    <div class="col-xs-6 col-sm-3 placeholder bg-success dashboardbox">
-      <a href="https://vs.svobodni.cz">
-        <span class="glyphicon glyphicon-thumbs-up"></span>
-        <span class="glyphicon glyphicon-thumbs-down"></span>
-        <h4>Volební místnost</h4>
-        <span class="text-muted">Ve volební místnosti naleznete seznam právě probíhajících voleb, kterých se můžete účastnit.</span>
-      </a>
+                    </div>
+                    <p class="small">
+                        Diskusní fórum se sekcemi pro členy, příznivce, orgány strany a pro prezentaci kandidátů.
+                    </p>
+                    <a href="https://forum.svobodni.cz" class="btn btn-success btn-lg"><i class="glyphicon glyphicon-comment fa-2x"></i> forum.svobodni.cz</a>
+                </div>
+            </div>
+        </div>
+        <div class="panel" style="border: 1px solid #00654E; min-height: 100%">
+            <div class="panel-body bg-success">
+                <div class="text-center">
+                    <h3>Wiki</h3>
+                    <div class="m">
+
+                    </div>
+                    <p class="small">
+                        Informační stránky, databáze návodů, postupů a znalostí, kam může přispívat každý člen.
+                    </p>
+                    <a href="https://wiki.svobodni.cz" class="btn btn-success btn-lg"><i class="glyphicon glyphicon-education fa-2x"></i> wiki.svobodni.cz</a>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="col-xs-6 col-sm-3 placeholder bg-info dashboardbox">
-      <a href="https://files.svobodni.cz/">
-        <span class="glyphicon glyphicon-folder-open"></span>
-        <span class="glyphicon glyphicon-certificate"></span>
-        <span class="glyphicon glyphicon-eye-close"></span>
-        <h4>Úložiště</h4>
-        <span class="text-muted">Zde najdete oficiální dokumenty centrálních i krajských orgánů.</span>
-      </a>
-    </div>
-    <div class="col-xs-6 col-sm-3 placeholder bg-warning dashboardbox">
-      <a href="https://forum.svobodni.cz">
-        <span class="glyphicon glyphicon-bullhorn"></span>
-        <span class="glyphicon glyphicon-resize-small"></span>
-        <span class="glyphicon glyphicon-user"></span>
-        <h4>Fórum</h4>
-        <font color="#777777">Diskusní fórum se sekcemi pro členy, příznivce, orgány strany a pro prezentaci kandidátů.</font>
-      </a>
-    </div>
-    <div class="col-xs-6 col-sm-3 placeholder bg-danger dashboardbox">
-      <a href="https://wiki.svobodni.cz/index.php?title=Speciáln%C3%AD:Přihlásit">
-        <span class="glyphicon glyphicon-pushpin"></span>
-        <span class="glyphicon glyphicon-education"></span>
-        <h4>Wiki</h4>
-        <span class="text-muted">Informační stránky, databáze návodů, postupů a znalostí, kam může přispívat každý člen.</span>
-      </a>
+    <div class="col-md-4">
+        <div class="panel" style="border: 1px solid #00654E">
+            <div class="panel-body bg-success">
+                <div class="text-center">
+                    <h3>Sdílení kontaktů</h3>
+                    <div class="m">
+
+                    </div>
+                    <p class="small">
+                        Členové a příznivci sdílí své kontakty.<br /> Najděte Svobodné ve Vašem okolí.
+                    </p>
+                    <a href="<%=contacts_path %>" class="btn btn-success btn-lg"><i class="glyphicon glyphicon-user fa-2x"></i> Kontakty</a>
+                </div>
+            </div>
+        </div>
     </div>
   </div>
+
+  <div class="row">
+      <!--
+  <a href="">
+  <img src="<%= @person.photo_url %>" width="200">
+  </a>
+  -->
+  <div class="col-md-3">
+    <div class="panel panel-default">
+      <div class="panel-body">
+    <h2><%= @person.name %></h2>
+    <p><!-- TODO , student --></p>
+    <% unless @person.roles.blank? %>
+    <ul>
+      <% for role in @person.roles %>
+      <li>
+        <% if role.branch %>
+          <%= link_to role.role_long_name, role.branch %>
+        <% elsif role.body.organization.class==Region %>
+          <%= link_to role.role_name, role.body %>
+          <%= link_to "Finance", "https://finance.svobodni.cz/organizations/#{role.body.organization.id}", class: "btn btn-info btn-xs" %>
+          <%= link_to "Kraj", region_path(role.body.organization), class: "btn btn-info btn-xs" %>
+        <% else %>
+          <%= link_to role.role_name, role.body %>
+        <% end %>
+      </li>
+      <% end %>
+    </ul>
+    <% end %>
+    <!-- TODO
+    <ul>
+      <li>příznivce Svobodných</li>
+      <li>zájemce o členství</li>
+      <li>místopředseda KrP Praha</li>
+    </ul>
+  -->
+    <h3>Vaše údaje&nbsp;<%= link_to "Aktualizovat", profiles_path, class: "btn btn-info btn-xs pull-right" %></h3>
+    <p>Adresa bydliště: <b><%= @person.domestic_address_line %></b></p>
+    <p>Krajské sdružení: <%= link_to @person.domestic_region.name, @person.domestic_region %></p>
+    <p>Pobočka: <% if @person.domestic_branch.nil? %>
+       a v místě není žádná pobočka.
+      <% else %>
+       <%= link_to @person.domestic_branch.name, @person.domestic_branch %>
+      <% end %>
+    </p>
+    <!-- TODO
+    <p>Výše uvedená adresa je i korespondenční a budeme Vám na ni zasílat občasník Beran.</p>
+  -->
+    <p>
+      <% if @person.guest_branch.nil? %>
+        <% if @person.guest_region.nil? %>
+          Nehostujete v žádném jiném kraji nebo pobočce.
+        <% else %>
+          Hostujete v krajském sdružení <%= link_to @person.guest_region.name, @person.guest_region %>
+        <% end %>
+      <% else %>
+        Hostujete v pobočce: <%= link_to @person.guest_branch.name, @person.guest_branch %>
+      <% end %>
+    </p>
+    <h3>Sdílené kontakty</h3>
+    <table class="table">
+      <% for contact in @person.contacts %>
+      <tr>
+        <td>
+          <% if contact.contact_type =="mobile-phone" %>
+            <span class="glyphicon glyphicon-phone"></span>
+          <% elsif contact.contact_type =="email" %>
+            <span class="glyphicon glyphicon-envelope"></span>
+          <% elsif contact.contact_type =="web" %>
+            <span class="glyphicon glyphicon-globe"></span>
+          <% else %>
+            <span class="glyphicon glyphicon-star"></span>
+          <% end %>
+          <br>
+        </td>
+        <td><%= auto_link contact.contact %></td>
+        <td><%= Contact.privacies.detect{|p| p[1]==contact.privacy}.try(:first) %></td>
+      </tr>
+      <% end %>
+    </table>
+    <span class="pull-right">
+    <%= link_to "Aktualizovat", contacts_profiles_path, class: "btn btn-info" %>
+    </span>
+  </div>
+</div>
+</div>
+  <div class="col-md-6">
+
+  </div>
+
+<div class="col-md-3">
   <!--
   <h2 class="sub-header">Nadcházející události</h2>
   <div class="table-responsive">
@@ -180,14 +227,9 @@
     </table>
   </div>
   -->
-  <h2 class="sub-header">Aktuality</h2>
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>Přidáno</th>
-        <th>Zpráva</th>
-      </tr>
-    </thead>
+  <div class="panel panel-default" style="border: 1px solid #00654E">
+  <div class="panel-heading"><h2 class="panel-title">Aktuality</h2></div>
+  <table class="table">
     <tbody>
       <% cache(:news_feed, :expires_in => 5.minutes) do %>
       <% for item in NewsFeed.items %>
@@ -199,6 +241,7 @@
       <% end %>
     </tbody>
   </table>
+  </div>
 
   <h4>Další funkce registru</h4>
 
