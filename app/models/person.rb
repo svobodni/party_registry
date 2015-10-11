@@ -213,6 +213,10 @@ class Person < ActiveRecord::Base
     ["registered", "awaiting_first_payment", "regular_supporter_awaiting_first_payment"].member?(status)
   end
 
+  def is_renewal_payment_expected?
+    is_regular? && paid_till && paid_till.to_date < "2016-01-01".to_date
+  end
+
   def region
     guest_region || domestic_region
   end
