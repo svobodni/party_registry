@@ -42,6 +42,14 @@ class Person < ActiveRecord::Base
   scope :regular_members, -> { where("status = ?", "regular_member") }
   scope :regular_supporters, -> { where("status = ?", "regular_supporter") }
 
+  scope :awaiting_first_payment, -> { where("status IN (?)", ["awaiting_first_payment", "regular_supporter_awaiting_first_payment"]) }
+
+  scope :not_renewed, -> { where("paid_till < ?", "2016-01-01") }
+
+  scope :without_signed_application, -> { joins(:signed_application).where("signed_applications.person_id IS NULL") }
+
+  scope :awaiting_presidium_decision, -> { where("status IN (?)", ["awaiting_presidium_decision", "regular_supporter_awaiting_presidium_decision"]) }
+
   before_save :unset_domestic_ruian_address,
     if: Proc.new { |person| person.domestic_address_street_changed? }
 
