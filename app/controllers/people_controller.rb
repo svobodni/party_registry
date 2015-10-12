@@ -190,7 +190,7 @@ class PeopleController < ApplicationController
       if response.code == 200
         send_data response.body, filename: "#{@person.id}.pdf", type: 'application/pdf', disposition: :inline
       else
-        render text: 'Not Found', status: '404', content_type: "text/html"
+        render text: 'Kandidát dosud nenahrál ke svému profilu žádný životopis', status: '404', content_type: "text/html"
       end
     end
   end
