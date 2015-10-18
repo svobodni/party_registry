@@ -253,12 +253,12 @@ class Person < ActiveRecord::Base
       # (nezaplaceny priznivce)[uhrada 100]->(priznivce)
       transitions from: :registered, to: :regular_supporter, :after => Proc.new { Notifier.new_regular_supporter(self) }
       # Příznivec zaplatil znovu
-      transitions from: :regular_supporter, to: :regular_supporter
+      transitions from: :regular_supporter, to: :regular_supporter, :after => Proc.new { SupporterNotifications.renewed(self).deliver }
       # Přijatý člen zaplatil
       # (schvaleny zajemce o clenstvi)[uhrada 1000]->(clen)
       transitions from: :awaiting_first_payment, to: :regular_member, :after => Proc.new { Notifier.new_regular_member(self) }
       # Člen zaplatil znovu
-      transitions from: :regular_member, to: :regular_member
+      transitions from: :regular_member, to: :regular_member, :after => Proc.new { MemberNotifications.renewed(self).deliver }
       # (priznivce schvaleny zajemce o clenstvi)[uhrada doplatku]->(clen)
       transitions from: :regular_supporter_awaiting_first_payment, to: :regular_member
     end

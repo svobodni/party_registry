@@ -8,4 +8,9 @@ class SupporterNotifications < ActionMailer::Base
     mail to: @person.email, subject: "Vaše úhrada byla úspěšně zpracována"
   end
 
+  def renewed(person)
+    @person = person
+    mail to: @person.email, subject: "Vaše úhrada byla úspěšně zpracována"
+  end
+
 end
