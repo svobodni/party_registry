@@ -1,7 +1,7 @@
 json.person do
   json.id @person.id
   json.name @person.name
-  json.type @person.is_member? ? "member" : "supporter"
+  json.type @person.is_supporter? ? "supporter" : "member"
   json.status @person.is_regular? ? "valid" : "other"
   json.person_status @person.status
   json.member_status @person.member_status
