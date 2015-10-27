@@ -72,6 +72,22 @@
                 </div>
             </div>
         </div>
+        <% if Date.today < "2015-11-10".to_date && current_person.is_regular_member? %>
+        <div class="panel" style="border: 1px solid #00654E; min-height: 100%">
+            <div class="panel-body bg-success">
+                <div class="text-center">
+                    <h3>Sněm listopad 2015</h3>
+                    <div class="m">
+
+                    </div>
+                    <p class="small">
+                        Sněm se uskuteční v sobotu 14. listopadu 2015. Registrujte se online nebo na místě. Rezervace obědu pouze online.
+                    </p>
+                    <a href="https://snem2015.svobodni.cz" class="btn btn-success btn-lg"><i class="glyphicon glyphicon-link fa-2x"></i> snem2015.svobodni.cz</a>
+                </div>
+            </div>
+        </div>
+        <% end %>
     </div>
   </div>
 
@@ -150,7 +166,6 @@
           <br>
         </td>
         <td><%= auto_link contact.contact %></td>
-        <td><%= Contact.privacies.detect{|p| p[1]==contact.privacy}.try(:first) %></td>
       </tr>
       <% end %>
     </table>
