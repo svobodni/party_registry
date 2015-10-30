@@ -1,6 +1,6 @@
 class RolesNotifications < ActionMailer::Base
   default from: "kancelar@svobodni.cz",
-  bcc: "kubicek@svobodni.cz",
+  bcc: "notifikace@svobodni.cz",
   content_transfer_encoding: 'text/plain'
 
   def reminder(role)

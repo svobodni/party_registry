@@ -1,6 +1,6 @@
 class PresidiumNotifications < ActionMailer::Base
   default from: "kancelar@svobodni.cz",
-          bcc: "kubicek@svobodni.cz",
+          bcc: "notifikace@svobodni.cz",
           content_transfer_encoding: 'text/plain'
 
   def member_registered(person)
