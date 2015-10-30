@@ -3,6 +3,16 @@
   render 'backoffice/sidebar'
 %>
 
+<div class="panel panel-default">
+  <div class="panel-body bg-success">
+<%= simple_form_for @event, url: backoffice_events_path, method: :get do |f| %>
+<%= f.input :eventable_id, label: "ID osoby" %>
+<%= f.input :command, collection:  Event.group(:command).uniq.size.collect{|k,v| k}.compact, label: "Událost" %>
+<%= f.button :submit, "Vyhledat", class: "pull-right" %>
+<% end %>
+</div>
+</div>
+
 <table class="table">
 <thead>
   <tr>
