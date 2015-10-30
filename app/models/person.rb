@@ -213,7 +213,7 @@ class Person < ActiveRecord::Base
   end
 
   def is_signed_application_expected?
-    is_awaiting_membership? && signed_application.blank?
+    is_member? && signed_application.blank?
   end
 
   def is_payment_expected?

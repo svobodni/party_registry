@@ -30,6 +30,5 @@ Požadavek: Jednoduchý vznik členství
   Scénář: Řádný zaplacený člen
     Když se přihlásím jako řádný člen bez nahrané přihlášky
     A jdu na stránku Členství
-    Pak měl bych vidět "Jste řádným členem se zaplacenými členskými příspěvky na tento rok."
-    # FIXME: Zatim nemame naimportovane vsechny prihlasky, proto:
-    A neměl bych vidět "vytiskněte ji a podepsanou odešlete na adresu kanceláře"
+    Pak měl bych vidět "Jste řádným členem se zaplacenými členskými příspěvky"
+    A měl bych vidět "vytiskněte ji a podepsanou odešlete na adresu kanceláře"
