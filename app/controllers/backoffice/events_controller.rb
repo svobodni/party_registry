@@ -10,7 +10,7 @@ class Backoffice::EventsController < ApplicationController
       @events = @events.where(eventable_id: params[:event][:eventable_id], eventable_type: 'Person') unless params[:event][:eventable_id].blank?
       @events = @events.where(command: params[:event][:command]) unless params[:event][:command].blank?
     end
-    @events = @events.last(20).reverse
+    @events = @events.order('created_at DESC').paginate(:page => params[:page], :per_page => 20)
   end
 
   def show

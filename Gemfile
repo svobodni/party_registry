@@ -111,6 +111,10 @@ gem 'simple_form'
 gem 'rspayd'
 gem 'rqrcode'
 
+# paginace
+gem 'will_paginate', '~> 3.0.6'
+gem 'bootstrap-will_paginate'
+
 gem 'elasticsearch'
 
 gem 'bower-rails', '~> 0.7.3'

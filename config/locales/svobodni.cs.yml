@@ -1,4 +1,8 @@
 cs:
+  will_paginate:
+    previous_label: '&laquo; Předchozí'
+    page_gap: '&hellip;'
+    next_label: 'Další &raquo;'
   person_status:
     registered: "Nezaplacený příznivec"
     regular_supporter: "Příznivec"
