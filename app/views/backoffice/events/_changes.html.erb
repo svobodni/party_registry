@@ -6,7 +6,7 @@
   <tbody>
 <% changes.each { |change_key, change_values|%>
   <tr>
-    <% if ["updated_at", "password", "password_confirmation"].member?(change_key) %>
+    <% if ["updated_at", "encrypted_password", "password_salt"].member?(change_key) %>
     <% elsif change_key=="status" %>
     <th>Stav</th>
     <td><%=t change_values[0], scope: :person_status%></td>
