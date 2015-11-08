@@ -74,7 +74,8 @@ class Backoffice::PeopleController < ApplicationController
     respond_to do |format|
       if @person.update(person_params)
         @person.events.create(default_event_params.merge({
-          command: "update",
+          command: "UpdatePerson",
+          name: "PersonUpdated",
           changes: @person.previous_changes
         }))
         format.html { redirect_to :back, notice: 'Person was successfully updated.' }
@@ -92,7 +93,8 @@ class Backoffice::PeopleController < ApplicationController
     @person.paid!
     respond_to do |format|
       @person.events.create(default_event_params.merge({
-        command: "paid",
+        command: "AcceptPayment",
+        name: "PaymentAccepted",
         changes: @person.previous_changes
       }))
       format.html { redirect_to :back, notice: 'Úhrada byla úspěšně vyznačena.' }
@@ -111,7 +113,8 @@ class Backoffice::PeopleController < ApplicationController
     @person.destroy
     respond_to do |format|
       Event.create(default_event_params.merge({
-        command: "delete",
+        command: "DeletePerson",
+        name: "PersonDeleted",
         eventable_id: params[:id],
         eventable_type: "Person",
         previous_data: previous_data

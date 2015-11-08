@@ -155,7 +155,8 @@ class PeopleController < ApplicationController
     @person.destroy
     respond_to do |format|
       Event.create(default_event_params.merge({
-        command: "delete",
+        command: "DeletePerson",
+        name: "PersonDeleted",
         eventable_id: params[:id],
         eventable_type: "Person",
         previous_data: previous_data

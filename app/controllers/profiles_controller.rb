@@ -10,7 +10,8 @@ class ProfilesController < ApplicationController
     respond_to do |format|
       if current_person.update(person_params)
         current_person.events.create(default_event_params.merge({
-          command: "update",
+          command: "UpdatePerson",
+          name: "PersonUpdated",
           changes: current_person.previous_changes
         }))
         format.html { redirect_to :back, notice: 'Údaje úspěšně aktualizovány.' }
