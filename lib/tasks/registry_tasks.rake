@@ -12,6 +12,11 @@ namespace :registry do
       if locator = BranchLocator.find_by_person(p)
         if p.domestic_branch.try(:name) != locator.try(:name)
           p.update_attribute :domestic_branch, locator.branch
+          p.events.create({
+            command: "UpdateDomesticBranch",
+            name: "DomesticBranchUpdated",
+            changes: p.previous_changes
+          }) unless p.previous_changes.empty?
         end
       end
     }
