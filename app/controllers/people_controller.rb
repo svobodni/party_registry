@@ -80,6 +80,11 @@ class PeopleController < ApplicationController
   def approve
     authorize!(:approve, @person)
     @person.presidium_accepted!
+    @person.events.create(default_event_params.merge({
+      command: "AcceptPerson",
+      name: "PersonAccepted",
+      changes: @person.previous_changes
+    }))
     respond_to do |format|
       if @person.errors.empty?
         format.html { redirect_to :back, notice: 'Členství bylo úspěšně schváleno.'}
