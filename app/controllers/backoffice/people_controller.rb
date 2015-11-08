@@ -88,13 +88,13 @@ class Backoffice::PeopleController < ApplicationController
 
   # POST /people/1/paid
   def paid
+    @person.paid_till="2016-12-31"
     @person.paid!
     respond_to do |format|
       @person.events.create(default_event_params.merge({
         command: "paid",
         changes: @person.previous_changes
       }))
-      @person.update_attribute :paid_till, "2016-12-31"
       format.html { redirect_to :back, notice: 'Úhrada byla úspěšně vyznačena.' }
     end
   end
