@@ -61,6 +61,7 @@ class Person < ActiveRecord::Base
   after_create :set_membership_type
   before_save :notify_coordinator
   after_create :notify_member_registered
+  after_create :store_creation_event
 
   # změny evidujeme
   has_paper_trail
@@ -366,6 +367,22 @@ class Person < ActiveRecord::Base
 
   def notify_member_registered
     PresidiumNotifications.member_registered(self).deliver_now if awaiting_presidium_decision?
+  end
+
+  def store_creation_event
+    if legacy_type=="member"
+      events.create({
+        command: "RequestMembership",
+        name: "MembershipRequested",
+        changes: previous_changes
+      })
+    else
+      events.create({
+        command: "RegisterSupporter",
+        name: "SupporterRegistered",
+        changes: previous_changes
+      })
+    end
   end
 
   def set_guest_region
