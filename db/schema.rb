@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150828143707) do
+ActiveRecord::Schema.define(version: 20151109001352) do
 
   create_table "bank_payments", force: :cascade do |t|
     t.integer  "account_id",    limit: 4
@@ -62,16 +62,24 @@ ActiveRecord::Schema.define(version: 20150828143707) do
   end
 
   create_table "events", force: :cascade do |t|
-    t.string   "uuid",           limit: 255
-    t.integer  "requestor_id",   limit: 4
-    t.string   "eventable_type", limit: 255
-    t.integer  "eventable_id",   limit: 4
-    t.string   "command",        limit: 255
-    t.text     "metadata",       limit: 65535
-    t.text     "data",           limit: 65535
+    t.string   "uuid",                   limit: 255
+    t.integer  "requestor_id",           limit: 4
+    t.string   "eventable_type",         limit: 255
+    t.integer  "eventable_id",           limit: 4
+    t.string   "command",                limit: 255
+    t.text     "metadata",               limit: 65535
+    t.text     "data",                   limit: 65535
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "name",           limit: 255
+    t.string   "name",                   limit: 255
+    t.integer  "old_domestic_region_id", limit: 4
+    t.integer  "old_domestic_branch_id", limit: 4
+    t.integer  "domestic_region_id",     limit: 4
+    t.integer  "domestic_branch_id",     limit: 4
+    t.integer  "old_guest_region_id",    limit: 4
+    t.integer  "old_guest_branch_id",    limit: 4
+    t.integer  "guest_region_id",        limit: 4
+    t.integer  "guest_branch_id",        limit: 4
   end
 
   create_table "identities", force: :cascade do |t|
