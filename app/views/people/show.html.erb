@@ -3,61 +3,138 @@
 	breadcrumb :person, @person
 %>
 
-<%
-  page_title @person.name
-  breadcrumb :person, @person
-%>
+<%= image_tag @person.photo_url %>
 
 <div class="row">
-
   <div class="col-md-6">
-    <table class="table table-striped">
-      <tr><th></th><td><img src="<%= @person.photo_url %>"></td></tr>
-      <tr><th>Jméno</th><td><%= @person.name %></td></tr>
-      <tr><th>Kraj</th><td><%= link_to @person.domestic_region.name, @person.domestic_region %></td></tr>
-      <% if @person.guest_region %>
-      <tr><th>Hostuje v kraji</th><td><%= link_to @person.guest_region.try(:name), @person.guest_region %></td></tr>
-      <% end %>
-    </table>
 
-  </div>
+<p>
+  <strong>VS:</strong>
+  <%= @person.vs %>
+</p>
 
-  <div class="col-md-6">
-    Doplňující údaje z registru:
+<p>
+  <strong>Jméno:</strong>
+  <%= @person.name %>
+</p>
 
-    <% if @person.domestic_branch || @person.guest_branch %>
-    <h4>Pobočka</h4>
-    <% if @person.domestic_branch %>
-    <div>Spadám do pobočky <%= link_to @person.domestic_branch.try(:name), @person.domestic_branch %></div>
-    <% end %>
-    <% if @person.guest_branch %>
-    <div>Hostuji v pobočce <%= link_to @person.guest_branch.try(:name), @person.guest_branch %></div>
-    <% end %>
-    <% end %>
+<p>
+  <strong>Datum narození:</strong>
+  <%= l @person.date_of_birth %>
+</p>
 
-    <% unless @person.roles.blank? %>
-    <h4>Moje funkce ve Svobodných</h4>
-    <table class="table">
-      <% for role in @person.roles %>
-      <tr><td><%= link_to role.role_long_name, role.body || role.branch %></td><td>od <%= l role.since %> <%= role.till.to_s=="2099-01-01" ? nil : "- do #{l role.till}" %></td></tr>
-      <% end %>
-    </table>
-    <% end %>
-    <h4>Sdílení kontaktů - Moje kontaktní údaje</h4>
-    <table class="table table-striped">
-      <% for contact in @person.contacts.accessible_by(current_ability) %>
-      <tr><th><%=contact.contact_type%></th>
-      <td>
-        <% if contact.contact_type == "email" %>
-          <%= mail_to contact.contact, contact.contact %>
-        <% elsif contact.contact.match(/^http/) %>
-          <%= link_to contact.contact, contact.contact %>
-        <% else %>
-          <%= contact.contact %>
-        <% end %>
-      </td>
-      </tr>
-      <% end %>
-    </table>
-  </div>
+<p>
+  <strong>Stav:</strong>
+  <%= t @person.status, scope: :person_status %>
+</p>
+
+<p>
+  <strong>Zaplaceno do:</strong>
+  <%= l @person.paid_till %>
+</p>
+
+<p>
+  <strong>Telefonní číslo:</strong>
+  <%= @person.phone %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @person.email %>
+</p>
+
+<p>
+  <strong>Adresa bydliště:</strong>
+  <%= link_to @person.domestic_address_line, "http://vdp.cuzk.cz/vdp/ruian/adresnimista/#{@person.domestic_address_ruian_id}" %>
+</p>
+
+<p>
+  <strong>Korespondenční adresa:</strong>
+  <%= @person.postal_address_line %>
+</p>
+
+<p>
+  <strong>Kraj:</strong>
+  <%= @person.domestic_region.try(:name) %>
+</p>
+
+<p>
+  <strong>Pobočka:</strong>
+  <%= @person.domestic_branch.try(:name) %>
+</p>
+
+<p>
+  <strong>Hostuje v kraji:</strong>
+  <%= @person.guest_region.try(:name) %>
+</p>
+
+<p>
+  <strong>Hostuje v pobočce:</strong>
+  <%= @person.guest_branch.try(:name) %>
+</p>
+
+<p>
+  <strong>Dřívější kandidatury:</strong>
+  <%= @person.previous_candidatures %>
+</p>
+
+<p>
+  <strong>Dřívější členství v politických stranách:</strong>
+  <%= @person.previous_political_parties %>
+</p>
+
+<% if @person.is_member? || @person.is_awaiting_membership? %>
+  <% if @person.signed_application %>
+    <%= link_to "Podepsaná přihláška", signed_application_person_path(@person, format: :pdf), class: 'btn btn-default btn-xs' %>
+  <% else %>
+    <%= link_to "Přihláška k podpisu", application_person_path(@person, format: :pdf), class: 'btn btn-default btn-xs' %>
+    <%= link_to "Nahrát scan podepsané přihlášky", new_signed_application_path(person_id: @person.id), class: 'btn btn-default btn-xs' %>
+  <% end %>
+<% end %>
+
+</div>
+<div class="col-md-6">
+<% unless @person.roles.empty? %>
+<h2>Aktuální funkce</h2>
+<table class="table">
+  <thead><tr><th></th><th>Od</th><th>Do</th><th></th></tr></thead>
+  <% for role in @person.roles %>
+  <tr>
+    <td><%= link_to role.role_long_name, role.body || role.branch %></td><td><%= l role.since %></td><td><%= l role.till %></td>
+    <td><%= link_to("Ukončit funkci", role_path(role), {method: :delete, class: 'btn btn-default btn-xs'}) if can?(:destroy, role) %></td></td>
+  </tr>
+  <% end %>
+</table>
+<% end %>
+
+<% unless @person.historic_roles.empty? %>
+<h2>Historické funkce</h2>
+<table class="table">
+<thead><tr><th></th><th>Od</th><th>Do</th></tr></thead>
+<% for role in @person.historic_roles.order(till: :desc) %>
+<tr><td><%= link_to role.role_long_name, role.body || role.branch %></td><td><%= l role.since %></td><td><%= l role.till %></td></tr>
+<% end %>
+</table>
+<% end %>
+
+<h4>Sdílení kontaktů - kontaktní údaje</h4>
+<table class="table table-striped">
+	<% for contact in @person.contacts.accessible_by(current_ability) %>
+	<tr><th><%=contact.contact_type%></th>
+	<td>
+		<% if contact.contact_type == "email" %>
+			<%= mail_to contact.contact, contact.contact %>
+		<% elsif contact.contact.match(/^http/) %>
+			<%= link_to contact.contact, contact.contact %>
+		<% else %>
+			<%= contact.contact %>
+		<% end %>
+	</td>
+	</tr>
+	<% end %>
+</table>
+
+
+
+</div>
 </div>
