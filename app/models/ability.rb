@@ -47,9 +47,9 @@ class Ability
         can [:create, :destroy], Role do |r|
           role.body.organization.branch_ids.member?(r.branch_id)
         end
-      elsif role.body.try(:accronym)=="ReP"
-        can [:supervise], Region
-        can [:supervise], Branch
+      elsif role.body.try(:acronym)=="ReP"
+        can :supervise, Region
+        can :supervise, Branch
         can [:read, :application, :export], Person
       elsif role.body.try(:organization).try(:type)=="Country"
         # Členové republikového předsednictva, RK, VK, KK
