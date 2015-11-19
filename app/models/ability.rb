@@ -51,8 +51,8 @@ class Ability
         can :supervise, Region
         can :supervise, Branch
         can [:read, :application, :export], Person
-      elsif role.body.try(:organization).try(:type)=="Country"
-        # Členové republikového předsednictva, RK, VK, KK
+      elsif role.body.try(:acronym)=="VK"
+        # Volební komise + volební systém
         can [:read], Person
       end
     end

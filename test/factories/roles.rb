@@ -13,4 +13,13 @@ FactoryGirl.define do
     till { 1.year.since }
   end
 
+  factory :member do
+    factory :vk_member do
+      person { create(:person) }
+      body { create(:vk) }
+      since { 6.months.ago }
+      till { 1.year.since }
+    end
+  end
+
 end

@@ -81,4 +81,18 @@ class PeopleControllerTest < ActionController::TestCase
     end
   end
 
+  context "Voting commission member" do
+    should "get list of all regular people" do
+      role = FactoryGirl.create(:vk_member)
+      @vk = Body.find_by_acronym("VK")
+      @person = @vk.members.first
+      sign_in @person
+      get :index, format: :json
+      assert_response :success
+      body = JSON.parse(response.body)
+      assert_equal Person.count, body["people"].size
+    end
+  end
+
+
 end
