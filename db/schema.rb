@@ -62,16 +62,24 @@ ActiveRecord::Schema.define(version: 20151109001352) do
   end
 
   create_table "events", force: :cascade do |t|
-    t.string   "uuid",           limit: 255
-    t.integer  "requestor_id",   limit: 4
-    t.string   "eventable_type", limit: 255
-    t.integer  "eventable_id",   limit: 4
-    t.string   "command",        limit: 255
-    t.text     "metadata",       limit: 65535
-    t.text     "data",           limit: 65535
+    t.string   "uuid",                   limit: 255
+    t.integer  "requestor_id",           limit: 4
+    t.string   "eventable_type",         limit: 255
+    t.integer  "eventable_id",           limit: 4
+    t.string   "command",                limit: 255
+    t.text     "metadata",               limit: 65535
+    t.text     "data",                   limit: 65535
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "name",           limit: 255
+    t.string   "name",                   limit: 255
+    t.integer  "old_domestic_region_id", limit: 4
+    t.integer  "old_domestic_branch_id", limit: 4
+    t.integer  "domestic_region_id",     limit: 4
+    t.integer  "domestic_branch_id",     limit: 4
+    t.integer  "old_guest_region_id",    limit: 4
+    t.integer  "old_guest_branch_id",    limit: 4
+    t.integer  "guest_region_id",        limit: 4
+    t.integer  "guest_branch_id",        limit: 4
   end
 
   create_table "identities", force: :cascade do |t|
