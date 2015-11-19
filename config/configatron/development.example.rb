@@ -12,6 +12,9 @@ configatron.auth.systems = {
 
 configatron.old_web.sync_pass = "tajneheslo"
 
+configatron.facebook.app_id = "facebook"
+configatron.facebook.app_secret = "koobecaf"
+
 configatron.twitter.consumer_key        = "mG3Bni2iKZv70UkzeZwFZjVPu"
 configatron.twitter.consumer_secret     = "YNl25W1vzlmNHUWLzfKfKWVTiZYRskby5D8dbGvyueukpEu3k9"
 configatron.twitter.access_token        = "3072281596-MEipY28e9A4lUKuaH23PNQ00Vhcm9fBh0pUNCEB"

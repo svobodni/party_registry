@@ -1,4 +1,5 @@
-== Political party registry
+Political party registry
+========================
 
 [![Build Status](https://travis-ci.org/svobodni/party_registry.svg?branch=master)](https://travis-ci.org/svobodni/party_registry)
 
@@ -13,6 +14,7 @@
 * Configuration
 
     bundle install
+    cp config/configatron/development.example.rb config/configatron/development.rb
 
 * Database creation
 
