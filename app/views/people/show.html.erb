@@ -17,7 +17,7 @@
   <strong>Jméno:</strong>
   <%= @person.name %>
 </p>
-
+<% if can? :read, @person %>
 <p>
   <strong>Datum narození:</strong>
   <%= l @person.date_of_birth %>
@@ -88,8 +88,8 @@
     <%= link_to "Podepsaná přihláška", signed_application_person_path(@person, format: :pdf), class: 'btn btn-default btn-xs' %>
   <% else %>
     <%= link_to "Přihláška k podpisu", application_person_path(@person, format: :pdf), class: 'btn btn-default btn-xs' %>
-    <%= link_to "Nahrát scan podepsané přihlášky", new_signed_application_path(person_id: @person.id), class: 'btn btn-default btn-xs' %>
   <% end %>
+<% end %>
 <% end %>
 
 </div>

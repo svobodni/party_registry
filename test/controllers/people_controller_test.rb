@@ -19,10 +19,16 @@ class PeopleControllerTest < ActionController::TestCase
       assert_response :forbidden
     end
 
-    should "get info on person with shared public contact" do
+    should "get public info on person with shared public contact" do
       @another_person = FactoryGirl.create(:person_with_public_contact)
       get :show, id: @another_person
       assert_response :success
+    end
+
+    should "not get private info on person with shared public contact" do
+      @another_person = FactoryGirl.create(:person_with_public_contact)
+      get :show, id: @another_person
+      assert_no_match /narození/, response.body
     end
 
     should "get json with profile" do
@@ -53,6 +59,7 @@ class PeopleControllerTest < ActionController::TestCase
       sign_in @coordinator
       get :show, id: @person
       assert_response :success
+      assert_match /narození/, response.body
     end
 
     should "not get info on person in other branch without shared contact" do
@@ -70,6 +77,7 @@ class PeopleControllerTest < ActionController::TestCase
       sign_in @president
       get :show, id: @person
       assert_response :success
+      assert_match /narození/, response.body
     end
 
     should "not get info on person in other region without shared contact" do
