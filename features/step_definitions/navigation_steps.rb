@@ -22,7 +22,7 @@ Když(/^přejdu z domovské stránky na stránku pro registraci$/) do
 end
 
 Když(/^v menu zvolím "(.*?)"$/) do |link|
-  click_link link
+  first(:link, link).click
 end
 
 Když(/^v menu rozbalím "(.*?)" a pak zvolím "(.*?)"$/) do |link1, link2|

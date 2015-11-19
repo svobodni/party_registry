@@ -19,7 +19,7 @@ Pak(/^bych měl být úspešně zaregistrován a přihlášen$/) do
 end
 
 Pak(/^(?:|měl bych|bych měl) vidět dashboard$/) do
-  assert page.has_xpath?('//h1', :text => 'Hlavní rozcestník')
+  assert page.has_xpath?('//h2', :text => 'Aktuality')
 end
 
 def create_user(username, password)
