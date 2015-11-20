@@ -65,6 +65,8 @@ module ApplicationHelper
             content_tag(:i, class: 'fa fa-twitter'){}
           when 'linked_in'
             content_tag(:i, class: 'fa fa-linkedin'){}
+          when 'skype'
+            content_tag(:i, class: 'fa fa-skype'){}
           when 'google_plus'
             content_tag(:i, class: 'fa fa-google-plus'){}
           when 'forum'

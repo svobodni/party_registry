@@ -36,7 +36,8 @@ class Contact < ActiveRecord::Base
       ['Blog','blog'],
       ['Fórum - kandidátské vlákno','forum'],
       ['FB stránka','facebook_page'],
-      ['Linked in','linked_in']
+      ['Linked in','linked_in'],
+      ['Skype','skype']
     ]
   end
 end
