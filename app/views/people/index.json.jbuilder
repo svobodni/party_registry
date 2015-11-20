@@ -6,6 +6,7 @@ json.people @people do |person|
   json.status person.status
   json.member_status person.member_status
   json.supporter_status person.supporter_status
+  json.paid_till person.paid_till
   json.name person.name
   json.first_name person.first_name
   json.last_name person.last_name
