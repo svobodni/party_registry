@@ -205,6 +205,10 @@ class Person < ActiveRecord::Base
     ["awaiting_first_payment", "regular_supporter_awaiting_first_payment"].member?(status)
   end
 
+  def self.final_states
+    ['regular_supporter', 'regular_member']
+  end
+
   def self.awaiting_states
     ["awaiting_presidium_decision", "awaiting_first_payment", "regular_supporter_awaiting_presidium_decision", "regular_supporter_awaiting_first_payment"]
   end
