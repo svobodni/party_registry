@@ -21,6 +21,7 @@
 
 <%= field_set_tag "Stav" do %>
 <%= f.input :status, include_blank: false, collection: Person.aasm.states.map(&:name), label_method: lambda {|status| t status, scope: :person_status} %>
+<%= f.input :snail_newsletter, label: "Zasílat Berana" %>
 <% end %>
 
 <%= f.button :submit, "Uložit" %>
