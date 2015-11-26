@@ -1,0 +1,49 @@
+<%
+  page_title 'Změny v registru'
+  render 'backoffice/sidebar'
+%>
+
+<div class="panel panel-default">
+  <div class="panel-body bg-success">
+    <%= simple_form_for @event, url: events_path, method: :get do |f| %>
+      <%= f.input :eventable_id, label: "ID osoby" %>
+      <%= f.input :name, collection:  Event.group(:name).uniq.size.collect{|k,v| k}.compact, label: "Událost" %>
+      <%= f.button :submit, "Vyhledat", class: "pull-right" %>
+    <% end %>
+  </div>
+</div>
+
+<% for date, event_groups in @event_groups %>
+  <h3><%= l date %></h3>
+  <% for event in event_groups %>
+    <% unless ['ContactCreated', 'ContactUpdated', 'ContactDeleted'].member?(event.name) %>
+
+      <%= event.previous_data.try(:[], 'person_name') || link_to(event.eventable.try(:name), person_path(event.eventable_id)) %>
+
+      <%= humanize_event(event) %>
+
+      <% if event.eventable.kind_of?(Person) %>
+      <small>(
+        <% if Person.final_states.member?(event.eventable.try(:status)) %>
+        <span class="glyphicon glyphicon-ok"></span>
+        <% elsif %>
+        <% event.name=='PersonDeleted' %>
+        <span class="glyphicon glyphicon-remove"></span>
+        <% else %>
+        <span class="glyphicon glyphicon-adjust"></span>
+        <% end %>
+      <%= t(event.eventable.status, scope: :person_status) %>)</small>
+      <% end %>
+      <br>
+
+      <% unless ['MembershipRequested', 'MembershipCancelled', 'BranchCreated', 'PersonAccepted', 'PaymentAccepted', 'SupporterRegistered', 'DomesticBranchUpdated', 'PersonDeleted', 'ApplicationReceived', 'RoleCreated', 'RoleCancelled', 'PersonUpdated'].member?(event.name) %>
+      <%= event.inspect %>
+      <%# end %>
+      <% end %>
+
+
+    <% end %>
+  <% end %>
+<% end %>
+
+<%= will_paginate @events, class: "pull-right" %>

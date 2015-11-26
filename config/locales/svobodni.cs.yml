@@ -66,6 +66,7 @@ cs:
         postal_address_zip: PSČ
         phone: Telefon
         amount: Částka
+        paid_till: Zaplaceno do
       organization:
         name: "Název"
         region: "Kraj"

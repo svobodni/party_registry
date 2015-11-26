@@ -79,6 +79,7 @@ Rails.application.routes.draw do
     end
   end
   resources :organizations
+  resources :events, only: :index
   resources :people do
     resources :contacts
     member do

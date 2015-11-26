@@ -134,6 +134,16 @@
 	<% end %>
 </table>
 
+<h4>Události</h4>
+<table class="table table-striped">
+	<% for event in @person.events.accessible_by(current_ability) %>
+	<tr><th><%=l event.created_at.to_date %></th>
+	<td>
+		<%= humanize_event(event) %>
+	</td>
+	</tr>
+	<% end %>
+</table>
 
 
 </div>

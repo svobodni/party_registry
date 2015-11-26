@@ -1,0 +1,18 @@
+<%
+  page_title 'Detail doménové události'
+  render 'backoffice/sidebar'
+%>
+
+<table class="table">
+<tbody>
+  <tr><th>UUID</th><td><%= @event.uuid %></td></tr>
+  <tr><th>Kdy</th><td><%=l @event.created_at %></td></tr>
+  <tr><th>Kdo</th><td><%= @event.requestor.try(:name) %></td></tr>
+  <tr><th>IP adresa</th><td><%= @event.remote_ip %></td></tr>
+  <tr><th>controller_path</th><td><%= @event.controller_path %></td></tr>
+  <tr><th>action_name</th><td><%= @event.action_name %></td></tr>
+  <tr><th>command</th><td><%= @event.command %></td></tr>
+  <tr><th>Kde</th><td><%= link_to @event.eventable.try(:name), @event.eventable %></td></tr>
+  <tr><th>Co</th><td><%= render(partial: "changes", locals: {changes: @event.changes, eventable_type: @event.eventable_type})%></td></tr>
+</tbody>
+</table>

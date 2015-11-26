@@ -1,0 +1,22 @@
+<% unless changes.blank? %>
+<table class="table table-condensed">
+  <thead>
+    <tr><th>Pole</th><th>Původní záznam</th><th>Nový záznam</th></tr>
+  </thead>
+  <tbody>
+<% changes.each { |change_key, change_values|%>
+  <tr>
+    <% if ["updated_at", "password", "encrypted_password", "password_salt", "username"].member?(change_key) %>
+    <% elsif change_key=="status" %>
+    <th>Stav</th>
+    <td><%=t change_values[0], scope: :person_status%></td>
+    <td><%=t change_values[1], scope: :person_status%></td>
+    <% else %>
+    <th><%=ta eventable_type, change_key %></th>
+    <td><%= change_values[0].inspect%></td>
+    <td><%= change_values[1].inspect%></td>
+    <% end %>
+<% } %>
+</tbody>
+</table>
+<% end %>

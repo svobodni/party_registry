@@ -5,6 +5,7 @@ class Ability
 
     # Každý může číst informace o orgánech, pobočkách, krajích a funkcích
     can :read, [Body, Branch, Region, Role]
+    can :read, Event, name: ['RoleCreated','RoleCancelled']
 
     # Uživatel může číst a aktualizovat informace o sobě, stáhnout formulář přihlášky a ukončit členství
     can [:read, :update, :application, :cancel_membership], Person, :id => user.id
@@ -38,9 +39,17 @@ class Ability
         can [:read, :application, :export], Person, guest_branch_id: role.branch_id
         can [:read, :application, :export], Person, domestic_branch_id: role.branch_id
         can [:supervise], Branch, id: role.branch_id
+        can :read, Event, domestic_branch_id: role.branch_id
+        can :read, Event, guest_branch_id: role.branch_id
+        can :read, Event, old_domestic_branch_id: role.branch_id
+        can :read, Event, old_guest_branch_id: role.branch_id
       elsif (role.type == "President" || role.type == "Vicepresident") && role.body.organization.type=="Region"
         # Členové krajského předsednictva
         can [:read, :application, :export, :update, :approve], Person, domestic_region_id: role.body.organization_id
+        can :read, Event, domestic_region_id: role.body.organization_id
+        can :read, Event, guest_region_id: role.body.organization_id
+        can :read, Event, old_domestic_region_id: role.body.organization_id
+        can :read, Event, old_guest_region_id: role.body.organization_id
         can [:read, :application, :export], Person, guest_region_id: role.body.organization_id
         can [:create, :supervise], Branch, parent_id: role.body.organization_id
         can [:supervise], Region, id: role.body.organization_id
@@ -50,6 +59,7 @@ class Ability
       elsif role.body.try(:acronym)=="ReP"
         can :supervise, Region
         can :supervise, Branch
+        can :read, Event
         can [:read, :application, :export], Person
       elsif role.body.try(:acronym)=="VK"
         # Volební komise + volební systém
