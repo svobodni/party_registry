@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151109001352) do
+ActiveRecord::Schema.define(version: 20151126132357) do
 
   create_table "bank_payments", force: :cascade do |t|
     t.integer  "account_id",    limit: 4
@@ -217,6 +217,7 @@ ActiveRecord::Schema.define(version: 20151109001352) do
     t.integer  "cv_file_size",               limit: 4
     t.datetime "cv_updated_at"
     t.date     "paid_till"
+    t.boolean  "snail_newsletter",                         default: true
   end
 
   add_index "people", ["confirmation_token"], name: "index_people_on_confirmation_token", unique: true, using: :btree
