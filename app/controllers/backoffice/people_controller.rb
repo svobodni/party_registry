@@ -49,6 +49,10 @@ class Backoffice::PeopleController < ApplicationController
   def new_registrations
     @people = Person.order(id: :desc).limit(50)
   end
+  
+  def active_addresses
+    @people = Person.includes([:domestic_region, :signed_application]).select{|p| p.is_regular?}
+  end
 
   # GET /people/1
   # GET /people/1.json
