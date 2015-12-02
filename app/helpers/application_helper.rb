@@ -50,7 +50,7 @@ module ApplicationHelper
 
   def draw_contacts(contacts)
     social = %w(facebook_profile facebook_page twitter google_plus linked_in forum web blog)
-    order = %w(phone email web blog)+social
+    order = %w(phone email web blog skype)+social
     contacts.sort_by{|element|
       order.index(element.contact_type)
     }.collect do |contact|
