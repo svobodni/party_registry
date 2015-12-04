@@ -26,3 +26,9 @@
 
 <%= f.button :submit, "Uložit" %>
 <% end %>
+
+<p>Nahrát nový životopis: </p>
+<%= simple_form_for @person, url: backoffice_person_path(@person) do |f| %>
+  <%= f.input :cv, label: "Soubor PDF s životopisem" %>
+  <%= f.button :submit, "Uložit životopis", class: 'btn btn-success'  %>
+<% end %>
