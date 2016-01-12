@@ -1,7 +1,8 @@
 class Backoffice::PeopleController < ApplicationController
 
   before_action :set_person, only: [:edit, :update, :destroy, :paid]
-  before_action :authorize_backoffice
+  before_action :authorize_backoffice_read, except: [:paid, :update, :destroy]
+  before_action :authorize_backoffice, only: [:paid, :update, :destroy]
 
   autocomplete :person, :email, :display_value => :email_name_id_region, :extra_data => [:name_prefix, :first_name, :last_name, :name_suffix, :domestic_region_id, :status]
 
@@ -158,6 +159,10 @@ class Backoffice::PeopleController < ApplicationController
 
     def authorize_backoffice
       authorize!(:backoffice, :all)
+    end
+
+    def authorize_backoffice_read
+      authorize!(:backoffice, :read)
     end
 
 end

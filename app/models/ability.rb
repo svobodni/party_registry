@@ -66,6 +66,10 @@ class Ability
       can :backoffice, :all
     end
 
+    if [2522].member?(user.id)
+      can :backoffice, :read
+    end
+
     # Speciální role pro adminitrátora
     if [342].member?(user.id)
       can :manage, Doorkeeper::Application
