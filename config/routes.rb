@@ -4,6 +4,9 @@ Rails.application.routes.draw do
     resources :events, only: [:index, :show]
     resources :stats, only: :index
     resources :people do
+      collection do
+        get 'addresses'
+      end
       member do
         post 'paid'
       end

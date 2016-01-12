@@ -124,6 +124,26 @@ class Backoffice::PeopleController < ApplicationController
     end
   end
 
+  def addresses
+    @people = Person.where(status: (Person.regular_supporter_states+["regular_member"]))
+    respond_to do |format|
+      format.csv {
+        render text: (CSV.generate do |csv|
+          column_names=[:first_name, :last_name, :street, :city, :zip, :newsletter, :status]
+          csv << column_names
+          @people.each do |person|
+            if person.postal_address_street.blank?
+              column_names=['first_name', 'last_name', 'domestic_address_street', 'domestic_address_city', 'domestic_address_zip']
+            else
+              column_names=['first_name', 'last_name', 'postal_address_street', 'postal_address_city', 'postal_address_zip']
+            end
+            csv << person.attributes.values_at(*column_names+['snail_newsletter']+['status'])
+            end
+        end)
+      }
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_person
