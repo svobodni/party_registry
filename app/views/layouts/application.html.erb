@@ -63,7 +63,7 @@
                     <li><%= link_to "Členové bez přihlášky", members_without_signed_application_backoffice_people_path %></li>
                     <li><%= link_to "Špatný kraj", with_bad_region_backoffice_people_path %></li>
                     <li><%= link_to "Nové registrace", new_registrations_backoffice_people_path %></li>
-                    <li><%= link_to_unless_current "Export adress", addresses_backoffice_people_path(format: 'csv') %></li>
+                    <li><%= link_to_unless_current "Export adress", addresses_backoffice_people_path(format: 'xls') %></li>
                   </ul>
                 </li>
                 <% if can? :destroy, Role %>
