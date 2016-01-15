@@ -8,8 +8,8 @@
     <tr><th>Kraj</th><th>Počet</th></tr>
   </thead>
   <tbody>
-    <% @people.group_by{|p| p.domestic_region.name}.each do |region, count| %>
-      <tr><th><%=region%></th><td><%=count %></td></tr>
+    <% @people.group_by{|p| p.domestic_region.name}.each do |region, people| %>
+      <tr><th><%=region%></th><td><%= people.size %></td></tr>
     <% end %>
   </tbody>
 </table>

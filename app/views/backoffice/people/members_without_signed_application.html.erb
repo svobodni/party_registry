@@ -3,6 +3,17 @@
   render "backoffice/sidebar"
 %>
 
+<table id="stats" class="table table-striped">
+  <thead>
+    <tr><th>Kraj</th><th>Počet</th></tr>
+  </thead>
+  <tbody>
+    <% @people.group_by{|p| p.domestic_region.name}.each do |region, people| %>
+      <tr><th><%=region%></th><td><%= people.size %></td></tr>
+    <% end %>
+  </tbody>
+</table>
+
 <table id="people" class="table table-striped">
   <thead>
     <tr><th>ID</th><th>Jméno</th><th>Kraj</th></tr>
