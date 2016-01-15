@@ -2,7 +2,11 @@ Rails.application.routes.draw do
 
   namespace :backoffice do
     resources :events, only: [:index, :show]
-    resources :stats, only: :index
+    resources :stats, only: [:index] do
+      collection do
+        get 'changes'
+      end
+    end
     resources :people do
       collection do
         get 'addresses'

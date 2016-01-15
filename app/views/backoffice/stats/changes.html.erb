@@ -1,0 +1,50 @@
+<%
+  render 'backoffice/sidebar'
+  page_title 'Statistiky změn členské základny za období'
+%>
+
+<h3><%= "#{l @since} - #{l @till}" %></h3>
+<form>
+  <input name="since" value="<%=@since%>">
+  <input name="till" value="<%=@till%>">
+  <input type="submit" value="Zobrazit">
+</form>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Kraj</th>
+      <th>Nových členů</th>
+      <th>Nových příznivců</th>
+      <th>Ukončené členství</th>
+      <th>Ukončené příznivectví</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for region in @regions %>
+      <% regional_events = @events.select{|e| e.domestic_region_id==region.id}%>
+      <% new_member_events = regional_events.select{|e| e.changes[:status][1]=="regular_member"} %>
+      <% new_supporter_events = regional_events.select{|e| e.changes[:status][1]=="regular_supporter"} %>
+      <% canceled_membership_events = regional_events.select{|e| e.changes[:status]==["regular_member", "registered"]} %>
+      <% canceled_supporter_events = regional_events.select{|e| e.changes[:status]==["regular_supporter", "registered"]} %>
+      <tr>
+        <th><%= region.name %></th>
+        <td><%= new_member_events.size %></td>
+        <td><%= new_supporter_events.size %></td>
+        <td><%= canceled_membership_events.size %></td>
+        <td><%= canceled_supporter_events.size %></td>
+      </tr>
+    <% end %>
+    <% new_member_events = @events.select{|e| e.changes[:status][1]=="regular_member"} %>
+    <% new_supporter_events = @events.select{|e| e.changes[:status][1]=="regular_supporter"} %>
+    <% canceled_membership_events = @events.select{|e| e.changes[:status]==["regular_member", "registered"]} %>
+    <% canceled_supporter_events = @events.select{|e| e.changes[:status]==["regular_supporter", "registered"]} %>
+    <tr>
+      <th>CELKEM</th>
+      <th><%= new_member_events.size %></th>
+      <th><%= new_supporter_events.size %></th>
+      <th><%= canceled_membership_events.size %></th>
+      <th><%= canceled_supporter_events.size %></th>
+    </tr>
+  </tbody>
+</table>

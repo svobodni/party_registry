@@ -21,6 +21,13 @@ class Backoffice::StatsController < ApplicationController
     }
   end
 
+  def changes
+    @since = (params[:since] || 1.month.ago).to_date
+    @till = (params[:till] || Time.now).to_date
+    @events = Event.where("created_at>=? AND created_at<=?", @since, @till).reject{|e| e.changes.blank? || e.changes[:status].blank?}
+    @regions = Region.all
+  end
+
   private
     def authorize_backoffice
       authorize!(:backoffice, :all)

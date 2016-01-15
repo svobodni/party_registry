@@ -27,6 +27,10 @@
       <% end %>
     </ul>
     <li><%= link_to_unless_current "Statistika", backoffice_stats_path %></li>
+    <ul>
+      <li><%= link_to_unless_current "Aktuální stav", backoffice_stats_path %>
+      <li><%= link_to_unless_current "Změny", changes_backoffice_stats_path %>
+    </ul>
     <li><a href="http://finance.svobodni.cz/organizations/100">Finance</a></li>
     <li><%= link_to_unless_current "Logy", backoffice_events_path %></li>
   </ul>
