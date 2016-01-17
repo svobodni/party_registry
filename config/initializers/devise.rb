@@ -247,7 +247,7 @@ Devise.setup do |config|
 
   config.omniauth :open_id, store: OpenID::Store::Filesystem.new("/tmp"), name: 'mojeid', identifier: 'https://mojeid.cz/endpoint/'
 
-  config.omniauth :trezor, :datetime, 'https://volby.svobodni.cz/_skin/index/images/svobodni_logo_1_color-crop-531x531.png'
+  config.omniauth :trezor, hosticon: 'https://volby.svobodni.cz/_skin/index/images/svobodni_logo_1_color-crop-531x531.png'
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
