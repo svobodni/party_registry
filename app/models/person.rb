@@ -4,7 +4,7 @@ require Rails.root.join('lib', 'dotnet_sha1')
 class Person < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :encryptable, :confirmable,
       :lockable, :recoverable, :rememberable, :trackable, :validatable
-  devise :omniauthable, :omniauth_providers => [:facebook, :twitter, :mojeid]
+  devise :omniauthable, :omniauth_providers => [:facebook, :twitter, :mojeid, :trezor]
 
   has_many :events, as: :eventable
 

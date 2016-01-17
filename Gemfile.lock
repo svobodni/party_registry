@@ -45,6 +45,9 @@ GEM
       execjs
       json
     bcrypt (3.1.10)
+    bitcoin (0.2.0)
+      bitcoin-ruby
+    bitcoin-ruby (0.0.7)
     bootstrap-sass (3.3.5.1)
       autoprefixer-rails (>= 5.0.0.1)
       sass (>= 3.3.0)
@@ -264,6 +267,10 @@ GEM
     omniauth-openid (1.0.1)
       omniauth (~> 1.0)
       rack-openid (~> 1.3.1)
+    omniauth-trezor (0.1.0)
+      bitcoin (~> 0.2)
+      ffi (~> 1.9)
+      omniauth (~> 1.0)
     omniauth-twitter (1.2.1)
       json (~> 1.3)
       omniauth-oauth (~> 1.1)
@@ -481,6 +488,7 @@ DEPENDENCIES
   oat
   omniauth-facebook
   omniauth-openid
+  omniauth-trezor
   omniauth-twitter
   paper_trail
   paperclip (~> 4.2)
@@ -508,3 +516,6 @@ DEPENDENCIES
   underscore-rails
   wicked
   will_paginate (~> 3.0.6)
+
+BUNDLED WITH
+   1.10.6

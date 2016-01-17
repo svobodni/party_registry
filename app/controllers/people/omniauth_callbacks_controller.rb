@@ -1,6 +1,6 @@
 class People::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
-  skip_before_action :verify_authenticity_token, only: :mojeid
+  skip_before_action :verify_authenticity_token, only: [:mojeid, :trezor]
 
   def twitter
     default_callback
@@ -11,6 +11,10 @@ class People::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def mojeid
+    default_callback
+  end
+
+  def trezor
     default_callback
   end
 

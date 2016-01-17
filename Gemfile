@@ -55,6 +55,7 @@ gem 'doorkeeper'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 gem 'omniauth-openid'
+gem 'omniauth-trezor'
 
 # Autorizace
 gem 'cancan'
