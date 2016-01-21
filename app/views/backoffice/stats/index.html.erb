@@ -11,6 +11,33 @@
 <tr><th>Počet nezaplacených příznivců:</th><td><%= @stats[:totals][:unpaid_supporters] %></td></tr>
 </table>
 
+<h3>Platby</h3>
+
+<% stats = Person.group(:status, :paid_till).count %>
+<% dates = stats.collect{|k,v| k[1]}.uniq %>
+<% states = stats.collect{|k,v| k[0]}.uniq %>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Status</th>
+      <% dates.each do |date| %>
+        <td><%= date %></td>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+<% states.each do |status| %>
+  <tr>
+    <th><%= t status, scope: :person_status %></th>
+    <% dates.each do |date| %>
+      <td><%= stats[[status, date]] %></td>
+    <% end %>
+  </tr>
+<% end %>
+  </tbody>
+</table>
+
 <h3>Kraje</h3>
 <table class="table">
 <thead><tr><th>Kraj</th><th align="right">Počet členů</th><th align="right">Počet příznivců</th><th>Počet zájemců o členství</th><th>Počet nezaplacených příznivců</th></tr></thead>
