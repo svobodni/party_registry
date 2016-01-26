@@ -14,6 +14,7 @@
         <Cell><Data ss:Type="String">Stav</Data></Cell>
         <Cell><Data ss:Type="String">Přihláška</Data></Cell>
         <Cell><Data ss:Type="String">Rozpoznaná adresa</Data></Cell>
+        <Cell><Data ss:Type="String">Zaplaceno do</Data></Cell>
         <Cell><Data ss:Type="String">Domovský kraj</Data></Cell>
         <Cell><Data ss:Type="String">Domovský okres</Data></Cell>
         <Cell><Data ss:Type="String">Domovská městská část</Data></Cell>
@@ -29,6 +30,7 @@
         <Cell><Data ss:Type="String"><%=t person.status, scope: :person_status %></Data></Cell>
         <Cell><Data ss:Type="String"><%= person.signed_application ? "ano" : "ne" %></Data></Cell>
         <Cell><Data ss:Type="String"><%= person.domestic_ruian_address ? "ano" : "ne" %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= person.paid_till %></Data></Cell>
         <Cell><Data ss:Type="String"><%= person.domestic_region.try(:name) %></Data></Cell>
         <Cell><Data ss:Type="String"><%= person.domestic_ruian_address.try(:okres) %></Data></Cell>
         <Cell><Data ss:Type="String"><%= person.domestic_ruian_address.try(:mestska_cast) %></Data></Cell>
