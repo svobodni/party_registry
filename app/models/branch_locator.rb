@@ -53,6 +53,8 @@ class BranchLocator
     return obec if obec=="Chrudim"
     # Středočeský kraj
     return obec if ["Slaný", "Řevnice"].member?(obec)
+    # Ústecký kraj
+    return obec if obec=="Štětí"
   end
 
   # Pobočky na celém území působnosti obce s rozšířenou působností
