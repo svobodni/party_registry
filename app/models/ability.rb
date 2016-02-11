@@ -54,6 +54,8 @@ class Ability
       elsif role.body.try(:acronym)=="VK"
         # Volební komise + volební systém
         can [:read], Person
+      elsif role.body.try(:acronym)=="KK"
+        can :backoffice, :read
       end
     end
 
