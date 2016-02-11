@@ -1,0 +1,9 @@
+<%
+  page_title 'Nová prezenční listina ReV'
+  render 'backoffice/sidebar'
+%>
+
+<%= simple_form_for :attendance_list, url: backoffice_attendance_lists_path do |f| %>
+<%= f.input :date, as: :date, label: "Datum jednání" %>
+<%= f.button :submit, value: "Vygenerovat", class: 'btn btn-success' %>
+<% end %>

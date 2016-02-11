@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   namespace :backoffice do
+    resources :attendance_lists, only: [:new, :create, :show]
     resources :events, only: [:index, :show]
     resources :stats, only: [:index] do
       collection do
