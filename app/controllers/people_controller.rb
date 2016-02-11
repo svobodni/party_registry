@@ -19,6 +19,7 @@ class PeopleController < ApplicationController
     respond_to do |format|
       format.xls
       format.json
+      format.vcf
     end
   end
 

@@ -1,0 +1,10 @@
+<% for person in @people %>
+BEGIN:VCARD
+VERSION:3.0
+N:<%= person.last_name %>;<%= person.first_name %>;;<%= person.name_prefix%>;<%= person.name_suffix%>
+FN:<%= person.name %>
+EMAIL;TYPE=INTERNET:<%= person.email %>
+ORG:Strana svobodných občanů
+TEL:<%= person.phone %>
+END:VCARD
+<% end %>
