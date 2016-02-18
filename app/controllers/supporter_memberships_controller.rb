@@ -10,6 +10,11 @@ class SupporterMembershipsController < ApplicationController
           name: "MembershipRequested",
           changes: current_person.previous_changes
         }))
+        begin
+          PresidiumNotifications.member_registered(current_person).deliver_now
+          CoordinatorNotifications.member_registered(current_person).deliver_now
+        rescue
+        end
         format.html { redirect_to membership_profiles_path, notice: 'Údaje úspěšně aktualizovány.' }
       else
         format.html { render action: :new }
