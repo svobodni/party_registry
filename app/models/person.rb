@@ -11,7 +11,7 @@ class Person < ActiveRecord::Base
   has_many :identities
 
   # může vykonávat funkci
-  has_many :roles, -> { where("since < ? and till > ?", Time.now, Time.now ) }
+  has_many :roles, -> { where("since <= ? and till >= ?", Time.now, Time.now ) }
   # vykonával funkci
   has_many :historic_roles, -> { where("till < ?", Time.now) }, source: :role, class_name: Role
   # ve voleném orgánu
