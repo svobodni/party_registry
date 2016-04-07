@@ -15,6 +15,11 @@ class Contact < ActiveRecord::Base
   validates_presence_of :privacy
 
 
+  validates :contact, :presence => true,
+                    :format => {:with => /\A[0-9\-\+ ]{9,15}\z/},
+                    :length => { :minimum => 9, :maximum => 15 },
+                    :if => Proc.new { |o| o.contact_type == "phone"}
+
   def self.privacies
     [
       ['Veřejný kontakt','public'],
