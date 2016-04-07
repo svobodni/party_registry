@@ -6,6 +6,8 @@ class Person < ActiveRecord::Base
       :lockable, :recoverable, :rememberable, :trackable, :validatable
   devise :omniauthable, :omniauth_providers => [:facebook, :twitter, :mojeid]
 
+  attr_accessor :reason
+
   has_many :events, as: :eventable
 
   has_many :identities

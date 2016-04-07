@@ -84,11 +84,11 @@
 </div>
 
 <% if @person.is_regular_member? %>
-<div class="jumbotron">
+<p class="bg-info">
   <h2>Ukončení členství</h2>
   <p>Pokud jste se rozhodli ukončit členství ve Svobodných, můžete tak učinit zde a budete převeden na příznivce.</p>
-  <p><%= button_to "Oznámit ukončení členství", cancel_membership_person_path(current_person), class: "btn btn-primary btn-danger", data: { confirm: "Opravdu si přejete ukončit své členství ve Straně svobodných občanů?" }%></p>
-</div>
+  <p><%= link_to "Oznámit ukončení členství", cancel_membership_request_person_path(current_person), class: "btn btn-default" %></p>
+</p>
 <% else %>
 <div class="jumbotron">
   <h2>Smazání osobních údajů</h2>

@@ -90,6 +90,7 @@ Rails.application.routes.draw do
       get 'cv'
       post 'approve'
       post 'cancel_membership'
+      get 'cancel_membership_request'
     end
     collection do
       get 'profile'

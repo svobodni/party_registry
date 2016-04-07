@@ -1,0 +1,16 @@
+<%
+  page_title "Oznámení o ukončení členství"
+  render 'profiles/sidebar'
+  breadcrumb(:profile_membership)
+%>
+
+<div class="row">
+<%= simple_form_for current_person, url: cancel_membership_person_path, method: :post do |f| %>
+<%= f.input :vs, disabled: true, label: "ID" %>
+<%= f.input :name, disabled: true, label: "Jméno" %>
+<%= f.input :reason, as: :text, label: "Mé důvody (nepovinné):" %>
+<p class="pull-right">V souladu se článkem 3 odst. 5a stanov tímto prohlašuji, že ukončuji
+své členství ve Straně svobodných občanů ke dni <%=l Date.today%>.</p>
+<%= f.button :submit, "Odeslat oznámení o ukončení členství", class: "pull-right", data: {confirm: "Opravdu si přejete ukončit své členství ve Straně svobodných občanů? Členství Vám bude ukončeno okamžitě a budete převeden na příznivce."} %>
+<% end %>
+</div>
