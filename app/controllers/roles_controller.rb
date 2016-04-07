@@ -23,7 +23,7 @@ class RolesController < ApplicationController
 
   # GET /roles/new
   def new
-    @role = Role.new
+    @role = Role.new(since: Date.today, till: Date.today+2.years-1.day)
   end
 
   # POST /roles
