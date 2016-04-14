@@ -10,7 +10,7 @@ class Role < ActiveRecord::Base
 
   has_many :events, as: :eventable
 
-  scope :current, -> { where("since < ? and till > ?", Date.today, Date.today) }
+  scope :current, -> { where("since <= ? and till >= ?", Date.today, Date.today) }
 
   delegate :contacts, to: :person
 
