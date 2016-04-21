@@ -39,11 +39,10 @@ $(".cezetmap").click(function(e){
 	<tbody>
 		<% for region in @country.regions.order(:nuts3_id).all %>
 		<tr>
-			<td><strong><%= link_to region.name, region %></strong></td>
+			<td><strong><%= link_to region.name, region %></strong> <%= link_to region.homepage_url do %><i class="glyphicon glyphicon-link"></i><% end %></td>
 			<td><%= region.presidium.president.try(:name) %></td>
 			<td><%= region.domestic_members.count %></td>
 			<td><%= region.branches.count %></td>
-			<td><%= region.domestic_people.reject{|p| p.domestic_address_ruian_id}.count %></td>
 		</tr>
 		<% end %>
 	</tbody>
