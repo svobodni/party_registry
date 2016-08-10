@@ -45,7 +45,7 @@ prawn_document(:left_margin => 60, :right_margin => 60, :bottom_margin => 100) d
       end
       org="ReP" if role.person.roles.detect{|r| r.body_id==1}
       ["#{role.person.last_name} #{role.person.first_name}", org,l(role.till),'']
-    }.sort{|a,b| a[0]<=>b[0]}
+    }.sort{|a,b| @collator.compare(a[0], b[0])}
 
     pdf.table(data, column_widths: [110, 140, 80, 130]) do
       row(0).font_style = :bold

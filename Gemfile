@@ -153,6 +153,9 @@ gem 'wicked'
 # notifikace chyb
 gem 'exception_notification'
 
+# sorting
+gem 'twitter_cldr'
+
 gem 'bootstrap-sass', '~> 3.3.3'
 
 gem 'twitter'

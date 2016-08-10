@@ -13,10 +13,11 @@ class Backoffice::AttendanceListsController < ApplicationController
   end
 
   def show
+    @collator = TwitterCldr::Collation::Collator.new(:cs)
     @date = params[:id].to_date
     @roles = Body.find(5).roles
     @members_count = @roles.size
-    @members_majority = (@members_count/2.to_f).ceil
+    @members_majority = (@members_count/2.to_f).ceil + 1
     @members_max_count = 49
   end
 
