@@ -52,7 +52,7 @@ class BranchLocator
     # Pardubický kraj
     return obec if obec=="Chrudim"
     # Středočeský kraj
-    return obec if ["Slaný", "Řevnice"].member?(obec)
+    return obec if ["Slaný", "Řevnice", "Lysá nad Labem"].member?(obec)
     # Ústecký kraj
     return obec if obec=="Štětí"
   end
