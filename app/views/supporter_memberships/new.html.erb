@@ -11,7 +11,7 @@
     <legend>Základní údaje</legend>
     <%= f.input :amount,
           required: true,
-          label: "Členský příspěvek na rok 2016",
+          label: "Členský příspěvek na rok 2017",
           collection: %w(300 500 750 1000 1500 2000 5000 7500 10000 15000 20000 25000 30000 50000).collect{|i| ["#{i} Kč", i]}.to_h,
           hint: "minimálně 1000 Kč<br>studenti a důchodci minimálně 300 Kč<br>Při placení členského příspěvku můžete odečíst příznivecký příspěvek zaplacený v tomto roce.".html_safe %>
   </fieldset>

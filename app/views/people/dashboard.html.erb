@@ -176,80 +176,10 @@
 </div>
 </div>
 
+
+
 <div class="col-md-6">
-  <% if current_person.is_renewal_payment_expected? %>
-    <div class="panel" style="border: 1px solid #00654E">
-        <div class="panel-body bg-danger">
-          <% if current_person.is_member? %>
-            <div class="text-center">
-              <h3>Členské příspěvky na rok 2016</h3>
-              <div class="m">
-                <i class="glyphicon glyphicon-piggy-bank fa-3x"></i>
-              </div>
-              <p class="small">
-                Zaplaťte prosím členský příspěvek na rok 2016. Tento rok bude ve znamení voleb do zastupitelstev krajů a do Senátu a příprav na sněmovní volby. Lhůta pro zaplacení členského příspěvku běží do konce ledna 2016.</p>
-
-              <p class="small">Příspěvek, prosím, uhraďte pod svým variabilním symbolem na níže uvedené konto. Minimální výše příspěvku činí 1000 Kč (300 Kč pro studenty a důchodce).</p>
-
-              <% @qr = RQRCode::QRCode.new(Rspayd::CzechPayment.generate_string(
-                :accountNumber=>@country.fio_account_number,
-                :bankCode => '2010',
-                :amount => 1000,
-                :vs=>current_person.vs,
-                :message => "prispevek qr"
-                ), :size => 6, :level => :m) %>
-
-              <div class="row" style="padding: 2em">
-                <div class="col-md-5">
-                  <%= render :partial => 'profiles/qr_platba' %>
-                </div>
-                <div class="col-md-7">
-                  <table class="table table-condensed">
-                    <tr><th>Číslo účtu</th><td><%= @country.fio_account_number %>/2010</td></tr>
-                    <tr><th>Ze zahraničí</th><td>IBAN: CZ6920100000002100382818, BIC: FIOBCZPP</td></tr>
-                    <tr><th>Částka</th><td>1000 Kč (základní sazba)<br /> 300 Kč (studenti do 25 let a důchodci)</td></tr>
-                    <tr><th>Variabilní symbol</th><td><%= current_person.vs %></td></tr>
-                  </table>
-                </div>
-              </div>
-            </div>
-          <% else %>
-            <div class="text-center">
-              <h3>Příspěvek příznivce na rok 2016</h3>
-              <div class="m">
-                  <i class="glyphicon glyphicon-piggy-bank fa-3x"></i>
-              </div>
-              <p class="small">
-                Zaplaťte prosím příspěvek příznivce na rok 2016. Tento rok bude ve znamení voleb do zastupitelstev krajů a do Senátu a příprav na sněmovní volby. Lhůta pro zaplacení příspěvku příznivce běží do konce ledna 2016.</p>
-
-              <p class="small">Příspěvek, prosím, uhraďte pod svým variabilním symbolem na níže uvedené konto. Minimální výše příspěvku činí 100&nbsp;Kč.</p>
-
-              <% @qr = RQRCode::QRCode.new(Rspayd::CzechPayment.generate_string(
-                :accountNumber=>@country.fio_account_number,
-                :bankCode => '2010',
-                :amount => 100,
-                :vs=>current_person.vs,
-                :message => "prispevek qr"
-                ), :size => 6, :level => :m) %>
-
-              <div class="row" style="padding: 2em">
-                <div class="col-md-5">
-                  <%= render :partial => 'profiles/qr_platba' %>
-                </div>
-                <div class="col-md-7">
-                  <table class="table table-condensed">
-                    <tr><th>Číslo účtu</th><td><%= @country.fio_account_number %>/2010</td></tr>
-                    <tr><th>Částka</th><td>100 Kč (základní sazba)</tr>
-                    <tr><th>Variabilní symbol</th><td><%= current_person.vs %></td></tr>
-                  </table>
-                </div>
-              </div>
-            </div>
-          <% end %>
-        </div>
-    </div>
-  <% end %>
-
+  <%= render partial: "people/payment"%>
   <% current_person.roles.each do |role| %>
     <% organization=role.try(:body).try(:organization) %>
     <% if organization.kind_of?(Region) %>

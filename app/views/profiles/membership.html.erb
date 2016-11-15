@@ -29,46 +29,7 @@
   <p class="bg-warning">Prosím, stáhněte si <%= link_to "PDF s přihláškou", application_person_path(@person, format: :pdf)%>, vytiskněte ji a podepsanou odešlete na adresu kanceláře. Pokud máte zaručený kvalifikovaný podpis, můžete PDF podepsat elektronicky a odeslat na <%= mail_to "kancelar@svobodni.cz" %>.</p>
 <% end %>
 
-<% if @person.is_payment_expected? && !@person.is_signed_application_expected? %>
-
-  <% if @person.is_supporter? && !@person.regular_supporter? && !@person.is_awaiting_membership? %>
-    <% vs = @person.supporter_vs %>
-    <% amount = @person.amount.blank? ? 100 : @person.amount %>
-    <p class="bg-primary">Registrační příspěvek na rok 2016 ve výši <%= amount %> Kč prosím uhraďte pod variabilním symbolem <%= vs %> na účet <%= @country.fio_account_number %>/2010 (ze zahraničí IBAN: CZ6920100000002100382818, BIC: FIOBCZPP). Jakmile platbu obdržíme, bude registrace kompletní. Budeme Vás o tom informovat dalším emailem. Získáte pak přístup přes web do sekce pro registrované uživatele, kde se mj. budete moci účastnit některých hlasování a účastnit se diskusí.</p>
-  <% else %>
-    <% vs = @person.member_vs %>
-    <% amount = @person.amount.blank? ? 1000 : @person.amount %>
-    <p class="bg-primary">Uhraďte prosím členský příspěvek na rok 2016 ve výši <%= amount %> Kč pod variabilním symbolem <%= vs %> na účet č. <%= @country.fio_account_number %>/2010 (ze zahraničí IBAN: CZ6920100000002100382818, BIC: FIOBCZPP). Jakmile platbu obdržíme, stanete se plnoprávným členem Strany svobodných občanů.</p>
-  <% end %>
-
-  <p class="bg-warning">Prosím dodržte výše uvedený variabilní symbol, jinak bude problém vaši platbu příspěvku identifikovat.</p>
-
-  <% @qr = RQRCode::QRCode.new(Rspayd::CzechPayment.generate_string(
-    :accountNumber=>@country.fio_account_number,
-    :bankCode => '2010',
-    :amount => amount,
-    :vs=>vs,
-    :message => "prispevek qr"
-    ), :size => 6, :level => :m) %>
-
-  <div class="row jumbotron" style="margin: 0; margin-bottom: 1em">
-    <div class="col-md-5">
-      <%= render :partial => 'qr_platba' %>
-    </div>
-    <div class="col-md-7">
-      <table class="table table-condensed">
-        <tr><th>Číslo účtu</th><td><%= @country.fio_account_number %>/2010</td></tr>
-        <tr><th>Ze zahraničí</th><td>IBAN: CZ6920100000002100382818, BIC: FIOBCZPP</td></tr>
-        <tr><th>Částka</th><td><%= amount %> Kč</td></tr>
-        <tr><th>Variabilní symbol</th><td><%= vs %></td></tr>
-      </table>
-      <!--
-      <a target='_blank' href='https://testgw.gopay.cz/gw/pay-base-v2?paymentCommand.targetGoId=8409367912&paymentCommand.totalPrice=10000&paymentCommand.currency=CZK&paymentCommand.productName=dar&paymentCommand.orderNumber=1234&paymentCommand.successURL=http%3A%2F%2Ffinance.svobodni.cz&paymentCommand.failedURL=http%3A%2F%2Ffinance.svobodni.cz&paymentCommand.encryptedSignature=d34dc125154f41264accd5000d5660e97845223e6a3db7be9dfb3fdb43842c10e8aee9fb8ff572ca6fa551d2550b605b' > <img src='https://www.gopay.cz/download/PT_rychloplatba.png' alt='Platba' title='Platba' border='0' style='border:none;'/> </a> -->
-    </div>
-  </div>
-
-
-<% end %>
+<%= render partial: "people/payment"%>
 </div>
 
 <% if @person.is_supporter? && !@person.is_awaiting_membership? %>

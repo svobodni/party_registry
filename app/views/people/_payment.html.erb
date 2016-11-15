@@ -1,0 +1,73 @@
+<% if (@person.is_payment_expected? && !@person.is_signed_application_expected?) || @person.is_renewal_payment_expected? %>
+  <% year = "2017" %>
+  <% if @person.is_supporter? && !@person.is_awaiting_membership? %>
+    <% vs = @person.supporter_vs %>
+    <% amount = @person.amount.blank? ? 100 : @person.amount %>
+    <% amount_text="100 Kč (základní sazba)" %>
+    <% account = @country.supporters_account_number %>
+    <% title = "Příspěvek příznivce na rok #{year}" %>
+    <% if @person.is_regular? %>
+    <% request_text="Zaplaťte prosím příspěvek příznivce na rok #{year}. Tento rok bude ve znamení sněmovních voleb. Lhůta pro zaplacení příspěvku příznivce běží do konce ledna #{year}."%>
+    <% else %>
+    <% request_text="Zaplaťte prosím příspěvek příznivce na rok #{year}. Jakmile platbu obdržíme, bude registrace kompletní. Budeme Vás o tom informovat emailem. Získáte pak přístup do sekce pro registrované uživatele, kde se mj. budete moci účastnit některých hlasování a účastnit se diskusí."%>
+    <% end %>
+    <% request_info_text="Příspěvek, prosím, uhraďte pod svým variabilním symbolem na níže uvedené konto. Minimální výše příspěvku činí 100&nbsp;Kč.".html_safe %>
+    <% request_warning="Pozor! V souladu s novelou zákona o politických stranách máme <strong>jiné číslo účtu</strong> a vy musíte u platby <strong>uvést její účel do zprávy pro příjemce</strong>.".html_safe%>
+    <% request_message="dar priznivce" %>
+  <% else %>
+    <% vs = @person.member_vs %>
+    <% amount = @person.amount.blank? ? 1000 : @person.amount %>
+    <% amount_text="1000 Kč (základní sazba)<br /> 300 Kč (studenti do 25 let a důchodci)".html_safe %>
+    <% account = @country.members_account_number %>
+    <% title = "Členské příspěvky na rok #{year}" %>
+    <% if @person.is_regular? %>
+    <% request_text="Zaplaťte prosím členský příspěvek na rok #{year}. Tento rok bude ve znamení sněmovních voleb. Lhůta pro zaplacení členského příspěvku běží do konce ledna #{year}."%>
+    <% else %>
+    <% request_text="Zaplaťte prosím členský příspěvek na rok #{year}. Jakmile platbu obdržíme, stanete se plnoprávným členem Strany svobodných občanů."%>
+    <% end %>
+    <% request_info_text="Příspěvek, prosím, uhraďte pod svým variabilním symbolem na níže uvedené konto. Minimální výše příspěvku činí 1000 Kč (300 Kč pro studenty a důchodce)." %>
+    <% request_message="clensky prispevek" %>
+  <% end %>
+
+  <!-- <div class="col-md-6"> -->
+    <div class="panel" style="border: 1px solid #00654E">
+        <div class="panel-body bg-danger">
+            <div class="text-center">
+              <h3><%=title%></h3>
+              <div class="m">
+                <i class="glyphicon glyphicon-piggy-bank fa-3x"></i>
+              </div>
+              <p class="small"><%=request_text%></p>
+
+              <p class="small"><%=request_info_text%></p>
+
+              <% @qr = RQRCode::QRCode.new(Rspayd::CzechPayment.generate_string(
+                :accountNumber=>account,
+                :bankCode => '2010',
+                :amount => amount,
+                :vs=>current_person.vs,
+                :message => request_message,
+                ), :size => 6, :level => :m) %>
+
+              <div class="row jumbotron" style="margin: 0; margin-bottom: 1em">
+              <!-- <div class="row" style="padding: 2em"> -->
+                <%if request_warning %><p class="bg-warning"><%=request_warning%></p><% end %>
+                <div class="col-md-5">
+                  <%= render :partial => 'profiles/qr_platba' %>
+                </div>
+                <div class="col-md-7">
+                  <table class="table table-condensed">
+                    <tr><th>Číslo účtu</th><td><%= account %>/2010</td></tr>
+                    <!-- <tr><th>Ze zahraničí</th><td>IBAN: CZ6920100000002100382818, BIC: FIOBCZPP</td></tr> -->
+                    <tr><th>Částka</th><td><%=amount_text%></tr>
+                    <tr><th>Variabilní symbol</th><td><%= current_person.vs %></td></tr>
+                    <tr><th>Účel</th><td><%=request_message%></td></tr>
+                  </table>
+                </div>
+              </div>
+                <!-- <p class="bg-warning">Prosíme dodržte výše uvedený variabilní symbol, jinak bude problém vaši platbu příspěvku identifikovat.</p> -->
+            </div>
+        </div>
+    </div>
+  <!-- </div> -->
+<%end %>

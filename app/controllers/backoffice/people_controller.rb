@@ -90,7 +90,7 @@ class Backoffice::PeopleController < ApplicationController
 
   # POST /people/1/paid
   def paid
-    @person.paid_till="2016-12-31"
+    @person.paid_till="2017-12-31"
     @person.paid!
     respond_to do |format|
       @person.events.create(default_event_params.merge({
