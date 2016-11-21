@@ -6,6 +6,7 @@ class RuianAddress < ActiveRecord::Base
   geocoded_by :address_line
   attr_accessor :address_line
 
+  after_validation :geocode
   before_save :load_ruian_data
 
   def load_ruian_data
@@ -25,6 +26,10 @@ class RuianAddress < ActiveRecord::Base
       puts "#{self.id} NOT FOUND"
     end
   end
+
+  # def decode_address_line
+  #   HTTParty.get("http://www.vugtk.cz/euradin/services/rest.py/CompileAddress/text?AddressPlaceId=#{id}").parsed_response.gsub(/\r\n/,', ')
+  # end
 
   def self.import(id)
     RuianAddress.where(id: id).first_or_create
