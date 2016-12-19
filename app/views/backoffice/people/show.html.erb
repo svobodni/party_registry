@@ -94,6 +94,8 @@
 <%= link_to "Životopis", @person.cv_url %></p>
 <% end %>
 
+<%= link_to "Platby", "https://finance.svobodni.cz/people/#{@person.id}", class: "btn btn-info btn-xs" %>
+
 <% if @person.is_member? || @person.is_awaiting_membership? %>
   <% if @person.signed_application %>
     <%= link_to "Podepsaná přihláška", signed_application_person_path(@person, format: :pdf), class: 'btn btn-default btn-xs' %>
