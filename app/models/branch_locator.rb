@@ -60,7 +60,7 @@ class BranchLocator
   # Pobočky na celém území působnosti obce s rozšířenou působností
   def name_by_orp
     # Středočeský kraj
-    if kraj_id == 11
+    if kraj_id == 27
       return orp if orp=="Brandýs nad Labem-Stará Boleslav"
       return "Říčansko" if orp=="Říčany"
     # Jihočeský kraj
