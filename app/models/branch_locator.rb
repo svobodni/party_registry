@@ -59,8 +59,12 @@ class BranchLocator
 
   # Pobočky na celém území působnosti obce s rozšířenou působností
   def name_by_orp
+    # Středočeský kraj
+    if kraj_id == 11
+      return orp if orp=="Brandýs nad Labem-Stará Boleslav"
+      return "Říčansko" if orp=="Říčany"
     # Jihočeský kraj
-    if kraj_id == 35
+    elsif kraj_id == 35
       return "Blatensko" if orp=="Blatná"
       return "Českobudějovicko" if orp=="České Budějovice"
       return "Českokrumlovsko" if orp=="Český Krumlov"
@@ -104,7 +108,7 @@ class BranchLocator
     return "Okres Rokycany" if okres == "Rokycany"
     return "Okres Klatovy" if okres == "Klatovy"
     # Středočeský kraj
-    return okres if ["Benešov", "Beroun", "Kolín", "Kutná Hora", "Mělník", "Mladá Boleslav", "Nymburk", "Praha-východ", "Praha-západ", "Příbram", "Rakovník", "Kladno"].member?(okres)
+    return okres if ["Benešov", "Beroun", "Kolín", "Kutná Hora", "Mělník", "Mladá Boleslav", "Nymburk", "Praha-západ", "Příbram", "Rakovník", "Kladno"].member?(okres)
     # Ústecký kraj
     return okres if ["Děčín", "Chomutov", "Litoměřice", "Most", "Roudnice nad Labem", "Ústí nad Labem", "Žatec"].member?(okres)
     return "Žatec" if okres == "Louny"
