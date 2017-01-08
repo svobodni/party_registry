@@ -15,7 +15,7 @@ class FinanceApiController < ApplicationController
     @person.paid_till="2017-12-31"
     @person.paid!
     respond_to do |format|
-      @person.events.create(default_event_params.merge({
+      @person.events.create(default_api_event_params.merge({
         command: "AcceptPayment",
         name: "PaymentAccepted",
         changes: @person.previous_changes
@@ -25,6 +25,17 @@ class FinanceApiController < ApplicationController
   end
 
   private
+  def default_api_event_params
+    {
+    params: params,
+    controller_path: controller_path,
+    action_name: action_name,
+    remote_ip: request.remote_ip,
+    referer: request.referer,
+    api_name: 'finance'
+    }
+  end
+
   def authenticate
     authenticate_or_request_with_http_basic('Finance API') do |username, password|
       username == 'finance' && password == configatron.finance.password
