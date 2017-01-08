@@ -118,6 +118,7 @@ Rails.application.routes.draw do
   end
 
   post "/people/:id/payments", to: "finance_api#payments"
+  post "/people/:id/paid", to: "finance_api#paid"
 
   root 'people#dashboard'
 end
