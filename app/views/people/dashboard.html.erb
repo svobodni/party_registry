@@ -191,7 +191,7 @@
           <tr class="bg-info"><th><%= link_to "Čekajících na první platbu", awaiting_domestic_people_region_path(organization)%></th><td><%= organization.domestic_people.awaiting_first_payment.count %></td></tr>
           <tr class="bg-danger"><th>Řádných členů bez přihlášky</th><td><%= organization.domestic_people.without_signed_application.count %></td></tr>
           <tr class="bg-success"><th><%= link_to "Řádných členů", domestic_members_region_path(organization)%></th><td><%= organization.domestic_members.count %></td></tr>
-          <tr class="bg-warning"><th>Nezaplacených na rok 2016</th><td><%= organization.domestic_members.not_renewed.count %></td></tr>
+          <tr class="bg-warning"><th>Nezaplacených na rok 2017</th><td><%= organization.domestic_members.not_renewed.count %></td></tr>
         <tbody>
       </table>
       </div>
