@@ -53,6 +53,8 @@ class BranchLocator
     return obec if obec=="Chrudim"
     # Středočeský kraj
     return obec if ["Slaný", "Řevnice", "Lysá nad Labem"].member?(obec)
+    #  Jesenice, Vestec, Dolní Břežany, Psáry, Zlatníky-Hodkovice a Průhonice
+    return "Jesenice" if [539325, 513458, 539210, 539597, 539881, 539571].include?(obec_id)
     # Ústecký kraj
     return obec if obec=="Štětí"
   end
