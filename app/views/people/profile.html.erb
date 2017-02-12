@@ -67,29 +67,5 @@
       <% end %>
     </table>
     <%= button_to 'Přidat kontakt', new_person_contact_path(current_person), method: :get %>
-
-    <h4>Další funkce registru</h4>
-    <% if can? :upload, SignedApplication %>
-    <%= button_to "Nahrát novou přihlášku", new_signed_application_path, method: :get %>
-    <% end %>
-
-    <% if can? :create, Branch %>
-    <%= button_to "Nová pobočka", new_branch_path, method: :get %>
-    <% end %>
-
-    <% if can? :destroy, Role %>
-    <%= button_to "Správa funkcí", roles_path, method: :get %>
-    <% end %>
-
-    <% unless flash[:password].blank? %>
-    <h4>Heslo pro webdav</h4>
-    <dl class="dl-horizontal">
-    <dt>Heslo</dt><dd><%= flash[:password] %></dd></tr>
-    </dl>
-    <% end %>
-
-    <%= form_tag("/webdav_passwords", method: "post") do %>
-      <%= submit_tag("Vygenerovat nové heslo pro webdav", data: { confirm: "Heslo slouží pro přístup na files.svobodni.cz protokolem webdav. Vygenerováním nového hesla zneplatníte předchozí (pokud už nějaké máte). Opravdu chcete vygenerovat nové heslo?" }) %>
-    <% end %>
   </div>
 </div>

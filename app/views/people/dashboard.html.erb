@@ -291,16 +291,3 @@
     </tbody>
   </table>
   </div>
-
-  <h4>Další funkce registru</h4>
-
-  <% unless flash[:password].blank? %>
-  <h4>Heslo pro webdav</h4>
-  <dl class="dl-horizontal">
-    <dt>Heslo</dt><dd><%= flash[:password] %></dd></tr>
-  </dl>
-  <% end %>
-
-  <%= form_tag("/webdav_passwords", method: "post") do %>
-  <%= submit_tag("Vygenerovat nové heslo pro webdav", class: "btn btn-warning", data: { confirm: "Heslo slouží pro přístup na files.svobodni.cz protokolem webdav. Vygenerováním nového hesla zneplatníte předchozí (pokud už nějaké máte). Opravdu chcete vygenerovat nové heslo?" }) %>
-  <% end %>

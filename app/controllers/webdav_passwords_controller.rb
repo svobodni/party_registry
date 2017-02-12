@@ -24,12 +24,12 @@ class WebdavPasswordsController < ApplicationController
     )
 
     if response.code == 200
-      redirect_to profile_people_path, flash: { password: @password }
+      redirect_to credentials_profiles_path(anchor: "webdav"), notice: "Nové heslo bylo úspešně vygenerováno.", flash: { password: @password }
     else
       flash[:error] = "Vytvoření hesla selhalo, zkuste to prosím později."
-      redirect_to profile_people_path
+      redirect_to credentials_profiles_path
     end
-    
+
   end
 
 end
