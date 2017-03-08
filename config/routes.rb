@@ -117,6 +117,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :councilors, only: :index
+
   post "/people/:id/payments", to: "finance_api#payments"
   post "/people/:id/paid", to: "finance_api#paid"
 
