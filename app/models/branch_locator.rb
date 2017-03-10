@@ -28,10 +28,6 @@ class BranchLocator
     return mestska_cast if ["Brno-střed", "Brno-sever", "Brno-Žabovřesky", "Brno-Kohoutovice"].member?(mestska_cast)
     return "Brno-Bystrc" if ["Brno-Bystrc", "Brno-Kníničky", "Brno-Komín", "Brno-Žebětín"].member?(mestska_cast)
     return "Brno-východ" if ["Brno-Líšeň", "Brno-Vinohrady", "Brno-Židenice", "Brno-Slatina"].member?(mestska_cast)
-    # Plzeňský kraj
-    return "Městský obvod Plzeň 1" if mestska_cast=="Plzeň 1"
-    return "Městský obvod Plzeň 2 – Slovany" if mestska_cast=="Plzeň 2-Slovany"
-    return "Městský obvod Plzeň 3" if mestska_cast=="Plzeň 3"
     # Praha
     return mestska_cast if obec=="Praha"
   end
@@ -107,6 +103,7 @@ class BranchLocator
     return okres if okres == "Pardubice"
     # Plzeňský kraj
     return "Okres Plzeň-sever" if okres == "Plzeň-sever"
+    return "Okres Plzeň-město" if okres == "Plzeň-město"
     return "Okres Rokycany" if okres == "Rokycany"
     return "Okres Klatovy" if okres == "Klatovy"
     # Středočeský kraj
