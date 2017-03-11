@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160115130442) do
+ActiveRecord::Schema.define(version: 20170311124131) do
 
   create_table "bank_payments", force: :cascade do |t|
     t.integer  "account_id",    limit: 4
@@ -155,6 +155,7 @@ ActiveRecord::Schema.define(version: 20160115130442) do
     t.string   "address_line",       limit: 255
     t.string   "homepage_url",       limit: 255
     t.string   "slug",               limit: 255
+    t.string   "fb_page_url",        limit: 255
   end
 
   add_index "organizations", ["slug"], name: "index_organizations_on_slug", unique: true, using: :btree
