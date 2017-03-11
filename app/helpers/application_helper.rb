@@ -126,6 +126,10 @@ module ApplicationHelper
     link_to ('<span class="glyphicon glyphicon-'+icon+'"></span> '+text).html_safe, path
   end
 
+  def fa_link_to(icon, path)
+    link_to ('<span class="fa fa-'+icon+'"></span>').html_safe, path
+  end
+
   def glyph_link_to(icon, text, path)
     link_to_unless_current ('<span class="glyphicon '+(current_page?(path) ? "active " : "")+'glyphicon-'+icon+'"></span> '+text).html_safe, path
   end

@@ -9,22 +9,18 @@
 %>
 
 <table id="branches" class="table table-striped">
-<thead><tr><th>Název pobočky</th><th>Koordinátor</th><th>Telefon</th><th>Email</th><th>Web</th><th>Kmenoví členové</th></thead>
+<thead><tr><th>Název pobočky</th><th></th><th>Koordinátor</th><th>Telefon</th><th>Email</th><th>Kmenoví členové</th></thead>
 <tbody>
 <% @branches.each do |branch| %>
 <tr>
-<th><%= link_to branch.name, branch %></th>
+<td><%= link_to branch.name, branch %></td>
+<td>
+	<%= fa_link_to('globe', branch.homepage_url) unless branch.homepage_url.blank? %>
+	<%= fa_link_to('facebook', branch.fb_page_url) unless branch.fb_page_url.blank? %>
+</td>
 <td><%= link_to(branch.coordinator.try(:person).try(:name), branch.coordinator.try(:person)) if branch.coordinator %></td>
 <td><%= tel_to branch.coordinator.try(:person).try(:phone) %></td>
 <td><%= mail_to branch.coordinator.try(:person).try(:email) %></td>
-<td>
-	<% unless branch.homepage_url.blank? %>
-  	[<%=link_to "web", branch.homepage_url %>]
-  <% end %>
-	<% unless branch.fb_page_url.blank? %>
-	  [<%=link_to "fb", branch.fb_page_url %>]
-	<% end %>
-</td>
 <td><%= branch.domestic_members.count %></td>
 </tr>
 <% end %>
