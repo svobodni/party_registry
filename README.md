@@ -20,23 +20,23 @@ Political party registry
 
 * Database creation
 ```
-    rake db:create
+    bundle exec rake db:create
 ```
 
 * Database initialization
 ```
-    rake db:migrate
-    rake db:seed
+    bundle exec rake db:migrate
+    bundle exec rake db:seed
 ```
 
 * How to run the test suite
 ```
-    rake
+    bundle exec rake
 ```
 
 * Development instructions
 ```
-    rake db:populate
+    bundle exec rake db:populate
 ```
 
 * Services (job queues, cache servers, search engines, etc.)
