@@ -25,8 +25,7 @@
       <% regional_events = @events.select{|e| e.domestic_region_id==region.id}%>
       <% new_member_events = regional_events.select{|e| e.changes[:status][1]=="regular_member"} %>
       <% new_supporter_events = regional_events.select{|e| e.changes[:status][1]=="regular_supporter"} %>
-      <% canceled_membership_events = regional_events.select{|e| e.changes[:status]==["regular_member", "registered"] || e.changes[:status]==["re
-gular_member", "regular_supporter"]} %>
+      <% canceled_membership_events = regional_events.select{|e| e.changes[:status]==["regular_member", "registered"] || e.changes[:status]==["regular_member", "regular_supporter"]} %>
       <% canceled_supporter_events = regional_events.select{|e| e.changes[:status]==["regular_supporter", "registered"]} %>
       <tr>
         <th><%= region.name %></th>
@@ -38,8 +37,7 @@ gular_member", "regular_supporter"]} %>
     <% end %>
     <% new_member_events = @events.select{|e| e.changes[:status][1]=="regular_member"} %>
     <% new_supporter_events = @events.select{|e| e.changes[:status][1]=="regular_supporter"} %>
-    <% canceled_membership_events = @events.select{|e| e.changes[:status]==["regular_member", "registered"] || e.changes[:status]==["re
-gular_member", "regular_supporter"]} %>
+    <% canceled_membership_events = @events.select{|e| e.changes[:status]==["regular_member", "registered"] || e.changes[:status]==["regular_member", "regular_supporter"]} %>
     <% canceled_supporter_events = @events.select{|e| e.changes[:status]==["regular_supporter", "registered"]} %>
     <tr>
       <th>CELKEM</th>
