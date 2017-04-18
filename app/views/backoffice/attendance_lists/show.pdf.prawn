@@ -8,18 +8,18 @@ prawn_document(:left_margin => 60, :right_margin => 60, :bottom_margin => 100) d
 
   extend ActionView::Helpers::TranslationHelper
 
-  pdf.font_families['Roboto'] = {
-    :normal => { :file => File.join(Rails.root, 'fonts', 'Roboto-Regular.ttf') },
-    :bold => { :file => File.join(Rails.root, 'fonts', 'Roboto-Bold.ttf') }
+  pdf.font_families['Montserrat'] = {
+    :normal => { :file => File.join(Rails.root, 'fonts', 'Montserrat-Regular.ttf') },
+    :bold => { :file => File.join(Rails.root, 'fonts', 'Montserrat-Bold.ttf') }
   }
-  pdf.font 'Roboto', :size => 10
+  pdf.font 'Montserrat', :size => 10
 
   top = pdf.bounds.top_left[1]
   half_width = pdf.bounds.width / 2
   half_width_column_width = half_width - 5
   vspace = 20
   line_height = pdf.height_of('X')
-  logo = "#{Rails.root}/app/assets/images/02_SVOBODNI_logo_tagline.jpg"
+  logo = "#{Rails.root}/app/assets/images/Svobodni_logo_CMYK.png"
 
   pdf.repeat(:all) do
     pdf.bounding_box [pdf.bounds.left, pdf.bounds.top], :width  => pdf.bounds.width do
