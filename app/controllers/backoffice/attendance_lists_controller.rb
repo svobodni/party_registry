@@ -9,7 +9,11 @@ class Backoffice::AttendanceListsController < ApplicationController
     date = params[:attendance_list]["date(1i)"] + '-' +
     params[:attendance_list]["date(2i)"] + '-' +
     params[:attendance_list]["date(3i)"]
-    redirect_to backoffice_attendance_list_path(date, format: :pdf)
+    if params[:attendance_list][:guest_list]
+      redirect_to guests_backoffice_attendance_list_path(date, format: :pdf)
+    else
+      redirect_to backoffice_attendance_list_path(date, format: :pdf)
+    end
   end
 
   def show
@@ -19,6 +23,10 @@ class Backoffice::AttendanceListsController < ApplicationController
     @members_count = @roles.size
     @members_majority = (@members_count/2.to_f).ceil + 1
     @members_max_count = 49
+  end
+
+  def guests
+    @date = params[:id].to_date
   end
 
   private

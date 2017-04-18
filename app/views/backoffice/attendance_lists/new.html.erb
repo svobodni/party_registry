@@ -5,5 +5,6 @@
 
 <%= simple_form_for :attendance_list, url: backoffice_attendance_lists_path do |f| %>
 <%= f.input :date, as: :date, label: "Datum jednání" %>
+<%= f.input :guest_list, as: :boolean, label: "Prezenční listina pro hosty" %>
 <%= f.button :submit, value: "Vygenerovat", class: 'btn btn-success' %>
 <% end %>
