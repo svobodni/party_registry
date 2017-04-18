@@ -25,7 +25,7 @@ prawn_document(:left_margin => 60, :right_margin => 60, :bottom_margin => 100) d
     pdf.bounding_box [pdf.bounds.left, pdf.bounds.top], :width  => pdf.bounds.width do
       pdf.image logo, :width => 220, :at => [-20, 0]
       pdf.move_down vspace*5
-      pdf.text("Jednání Republikového výboru dne #{l @date} - prezenční listina", { size: 12, color: "00654E" })
+      pdf.text("Jednání Republikového výboru dne #{l @date} - prezenční listina", { size: 12, color: "009681" })
     end
   end
 
