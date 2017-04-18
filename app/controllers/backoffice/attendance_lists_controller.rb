@@ -9,7 +9,7 @@ class Backoffice::AttendanceListsController < ApplicationController
     date = params[:attendance_list]["date(1i)"] + '-' +
     params[:attendance_list]["date(2i)"] + '-' +
     params[:attendance_list]["date(3i)"]
-    if params[:attendance_list][:guest_list]
+    if params[:attendance_list][:guest_list].to_i==1
       redirect_to guests_backoffice_attendance_list_path(date, format: :pdf)
     else
       redirect_to backoffice_attendance_list_path(date, format: :pdf)
