@@ -38,6 +38,6 @@ prawn_document(:left_margin => 60, :right_margin => 60, :bottom_margin => 100) d
     pdf.table(data, column_widths: [half_width, half_width]) do
       row(0).font_style = :bold
     end
-    pdf.number_pages "<page>/<total>", {color: "00654E", align: :right, size: 8, at: [pdf.bounds.right - 50, -10]}
+    pdf.number_pages "<page>/<total>", {color: "009681", align: :right, size: 8, at: [pdf.bounds.right - 50, -10]}
   end
 end

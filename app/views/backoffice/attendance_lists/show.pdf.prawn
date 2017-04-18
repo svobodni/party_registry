@@ -51,6 +51,6 @@ prawn_document(:left_margin => 60, :right_margin => 60, :bottom_margin => 100) d
       row(0).font_style = :bold
     end
     #pdf.move_down 20
-    pdf.number_pages "<page>/<total>", {color: "00654E", align: :right, size: 8, at: [pdf.bounds.right - 50, -10]}
+    pdf.number_pages "<page>/<total>", {color: "009681", align: :right, size: 8, at: [pdf.bounds.right - 50, -10]}
   end
 end

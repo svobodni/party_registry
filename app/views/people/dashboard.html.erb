@@ -1,7 +1,7 @@
   <!-- <h1 class="page-header">Hlavní rozcestník člena</h1> -->
   <div class="row" style="margin-top: 2.5em">
     <div class="col-md-4">
-        <div class="panel panel-default" style="border: 1px solid #00654E">
+        <div class="panel panel-default" style="border: 1px solid #009681">
             <div class="panel-body bg-success">
                 <div class="text-center">
                     <h3>Volební systém</h3>
@@ -12,7 +12,7 @@
                 </div>
             </div>
         </div>
-        <div class="panel" style="border: 1px solid #00654E">
+        <div class="panel" style="border: 1px solid #009681">
             <div class="panel-body bg-success">
                 <div class="text-center">
                     <h3>Úložiště</h3>
@@ -28,7 +28,7 @@
         </div>
       </div>
       <div class="col-md-4">
-        <div class="panel" style="border: 1px solid #00654E">
+        <div class="panel" style="border: 1px solid #009681">
             <div class="panel-body bg-success">
                 <div class="text-center">
                     <h3>Fórum</h3>
@@ -42,7 +42,7 @@
                 </div>
             </div>
         </div>
-        <div class="panel" style="border: 1px solid #00654E; min-height: 100%">
+        <div class="panel" style="border: 1px solid #009681; min-height: 100%">
             <div class="panel-body bg-success">
                 <div class="text-center">
                     <h3>Wiki</h3>
@@ -58,7 +58,7 @@
         </div>
     </div>
     <div class="col-md-4">
-        <div class="panel" style="border: 1px solid #00654E">
+        <div class="panel" style="border: 1px solid #009681">
             <div class="panel-body bg-success">
                 <div class="text-center">
                     <h3>Sdílení kontaktů</h3>
@@ -73,7 +73,7 @@
             </div>
         </div>
         <% if Date.today < "2015-11-10".to_date && current_person.is_regular_member? %>
-        <div class="panel" style="border: 1px solid #00654E; min-height: 100%">
+        <div class="panel" style="border: 1px solid #009681; min-height: 100%">
             <div class="panel-body bg-success">
                 <div class="text-center">
                     <h3>Sněm listopad 2015</h3>
@@ -110,7 +110,7 @@
           <%= link_to role.role_long_name, role.branch %>
         <% elsif role.body.organization.class==Region %>
           <%= link_to role.role_name, role.body %>
-          <%= link_to "Finance", "https://finance.svobodni.cz/2017/organizace/#{role.body.organization.id}", class: "btn btn-info btn-xs" %>
+          <%= link_to "Finance", "hl#{role.body.organization.id}", class: "btn btn-info btn-xs" %>
           <%= link_to "Kraj", region_path(role.body.organization), class: "btn btn-info btn-xs" %>
         <% else %>
           <%= link_to role.role_name, role.body %>
@@ -183,7 +183,7 @@
   <% current_person.roles.each do |role| %>
     <% organization=role.try(:body).try(:organization) %>
     <% if organization.kind_of?(Region) %>
-      <div class="panel panel-default" style="border: 1px solid #00654E">
+      <div class="panel panel-default" style="border: 1px solid #009681">
       <div class="panel-heading"><h2 class="panel-title"><%= link_to role.try(:body).try(:organization).try(:name), organization %></h2></div>
       <table class="table">
         <tbody>
@@ -198,7 +198,7 @@
     <% end %>
   <% end %>
 
-  <div class="panel" style="border: 1px solid #00654E">
+  <div class="panel" style="border: 1px solid #009681">
     <div class="panel-body bg-success">
       <div class="text-center">
         <h3>Podpora</h3>
@@ -276,7 +276,7 @@
     </table>
   </div>
   -->
-  <div class="panel panel-default" style="border: 1px solid #00654E">
+  <div class="panel panel-default" style="border: 1px solid #009681">
   <div class="panel-heading"><h2 class="panel-title">Aktuality</h2></div>
   <table class="table">
     <tbody>
