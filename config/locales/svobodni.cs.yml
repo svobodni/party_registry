@@ -43,8 +43,10 @@ cs:
       vicepresident: Místopředseda
       coordinator: Koordinátor
       member: Člen orgánu
-
+      note: Poznámka
     attributes:
+      note:
+        content: "Text poznámky"
       person:
         username: "Přihlašovací jméno"
         name_prefix: "Titul"

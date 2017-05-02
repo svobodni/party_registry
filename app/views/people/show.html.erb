@@ -134,7 +134,19 @@
 	<% end %>
 </table>
 
+<% if can?(:notes, @person) %>
+<%= link_to "+ Nová poznámka", new_person_note_path(@person), class: "btn btn-xs btn-default pull-right"%>
+<h4>Poznámky</h4>
 
+<table class="table table-striped">
+	<% for note in @person.notes.order(created_at: :desc) %>
+	<tr>
+		<th><small><i><%=l note.created_at.to_date%></i></small><br/><%=note.creator.try(:name)%></th>
+		<td><%= note.content %></td>
+	</tr>
+	<% end %>
+</table>
+<% end %>
 
 </div>
 </div>

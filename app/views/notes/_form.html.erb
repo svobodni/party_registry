@@ -1,0 +1,11 @@
+<%= simple_form_for([@note.noteable, @note]) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :content %>
+  </div>
+
+  <div class="form-actions pull-right">
+    <%= f.button :submit, "Uložit poznámku" %>
+  </div>
+<% end %>

@@ -9,6 +9,7 @@ class Person < ActiveRecord::Base
   attr_accessor :reason
 
   has_many :events, as: :eventable
+  has_many :notes, as: :noteable
 
   has_many :identities
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170311124131) do
+ActiveRecord::Schema.define(version: 20170502194645) do
 
   create_table "bank_payments", force: :cascade do |t|
     t.integer  "account_id",    limit: 4
@@ -100,6 +100,15 @@ ActiveRecord::Schema.define(version: 20170311124131) do
     t.string   "ip_address", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "notes", force: :cascade do |t|
+    t.string   "noteable_type", limit: 255
+    t.integer  "noteable_id",   limit: 4
+    t.text     "content",       limit: 65535
+    t.integer  "created_by",    limit: 4
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
   create_table "oauth_access_grants", force: :cascade do |t|

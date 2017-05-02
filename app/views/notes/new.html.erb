@@ -1,0 +1,5 @@
+<% @page_title="Nová poznámka k ##{@note.noteable_id} (#{@note.noteable.try(:name)})" %>
+
+<%= render 'form' %>
+
+<%= link_to 'Zpět', @note.noteable, class: "btn btn-default" %>

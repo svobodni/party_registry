@@ -86,6 +86,8 @@ Rails.application.routes.draw do
   resources :organizations
   resources :people do
     resources :contacts
+    resources :notes, only: [:new, :create]
+
     member do
       get 'application'
       get 'signed_application'

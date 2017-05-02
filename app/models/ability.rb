@@ -36,13 +36,13 @@ class Ability
       user.roles.each do |role|
         if role.type == "Coordinator"
           # Koordinátor pobočky
-          can [:read, :application, :export], Person, guest_branch_id: role.branch_id
-          can [:read, :application, :export], Person, domestic_branch_id: role.branch_id
+          can [:read, :application, :export, :notes], Person, guest_branch_id: role.branch_id
+          can [:read, :application, :export, :notes], Person, domestic_branch_id: role.branch_id
           can [:supervise], Branch, id: role.branch_id
         elsif (role.type == "President" || role.type == "Vicepresident") && role.body.organization.type=="Region"
           # Členové krajského předsednictva
-          can [:read, :application, :export, :update, :approve], Person, domestic_region_id: role.body.organization_id
-          can [:read, :application, :export], Person, guest_region_id: role.body.organization_id
+          can [:read, :application, :export, :update, :approve, :notes], Person, domestic_region_id: role.body.organization_id
+          can [:read, :application, :export, :notes], Person, guest_region_id: role.body.organization_id
           can [:create, :supervise], Branch, parent_id: role.body.organization_id
           can [:supervise], Region, id: role.body.organization_id
           can [:create, :destroy], Role do |r|
@@ -51,7 +51,7 @@ class Ability
         elsif role.body.try(:acronym)=="ReP"
           can :supervise, Region
           can :supervise, Branch
-          can [:read, :application, :export], Person
+          can [:read, :application, :export, :notes], Person
         elsif role.body.try(:acronym)=="VK"
           # Volební komise + volební systém
           can [:read], Person
