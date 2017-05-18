@@ -8,8 +8,34 @@ class Event < ActiveRecord::Base
   belongs_to :requestor, foreign_key: :requestor_id, class_name: 'Person'
   belongs_to :eventable, polymorphic: true
 
-  belongs_to :domestic_branch
-  belongs_to :old_domestic_branch
+  belongs_to :domestic_region, class_name: 'Region'
+  belongs_to :guest_region, class_name: 'Region'
+  belongs_to :domestic_branch, class_name: 'Branch'
+  belongs_to :guest_branch, class_name: 'Branch'
+  belongs_to :old_domestic_region, class_name: 'Region'
+  belongs_to :old_guest_region, class_name: 'Region'
+  belongs_to :old_domestic_branch, class_name: 'Branch'
+  belongs_to :old_guest_branch, class_name: 'Branch'
+
+  def domestic_region
+    super || (Region.where(id: previous_data['domestic_region_id']).first if previous_data)
+  end
+
+  def old_domestic_branch
+    super ||
+    (Branch.where(id: previous_data['domestic_branch_id']).first if previous_data) ||
+    (Branch.where(id: changes['domestic_branch_id'].try(:first)).first if changes)
+  end
+
+  def domestic_branch
+    super ||
+    (Branch.where(id: previous_data['domestic_branch_id']).first if previous_data) ||
+    (Branch.where(id: changes['domestic_branch_id'].try(:last)).first if changes)
+  end
+
+  def slug
+    "#{eventable_type}##{eventable_id}"
+  end
 
   def set_uuid
     self.uuid ||= SecureRandom.uuid
