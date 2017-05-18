@@ -8,6 +8,12 @@ class MemberNotifications < ActionMailer::Base
     mail to: @person.email, subject: "Krajské předsednictvo schválilo Vaše členství"
   end
 
+  def reminder(person)
+    @person = person
+    @event = person.events.where("events.name = 'PersonAccepted'").try(:last)
+    mail to: @person.email, subject: "Úhrada členského příspěvku"
+  end
+
   def regular(person)
     @person = person
     mail to: @person.email, subject: "Vaše úhrada byla úspěšně zpracována"
