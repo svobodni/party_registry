@@ -4,141 +4,77 @@
 
 <div class="row">
   <div class="col-md-6">
+    <table class="table">
+      <tbody>
+        <tr><th>VS</th><td><%= @person.vs %></td></tr>
+        <tr><th>Jméno</th><td><%= @person.name %></td></tr>
+        <tr><th>Datum narození</th><td><%= l @person.date_of_birth%></td></tr>
+        <tr><th>Stav</th><td><%= t @person.status, scope: :person_status %></td></tr>
+        <tr><th>Zaplaceno do</th><td><%= @person.paid_till %></td></tr>
+        <tr><th>Beran</th><td><%= @person.snail_newsletter ? "zasílat" : "nezasílat" %></td></tr>
+        <tr><th>Přihlašovací jméno</th><td><%= @person.username %></td></tr>
+        <tr><th>Telefonní číslo</th><td><%= @person.phone %></td></tr>
+        <tr><th>Email</th><td><%= @person.email %></td></tr>
+        <tr><th>Adresa bydliště</th><td><%= link_to @person.domestic_address_line, "http://vdp.cuzk.cz/vdp/ruian/adresnimista/#{@person.domestic_address_ruian_id}" %></td></tr>
+        <tr><th>Korespondenční adresa</th><td><%= @person.postal_address_line %></td></tr>
+        <tr><th>Kraj</th><td><%= @person.domestic_region.try(:name) %></td></tr>
+        <tr><th>Pobočka</th><td><%= @person.domestic_branch.try(:name) %></td></tr>
+        <tr><th>Hostuje v kraji</th><td><%= @person.guest_region.try(:name) %></td></tr>
+        <tr><th>Hostuje v pobočce</th><td><%= @person.guest_branch.try(:name) %></td></tr>
+        <tr><th>Dřívější kandidatury</th><td><%= @person.previous_candidatures %></td></tr>
+        <tr><th>Dřívější členství v politických stranách:</th><td><%= @person.previous_political_parties %></td></tr>
+        <% if @person.cv %>
+          <tr><th></th><td><%= link_to "Životopis", @person.cv_url %></td></tr>
+        <% end %>
+        <% if @person.is_member? || @person.is_awaiting_membership? %>
+          <tr><th></th><td>
+          <% if @person.signed_application %>
+            <%= link_to "Podepsaná přihláška", signed_application_person_path(@person, format: :pdf), class: 'btn btn-default btn-xs' %>
+          <% else %>
+            <%= link_to "Přihláška k podpisu", application_person_path(@person, format: :pdf), class: 'btn btn-default btn-xs' %>
+            <%= link_to "Nahrát scan podepsané přihlášky", new_signed_application_path(person_id: @person.id), class: 'btn btn-default btn-xs' %>
+          <% end %>
+          </td></tr>
+        <% end %>
+      </tbody>
+    </table>
 
-<p>
-  <strong>VS:</strong>
-  <%= @person.vs %>
-</p>
+    <%= button_to("Vyznačit zaplacení na rok 2017", paid_backoffice_person_path(@person), class: "btn btn-success pull-right") unless @person.paid_till.to_s=="2017-12-31"%>
+    <% unless @person.status=="regular_member" %>
+    <%= button_to 'Smazat', backoffice_person_path(@person), method: :delete, data: { confirm: 'Opravdu chcete smazat tuto osobu?'}, class: "btn btn-danger pull-right" %>
+    <% end %>
+    <%= link_to "Platby", "https://finance.svobodni.cz/people/#{@person.id}", class: "btn btn-info" %>
+    <%= link_to 'Upravit', edit_backoffice_person_path(@person), class: "btn btn-default" %>
+  </div>
+  <div class="col-md-6">
+    <% unless @person.roles.empty? %>
+    <h2>Aktuální funkce</h2>
+    <table class="table">
+      <thead><tr><th></th><th>Od</th><th>Do</th><th></th></tr></thead>
+      <% for role in @person.roles %>
+      <tr>
+        <td><%= link_to role.role_long_name, role.body || role.branch %></td><td><%= l role.since %></td><td><%= l role.till %></td>
+        <td><%= link_to("Ukončit funkci", role_path(role), {method: :delete, class: 'btn btn-default btn-xs'}) if can?(:destroy, role) %></td></td>
+      </tr>
+      <% end %>
+    </table>
+    <% end %>
 
-<p>
-  <strong>Jméno:</strong>
-  <%= @person.name %>
-</p>
+    <% unless @person.historic_roles.empty? %>
+    <h2>Historické funkce</h2>
+    <table class="table">
+    <thead><tr><th></th><th>Od</th><th>Do</th></tr></thead>
+    <% for role in @person.historic_roles.order(till: :desc) %>
+    <tr><td><%= link_to role.role_long_name, role.body || role.branch %></td><td><%= l role.since %></td><td><%= l role.till %></td></tr>
+    <% end %>
+    </table>
+    <% end %>
 
-<p>
-  <strong>Datum narození:</strong>
-  <%= l @person.date_of_birth %>
-</p>
-
-<p>
-  <strong>Stav:</strong>
-  <%= t @person.status, scope: :person_status %>
-</p>
-
-<p>
-  <strong>Zaplaceno do:</strong>
-  <%= l @person.paid_till %>
-</p>
-
-<p>
-  <strong>Beran:</strong>
-  <%= @person.snail_newsletter ? "zasílat" : "nezasílat" %>
-</p>
-
-<p>
-  <strong>Přihlašovací jméno:</strong>
-  <%= @person.username %>
-</p>
-
-<p>
-  <strong>Telefonní číslo:</strong>
-  <%= @person.phone %>
-</p>
-
-<p>
-  <strong>Email:</strong>
-  <%= @person.email %>
-</p>
-
-<p>
-  <strong>Adresa bydliště:</strong>
-  <%= link_to @person.domestic_address_line, "http://vdp.cuzk.cz/vdp/ruian/adresnimista/#{@person.domestic_address_ruian_id}" %>
-</p>
-
-<p>
-  <strong>Korespondenční adresa:</strong>
-  <%= @person.postal_address_line %>
-</p>
-
-<p>
-  <strong>Kraj:</strong>
-  <%= @person.domestic_region.try(:name) %>
-</p>
-
-<p>
-  <strong>Pobočka:</strong>
-  <%= @person.domestic_branch.try(:name) %>
-</p>
-
-<p>
-  <strong>Hostuje v kraji:</strong>
-  <%= @person.guest_region.try(:name) %>
-</p>
-
-<p>
-  <strong>Hostuje v pobočce:</strong>
-  <%= @person.guest_branch.try(:name) %>
-</p>
-
-<p>
-  <strong>Dřívější kandidatury:</strong>
-  <%= @person.previous_candidatures %>
-</p>
-
-<p>
-  <strong>Dřívější členství v politických stranách:</strong>
-  <%= @person.previous_political_parties %>
-</p>
-
-<% if @person.cv %>
-<%= link_to "Životopis", @person.cv_url %></p>
-<% end %>
-
-<%= link_to "Platby", "https://finance.svobodni.cz/people/#{@person.id}", class: "btn btn-info btn-xs" %>
-
-<% if @person.is_member? || @person.is_awaiting_membership? %>
-  <% if @person.signed_application %>
-    <%= link_to "Podepsaná přihláška", signed_application_person_path(@person, format: :pdf), class: 'btn btn-default btn-xs' %>
-  <% else %>
-    <%= link_to "Přihláška k podpisu", application_person_path(@person, format: :pdf), class: 'btn btn-default btn-xs' %>
-    <%= link_to "Nahrát scan podepsané přihlášky", new_signed_application_path(person_id: @person.id), class: 'btn btn-default btn-xs' %>
-  <% end %>
-<% end %>
-
+    <h2>Události</h2>
+    <ul>
+      <% @person.events.order(created_at: :desc).each do |event| %>
+      <li><%= l event.created_at.to_date %> <%=humanize_event(event)%></li>
+      <% end %>
+    </ul>
+  </div>
 </div>
-<div class="col-md-6">
-<% unless @person.roles.empty? %>
-<h2>Aktuální funkce</h2>
-<table class="table">
-  <thead><tr><th></th><th>Od</th><th>Do</th><th></th></tr></thead>
-  <% for role in @person.roles %>
-  <tr>
-    <td><%= link_to role.role_long_name, role.body || role.branch %></td><td><%= l role.since %></td><td><%= l role.till %></td>
-    <td><%= link_to("Ukončit funkci", role_path(role), {method: :delete, class: 'btn btn-default btn-xs'}) if can?(:destroy, role) %></td></td>
-  </tr>
-  <% end %>
-</table>
-<% end %>
-
-<% unless @person.historic_roles.empty? %>
-<h2>Historické funkce</h2>
-<table class="table">
-<thead><tr><th></th><th>Od</th><th>Do</th></tr></thead>
-<% for role in @person.historic_roles.order(till: :desc) %>
-<tr><td><%= link_to role.role_long_name, role.body || role.branch %></td><td><%= l role.since %></td><td><%= l role.till %></td></tr>
-<% end %>
-</table>
-<% end %>
-</div>
-</div>
-
-<hr>
-<%= link_to 'Upravit', edit_backoffice_person_path(@person), class: "btn btn-default" %>
-
-<hr>
-<p><%= button_to("Vyznačit zaplacení na rok 2017", paid_backoffice_person_path(@person)) unless @person.paid_till.to_s=="2017-12-31"%></p>
-
-<% unless @person.status=="regular_member" %>
-<hr>
-<%= button_to 'Smazat', backoffice_person_path(@person), method: :delete, data: { confirm: 'Opravdu chcete smazat tuto osobu?'}, class: "btn btn-danger" %>
-<% end %>

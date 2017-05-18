@@ -8,6 +8,9 @@ class Event < ActiveRecord::Base
   belongs_to :requestor, foreign_key: :requestor_id, class_name: 'Person'
   belongs_to :eventable, polymorphic: true
 
+  belongs_to :domestic_branch
+  belongs_to :old_domestic_branch
+
   def set_uuid
     self.uuid ||= SecureRandom.uuid
   end
