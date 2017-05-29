@@ -7,7 +7,7 @@ module Paperclip
     def make
       detector = OpenCV::CvHaarClassifierCascade::load('./haarcascade_frontalface_alt.xml')
       image = OpenCV::CvMat.load(@file.path)
-      regions = detector.detect_objects(image, scale_factor: 2)
+      regions = detector.detect_objects(image, scale_factor: 1.99)
       region = regions.max{|r| r.width}
 
       width=region.width*2
