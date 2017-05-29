@@ -52,7 +52,7 @@ end
 gem 'devise'
 gem 'devise-encryptable'
 gem 'doorkeeper'
-gem 'omniauth-facebook'
+gem 'omniauth-facebook', '~> 4.0.0'
 gem 'omniauth-twitter'
 gem 'omniauth-openid'
 
