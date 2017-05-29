@@ -12,6 +12,7 @@ class Person < ActiveRecord::Base
   has_many :notes, as: :noteable
 
   has_many :identities
+  has_many :profile_pictures
 
   # může vykonávat funkci
   has_many :roles, -> { where("since <= ? and till >= ?", Time.now, Time.now ) }

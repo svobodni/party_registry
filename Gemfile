@@ -163,3 +163,6 @@ gem 'rails_autolink'
 gem 'underscore-rails'
 gem 'jquery-datatables-rails'
 gem 'font-awesome-sass'
+
+gem 'mini_magick'
+gem 'ruby-opencv'

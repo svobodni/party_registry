@@ -51,6 +51,7 @@ Rails.application.routes.draw do
   patch '/profiles', to: 'profiles#update'
   use_doorkeeper
 
+  resources :profile_pictures
   resources :contacts
   require 'sidekiq/web'
   mount Sidekiq::Web => '/sidekiq'

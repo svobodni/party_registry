@@ -29,3 +29,21 @@
   <%= f.input :cv, label: "Soubor PDF s životopisem" %>
   <%= f.button :submit, "Uložit životopis", class: 'btn btn-success'  %>
 <% end %>
+
+<hr>
+<h2>Fotografie</h2>
+
+<div class="row">
+  <% current_person.profile_pictures.each do |pp| %>
+    <div class="col-sm-2">
+      <%= link_to "Originál", pp.photo.url %>
+      <%= image_tag pp.photo.url(:legacy) %>
+    </div>
+  <% end %>
+</div>
+
+<p>Zde můžete nahrát novou fotografii. Nahrajte soubor s jednou osobou s jasně rozpoznatelným obličejem. Fotografie bude automaticky oříznuta.</p>
+<%= simple_form_for current_person.profile_pictures.new do |f| %>
+  <%= f.input :photo, label: "Fotografie" %>
+  <%= f.button :submit, "Uložit fotografii", class: 'btn btn-success'  %>
+<% end %>
