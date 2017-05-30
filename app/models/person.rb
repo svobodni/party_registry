@@ -318,16 +318,12 @@ class Person < ActiveRecord::Base
     "https://files.svobodni.cz/rep/is/member_photo/#{id}.png"
   end
 
-  def files_cv_url
-    "https://files.svobodni.cz/rep/is/member_cv/#{id}.pdf"
-  end
-
   def photo_url
     "https://registr.svobodni.cz/people/#{id}/photo.png"
   end
 
   def cv_url
-    "https://registr.svobodni.cz/people/#{id}/cv.pdf"
+    cv.size ? "https://registr.svobodni.cz/people/#{id}/cv.pdf" : ""
   end
 
   def set_domestic_ruian_address
