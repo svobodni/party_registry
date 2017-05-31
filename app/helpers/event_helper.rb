@@ -92,6 +92,9 @@ module EventHelper
         event.old_guest_branch
         output << "začal hostovat v #{event.guest_branch.try(:name)}"
       end
+      if event.data["changes"]["domestic_address_ruian_id"]
+        output << "dohledána adresa v RUIAN"
+      end
       output = [output.join(', '),'.']
       output = ['aktualizovány ostatní údaje.'] if output==['','.']
     end

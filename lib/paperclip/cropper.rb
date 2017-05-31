@@ -8,6 +8,8 @@ module Paperclip
       detector = OpenCV::CvHaarClassifierCascade::load('./haarcascade_frontalface_alt.xml')
       image = OpenCV::CvMat.load(@file.path)
       regions = detector.detect_objects(image, scale_factor: 1.99)
+      regions = detector.detect_objects(image, scale_factor: 1.2) if regions.empty?
+      regions = detector.detect_objects(image) if regions.empty?
       region = regions.max{|r| r.width}
 
       width=region.width*2

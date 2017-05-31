@@ -27,7 +27,7 @@
 <% for event in @events %>
 <tr>
   <td><%= distance_of_time_in_words_to_now event.created_at %></td>
-  <td><%= event.requestor.try(:short_name) %></td>
+  <td><%= link_to event.requestor.try(:short_name), event.requestor %></td>
   <td><%= event.name %></td>
   <td><%=  event.eventable.try(:name)||"#{event.eventable_type}##{event.eventable_id}" %></td>
   <td>
