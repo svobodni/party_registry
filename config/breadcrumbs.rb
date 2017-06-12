@@ -60,6 +60,11 @@ crumb :region_contacts do |region|
   parent :region, region
 end
 
+crumb :region_councilors do |region|
+  link "Zastupitelé", region_contacts_path(region)
+  parent :region, region
+end
+
 crumb :region_mestske_casti do |region|
   link "Městské části", mestske_casti_region_path(region)
   parent :region, region

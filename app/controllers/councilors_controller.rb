@@ -7,7 +7,12 @@ class CouncilorsController < ApplicationController
     respond_to do |format|
       format.html {
         load_country
-        @councilors=Councilor.all
+        if params[:region_id]
+          @region = Region.find(params[:region_id])
+          @councilors = @region.councilors
+        else
+          @councilors=Councilor.all
+        end
       }
       format.json
     end

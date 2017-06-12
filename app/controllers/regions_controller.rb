@@ -13,7 +13,7 @@ class RegionsController < ApplicationController
   # GET /regions/1.json
   def show
     respond_to do |format|
-      format.html { redirect_to region_branches_path(@region) }
+      format.html { redirect_to region_body_path(@region) }
       format.json
     end
   end

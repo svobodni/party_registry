@@ -1,9 +1,16 @@
-<% @page_title = "Zastupitelé Svobodných" %>
+<%
+  page_title "Zastupitelé Svobodných"
+  if @region
+    breadcrumb(:region_councilors, @region)
+    render 'regions/sidebar'
+  end
+%>
+
 <table class="table">
   <tbody>
     <% @councilors.order(:region_id).each do |councilor| %>
     <tr>
-      <td><%=councilor.region.try(:name)%></td>
+      <% unless @region %><td><%=councilor.region.try(:name)%></td><% end %>
       <td><%=councilor.council_name%><br><small><%=councilor.voting_party%></small></td>
       <td><%=councilor.person ? link_to("#{councilor.person_name} #{councilor.person.status=="registered" ? '!!!' : ''}", councilor.person) : councilor.person_name%><br><small><%=councilor.person_party%></small></td>
       <td><img src="<%= councilor.person.try(:photo_url) %>" width="30" class="img-responsivex"></td>

@@ -111,6 +111,7 @@ Rails.application.routes.draw do
   resources :regions do
     resources :people
     resources :branches, only: :index
+    resources :councilors, only: :index
     resources :contacts, only: :index
     resource :body, only: :show
     member do

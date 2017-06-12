@@ -4,6 +4,7 @@
     <li class="sidebar-brand"><%=@region.name%></li>
     <li><%= link_to_unless_current "Předsednictvo", region_body_path(@region) %></li>
     <li><%= link_to_unless_current "Pobočky", region_branches_path(@region) %></li>
+    <li><%= link_to_unless_current "Zastupitelé", region_councilors_path(@region) %></li>
     <li><%= link_to_unless_current "Sdílené kontakty", region_contacts_path(@region) %></li>
     <% if can? :supervise, @region  %>
     <hr>
