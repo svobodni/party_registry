@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170528142030) do
+ActiveRecord::Schema.define(version: 20170612001632) do
 
   create_table "bank_payments", force: :cascade do |t|
     t.integer  "account_id",    limit: 4
@@ -59,6 +59,20 @@ ActiveRecord::Schema.define(version: 20170528142030) do
     t.string   "privacy",          limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "councilors", force: :cascade do |t|
+    t.string   "council_name", limit: 255
+    t.string   "voting_party", limit: 255
+    t.string   "person_name",  limit: 255
+    t.string   "person_party", limit: 255
+    t.integer  "person_id",    limit: 4
+    t.integer  "region_id",    limit: 4
+    t.date     "since"
+    t.date     "till"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.string   "council_type", limit: 255
   end
 
   create_table "events", force: :cascade do |t|

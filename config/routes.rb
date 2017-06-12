@@ -125,7 +125,7 @@ Rails.application.routes.draw do
   end
 
   resources :regions, path: "kraje"
-
+  resources :councilors, path: "zastupitele"
   resources :councilors, only: :index
 
   post "/people/:id/payments", to: "finance_api#payments"
