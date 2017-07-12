@@ -14,7 +14,10 @@ class CouncilorsController < ApplicationController
           @councilors=Councilor.all
         end
       }
-      format.json
+      format.json {
+        @regional_councilors = Councilor.regional.group_by{|c| c.council_name}
+        @municipal_councilors = Councilor.municipal.group_by{|c| [c.council_name, c.voting_party]}
+      }
     end
   end
 

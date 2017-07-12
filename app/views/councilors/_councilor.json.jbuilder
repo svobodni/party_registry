@@ -8,6 +8,10 @@ else
   contacts=[]
 end
 
+# TMP for web
+json.name councilor.person_name
+json.party councilor.person_party
+
 json.council_name councilor.council_name
 json.voting_party councilor.voting_party
 json.person_name councilor.person_name
