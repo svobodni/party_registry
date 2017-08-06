@@ -7,7 +7,7 @@ class Country < Organization
   end
 
   def supporters_account_number
-    "2601082960"
+    "7505075050"
   end
 
 end
