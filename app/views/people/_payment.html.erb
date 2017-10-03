@@ -1,5 +1,5 @@
 <% if (@person.is_payment_expected? && !@person.is_signed_application_expected?) || @person.is_renewal_payment_expected? %>
-  <% year = "2017" %>
+  <% year = "2018" %>
   <% if @person.is_supporter? && !@person.is_awaiting_membership? %>
     <% vs = @person.supporter_vs %>
     <% amount = @person.amount.blank? ? 100 : @person.amount %>

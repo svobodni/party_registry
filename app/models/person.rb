@@ -48,7 +48,7 @@ class Person < ActiveRecord::Base
 
   scope :awaiting_first_payment, -> { where("status IN (?)", ["awaiting_first_payment", "regular_supporter_awaiting_first_payment"]) }
 
-  scope :not_renewed, -> { where("paid_till < ?", "2017-01-01") }
+  scope :not_renewed, -> { where("paid_till < ?", "2018-01-01") }
 
   scope :without_signed_application, -> { joins(:signed_application).where("signed_applications.person_id IS NULL") }
 
@@ -227,7 +227,7 @@ class Person < ActiveRecord::Base
   end
 
   def is_renewal_payment_expected?
-    is_regular? && paid_till && paid_till.to_date < "2017-01-01".to_date
+    is_regular? && paid_till && paid_till.to_date < "2018-01-01".to_date
   end
 
   def region
