@@ -362,7 +362,9 @@ class Person < ActiveRecord::Base
   end
 
   def notify_coordinator
-    CoordinatorNotifications.guesting_person_joined(self).deliver_now if guest_branch_id_changed?
+    if guest_branch_id_changed? && guest_branch.coordinator
+      CoordinatorNotifications.guesting_person_joined(self).deliver_now
+    end
   end
 
   def notify_member_registered
