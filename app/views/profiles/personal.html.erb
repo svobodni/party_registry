@@ -36,6 +36,7 @@
 
 <%= simple_form_for current_person, url: request.original_url, as: 'person' do |f| %>
   <%= f.input :description %>
+  <%= f.button :submit, value: "Uložit", class: 'btn btn-success' %>
 <% end %>
 
 <hr>
