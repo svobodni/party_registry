@@ -31,7 +31,7 @@ class ProfilesController < ApplicationController
 
   private
   def person_params
-    params.require(:person).permit(:name_prefix, :name_suffix, :email, :phone, :domestic_address_street, :domestic_address_city, :domestic_address_zip, :postal_address_street, :postal_address_city, :postal_address_zip, :guest_region_id, :guest_branch_id, :username, :password, :password_confirmation, :cv, :snail_newsletter)
+    params.require(:person).permit(:name_prefix, :name_suffix, :email, :phone, :domestic_address_street, :domestic_address_city, :domestic_address_zip, :postal_address_street, :postal_address_city, :postal_address_zip, :guest_region_id, :guest_branch_id, :username, :password, :password_confirmation, :cv, :snail_newsletter, :description)
   end
 
 end
