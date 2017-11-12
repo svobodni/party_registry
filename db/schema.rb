@@ -242,6 +242,7 @@ ActiveRecord::Schema.define(version: 20170612001632) do
     t.datetime "cv_updated_at"
     t.date     "paid_till"
     t.boolean  "snail_newsletter",                         default: true
+    t.text     "description",                limit: 65535
   end
 
   add_index "people", ["confirmation_token"], name: "index_people_on_confirmation_token", unique: true, using: :btree

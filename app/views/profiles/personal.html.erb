@@ -31,6 +31,14 @@
 <% end %>
 
 <hr>
+<h2>Popis</h2>
+<p>Do systému můžete vložit krátký text, který se bude objevovat ve volebním systému při Vaší kandidatuře.</p>
+
+<%= simple_form_for current_person, url: request.original_url, as: 'person' do |f| %>
+  <%= f.input :description %>
+<% end %>
+
+<hr>
 <h2>Fotografie</h2>
 
 <div class="row">

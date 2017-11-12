@@ -5,6 +5,7 @@ else
 end
 
 json.name person.name
+json.description person.description
 json.phone contacts.detect{|c| c.contact_type=="phone"}.try(:contact)
 json.email contacts.detect{|c| c.contact_type=="email"}.try(:contact)
 json.homepage_url contacts.detect{|c| c.contact_type=="web"}.try(:contact)

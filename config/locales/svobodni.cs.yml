@@ -68,6 +68,7 @@ cs:
         postal_address_zip: PSČ
         phone: Telefon
         amount: Částka
+        description: Popis
       organization:
         name: "Název"
         region: "Kraj"

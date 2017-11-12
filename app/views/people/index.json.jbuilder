@@ -12,6 +12,7 @@ json.people @people do |person|
   json.last_name person.last_name
   json.email person.email
   json.phone person.phone
+  json.description person.description
   json.domestic_address do
     json.latitude person.domestic_ruian_address.try(:latitude)
     json.longitude person.domestic_ruian_address.try(:longitude)
