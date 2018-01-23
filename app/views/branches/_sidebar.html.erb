@@ -10,6 +10,7 @@
     <li><%= glyph_link_to 'lock', "Příznivci", domestic_supporters_branch_path(@branch) %></li>
     <li><%= glyph_link_to 'lock', "Hostující", guest_people_branch_path(@branch) %></li>
     <li><%= glyph_link_to 'lock', "Zájemci o členství", awaiting_domestic_people_branch_path(@branch) %></li>
+    <li><%= glyph_link_to 'lock', "Neprodloužení členové", unpaid_domestic_members_branch_path(@branch) %></li>
     <li><%= glyph_link_to 'lock', "Mapa", map_branch_path(@branch) %></li>
     <li><%= glyph_link_to 'lock', "Export", branch_people_path(@branch, format: :xls) %></li>
     <% end %>

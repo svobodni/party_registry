@@ -82,6 +82,7 @@ Rails.application.routes.draw do
       get 'domestic_members'
       get 'domestic_supporters'
       get 'guest_people'
+      get 'unpaid_domestic_members'
     end
   end
   resources :organizations
@@ -122,6 +123,7 @@ Rails.application.routes.draw do
       get 'okresy'
       get 'map'
       get 'awaiting_domestic_people'
+      get 'unpaid_domestic_members'
     end
   end
 

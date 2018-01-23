@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 class BranchesController < ApplicationController
-  before_action :set_branch, only: [:show, :update, :destroy, :coordinator, :awaiting_domestic_people, :domestic_members, :domestic_supporters, :guest_people, :map]
+  before_action :set_branch, only: [:show, :update, :destroy, :coordinator, :awaiting_domestic_people, :domestic_members, :domestic_supporters, :guest_people, :unpaid_domestic_members, :map]
 
   before_action :authenticate_person!, except: :show
 

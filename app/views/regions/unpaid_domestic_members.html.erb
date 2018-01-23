@@ -1,0 +1,24 @@
+<%
+  page_title "Neprodloužení členové"
+  breadcrumb(:region, @region)
+  render "sidebar"
+%>
+
+<table id="unpaid_domestic_members" class="table table-striped">
+  <thead>
+	<tr><th>Jméno</th><th>Stav</th><th>Telefon</th><th>Email</th><th>Zaplaceno do</th></tr>
+  </thead>
+  <tbody>
+  <% @region.domestic_members.not_renewed.accessible_by(current_ability).reverse.each do |member| %>
+    <tr>
+      <td><%= member.name %></td>
+      <td><%= t member.status, scope: :person_status %></td>
+      <td><%= tel_to member.phone %></td>
+      <td><%= mail_to member.email %></td>
+      <td><%= member.paid_till %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<%= datatable :unpaid_domestic_members %>
