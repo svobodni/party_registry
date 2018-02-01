@@ -12,13 +12,13 @@ class CoordinatorNotifications < ActionMailer::Base
 
   def member_registered(person)
     @person = person
-    mail to: @person.domestic_branch.coordinator.person.email, subject: "Nový zájemce o členství"
+    mail to: @person.domestic_branch.coordinator.person.email, subject: "Nový zájemce o členství" if @person.domestic_branch.coordinator
   end
 
   def daily_event_notifier(branch, events)
     @events = events
     @branch = branch
-    mail to: branch.coordinator.person.email, subject: "svobodni.cz - notifikace změn"
+    mail to: branch.coordinator.person.email, subject: "svobodni.cz - notifikace změn" if branch.coordinator
   end
 
 end
