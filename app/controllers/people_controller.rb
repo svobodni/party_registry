@@ -190,7 +190,7 @@ class PeopleController < ApplicationController
   def photo
     authenticate_person! if @person.roles.empty?
     if @person.profile_pictures.empty?
-      send_data HTTParty.get(@person.files_photo_url).body, filename: "#{@person.id}.png", type: 'image/png', disposition: :inline
+      send_data HTTParty.get(@person.files_photo_url, :verify => false).body, filename: "#{@person.id}.png", type: 'image/png', disposition: :inline
     else
       style = params[:size]
       style ||= :legacy

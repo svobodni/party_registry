@@ -25,7 +25,7 @@ class BranchLocator
   # Pobočky na celém území městské části
   def name_by_mestska_cast
     # Jihomoravský kraj
-    return mestska_cast if ["Brno-střed", "Brno-sever", "Brno-Žabovřesky", "Brno-Kohoutovice"].member?(mestska_cast)
+    return mestska_cast if ["Brno-střed", "Brno-sever", "Brno-Žabovřesky", "Brno-Kohoutovice", "Brno-Královo pole"].member?(mestska_cast)
     return "Brno-Bystrc" if ["Brno-Bystrc", "Brno-Kníničky", "Brno-Komín", "Brno-Žebětín"].member?(mestska_cast)
     return "Brno-východ" if ["Brno-Líšeň", "Brno-Vinohrady", "Brno-Židenice", "Brno-Slatina"].member?(mestska_cast)
     # Praha
@@ -104,8 +104,12 @@ class BranchLocator
     # Plzeňský kraj
     return "Okres Plzeň-sever" if okres == "Plzeň-sever"
     return "Okres Plzeň-město" if okres == "Plzeň-město"
+    return "Okres Plzeň-jih" if okres == "Plzeň-jih"
     return "Okres Rokycany" if okres == "Rokycany"
     return "Okres Klatovy" if okres == "Klatovy"
+    return "Okres Domažlice" if okres == "Domažlice"
+    return "Okres Tachov" if okres == "Tachov"
+
     # Středočeský kraj
     return okres if ["Benešov", "Beroun", "Kolín", "Kutná Hora", "Mělník", "Mladá Boleslav", "Nymburk", "Praha-západ", "Příbram", "Rakovník", "Kladno"].member?(okres)
     # Ústecký kraj
