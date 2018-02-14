@@ -35,7 +35,7 @@ class BranchLocator
   # Pobočky na celém území obce
   def name_by_obec
     # Jihomoravský kraj
-    return obec if ["Hodonín", "Moravský Krumlov"].member?(obec)
+    return obec if ["Hodonín", "Moravský Krumlov", "Břeclav"].member?(obec)
     return "Kuřimsko" if [583251, 583430, 583791, 583171, 584151].include?(obec_id)
     # kraj Vysočina
     return "Město Jihlava" if obec=="Jihlava"
