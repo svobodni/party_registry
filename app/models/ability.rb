@@ -61,7 +61,7 @@ class Ability
       end
 
       # Speciální role pro kancelář
-      if ([1, 86, 342, 344, 2804, 3860].member?(user.id) || user.roles.detect{|r| r.body.try(:acronym)=="ReP"})
+      if ([1, 86, 342, 344, 2804, 3860, 5679, 7873].member?(user.id) || user.roles.detect{|r| r.body.try(:acronym)=="ReP"})
         can [:read, :application], Person
         can :upload, SignedApplication
         can [:create, :destroy], Role
