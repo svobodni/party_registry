@@ -29,6 +29,7 @@ Rails.application.routes.draw do
         get :without_signed_application
         get :members_without_signed_application
         get :new_registrations
+        get :membership_requests
       end
     end
   end

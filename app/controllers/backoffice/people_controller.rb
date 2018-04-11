@@ -51,6 +51,10 @@ class Backoffice::PeopleController < ApplicationController
     @people = Person.order(id: :desc).limit(50)
   end
 
+  def membership_requests
+    @membership_requests = MembershipRequest.includes(:person).all
+  end
+
   # GET /people/1
   # GET /people/1.json
   def show

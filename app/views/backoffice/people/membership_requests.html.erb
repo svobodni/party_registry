@@ -1,0 +1,29 @@
+<%
+  page_title "Seznam žadatelů o členství"
+  render "backoffice/sidebar"
+%>
+
+<table id="people" class="table table-striped">
+  <thead>
+    <tr><th>ID osoby</th><th>Jméno</th><th>Původní stav</th><th>Zařazen v kraji</th><th>Zařazen v pobočce</th><th>Požádal dne</th>
+      <th>Přihláška doručena dne</th>
+      <th>Platba zpracována dne</th>
+      <th>KrP vyznačil schválení dne</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @membership_requests.each do |request| %>
+    <tr>
+      <td><%=request.person_id%></td>
+      <td><%=request.person.try(:name)%></td>
+      <td><%=request.previous_status%></td>
+      <td><%=request.person.try(:domestic_region).try(:name)%></td>
+      <td><%=request.person.try(:domestic_branch).try(:name)%></td>
+      <td><%=l request.membership_requested_on%></td>
+      <td><%=l request.application_received_on%></td>
+      <td><%=l request.paid_on%></td>
+      <td><%=l request.approved_on%></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
