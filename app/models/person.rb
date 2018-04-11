@@ -10,6 +10,7 @@ class Person < ActiveRecord::Base
 
   has_many :events, as: :eventable
   has_many :notes, as: :noteable
+  has_one :membership_request
 
   has_many :identities
   has_many :profile_pictures

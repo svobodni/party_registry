@@ -4,6 +4,7 @@ class Event < ActiveRecord::Base
 
   before_create :set_uuid
   before_create :set_regions_and_branches
+  after_create :handle_event
 
   belongs_to :requestor, foreign_key: :requestor_id, class_name: 'Person'
   belongs_to :eventable, polymorphic: true
@@ -65,4 +66,26 @@ class Event < ActiveRecord::Base
     end
   end
 
+  def handle_event
+    case name
+    when "ApplicationReceived"
+      req=MembershipRequest.find_or_initialize_by(person_id: eventable_id)
+      req.update_attribute :application_received_on, created_at
+    when "PaymentAccepted"
+      req=MembershipRequest.find_by(person_id: eventable_id)
+      req.update_attribute(:paid_on, created_at) if req
+    when "PersonAccepted"
+      req=MembershipRequest.find_or_initialize_by(person_id: eventable_id)
+      req.update_attribute :approved_on, created_at
+    when "MembershipRequested"
+      req=MembershipRequest.find_or_initialize_by(person_id: eventable_id)
+      req.membership_requested_on=created_at
+      if changes.try(:fetch, :status).try(:first)=="regular_supporter"
+        req.previous_status="regular_supporter"
+      else
+        req.previous_status=nil
+      end
+      req.save
+    end
+  end
 end

@@ -1,0 +1,7 @@
+<h2>Stav přijímání</h2>
+<table class="table">
+  <tr><th>Na webu vyplněno</th><td><%= l @person.membership_request.membership_requested_on %></td></tr>
+  <tr><th>Podepsaná přihláška vložena</th><td><%= l @person.membership_request.application_received_on %></td></tr>
+  <tr><th>Platba zaevidována</th><td><%= l @person.membership_request.paid_on %></td></tr>
+  <tr><th>KrP vyznačil schválení</th><td><%= l @person.membership_request.approved_on %></td></tr>
+</table>

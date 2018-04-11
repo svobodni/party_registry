@@ -47,6 +47,9 @@
     <%= link_to 'Upravit', edit_backoffice_person_path(@person), class: "btn btn-default" %>
   </div>
   <div class="col-md-6">
+    <% if @person.membership_request %>
+    <%= render "people/membership_request_details" %>
+    <% end %>
     <% unless @person.roles.empty? %>
     <h2>Aktuální funkce</h2>
     <table class="table">
