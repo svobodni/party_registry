@@ -12,6 +12,11 @@ module ApplicationHelper
   end
   end
 
+  def link_to_branch(branch=nil)
+    if branch
+      link_to branch.name, branch
+    end
+  end
   def datatable(id, paging=true)
     paging_html = paging ? "" : "\"paging\":   false,"
     content_tag :script do

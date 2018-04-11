@@ -3,7 +3,7 @@
   render "backoffice/sidebar"
 %>
 
-<table id="people" class="table table-striped">
+<table id="membership_requests" class="table table-striped">
   <thead>
     <tr><th>ID osoby</th><th>Jméno</th><th>Zařazen v kraji</th><th>Zařazen v pobočce</th>
       <th>Stav</th>
@@ -13,15 +13,18 @@
   <tbody>
     <% @membership_requests.each do |request| %>
     <tr>
-      <td><%=request.person_id%></td>
+      <td><%=link_to request.person_id, backoffice_person_path(request.person_id)%></td>
       <td><%=request.person.try(:name)%></td>
       <td><%=request.person.try(:domestic_region).try(:name)%></td>
-      <td><%=request.person.try(:domestic_branch).try(:name)%></td>
+      <td><%=link_to_branch(request.person.try(:domestic_branch))%></td>
       <td><%=tag(:i, class: 'glyphicon glyphicon-pencil', style:'color: green', title: "Přihláška přijata dne #{l(request.application_received_on)}") if request.application_received_on%>
       <%=tag(:i, class: 'glyphicon glyphicon-usd', style:'color: green', title: "Platba zpracována dne #{l(request.paid_on)}") if request.paid_on %>
       <%=tag(:i, class: 'glyphicon glyphicon-thumbs-up', style:'color: green', title: "KrP vynačil schválení dne #{l(request.approved_on)}") if request.approved_on %></td>
-      <td><%=l [request.membership_requested_on,request.application_received_on,request.approved_on,request.paid_on].compact.max%></td>
+      <% last_change = [request.membership_requested_on,request.application_received_on,request.approved_on,request.paid_on].compact.max %>
+      <td data-order="<%=last_change%>"><%=l last_change%></td>
     </tr>
     <% end %>
   </tbody>
 </table>
+
+<%= datatable "membership_requests", false %>
