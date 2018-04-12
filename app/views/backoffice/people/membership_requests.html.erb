@@ -14,7 +14,7 @@
     <% @membership_requests.each do |request| %>
     <tr>
       <td><%=link_to request.person_id, backoffice_person_path(request.person_id)%></td>
-      <td><%=request.person.try(:name)%></td>
+      <td data-order="<%=request.person.try(:last_name)%>"><%=request.person.try(:name)%></td>
       <td><%=request.person.try(:domestic_region).try(:name)%></td>
       <td><%=link_to_branch(request.person.try(:domestic_branch))%></td>
       <td><%=tag(:i, class: 'glyphicon glyphicon-pencil', style:'color: green', title: "Přihláška přijata dne #{l(request.application_received_on)}") if request.application_received_on%>
