@@ -82,6 +82,8 @@ class Event < ActiveRecord::Base
       req.membership_requested_on=created_at
       if changes.try(:fetch, :status).try(:first)=="regular_supporter"
         req.previous_status="regular_supporter"
+      elsif eventable.status=="regular_supporter"
+        req.previous_status="regular_supporter"
       else
         req.previous_status=nil
       end
