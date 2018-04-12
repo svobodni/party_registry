@@ -21,6 +21,7 @@ module ApplicationHelper
     paging_html = paging ? "" : "\"paging\":   false,"
     content_tag :script do
       "$(document).ready(function() {
+        $.fn.dataTable.ext.order.intl();
         $('##{id}').DataTable( {
            #{paging_html}
            \"language\": {
