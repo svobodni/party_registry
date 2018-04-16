@@ -1,4 +1,4 @@
-<% if (@person.is_payment_expected? && !@person.is_signed_application_expected?) || @person.is_renewal_payment_expected? %>
+<% if @person.is_payment_expected? || @person.is_renewal_payment_expected? %>
   <% year = "2018" %>
   <% if @person.is_supporter? && !@person.is_awaiting_membership? %>
     <% vs = @person.supporter_vs %>
@@ -7,7 +7,7 @@
     <% account = @country.supporters_account_number %>
     <% title = "Příspěvek příznivce na rok #{year}" %>
     <% if @person.is_regular? %>
-    <% request_text="Zaplaťte prosím příspěvek příznivce na rok #{year}. Tento rok bude ve znamení sněmovních voleb. Lhůta pro zaplacení příspěvku příznivce běží do konce ledna #{year}."%>
+    <% request_text="Zaplaťte prosím příspěvek příznivce na rok #{year}. Tento rok bude ve znamení komunálních voleb. Lhůta pro zaplacení příspěvku příznivce běží do konce ledna #{year}."%>
     <% else %>
     <% request_text="Zaplaťte prosím příspěvek příznivce na rok #{year}. Jakmile platbu obdržíme, bude registrace kompletní. Budeme Vás o tom informovat emailem. Získáte pak přístup do sekce pro registrované uživatele, kde se mj. budete moci účastnit některých hlasování a účastnit se diskusí."%>
     <% end %>
@@ -20,7 +20,9 @@
     <% amount_text="1000 Kč (základní sazba)<br /> 300 Kč (studenti do 25 let a důchodci)".html_safe %>
     <% account = @country.members_account_number %>
     <% title = "Členské příspěvky na rok #{year}" %>
-    <% if @person.is_regular? %>
+    <% if @person.is_requesting_membership? %>
+    <% request_text="Zaplaťte prosím členský příspěvek na rok #{year}."%>
+    <% elsif @person.is_regular? %>
     <% request_text="Zaplaťte prosím členský příspěvek na rok #{year}. Tento rok bude ve znamení sněmovních voleb. Lhůta pro zaplacení členského příspěvku běží do konce ledna #{year}."%>
     <% else %>
     <% request_text="Zaplaťte prosím členský příspěvek na rok #{year}. Jakmile platbu obdržíme, stanete se plnoprávným členem Strany svobodných občanů."%>
@@ -31,15 +33,18 @@
 
   <!-- <div class="col-md-6"> -->
     <div class="panel" style="border: 1px solid #009681">
-        <div class="panel-body bg-danger">
+        <div class="panel-body <% @person.is_requesting_membership? ? "bg-success" : "bg-danger"%>">
             <div class="text-center">
               <h3><%=title%></h3>
+              <% unless @person.is_requesting_membership? %>
               <div class="m">
                 <i class="glyphicon glyphicon-piggy-bank fa-3x"></i>
               </div>
+              <% end %>
               <p class="small"><%=request_text%></p>
 
               <p class="small"><%=request_info_text%></p>
+
 
               <% @qr = RQRCode::QRCode.new(Rspayd::CzechPayment.generate_string(
                 :accountNumber=>account,
@@ -61,7 +66,7 @@
                     <!-- <tr><th>Ze zahraničí</th><td>IBAN: CZ6920100000002100382818, BIC: FIOBCZPP</td></tr> -->
                     <tr><th>Částka</th><td><%=amount_text%></tr>
                     <tr><th>Variabilní symbol</th><td><%= current_person.vs %></td></tr>
-                    <tr><th>Účel</th><td><%=request_message%></td></tr>
+                    <tr><th>Zpráva pro příjemce</th><td><%=request_message%></td></tr>
                   </table>
                 </div>
               </div>

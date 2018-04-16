@@ -5,6 +5,48 @@
 %>
 
 <div class="profile membership">
+
+<% unless @person.confirmed? %>
+  <p class="bg-warning">Poslali jsme Vám emailem ověřovací zprávu. Prosím potvrďte Vaši emailovou adresu odkazem ve zprávě.</p>
+<% end %>
+
+<% if @person.is_requesting_membership? %>
+<div class="jumbotron bg-success">
+<h2>Žádost o členství</h2>
+<p>Dne <%= l @person.membership_request.membership_requested_on %> jste požádal/a o členství. Pro vznik členství je potřeba splnit tři kroky:</p>
+<ul>
+<li><h4>doručit podepsanou přihlášku <%= content_tag(:span, nil, class: 'glyphicon glyphicon-ok', style:'color: green', title: "Přihláška přijata dne #{l(@person.membership_request.application_received_on)}") if @person.membership_request.application_received? %></h4></li>
+<li><h4>zaplatit členský příspěvek <%= content_tag(:span, nil, class: 'glyphicon glyphicon-ok', style:'color: green', title: "Platba zpracována dne #{l(@person.membership_request.paid_on)}") if @person.membership_request.paid? %></h4></li>
+<li><h4>být schválen krajským předsednictvem <%= content_tag(:span, nil, class: 'glyphicon glyphicon-ok', style:'color: green', title: "Členství schváleno dne #{l(@person.membership_request.approved_on)}") if @person.membership_request.approved? %></h4></li>
+</ul>
+</div>
+
+<% if !@person.is_signed_application_expected? %>
+<div class="panel" style="border: 1px solid #009681">
+  <div class="panel-body text-center">
+    <h2>Přihláška</h2>
+    Prosím, stáhněte si <%= link_to "PDF s přihláškou", application_person_path(@person, format: :pdf)%>, vytiskněte ji a podepsanou odešlete na adresu kanceláře nebo ji doneste na seznamovací schůzku. Pokud máte zaručený kvalifikovaný podpis, můžete PDF podepsat elektronicky a odeslat na <%= mail_to "kancelar@svobodni.cz" %>.
+  </div>
+</div>
+<% end %>
+
+<% if @person.is_awaiting_first_payment? %>
+<p>Po zaplacení příspěvku získáte dočasný přístup do sekce pro registrované příznivce a můžete se ihned zapojit do života strany. V případě nepřijetí Vám platbu vrátíme.</p>
+<%= render partial: "people/payment" %>
+<% end %>
+
+<% if @person.is_awaiting_presidium_decision? %>
+<div class="panel" style="border: 1px solid #009681">
+  <div class="panel-body text-center">
+    <h2>Schválení KrP</h2>
+    <%=link_to "Krajské předsednictvo", region_body_path(@person.domestic_region)%> nebo koordinátor pobočky Vás pozvou na seznamovací schůzku a poté rozhodnou o Vašem přijetí ke Svobodným.
+  </div>
+</div>
+<% end %>
+
+
+<% else %>
+
 <% if @person.is_regular_member? %>
   <p class="bg-info">Jste řádným členem se zaplacenými členskými příspěvky do <%= l @person.paid_till %>.</p>
 <% end %>
@@ -13,23 +55,12 @@
   <p class="bg-info">Jste příznivce Svobodných se řádně zaplaceným příspěvkem do <%= l @person.paid_till %>. Děkujeme.</p>
 <% end %>
 
-<% if @person.is_awaiting_presidium_decision? %>
-  <p class="bg-info">Požádal jste o členství a čeká se na rozhodnutí <%=link_to "krajského předsednictva", region_body_path(@person.domestic_region)%>.</p>
-<% end %>
-
-<% if @person.is_awaiting_first_payment? %>
-  <p class="bg-success">Vaše členství bylo schváleno krajským předsednictvem.</p>
-<% end %>
-
-<% unless @person.confirmed? %>
-  <p class="bg-warning">Poslali jsme Vám emailem ověřovací zprávu. Prosím potvrďte Vaši emailovou adresu odkazem ve zprávě.</p>
-<% end %>
-
 <% if @person.is_signed_application_expected? %>
   <p class="bg-warning">Prosím, stáhněte si <%= link_to "PDF s přihláškou", application_person_path(@person, format: :pdf)%>, vytiskněte ji a podepsanou odešlete na adresu kanceláře. Pokud máte zaručený kvalifikovaný podpis, můžete PDF podepsat elektronicky a odeslat na <%= mail_to "kancelar@svobodni.cz" %>.</p>
 <% end %>
 
-<%= render partial: "people/payment"%>
+<%= render partial: "people/payment" %>
+<% end %>
 </div>
 
 <% if @person.is_supporter? && !@person.is_awaiting_membership? %>
@@ -55,6 +86,6 @@
 <div class="jumbotron">
   <h2>Smazání osobních údajů</h2>
   <p>Pokud jste se rozhodli ukončit svou podporu Svobodných, můžete nechat vymazat své údaje z databáze.</p>
-  <p><%= button_to "Vymazat mé údaje", person_path(current_person), class: "btn btn-primary btn-danger", method: :delete, data: { confirm: "Opravdu si smazat své údaje z databáze Strany svobodných občanů?" }%></p>
+  <%= button_to "Vymazat mé údaje", person_path(current_person), class: "btn btn-primary btn-danger", method: :delete, data: { confirm: "Opravdu si smazat své údaje z databáze Strany svobodných občanů?" }%>
 </div>
 <% end %>

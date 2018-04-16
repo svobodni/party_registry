@@ -3,6 +3,15 @@
   render "backoffice/sidebar"
 %>
 
+<table class="table table-striped table-condensed">
+  <tbody>
+    <tr><th>Počet žádostí</th><td><%=@membership_requests.count%></td></tr>
+    <tr><th>Nezaplacených</th><td><%=@membership_requests.reject{|r| r.paid?}.size%></td></tr>
+    <tr><th>Bez přihlášky</th><td><%=@membership_requests.reject{|r| r.application_received?}.size%></td></tr>
+    <tr><th>Bez rozhodnutí KrP</th><td><%=@membership_requests.reject{|r| r.approved?}.size%></td></tr>
+  </tbody>
+</table>
+
 <table id="membership_requests" class="table table-striped">
   <thead>
     <tr><th>ID osoby</th><th>Jméno</th><th>Zařazen v kraji</th><th>Zařazen v pobočce</th>
