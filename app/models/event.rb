@@ -69,7 +69,7 @@ class Event < ActiveRecord::Base
   def handle_event
     case name
     when "ApplicationReceived"
-      req=MembershipRequest.find_or_initialize_by(person_id: eventable_id)
+      req=MembershipRequest.find_by(person_id: eventable_id)
       req.update_attribute :application_received_on, created_at
     when "PaymentAccepted"
       req=MembershipRequest.find_by(person_id: eventable_id)
@@ -83,7 +83,7 @@ class Event < ActiveRecord::Base
     when "MembershipRequested"
       req=MembershipRequest.find_or_initialize_by(person_id: eventable_id)
       req.membership_requested_on=created_at
-      if changes.try(:fetch, :status).try(:first)=="regular_supporter"
+      if changes[:status] && changes[:status].first=="regular_supporter"
         req.previous_status="regular_supporter"
       elsif eventable.status=="regular_supporter"
         req.previous_status="regular_supporter"
@@ -92,5 +92,11 @@ class Event < ActiveRecord::Base
       end
       req.save
     end
+
+    # cleanup pokud byl uživatel úspěšně přeřazen
+    if ["ApplicationReceived","PaymentAccepted","PersonAccepted"].member?(name)
+      eventable.membership_request.destroy if eventable.status=="regular_member"
+    end
+
   end
 end

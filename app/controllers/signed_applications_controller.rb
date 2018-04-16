@@ -14,9 +14,12 @@ class SignedApplicationsController < ApplicationController
 
     respond_to do |format|
       if @signed_application.save
-        Person.find(signed_application_params[:person_id]).events.create(default_event_params.merge({
+        person=Person.find(signed_application_params[:person_id])
+        person.application_received!
+        person.events.create(default_event_params.merge({
           command: "ReceiveApplication",
-          name: "ApplicationReceived"
+          name: "ApplicationReceived",
+          changes: person.previous_changes
         }))
         format.html { redirect_to new_signed_application_path, notice: 'Přihláška byla úspěšně uložena.' }
         format.json { render action: 'show', status: :created, location: @signed_application }
