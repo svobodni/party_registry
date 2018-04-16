@@ -8,7 +8,7 @@ class Notifier
 
   # novy zaplaceny priznivce
   def self.new_regular_supporter(person)
-    SupporterNotifications.regular(person).deliver
+    SupporterNotifications.supporter_paid(person).deliver
     PresidiumNotifications.new_regular_supporter(person).deliver
   end
 end

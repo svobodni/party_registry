@@ -4,7 +4,7 @@ Uhraďte prosím příspěvek příznivce na rok 2018
 ve výši <%=@person.amount%> Kč
 na účet č. 7505075050/2010
 variabilní symbol <%=@person.vs%>
-zpráva pro příjemce: příspěvek příznivce <JMÉNO,PŘÍJEMNE>
+zpráva pro příjemce: příspěvek příznivce <%= @person.short_name %>
 
 Prosím dodržte výše uvedený variabilní symbol, jinak bude problém vaši platbu příspěvku identifikovat.
 
