@@ -98,6 +98,24 @@ class PeopleController < ApplicationController
     end
   end
 
+  # POST /people/123/reject
+  def reject
+    authorize!(:approve, @person)
+    @person.presidium_denied!
+    @person.events.create(default_event_params.merge({
+      command: "RejectPerson",
+      name: "PersonRejected",
+      changes: @person.previous_changes
+    }))
+    respond_to do |format|
+      if @person.errors.empty?
+        format.html { redirect_to :back, notice: 'Členství bylo zamítnuto.'}
+      else
+        format.html { redirect_to :back, alert: 'Změnu se nepodařilo uložit: '+@person.errors.full_messages.join("<br/>") }
+      end
+    end
+  end
+
   def cancel_membership_request
   end
 

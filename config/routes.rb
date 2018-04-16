@@ -98,6 +98,7 @@ Rails.application.routes.draw do
       get 'photo'
       get 'cv'
       post 'approve'
+      post 'reject'
       post 'cancel_membership'
       get 'cancel_membership_request'
     end

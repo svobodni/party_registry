@@ -15,7 +15,11 @@
 <td><%= link_to member.name, member %></td>
 <td><%= t member.status, scope: :person_status %></td>
 <td><%= member.domestic_branch.try(:name) %></td>
-<td><%= link_to_member_application(member)%><%=button_to("Vyznačit schválení", approve_person_path(member), class: "btn btn-xs") if member.is_awaiting_presidium_decision?%></td>
+<td>
+	<%= link_to_member_application(member)%>
+	<%=button_to("Vyznačit schválení", approve_person_path(member), class: "btn btn-xs", data: { confirm: "Opravdu chcete vyznačit schválení? (#{member.id} #{member.short_name})"}) if member.is_awaiting_presidium_decision?%>
+	<%=button_to("Vyznačit zamítnutí", reject_person_path(member), class: "btn btn-xs", data: { confirm: "Opravdu chcete vyznačit neschválení? (#{member.id} #{member.short_name})"}) if member.is_awaiting_presidium_decision?%>
+</td>
 </tr>
 
 <% end %>

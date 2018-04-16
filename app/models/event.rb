@@ -77,6 +77,9 @@ class Event < ActiveRecord::Base
     when "PersonAccepted"
       req=MembershipRequest.find_or_initialize_by(person_id: eventable_id)
       req.update_attribute :approved_on, created_at
+    when "PersonRejected"
+      req=MembershipRequest.find_by(person_id: eventable_id)
+      req.destroy
     when "MembershipRequested"
       req=MembershipRequest.find_or_initialize_by(person_id: eventable_id)
       req.membership_requested_on=created_at
