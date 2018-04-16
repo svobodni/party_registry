@@ -38,7 +38,7 @@
             <a href="#" class="dropdown-toogle" data-toggle="dropdown">Republikové orgány</a>
             <ul class="dropdown-menu">
               <% for body in @country.bodies.order_for_display %>
-              <li><%= link_to body.name.split("(").first, body %></a></li>
+              <li><%= link_to body.name.split("(").first, body %></li>
               <% end %>
             </ul>
           </li>
@@ -46,7 +46,7 @@
             <a href="#" class="dropdown-toogle" data-toggle="dropdown">Kraje</a>
             <ul class="dropdown-menu">
               <% for region in @country.regions.sorted %>
-              <li><%= link_to region.name, region %></a></li>
+              <li><%= link_to region.name, region %></li>
               <% end %>
             </ul>
           </li>
@@ -74,17 +74,19 @@
                   </ul>
                 </li>
                 <% end %>
-                <li><%= link_to "Pobočky", branches_path %></li>
-                <ul>
-                  <% if can? :create, Branch %>
-                  <li><%= link_to "Nová pobočka", new_branch_path %>
-                  <% end %>
-                </ul>
-                <li><%= link_to "Statistika", backoffice_stats_path %></li>
+                <li><%= link_to "Pobočky", branches_path %>
+                  <ul>
+                    <% if can? :create, Branch %>
+                    <li><%= link_to "Nová pobočka", new_branch_path %>
+                    <% end %>
+                  </ul>
+                </li>
+                <li><%= link_to "Statistika", backoffice_stats_path %>
                   <ul>
                     <li><%= link_to "Aktuální stav", backoffice_stats_path %>
                     <li><%= link_to "Změny", changes_backoffice_stats_path %>
                   </ul>
+                </li>
                 <li><a href="https://finance.svobodni.cz/2017/organizace/republikove-organy">Finance</a></li>
                 <li><%= link_to "Logy", backoffice_events_path %></li>
                 <li><%= link_to "Prezenční listiny", new_backoffice_attendance_list_path %></li>
@@ -110,63 +112,53 @@
     </div>
   </div>
   </header>
-  <main role="main">
-  <div class="container-fluid">
-    <div class="row">
-      <% if content_for('sidebar') %>
-
-        <div id="wrapper">
-        <!-- Sidebar -->
-        <%= content_for('sidebar') %>
-        <!-- /#sidebar-wrapper -->
-
-        <!-- Page Content -->
-        <div id="page-content-wrapper">
-          <div class="container-fluid">
-            <div class="row">
-              <% if current_controller?(:profiles) %>
-              <div class="col-lg-8">
-              <% else %>
-              <div class="col-lg-12">
-              <% end %>
-                <ul class="breadcrumb pull-right"><%= breadcrumbs separator: " / " %></ul>
-                <% if @page_title %><h2><%= @page_title %></h2><% end %>
-                <% flash.each do |type, message| %>
-                <div class="alert <%= alert_class_for(type) %> alert-dismissible fade in">
-                  <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                  <%= message %>
+  <main>
+    <div class="container-fluid">
+      <div class="row">
+        <% if content_for('sidebar') %>
+          <div id="wrapper">
+            <!-- Sidebar -->
+            <%= content_for('sidebar') %>
+            <!-- /#sidebar-wrapper -->
+            <!-- Page Content -->
+            <div id="page-content-wrapper">
+              <div class="container-fluid">
+                <div class="row">
+                  <% if current_controller?(:profiles) %>
+                  <div class="col-lg-8">
+                  <% else %>
+                  <div class="col-lg-12">
+                  <% end %>
+                    <div class="pull-right"><%= breadcrumbs separator: " / " %></div>
+                    <% if @page_title %><h2><%= @page_title %></h2><% end %>
+                    <% flash.each do |type, message| %>
+                    <div class="alert <%= alert_class_for(type) %> alert-dismissible fade in">
+                      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                      <%= message %>
+                    </div>
+                    <% end %>
+                    <%= yield %>
+                  </div>
                 </div>
-                <% end %>
-                <%= yield %>
-
               </div>
             </div>
+            <!-- /#page-content-wrapper -->
           </div>
-        </div>
-        <!-- /#page-content-wrapper -->
-
-        </div>
-
-      <% else %>
-      <div class="col-md-12">
-        <ul class="breadcrumb pull-right"><%= breadcrumbs separator: " / " %></ul>
-        <% if @page_title %><h2><%= @page_title %></h2><% end %>
-        <% flash.each do |type, message| %>
-        <div class="alert <%= alert_class_for(type) %> alert-dismissible fade in">
-          <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-          <%= message %>
-        </div>
+        <% else %>
+          <div class="col-md-12">
+            <ul class="breadcrumb pull-right"><%= breadcrumbs separator: " / " %></ul>
+            <% if @page_title %><h2><%= @page_title %></h2><% end %>
+            <% flash.each do |type, message| %>
+            <div class="alert <%= alert_class_for(type) %> alert-dismissible fade in">
+              <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+              <%= message %>
+            </div>
+            <% end %>
+            <%= yield %>
+          </div>
         <% end %>
-
-        <%= yield %>
       </div>
-      <% end %>
     </div>
-
-
-
-  </div>
   </main>
-
 </body>
 </html>
