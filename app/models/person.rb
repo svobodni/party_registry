@@ -137,10 +137,6 @@ class Person < ActiveRecord::Base
     is_regular_member? || is_requesting_membership?
   end
 
-  def is_supporter?
-    ["registered", "regular_supporter"].member?(status)
-  end
-
   def membership_type
     is_regular_member? ? :member : :supporter
   end

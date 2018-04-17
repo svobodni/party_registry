@@ -21,7 +21,7 @@
 </ul>
 </div>
 
-<% if !@person.is_signed_application_expected? %>
+<% if @person.is_signed_application_expected? %>
 <div class="panel" style="border: 1px solid #009681">
   <div class="panel-body text-center">
     <h2>Přihláška</h2>
@@ -63,7 +63,7 @@
 <% end %>
 </div>
 
-<% if @person.is_supporter? && !@person.is_awaiting_membership? %>
+<% unless @person.is_member_or_requesting? %>
 <div class="jumbotron">
   <h2>Staňte se členem Svobodných</h2>
   <p>Děkujeme za Vaši přízniveckou podporu. Zapojte se ještě více. Staňte se členem.</p>

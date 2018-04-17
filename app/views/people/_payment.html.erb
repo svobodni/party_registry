@@ -1,6 +1,6 @@
 <% if @person.is_payment_expected? || @person.is_renewal_payment_expected? %>
   <% year = "2018" %>
-  <% if @person.is_supporter? && !@person.is_awaiting_membership? %>
+  <% if !@person.is_member_or_requesting? %>
     <% vs = @person.supporter_vs %>
     <% amount = @person.amount.blank? ? 100 : @person.amount %>
     <% amount_text="100 Kč (základní sazba)" %>
