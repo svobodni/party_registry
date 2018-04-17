@@ -292,7 +292,7 @@ class Person < ActiveRecord::Base
 
     event :application_received do
       # (priznivce schvaleny zajemce o clenstvi)[uhrada doplatku]->(clen)
-      transitions from: :regular_supporter, to: :regular_member,
+      transitions from: [:registered, :regular_supporter], to: :regular_member,
         :guard => Proc.new { self.validate_membership_conditions(["PersonAccepted", "PaymentAccepted"]) },
         :after => Proc.new { Notifier.new_regular_member(self) }
       transitions from: :regular_supporter, to: :regular_supporter
@@ -300,7 +300,7 @@ class Person < ActiveRecord::Base
 
     # Členství schváleno KrP
     event :presidium_accepted do
-      transitions from: :regular_supporter, to: :regular_member,
+      transitions from: [:registered,:regular_supporter], to: :regular_member,
         :guard => Proc.new { self.validate_membership_conditions(["ApplicationReceived", "PaymentAccepted"])},
         :after => Proc.new { Notifier.new_regular_member(self) }
       transitions from: :regular_supporter, to: :regular_supporter,
