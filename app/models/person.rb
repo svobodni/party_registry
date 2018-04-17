@@ -132,8 +132,8 @@ class Person < ActiveRecord::Base
     "#{postal_address_street}, #{postal_address_zip} #{postal_address_city}"
   end
 
-  def is_member?
-    ["registered", "regular_supporter", "regular_member"].member?(status)
+  def is_member_or_requesting?
+    is_regular_member? || is_requesting_membership?
   end
 
   def is_supporter?
@@ -141,7 +141,7 @@ class Person < ActiveRecord::Base
   end
 
   def membership_type
-    is_member? ? :member : :supporter
+    is_regular_member? ? :member : :supporter
   end
 
   def is_regular?
@@ -161,7 +161,7 @@ class Person < ActiveRecord::Base
   end
 
   def vs
-    (is_member? ? "1" : "5") + id.to_s.rjust(4,"0")
+    (is_member_or_requesting? ? "1" : "5") + id.to_s.rjust(4,"0")
   end
 
   def member_vs
@@ -209,11 +209,11 @@ class Person < ActiveRecord::Base
   end
 
   def is_awaiting_membership?
-    membership_request
+    is_requesting_membership?
   end
 
   def is_signed_application_expected?
-    (is_member? || membership_request) && signed_application.blank?
+    (is_regular_member? || membership_request) && signed_application.blank?
   end
 
   def is_payment_expected?

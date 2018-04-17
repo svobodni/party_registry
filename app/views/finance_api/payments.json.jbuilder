@@ -8,7 +8,8 @@ json.payment do
   json.email @person.email
   json.membership_type @person.membership_type
   json.date_of_birth @person.date_of_birth
-  if @person.is_member?
+  # FIXME: rozlisovat podle cisla naseho uctu
+  if @person.is_member_or_requesting?
     note = "Členský příspěvek - #{@person.name}"
   else
     note = "Příspěvek příznivce - #{@person.name}"

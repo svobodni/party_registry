@@ -154,7 +154,7 @@
   marker.lng user.domestic_ruian_address.longitude
   marker.infowindow "#{user.name}<br/>#{user.status_text}"
   marker.picture ({
-        "url" => user.is_member? ?
+        "url" => user.is_regular_member? ?
           image_path("Map-Marker-Drawing-Pin-Right-Chartreusen-icon.png") :
           image_path("Map-Marker-Drawing-Pin-Right-Azure-icon.png"),
         "width" =>  36,

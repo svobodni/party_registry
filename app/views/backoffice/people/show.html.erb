@@ -26,7 +26,7 @@
         <% if @person.cv %>
           <tr><th></th><td><%= link_to "Životopis", @person.cv_url %></td></tr>
         <% end %>
-        <% if @person.is_member? || @person.is_awaiting_membership? %>
+        <% if @person.is_member_or_requesting? %>
           <tr><th></th><td>
           <% if @person.signed_application %>
             <%= link_to "Podepsaná přihláška", signed_application_person_path(@person, format: :pdf), class: 'btn btn-default btn-xs' %>
