@@ -154,7 +154,7 @@ class Person < ActiveRecord::Base
   end
 
   def vs
-    (is_member_or_requesting? ? "1" : "5") + id.to_s.rjust(4,"0")
+    (is_member_or_requesting? ? member_vs : supporter_vs)
   end
 
   def member_vs
@@ -167,14 +167,15 @@ class Person < ActiveRecord::Base
 
   # podpora starého formátu
   def supporter_status
-    return status if ["registered", "regular_supporter"].member?(status)
+    return status if is_regular_supporter?
   end
 
   # podpora starého formátu
   def member_status
-    return status if ["registered","regular_supporter","regular_member"].member?(status)
+    return status if is_regular_member?
   end
 
+  # FIXME: do helperu k mapě!
   def status_text
     if membership_request
       "žadatel o členství"
@@ -194,11 +195,11 @@ class Person < ActiveRecord::Base
   end
 
   def is_awaiting_presidium_decision?
-    membership_request && !membership_request.approved_on
+    is_requesting_membership? && !membership_request.approved?
   end
 
   def is_awaiting_first_payment?
-    membership_request && !membership_request.paid_on
+    is_requesting_membership? && !membership_request.paid?
   end
 
   def is_awaiting_membership?
@@ -206,7 +207,7 @@ class Person < ActiveRecord::Base
   end
 
   def is_signed_application_expected?
-    (is_regular_member? || membership_request) && signed_application.blank?
+    (is_regular_member? || is_requesting_membership?) && signed_application.blank?
   end
 
   def is_payment_expected?
