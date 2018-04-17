@@ -1,4 +1,4 @@
-class OfficeNotifications < ApplicationMailer
+class OfficeNotifications < ActionMailer::Base
 
   default from: "kancelar@svobodni.cz",
           bcc: "notifikace@svobodni.cz,jiri@kubicek.cz",

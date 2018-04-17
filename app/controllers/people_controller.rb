@@ -24,7 +24,7 @@ class PeopleController < ApplicationController
   end
 
   def beran_export
-    @people = Person.accessible_by(current_ability).regular, snail_newsletter: true)
+    @people = Person.accessible_by(current_ability).regular.where(snail_newsletter: true)
     respond_to do |format|
       format.xls
       format.csv {
