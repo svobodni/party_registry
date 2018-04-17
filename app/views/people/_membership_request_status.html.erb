@@ -1,0 +1,3 @@
+<%=tag(:i, class: 'glyphicon glyphicon-pencil', style:'color: green', title: "Přihláška přijata dne #{l(membership_request.application_received_on)}") if membership_request.application_received_on%>
+<%=tag(:i, class: 'glyphicon glyphicon-usd', style:'color: green', title: "Platba zpracována dne #{l(membership_request.paid_on)}") if membership_request.paid_on %>
+<%=tag(:i, class: 'glyphicon glyphicon-thumbs-up', style:'color: green', title: "KrP vynačil schválení dne #{l(membership_request.approved_on)}") if membership_request.approved_on %>

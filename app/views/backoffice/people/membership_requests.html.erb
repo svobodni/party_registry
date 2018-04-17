@@ -26,11 +26,8 @@
       <td data-order="<%=request.person.try(:last_name)%>"><%=request.person.try(:name)%></td>
       <td><%=request.person.try(:domestic_region).try(:name)%></td>
       <td><%=link_to_branch(request.person.try(:domestic_branch))%></td>
-      <td><%=tag(:i, class: 'glyphicon glyphicon-pencil', style:'color: green', title: "Přihláška přijata dne #{l(request.application_received_on)}") if request.application_received_on%>
-      <%=tag(:i, class: 'glyphicon glyphicon-usd', style:'color: green', title: "Platba zpracována dne #{l(request.paid_on)}") if request.paid_on %>
-      <%=tag(:i, class: 'glyphicon glyphicon-thumbs-up', style:'color: green', title: "KrP vynačil schválení dne #{l(request.approved_on)}") if request.approved_on %></td>
-      <% last_change = [request.membership_requested_on,request.application_received_on,request.approved_on,request.paid_on].compact.max %>
-      <td data-order="<%=last_change%>"><%=l last_change%></td>
+      <td><%= render partial:"people/membership_request_status", locals: {membership_request: request}%></td>
+      <td data-order="<%=request.last_changed_on%>"><%=l request.last_changed_on%></td>
     </tr>
     <% end %>
   </tbody>

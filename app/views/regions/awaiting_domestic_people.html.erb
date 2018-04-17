@@ -6,14 +6,15 @@
 
 <table id="awaiting_domestic_people" class="table table-striped">
 	<thead>
-		<tr><th>ID</th><th>Jméno</th><th>Stav</th><th>Pobočka</th><th></th></tr>
+		<tr><th>ID</th><th>Jméno</th><th>Stav</th><th>Poslední změna</th><th>Pobočka</th><th></th></tr>
 	</thead>
 	<tbody>
 <% @region.awaiting_domestic_people.includes(:domestic_ruian_address).accessible_by(current_ability).reverse.each do |member| %>
 <tr>
 <td><%= member.vs %></td>
-<td><%= link_to member.name, member %></td>
-<td><%= t member.status, scope: :person_status %></td>
+<td data-order="<%=member.last_name%>"><%= link_to member.name, member %></td>
+<td><%= render partial:"people/membership_request_status", locals: {membership_request: member.membership_request}%></td>
+<td data-order="<%=member.membership_request.last_changed_on%>"><%=l member.membership_request.last_changed_on%></td>
 <td><%= member.domestic_branch.try(:name) %></td>
 <td>
 	<%= link_to_member_application(member)%>

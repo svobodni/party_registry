@@ -23,7 +23,9 @@ module EventHelper
          output << "prodloužil do #{l event.changes['paid_till'].try(:last).try(:to_date)}"
        end
     elsif event.name=='PersonDeleted'
-         output << "byl smazán z databáze."
+      output << "byl smazán z databáze."
+    elsif event.name=='PersonMigrated'
+      output << 'převod do nového systému přijímání'
     elsif event.name=='PersonAccepted'
       output << 'byl schválen KrP'
     elsif event.name=='SupporterRegistered'

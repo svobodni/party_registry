@@ -6,13 +6,14 @@
 
 <table id="awaiting_domestic_people" class="table table-striped">
   <thead>
-	<tr><th>Jméno</th><th>Stav</th><th>Telefon</th><th>Email</th><th></th></tr>
+    <tr><th>Jméno</th><th>Stav</th><th>Poslední změna</th><th>Telefon</th><th>Email</th><th></th></tr>
   </thead>
   <tbody>
   <% @branch.awaiting_domestic_people.accessible_by(current_ability).reverse.each do |member| %>
     <tr>
-      <td><%= member.name %></td>
-      <td><%= t member.status, scope: :person_status %></td>
+      <td data-order="<%=member.last_name%>"><%= member.name %></td>
+      <td><%= render partial:"people/membership_request_status", locals: {membership_request: member.membership_request}%></td>
+      <td data-order="<%=member.membership_request.last_changed_on%>"><%=l member.membership_request.last_changed_on%></td>
       <td><%= tel_to member.phone %></td>
       <td><%= mail_to member.email %></td>
       <td><%=link_to_member_application(member)%></td>
