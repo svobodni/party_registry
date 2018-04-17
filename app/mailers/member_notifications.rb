@@ -47,11 +47,6 @@ class MemberNotifications < ActionMailer::Base
     mail to: @person.email, subject: "Vaše úhrada byla úspěšně zpracována"
   end
 
-  def supporter_regular(person)
-    @person = person
-    mail to: @person.email, subject: "Vítáme nového člena"
-  end
-
   def supporter_rejected(person)
     @person = person
     mail to: @person.email, subject: "Zamítnutí členství"

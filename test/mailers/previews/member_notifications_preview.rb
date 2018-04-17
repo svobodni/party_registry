@@ -31,10 +31,6 @@ class MemberNotificationsPreview < ActionMailer::Preview
     MemberNotifications.supporter_payment_pending(Person.first)
   end
 
-  def supporter_regular
-    MemberNotifications.supporter_regular(Person.first)
-  end
-
   def supporter_rejected
     MemberNotifications.supporter_rejected(Person.first)
   end

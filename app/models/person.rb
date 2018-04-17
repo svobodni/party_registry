@@ -68,6 +68,7 @@ class Person < ActiveRecord::Base
   before_save :notify_coordinator
   after_create :notify_member_registered
   after_create :store_creation_event
+  after_create :welcome_new_supporter
 
   # změny evidujeme
   has_paper_trail
@@ -264,7 +265,12 @@ class Person < ActiveRecord::Base
 
       # Přijímaný člen zaplatil a stává se příznivcem
       transitions from: :registered, to: :regular_supporter,
-        :guard => Proc.new { self.membership_request },
+        :guard => Proc.new { self.is_requesting_membership? },
+        :after => Proc.new { MemberNotifications.paid(self).deliver }
+
+      # Přijímaný příznivec zaplatil
+      transitions from: :regular_supporter, to: :regular_supporter,
+        :guard => Proc.new { self.is_requesting_membership? && self.membership_request.previous_status=="regular_supporter"},
         :after => Proc.new { MemberNotifications.supporter_paid(self).deliver }
 
       # Příznivec zaplatil
@@ -311,6 +317,9 @@ class Person < ActiveRecord::Base
 
     # Členství neschváleno KrP
     event :presidium_denied do
+      after do
+        OfficeNotification.membership_request_rejected(self).deliver
+      end
       transitions from: :regular_supporter, to: :regular_supporter,
         :guard => Proc.new { self.membership_request.try(:previous_status)=="regular_supporter"},
         :after => Proc.new { MemberNotifications.supporter_rejected(self).deliver }
@@ -419,6 +428,10 @@ class Person < ActiveRecord::Base
 
   def notify_member_registered
     PresidiumNotifications.member_registered(self).deliver_now if awaiting_presidium_decision?
+  end
+
+  def welcome_new_supporter
+    SupporterNotifications.registered(self).deliver_now unless legacy_type=="member"
   end
 
   def store_creation_event
