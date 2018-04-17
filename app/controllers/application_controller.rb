@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
 
   before_action :authenticate_person!
   before_action :load_country
+  before_action :prepare_exception_notifier
 
   before_action :configure_permitted_parameters, if: :devise_controller?
 
@@ -47,6 +48,13 @@ class ApplicationController < ActionController::Base
       membership_profiles_path
     end
   end
+
+  def prepare_exception_notifier
+    request.env["exception_notifier.exception_data"] = {
+      :current_person_id => current_person.try(:id)
+    }
+  end
+
   def authorize_token!
     token = request.headers['Authorization'].split(' ').last
 
