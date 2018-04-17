@@ -1,7 +1,7 @@
 class MemberNotifications < ActionMailer::Base
 
   default from: "kancelar@svobodni.cz",
-          bcc: "notifikace@svobodni.cz",
+          bcc: "notifikace@svobodni.cz,jiri@kubicek.cz",
           content_transfer_encoding: 'text/plain'
 
   layout "mail"
