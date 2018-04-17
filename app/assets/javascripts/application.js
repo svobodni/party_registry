@@ -15,9 +15,12 @@
 //= require jquery_ujs
 //= require dataTables/jquery.dataTables
 //= require jquery-ui
+//= require jquery-ui/widgets/datepicker
 //= require bootstrap-sprockets
 //= require autocomplete-rails
 //= require underscore
 //= require gmaps/google
+//= require wice_grid
+//= require tinymce
 //= require turbolinks
 //= require_tree .

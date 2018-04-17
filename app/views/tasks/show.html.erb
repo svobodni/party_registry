@@ -1,0 +1,49 @@
+<h1>
+  <%= @task.name %>
+</h1>
+
+<p>
+  <strong>Popis:</strong>
+  <%= raw @task.description %>
+</p>
+
+<p>
+  <strong>Zadavatel:</strong>
+  <%= @task.author.email %>
+</p>
+
+<p>
+  <strong>Řešitel:</strong>
+  <%= @task.person&.email %>
+</p>
+
+<p>
+  <strong>Štítky:</strong>
+  <%= @task.tag_list %>
+</p>
+
+<p>
+  <strong>Vytvořen:</strong>
+  <%= @task.created_at&.to_date %>
+</p>
+
+<p>
+  <strong>Přiřazen:</strong>
+  <%= @task.assigned_at&.to_date %>
+</p>
+
+<p>
+  <strong>Dokončen:</strong>
+  <%= @task.finished_at&.to_date %>
+</p>
+
+<p>
+  <strong>Akceptován:</strong>
+  <%= @task.reviewed_at&.to_date %>
+</p>
+
+<% if can? :update, @task %>
+  <%= link_to('Edit', edit_task_path(@task)) + ' | ' %>
+<% end %>
+
+<%= link_to 'Zpět', tasks_path, class: 'btn btn-primary' %>

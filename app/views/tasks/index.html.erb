@@ -1,0 +1,65 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12">
+      <% if person_signed_in? %>
+
+        <%= link_to 'Nový štítek', new_tag_path, class: 'btn btn-primary' %>
+
+        <%= link_to 'Nový úkol', new_task_path, class: 'btn btn-success' %>
+      <% else %>
+        <%= link_to('Login', new_person_session_path, class: 'btn btn-primary' )  %>
+        <%= link_to('Nová registrace', new_person_registration_path, class: 'btn btn-primary' )  %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<h1>Úkoly</h1>
+
+<%= grid(@tasks_grid) do |g|
+
+  g.column name: 'Jméno', attribute: 'name' do |task|
+    link_to task.name, task
+  end
+
+  g.column name: 'Zadavatel', attribute: 'email', assoc: :author, table_alias: 'people'   do |task|
+    task.author&.email
+  end
+
+  g.column name: 'Řešitel', attribute: 'email', assoc: :person do |task|
+    task.person&.email
+  end
+
+  g.column name: 'Vytvořen', attribute: 'created_at' do |task|
+    task.created_at&.to_date
+  end
+
+  g.column name: 'Přidělen', attribute: 'assigned_at' do |task|
+    task.assigned_at&.to_date
+  end
+
+  g.column name: 'Dokončen', attribute: 'finished_at' do |task|
+    task.finished_at&.to_date
+  end
+
+  g.column name: 'Akceptován', attribute: 'reviewed_at' do |task|
+    task.reviewed_at&.to_date
+  end
+
+  g.column name: 'Štítky', assoc: :tags, attribute: 'name', table_alias: 'tags'  do |task|
+    task.tags.map(&:name).join(' ')
+  end
+
+  g.column do |task|
+    action_button_to(task)
+  end
+
+  g.column do |task|
+    if can? :edit, task
+      link_to('Editovat', edit_task_path(task))
+    end
+  end
+
+end -%>

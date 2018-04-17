@@ -4,7 +4,7 @@ class AddConfirmableToDevise < ActiveRecord::Migration
     add_column :people, :confirmed_at, :datetime
     add_column :people, :confirmation_sent_at, :datetime
     add_index :people, :confirmation_token, unique: true
-    execute("UPDATE people SET confirmed_at = NOW()")
+    execute("UPDATE people SET confirmed_at = :date('now')")
   end
 
   def down

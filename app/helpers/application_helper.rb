@@ -1,7 +1,19 @@
 # -*- encoding : utf-8 -*-
 module ApplicationHelper
+
+  include ActsAsTaggableOn::TagsHelper
+
   def page_title(value)
     @page_title = value
+  end
+
+  def flash_class(level)
+    case level
+    when 'notice' then "alert alert-success"
+    when 'success' then "alert alert-success"
+    when 'error' then "alert alert-error"
+    when 'alert' then "alert alert-error"
+    end
   end
 
   def link_to_member_application(member)
@@ -151,5 +163,28 @@ module ApplicationHelper
   #        tm('domain')
   def tm(model_name, count = 1)
     model_name.to_s.classify.constantize.model_name.human(:count => count)
+  end
+
+  def flash_class(level)
+    case level
+    when 'notice' then "alert alert-success"
+    when 'success' then "alert alert-success"
+    when 'error' then "alert alert-error"
+    when 'alert' then "alert alert-error"
+    end
+  end
+
+  def action_button_to(task)
+    res = ''
+    if can? :assign, task
+      res = button_to('Přidělit', task_assign_path(task), method: :put, class: 'btn btn-success')
+    end
+    if (can? :finish, task) && res.empty?
+      res = button_to('Dokončit', task_finish_path(task), method: :put, class: 'btn btn-danger')
+    end
+    if (can? :review, task) && res.empty?
+      res = button_to('Akceptovat', task_review_path(task), method: :put, class: 'btn btn-info')
+    end
+    res
   end
 end

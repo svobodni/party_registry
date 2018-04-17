@@ -77,6 +77,20 @@ class Ability
       if [342].member?(user.id)
         can :manage, Doorkeeper::Application
       end
+
+      # Ukolovnik
+      can [:index, :new, :read, :show, :create], Task
+      can [:edit, :update], Task, author_id: user.id
+      can :assign, Task do |task|
+        (task.assigned_at.nil? && task.author_id != user.id)
+      end
+      can :finish, Task do |task|
+        (task.finished_at.nil? && task.assigned_at.present? && task.person_id == user.id)
+      end
+      can :review, Task do |task|
+        (task.finished_at.present? && task.reviewed_at.nil? && task.author_id == user.id)
+      end
+
     end
   end
 end

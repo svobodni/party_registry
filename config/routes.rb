@@ -134,5 +134,12 @@ Rails.application.routes.draw do
   post "/people/:id/payments", to: "finance_api#payments"
   post "/people/:id/paid", to: "finance_api#paid"
 
+  resources :tags
+  resources :tasks do
+    put :assign
+    put :finish
+    put :review
+  end
+
   root 'people#dashboard'
 end

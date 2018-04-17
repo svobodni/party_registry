@@ -1,0 +1,13 @@
+<%= bootstrap_form_for(tag) do |f| %>
+
+  <div class="field">
+    <%= f.text_field :name, class: 'form-control'  %>
+  </div>
+
+  <br>
+
+  <%= f.submit class: 'btn btn-danger' %>
+
+  <%= link_to 'Zpět', tags_path, class: 'btn btn-primary' %>
+
+<% end %>

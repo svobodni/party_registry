@@ -1,9 +1,11 @@
 source 'https://rubygems.org'
 
+ruby '2.5.0'
+
 gem 'rake'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.3'
+gem 'rails', '4.2.10'
 
 # Use mysql as the database for Active Record
 gem 'mysql2'
@@ -29,7 +31,7 @@ gem 'rails-jquery-autocomplete'
 gem 'turbolinks'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 1.2'
+gem 'jbuilder'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
@@ -120,7 +122,7 @@ gem 'elasticsearch'
 gem 'bower-rails', '~> 0.7.3'
 
 group :test do
-  gem 'cucumber-rails', :require => false
+  # gem 'cucumber-rails', :require => false
   # database_cleaner is not required, but highly recommended
   gem 'database_cleaner'
   gem 'cucumber-api-steps', :require => false
@@ -141,11 +143,13 @@ group :development do
   gem 'capistrano-sidekiq', require: false
 end
 
+gem 'sqlite3'
+
 # sidekiq UI
 gem 'sinatra', :require => nil
 
 # sidekiq scheduler
-gem "sidekiq-cron", "~> 0.2.0"
+gem "sidekiq-cron"
 
 # form wizzard
 gem 'wicked'
@@ -166,3 +170,13 @@ gem 'font-awesome-sass'
 
 gem 'mini_magick'
 gem 'ruby-opencv'
+
+# Ukolovnik
+gem "bootstrap_form"
+gem 'wice_grid'
+gem 'acts-as-taggable-on', '~> 4.0'
+gem 'bootstrap-datepicker-rails', :require => 'bootstrap-datepicker-rails',
+    :git => 'git://github.com/Nerian/bootstrap-datepicker-rails.git'
+gem 'tinymce-rails'
+
+

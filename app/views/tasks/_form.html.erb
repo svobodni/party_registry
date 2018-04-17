@@ -1,0 +1,30 @@
+<%= bootstrap_form_for(task) do |form| %>
+  <% if task.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(task.errors.count, "error") %> prohibited this task from being saved:</h2>
+
+      <ul>
+      <% task.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>g
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.text_area :name, id: :task_name %>
+  </div>
+
+  <div class="field">
+    <%= form.text_area :description, id: :task_description, :class => "tinymce" %>
+  </div>
+
+  <%= tinymce %>
+
+  <%= form.select :tag_list, options_for_select(ActsAsTaggableOn::Tag.all.map(&:name), task.tag_list), { include_blank: false }, {:multiple => true } %>
+
+  <%= form.submit class: 'btn btn-danger' %>
+
+  <%= link_to 'Zpět', tasks_path, class: 'btn btn-primary' %>
+
+<% end %>

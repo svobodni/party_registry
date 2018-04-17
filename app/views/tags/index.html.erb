@@ -1,0 +1,19 @@
+<h1>Štítky</h1>
+
+<%= grid(@tags_grid) do |g|
+
+  g.column name: 'ID', attribute: 'id' do |tag|
+    tag.id
+  end
+
+  g.column name: 'Jméno', attribute: 'name' do |tag|
+    tag.name
+  end
+
+  g.column do |tag|
+    if can? :update, tag
+      link_to('Edit', edit_tag_path(tag))
+    end
+  end
+
+end -%>
