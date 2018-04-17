@@ -258,7 +258,7 @@ class Person < ActiveRecord::Base
     # Platba členského/registračního příspěvku
     event :paid do
       # Přijímaný člen zaplatil, splnil i ostatní podmínky a stává se členem
-      transitions from: :regular_supporter, to: :regular_member,
+      transitions from: [:registered, :regular_supporter], to: :regular_member,
         :guard => Proc.new { self.validate_membership_conditions(["ApplicationReceived", "PersonAccepted"]) },
         :after => Proc.new { Notifier.new_regular_member(self) }
 
