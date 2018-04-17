@@ -44,6 +44,7 @@ class Person < ActiveRecord::Base
   # má kontaktní údaje
   has_many :contacts, as: :contactable, dependent: :destroy
 
+  scope :regular, -> { where(status: ["regular_suporter", "regular_member"]) }
   scope :regular_members, -> { where("status = ?", "regular_member") }
   scope :regular_supporters, -> { where("status = ?", "regular_supporter") }
 
@@ -150,10 +151,6 @@ class Person < ActiveRecord::Base
 
   def is_regular_member?
     status == "regular_member"
-  end
-
-  def self.regular_supporter_states
-    ["regular_supporter"]
   end
 
   def is_regular_supporter?

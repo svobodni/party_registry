@@ -130,7 +130,7 @@ class Backoffice::PeopleController < ApplicationController
   end
 
   def addresses
-    @people = Person.where(status: (Person.regular_supporter_states+["regular_member"]))
+    @people = Person.regular
     respond_to do |format|
       format.xls
       format.csv {

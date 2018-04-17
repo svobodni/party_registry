@@ -16,7 +16,7 @@ class Branch < Organization
   # má kmenové členy a příznivce
   has_many :domestic_people, class_name: "Person", foreign_key: "domestic_branch_id"
   has_many :domestic_members, -> { where('status="regular_member"') },class_name: "Person", foreign_key: "domestic_branch_id"
-  has_many :domestic_supporters, -> { where("status IN (?)", Person.regular_supporter_states) },class_name: "Person", foreign_key: "domestic_branch_id"
+  has_many :domestic_supporters, -> { where(status: "regular_supporter") },class_name: "Person", foreign_key: "domestic_branch_id"
 
   has_many :awaiting_domestic_people, -> { includes(:membership_request).where.not("membership_requests.membership_requested_on" => nil) }, class_name: "Person", foreign_key: "domestic_branch_id"
   # má hostující členy a příznivce
