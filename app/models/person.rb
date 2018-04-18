@@ -313,6 +313,7 @@ class Person < ActiveRecord::Base
         :guard => Proc.new { !self.validate_membership_conditions(["PaymentAccepted"])},
         :after => Proc.new { MemberNotifications.supporter_payment_pending(self).deliver }
       transitions from: :regular_supporter, to: :regular_supporter
+      transitions from: :registered, to: :registered
     end
 
     # Členství neschváleno KrP
