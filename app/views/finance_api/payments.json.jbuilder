@@ -6,7 +6,7 @@ json.payment do
   json.city @person.domestic_address_city
   json.zip @person.domestic_address_zip
   json.email @person.email
-  json.membership_type @person.membership_type
+  json.membership_type @person.is_member_or_requesting? ? "member" : "supporter"
   json.date_of_birth @person.date_of_birth
   # FIXME: rozlisovat podle cisla naseho uctu
   if @person.is_member_or_requesting?
