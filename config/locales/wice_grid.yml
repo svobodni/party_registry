@@ -410,7 +410,7 @@ sk:
     select_all: Vyber všetko
     deselect_all: Zrušiť výber
 
-cz:
+cs:
   date:
     order:
       - :year
@@ -422,35 +422,35 @@ cz:
     csv_export_tooltip: Exportovat do CSV
     filter_tooltip: Filtr
     reset_filter_tooltip: Zrušit filtr
-    boolean_filter_true_label: "áno"
+    boolean_filter_true_label: "ano"
     boolean_filter_false_label: "ne"
     previous_label: «
     next_label: »
     # Title of the icon clicking on which will show the calendar to set the FROM date.
-    date_selector_tooltip_from: Dátum od
+    date_selector_tooltip_from: Od
     # Title of the icon clicking on which will show the calendar to set the TO date.
-    date_selector_tooltip_to: Dátum do
+    date_selector_tooltip_to: do
     # The title of the checkox to turn on negation
     negation_checkbox_title: Inverzní výběr
     # link to switch to show all records
     show_all_records_label: Zobrazit všechno
     # tooltip for the link to switch to show all records
-    show_all_records_tooltip: Zobrazí všechny záznamy v databáze
+    show_all_records_tooltip: Zobrazí všechny záznamy v databázi
     # Warning message shown when the user wants to switch to all-records mode
-    all_queries_warning: Určitě chceš zobrazit všechny záznamy v databáze?
+    all_queries_warning: Určitě chcete zobrazit všechny záznamy v databázi?
     # link to paginated view
     switch_back_to_paginated_mode_label: zpět na stránkové zobrazení
     # tooltip for the link to paginated view
     switch_back_to_paginated_mode_tooltip: Přepnout do stránkového zobrazení
     # Title of the date string.
-    date_string_tooltip: Kliknutím zmažeš
+    date_string_tooltip: Klikněte pro smazání
     saved_query_panel_title: Uložené filtry
     save_query_button_label: Uložit aktuálni stav filtrů
-    saved_query_deletion_confirmation: Seš si jistej?
-    saved_query_deletion_link_title: Smazat uloženej filtr
-    saved_query_link_title: Použít uloženej filtr
+    saved_query_deletion_confirmation: Jste si jistí?
+    saved_query_deletion_link_title: Smazat uložený filtr
+    saved_query_link_title: Použít uložený filtr
     validates_uniqueness_error: Filtr už existuje.
-    validates_presence_error: Prosím zadej název filtru.
+    validates_presence_error: Prosím zadejte název filtru.
     query_deleted_message: Uložený filtr byl smazán.
     query_saved_message: Filtr byl uložen.
     select_all: Vyber všechno

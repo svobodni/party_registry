@@ -75,6 +75,7 @@ Rails.application.routes.draw do
   resources :branches do
     resources :people
     resources :contacts, only: :index
+    resources :tasks
     member do
       get 'coordinator'
       get 'map'
@@ -89,7 +90,6 @@ Rails.application.routes.draw do
   resources :people do
     resources :contacts
     resources :notes, only: [:new, :create]
-
     member do
       get 'application'
       get 'signed_application'
@@ -115,6 +115,7 @@ Rails.application.routes.draw do
     resources :councilors, only: :index
     resources :contacts, only: :index
     resource :body, only: :show
+    resources :tasks
     member do
       get 'domestic_members'
       get 'domestic_supporters'
@@ -133,6 +134,10 @@ Rails.application.routes.draw do
 
   post "/people/:id/payments", to: "finance_api#payments"
   post "/people/:id/paid", to: "finance_api#paid"
+
+  resources :countries do
+    resources :tasks
+  end
 
   resources :tags
   resources :tasks do
