@@ -1,13 +1,23 @@
-<%= bootstrap_form_for(tag) do |f| %>
+<%
+  if @region
+    render 'regions/sidebar'
+  elsif @branch
+    render 'branches/sidebar'
+  else
+    render 'bodies/sidebar'
+  end
+%>
+
+<%= bootstrap_form_for(tag, url: '/tags') do |f| %>
 
   <div class="field">
-    <%= f.text_field :name, class: 'form-control'  %>
+    <%= f.text_field :name,label: 'Název', class: 'form-control'  %>
   </div>
 
   <br>
+  <%= f.hidden_field :organization_id, :value => @organization.id %>
+  <%= f.submit 'Potvrdit',class: 'btn btn-danger' %>
 
-  <%= f.submit class: 'btn btn-danger' %>
-
-  <%= link_to 'Zpět', tags_path, class: 'btn btn-primary' %>
+  <%= link_to 'Zpět', :back, class: 'btn btn-primary' %>
 
 <% end %>

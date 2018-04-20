@@ -14,6 +14,7 @@
     <li><%= glyph_link_to 'lock', "Mapa", map_branch_path(@branch) %></li>
     <li><%= glyph_link_to 'lock', "Export", branch_people_path(@branch, format: :xls) %></li>
     <% end %>
+    <li><%= link_to_unless_current  'Úkoly', branch_tasks_path(@branch) %></a></li>
   </ul>
 </div>
 <% end %>

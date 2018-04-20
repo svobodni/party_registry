@@ -4,5 +4,6 @@ class Task < ActiveRecord::Base
 
   belongs_to :author, class_name: 'Person', foreign_key: "author_id"
   belongs_to :person, required: false
+  belongs_to :organization, foreign_key: "organization_id"
 
 end

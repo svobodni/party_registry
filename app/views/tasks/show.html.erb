@@ -1,3 +1,14 @@
+<%
+
+  if params[:region_id]
+    render 'regions/sidebar'
+  elsif params[:branch_id]
+    render 'branches/sidebar'
+  else
+    render 'bodies/sidebar'
+  end
+%>
+
 <h1>
   <%= @task.name %>
 </h1>
@@ -43,7 +54,7 @@
 </p>
 
 <% if can? :update, @task %>
-  <%= link_to('Edit', edit_task_path(@task)) + ' | ' %>
+  <%= link_to('Edit', send("edit_#{@org_type}_task_path",@organization,@task)) + ' | ' %>
 <% end %>
 
-<%= link_to 'Zpět', tasks_path, class: 'btn btn-primary' %>
+<%= link_to 'Zpět', send("#{@org_type}_tasks_path",@task.organization_id), class: 'btn btn-primary' %>

@@ -5,6 +5,7 @@
     <% for body in @country.bodies %>
     <li><%= link_to_unless_current body.name.split("(").first, body %></a></li>
     <% end %>
+    <li><%= link_to_unless_current  'Úkoly', country_tasks_path(@country)%></a></li>
   </ul>
 </div>
 <% end %>

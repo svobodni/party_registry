@@ -3,9 +3,10 @@
     <div class="col-sm-12">
       <% if person_signed_in? %>
 
-        <%= link_to 'Nový štítek', new_tag_path, class: 'btn btn-primary' %>
+        <%= link_to 'Nový štítek', new_tag_path(organization_id: @organization.id), class: 'btn btn-primary' %>
 
-        <%= link_to 'Nový úkol', new_task_path, class: 'btn btn-success' %>
+        <%= link_to 'Nový úkol', send("new_#{@org_type}_task_path",@organization), class: 'btn btn-success' %>
+
       <% else %>
         <%= link_to('Login', new_person_session_path, class: 'btn btn-primary' )  %>
         <%= link_to('Nová registrace', new_person_registration_path, class: 'btn btn-primary' )  %>
@@ -15,13 +16,24 @@
 </div>
 <br>
 
+<%
+
+  if params[:region_id]
+    render 'regions/sidebar'
+  elsif params[:branch_id]
+    render 'branches/sidebar'
+  else
+    render 'bodies/sidebar'
+  end
+%>
+
 
 <h1>Úkoly</h1>
 
 <%= grid(@tasks_grid) do |g|
 
   g.column name: 'Jméno', attribute: 'name' do |task|
-    link_to task.name, task
+    link_to task.name, send("#{@org_type}_task_path",@organization,task)
   end
 
   g.column name: 'Zadavatel', attribute: 'email', assoc: :author, table_alias: 'people'   do |task|
@@ -58,7 +70,7 @@
 
   g.column do |task|
     if can? :edit, task
-      link_to('Editovat', edit_task_path(task))
+      link_to('Editovat', send("edit_#{@org_type}_task_path",@organization,task))
     end
   end
 

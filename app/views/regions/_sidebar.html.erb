@@ -18,6 +18,7 @@
     <li><%= glyph_link_to 'lock', "Neprodloužení členové", unpaid_domestic_members_region_path(@region) %></li>
     <li><%= glyph_link_to 'lock', "Export", region_people_path(@region, format: :xls) %></li>
     <% end %>
+    <li><%= link_to_unless_current  'Úkoly', region_tasks_path(@region) %></a></li>
   </ul>
 </div>
 <% end %>

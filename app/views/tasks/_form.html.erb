@@ -1,3 +1,13 @@
+<%
+  if params[:region_id]
+    render 'regions/sidebar'
+  elsif params[:branch_id]
+    render 'branches/sidebar'
+  else
+    render 'bodies/sidebar'
+  end
+%>
+
 <%= bootstrap_form_for(task) do |form| %>
   <% if task.errors.any? %>
     <div id="error_explanation">
@@ -12,19 +22,23 @@
   <% end %>
 
   <div class="field">
-    <%= form.text_area :name, id: :task_name %>
+    <%= form.text_area :name, label: 'Název', id: :task_name %>
   </div>
 
   <div class="field">
-    <%= form.text_area :description, id: :task_description, :class => "tinymce" %>
+    <%= form.text_area :description, label: 'Popis',id: :task_description, :class => "tinymce" %>
   </div>
 
   <%= tinymce %>
+  <%= form.hidden_field :organization_id, :value => @organization.id %>
 
-  <%= form.select :tag_list, options_for_select(ActsAsTaggableOn::Tag.all.map(&:name), task.tag_list), { include_blank: false }, {:multiple => true } %>
+  <div class="form-group">
+    <label class="control-label" for="task_tag_list">Štítky</label>
+    <%= select("task","tag_list",options_for_select(ActsAsTaggableOn::Tag.all.map(&:name), task.tag_list), { include_blank: false }, {:multiple => true, :class => "form-control" } )%>
+  </div>
 
-  <%= form.submit class: 'btn btn-danger' %>
+  <%= form.submit 'Potvrdit',class: 'btn btn-danger' %>
 
-  <%= link_to 'Zpět', tasks_path, class: 'btn btn-primary' %>
+  <%= link_to 'Zpět', :back , class: 'btn btn-primary' %>
 
 <% end %>
