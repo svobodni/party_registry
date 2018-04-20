@@ -11,7 +11,7 @@
 <%= bootstrap_form_for(tag, url: '/tags') do |f| %>
 
   <div class="field">
-    <%= f.text_field :name,label: 'Název', class: 'form-control'  %>
+    <%= f.text_field :name,label: 'Název', class: 'form-control', :required => true  %>
   </div>
 
   <br>
