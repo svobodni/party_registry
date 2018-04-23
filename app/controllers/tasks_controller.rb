@@ -16,7 +16,7 @@ class TasksController < ApplicationController
 
   def assign
     respond_to do |format|
-      if @task.update_attributes(assigned_at: DateTime.now, user: current_user)
+      if @task.update_attributes(assigned_at: DateTime.now, person: current_user)
         format.html {redirect_to tasks_path, notice: 'Task was successfully updated.'}
         format.json {render :show, status: :ok, location: @task}
       else
