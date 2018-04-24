@@ -19,7 +19,7 @@ class TasksController < ApplicationController
     get_org_type
     respond_to do |format|
       if @task.update_attributes(assigned_at: DateTime.now, person: current_user)
-            format.html {redirect_to send("#{@org_type}_tasks_path",@task.organization_id), notice: 'Úkol byl úspěšně přidělen.'}
+        format.html {redirect_to send("#{@org_type}_tasks_path",@task.organization_id), notice: 'Úkol byl úspěšně přidělen.'}
         format.json {render :show, status: :ok, location: @task}
       else
         format.html {render :edit}

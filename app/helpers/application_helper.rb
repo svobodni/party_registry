@@ -7,15 +7,6 @@ module ApplicationHelper
     @page_title = value
   end
 
-  def flash_class(level)
-    case level
-    when 'notice' then "alert alert-success"
-    when 'success' then "alert alert-success"
-    when 'error' then "alert alert-error"
-    when 'alert' then "alert alert-error"
-    end
-  end
-
   def link_to_member_application(member)
   if member.signed_application
     link_to "Podepsaná přihláška", signed_application_person_path(member, format: :pdf), class: 'btn btn-default btn-xs'
