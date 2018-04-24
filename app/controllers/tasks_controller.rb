@@ -3,9 +3,10 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy, :assign, :finish, :review]
 
   def review
+    get_org_type
     respond_to do |format|
       if @task.update_attributes(reviewed_at: DateTime.now)
-        format.html {redirect_to tasks_path, notice: 'Task was successfully updated.'}
+        format.html {redirect_to send("#{@org_type}_tasks_path",@task.organization_id), notice: 'Úkol byl úspěšně akceptován.'}
         format.json {render :show, status: :ok, location: @task}
       else
         format.html {render :edit}
@@ -15,9 +16,10 @@ class TasksController < ApplicationController
   end
 
   def assign
+    get_org_type
     respond_to do |format|
-      if @task.update_attributes(assigned_at: DateTime.now, user: current_user)
-        format.html {redirect_to tasks_path, notice: 'Task was successfully updated.'}
+      if @task.update_attributes(assigned_at: DateTime.now, person_id: current_user.id)
+            format.html {redirect_to send("#{@org_type}_tasks_path",@task.organization_id), notice: 'Úkol byl úspěšně přidělen.'}
         format.json {render :show, status: :ok, location: @task}
       else
         format.html {render :edit}
@@ -27,9 +29,10 @@ class TasksController < ApplicationController
   end
 
   def finish
+    get_org_type
     respond_to do |format|
       if @task.update_attributes(finished_at: DateTime.now)
-        format.html {redirect_to tasks_path, notice: 'Task was successfully updated.'}
+        format.html {redirect_to send("#{@org_type}_tasks_path",@task.organization_id), notice: 'Úkol byl úspěšně dokončen.'}
         format.json {render :show, status: :ok, location: @task}
       else
         format.html {render :edit}
