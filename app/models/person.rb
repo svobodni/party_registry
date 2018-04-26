@@ -301,7 +301,8 @@ class Person < ActiveRecord::Base
       transitions from: [:registered, :regular_supporter], to: :regular_member,
         :guard => Proc.new { self.validate_membership_conditions(["PersonAccepted", "PaymentAccepted"]) },
         :after => Proc.new { Notifier.new_regular_member(self) }
-      transitions from: [:registered, :regular_supporter], to: :regular_supporter
+      transitions from: :registered, to: :registered
+      transitions from: :regular_supporter, to: :regular_supporter
     end
 
     # Členství schváleno KrP
