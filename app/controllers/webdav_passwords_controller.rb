@@ -20,7 +20,8 @@ class WebdavPasswordsController < ApplicationController
         body: {
           jwt: @token,
           pwd: Digest::SHA1.hexdigest(@password)
-        }
+        },
+        verify: false
     )
 
     if response.code == 200
