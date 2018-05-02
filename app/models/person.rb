@@ -231,7 +231,7 @@ class Person < ActiveRecord::Base
     return false if events.empty?
     e=events.collect{|event| event.name}
     # pouze udalosti od posledni zadosti o clenstvi
-    e[(e.rindex("MembershipRequested")||0)..-1]
+    e=e[(e.rindex("MembershipRequested")||0)..-1]
     (event_names-e).empty?
   end
 
