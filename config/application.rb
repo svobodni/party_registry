@@ -24,17 +24,17 @@ module PartyRegistry
       allow do
         origins '*'
 
-        # resource '/auth/token',
-        # :headers => :any,
-        # :methods => [:get],
-        # :credentials => true,
-        # :max_age => 0
+        resource '/auth/token',
+        :headers => :any,
+        :methods => [:get],
+        :credentials => true,
+        :max_age => 0
 
-        # resource '/people/*/private.json',
-        # :headers => :any,
-        # :methods => [:get],
-        # :credentials => true,
-        # :max_age => 0
+        resource '/people/*/private.json',
+        :headers => :any,
+        :methods => [:get],
+        :credentials => true,
+        :max_age => 0
 
       end
     end

@@ -11,8 +11,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180223214808) do
-
+ActiveRecord::Schema.define(version: 20180420083503) do
+  
   create_table "bank_payments", force: :cascade do |t|
     t.integer  "account_id"
     t.decimal  "amount",        precision: 10, scale: 2
@@ -321,7 +321,8 @@ ActiveRecord::Schema.define(version: 20180223214808) do
 
   create_table "tags", force: :cascade do |t|
     t.string  "name"
-    t.integer "taggings_count", default: 0
+    t.integer "taggings_count",  default: 0
+    t.integer "organization_id"
   end
 
   add_index "tags", ["name"], name: "index_tags_on_name", unique: true
@@ -336,6 +337,7 @@ ActiveRecord::Schema.define(version: 20180223214808) do
     t.datetime "assigned_at"
     t.datetime "finished_at"
     t.datetime "reviewed_at"
+    t.integer  "organization_id"
   end
 
   create_table "versions", force: :cascade do |t|

@@ -81,20 +81,26 @@ h1 {
     	<h3 class="omb_authTitle"><%= image_tag("05_SVOBODNI_logo_NEGATIV.png", height: 200)%><br />Přihlaste se nebo se <a href="https://web.svobodni.cz/registrace">zaregistrujte</a></h3>
 
 		<div class="row omb_row-sm-offset-3 omb_socialButtons">
+      <div class="col-xs-4 col-sm-2">
+        <a href="<%= person_omniauth_authorize_path(:facebook) %>" class="btn btn-lg btn-block omb_btn-facebook">
+          <i class="fa fa-facebook visible-xs"></i>
+          <span class="hidden-xs">Facebook</span>
+        </a>
+      </div>
 
-        	<div class="col-xs-4 col-sm-2">
-		        <a href="<%= person_twitter_omniauth_authorize_path(:twitter) %>" class="btn btn-lg btn-block omb_btn-twitter">
-			        <i class="fa fa-twitter visible-xs"></i>
-			        <span class="hidden-xs">Twitter</span>
-		        </a>
-	        </div>
+      <div class="col-xs-4 col-sm-2">
+        <a href="<%= person_omniauth_authorize_path(:twitter) %>" class="btn btn-lg btn-block omb_btn-twitter">
+          <i class="fa fa-twitter visible-xs"></i>
+          <span class="hidden-xs">Twitter</span>
+        </a>
+      </div>
 
-        	<div class="col-xs-4 col-sm-2">
-		        <a href="<%= person_twitter_omniauth_authorize_path(:mojeid) %>" class="btn btn-lg btn-block omb_btn-google">
-			        <i class="fa fa-google-plus visible-xs"></i>
-			        <span class="hidden-xs">MojeID</span>
-		        </a>
-	        </div>
+      <div class="col-xs-4 col-sm-2">
+        <a href="<%= person_omniauth_authorize_path(:mojeid) %>" class="btn btn-lg btn-block omb_btn-google">
+          <i class="fa fa-google-plus visible-xs"></i>
+          <span class="hidden-xs">MojeID</span>
+        </a>
+      </div>
 		</div>
 
 		<div class="row omb_row-sm-offset-3 omb_loginOr">

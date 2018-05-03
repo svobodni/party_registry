@@ -1,11 +1,10 @@
 source 'https://rubygems.org'
 
 ruby '2.5.0'
-
 gem 'rake'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.10'
+gem 'rails', '4.2.3'
 
 # Use mysql as the database for Active Record
 gem 'mysql2'
@@ -16,7 +15,7 @@ gem 'sass-rails'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 
-# Use CoffeeScript for .js.coffee assets and views
+# Use CoffeeScript for .js.coffee assets and viewsbu
 gem 'coffee-rails', '~> 4.0.0'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
@@ -31,7 +30,7 @@ gem 'rails-jquery-autocomplete'
 gem 'turbolinks'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder'
+gem 'jbuilder', '~> 1.2'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
@@ -122,7 +121,7 @@ gem 'elasticsearch'
 gem 'bower-rails', '~> 0.7.3'
 
 group :test do
-  # gem 'cucumber-rails', :require => false
+  gem 'cucumber-rails', :require => false
   # database_cleaner is not required, but highly recommended
   gem 'database_cleaner'
   gem 'cucumber-api-steps', :require => false
@@ -143,13 +142,11 @@ group :development do
   gem 'capistrano-sidekiq', require: false
 end
 
-gem 'sqlite3'
-
 # sidekiq UI
 gem 'sinatra', :require => nil
 
 # sidekiq scheduler
-gem "sidekiq-cron"
+gem "sidekiq-cron", "~> 0.2.0"
 
 # form wizzard
 gem 'wicked'
