@@ -165,7 +165,7 @@ module ApplicationHelper
     end
   end
 
-  def action_button_to(task)
+  def task_action_buttons_to(task)
     res = ''
     if can? :assign, task
       res = button_to('Přidělit', task_assign_path(task), method: :put, class: 'btn btn-success')
