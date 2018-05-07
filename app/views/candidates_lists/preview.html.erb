@@ -22,7 +22,7 @@
   </tbody>
 </table>
 
-<table class="table">
+<table class="table table-condensed">
   <thead>
     <tr>
       <th>Pořadí</th>
@@ -33,6 +33,7 @@
       <th>Datum narození</th>
       <th>Pohlaví</th>
       <th>Povolání</th>
+      <th>Obec/část</th>
       <th>Členství ve straně</th>
       <th>Adresa bydliště</th>
     </tr>
@@ -48,6 +49,7 @@
       <td><%= candidate[:datum_narozeni].to_date %></td>
       <td><%= candidate[:pohlavi] %></td>
       <td><%= candidate[:povolani] %></td>
+      <td><%= candidate[:obec] %></td>
       <td><%= candidate[:clenstvi_ve_strane] %></td>
       <td><%= candidate[:adresa_bydliste] %></td>
     </tr>

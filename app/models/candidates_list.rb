@@ -13,18 +13,26 @@ class CandidatesList < ActiveRecord::Base
     kandidati = workbook["Kandidátní listina"].reject{ |row| row.nil? || row[0].value.blank? }.select{ |row|
       puts row[0].value
       row[0].value.match(/\A(\d+\.|n.hradn.*)\z/)}.collect{ |row|
+        begin
         {
           poradi: row[0].value.to_i==0 ? "náhr" : row[0].value.to_i,
-          titul_pred: row[1].value,
+          titul_pred: row[1].try(:value),
           prijmeni: row[2].value,
           jmeno: row[3].value,
-          titul_za: row[4].value,
+          titul_za: row[4].try(:value),
           datum_narozeni: row[5].value.try(:to_date),
           pohlavi: row[6].value,
           povolani: row[7].value,
-          clenstvi_ve_strane: row[8].value,
-          adresa_bydliste: row[9].value
+          obec: row[8].value,
+          clenstvi_ve_strane: row[9].try(:value),
+          adresa_bydliste: row[10].try(:value)
         }
+        rescue
+        {
+          prijmeni: "Chyba importu",
+          datum_narozeni: "2345-01-01"
+        }
+        end
       }.reject{|row| row[:prijmeni].nil?}
 
     self.new({
