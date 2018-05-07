@@ -1,5 +1,12 @@
 Rails.application.routes.draw do
 
+  resources :candidates_lists, only: [:new, :create, :index, :show] do
+    collection do
+      post :preview
+    end
+  end
+  get '/candidates_lists/:candidates_list_id/declaration/:id', to: 'candidates_lists#declaration', as: 'declaration'
+
   namespace :backoffice do
     resources :attendance_lists, only: [:new, :create, :show] do
       member do
@@ -133,7 +140,9 @@ Rails.application.routes.draw do
   resources :councilors, path: "zastupitele"
   resources :councilors, only: :index
 
-  post "/people/:id/payments", to: "finance_api#payments"
+  post "/people/:id/supporter_payments", to: "finance_api#supporter_payments"
+  post "/people/:id/member_payments", to: "finance_api#member_payments"
+  get "/people/:id/payments", to: "finance_api#payments"
   post "/people/:id/paid", to: "finance_api#paid"
 
   root 'people#dashboard'

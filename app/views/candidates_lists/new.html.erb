@@ -1,0 +1,11 @@
+<%
+  page_title 'Nová kandidátní listina nebo nová verze'
+  render 'backoffice/sidebar'
+%>
+
+<p>Zde prosím nahrajte novou nebo aktualizovanou kandidátní listinu. Před uložením bude zpracována a zobrazena ke kontrole.</p>
+
+<%= simple_form_for(@candidates_list, url: preview_candidates_lists_path) do |f| %>
+  <%= f.input :sheet, label: "Kandidátní listina" %>
+  <%= f.button :submit, "Načíst kandidátní listinu" %>
+<% end %>

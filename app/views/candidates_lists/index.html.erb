@@ -1,0 +1,25 @@
+<%
+  page_title 'Seznam kandidátních listin'
+  render 'backoffice/sidebar'
+%>
+
+
+<%= link_to "Nahrát novou", new_candidates_list_path, class: "btn btn-primary pull-right" %>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Název zastupitelstva</th><th>Počet míst</th><th>Počet kandidátů</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @candidates_lists.each do |candidates_list| %>
+    <tr>
+      <td><%= candidates_list.nazev_zastupitelstva %></td>
+      <td><%= candidates_list.pocet_clenu_zastupitelstva %></td>
+      <td><%= candidates_list.kandidati.size %></td>
+      <td><%= link_to("Detail", candidates_list) if can?(:view, CandidatesList)%></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

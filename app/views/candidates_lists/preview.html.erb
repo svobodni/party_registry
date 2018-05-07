@@ -1,0 +1,58 @@
+<%
+  page_title 'Kontrola načtení kandidátní listiny'
+  render 'backoffice/sidebar'
+%>
+
+<p>Zkontrolujte, prosím, zda jsou pole načtena správně. Pokud ne, nahrajte znovu upravený soubor, jinak kandidátní listinu uložte.</p>
+
+<table class="table table-condensed">
+  <tbody>
+    <tr><th>Druh zastupitelstva</th><td><%= @candidates_list['druh_zastupitelstva'] %></td></tr>
+    <tr><th>Kód zastupitelstva</th><td><%= @candidates_list.kod_zastupitelstva %></td></tr>
+    <tr><th>Název zastupitelstva</th><td><%= @candidates_list.nazev_zastupitelstva %></td></tr>
+    <tr><th>Volební obvod</th><td><%= @candidates_list.volebni_obvod %></td></tr>
+    <tr><th>Název volební strany</th><td><%= @candidates_list.nazev_volebni_strany %></td></tr>
+    <tr><th>Typ volební strany</th><td><%= @candidates_list.typ_volebni_strany %></td></tr>
+    <tr><th>Název strany a hnutí</th><td><%= @candidates_list.nazev_strany_a_hnuti %></td></tr>
+    <tr><th>Počet členů zastupitelstva</th><td><%= @candidates_list.pocet_clenu_zastupitelstva %></td></tr>
+    <tr><th>Jméno zmocněnce</th><td><%= @candidates_list.zmocnenec_jmeno %></td></tr>
+    <tr><th>Addresa zmocněnce</th><td><%= @candidates_list.zmocnenec_adresa %></td></tr>
+    <tr><th>Jméno náhradníka</th><td><%= @candidates_list.nahradnik_jmeno %></td></tr>
+    <tr><th>Addresa náhradníka</th><td><%= @candidates_list.nahradnik_adresa %></td></tr>
+  </tbody>
+</table>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Pořadí</th>
+      <th>Titul</th>
+      <th>Jméno</th>
+      <th>Příjmení</th>
+      <th>Titul</th>
+      <th>Datum narození</th>
+      <th>Pohlaví</th>
+      <th>Povolání</th>
+      <th>Členství ve straně</th>
+      <th>Adresa bydliště</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @candidates_list.kandidati.each do |candidate| %>
+    <tr>
+      <td><%= candidate[:poradi] %>.</td>
+      <td><%= candidate[:titul_pred] %></td>
+      <td><%= candidate[:jmeno] %></td>
+      <td><%= candidate[:prijmeni] %></td>
+      <td><%= candidate[:titul_za] %></td>
+      <td><%= candidate[:datum_narozeni].to_date %></td>
+      <td><%= candidate[:pohlavi] %></td>
+      <td><%= candidate[:povolani] %></td>
+      <td><%= candidate[:clenstvi_ve_strane] %></td>
+      <td><%= candidate[:adresa_bydliste] %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= button_to "Uložit kandidátní listinu", candidates_lists_path, method: :post, params: {candidates_list: Base64.encode64(@candidates_list.to_json)}%>

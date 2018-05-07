@@ -91,6 +91,14 @@ class Event < ActiveRecord::Base
         req.previous_status=nil
       end
       req.save
+    when "CandidatesListSaved"
+      candidates_list = CandidatesList.find_or_initialize_by(kod_zastupitelstva:params[:kod_zastupitelstva])
+      candidates_list.update_attributes(params.except("id","created_at","updated_at"))
+      candidates_list.kandidati.each{|kandidat|
+        person=Person.find_by(last_name:kandidat[:prijmeni], first_name: kandidat[:jmeno], date_of_birth:kandidat[:datum_narozeni])
+        kandidat[:person_id]=person.id if person
+      }
+      candidates_list.save
     end
 
     # cleanup pokud byl uživatel úspěšně přeřazen

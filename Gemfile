@@ -166,3 +166,4 @@ gem 'font-awesome-sass'
 
 gem 'mini_magick'
 gem 'ruby-opencv'
+gem 'rubyXL'

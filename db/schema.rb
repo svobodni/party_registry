@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180411134110) do
+ActiveRecord::Schema.define(version: 20180506234022) do
 
   create_table "bank_payments", force: :cascade do |t|
     t.integer  "account_id",    limit: 4
@@ -50,6 +50,34 @@ ActiveRecord::Schema.define(version: 20180411134110) do
   end
 
   add_index "bodies", ["slug"], name: "index_bodies_on_slug", unique: true, using: :btree
+
+  create_table "candidates_list_files", force: :cascade do |t|
+    t.string   "sheet_file_name",    limit: 255
+    t.string   "sheet_content_type", limit: 255
+    t.integer  "sheet_file_size",    limit: 4
+    t.datetime "sheet_updated_at"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+  end
+
+  create_table "candidates_lists", force: :cascade do |t|
+    t.string   "druh_zastupitelstva",        limit: 255
+    t.integer  "kod_zastupitelstva",         limit: 4
+    t.string   "nazev_zastupitelstva",       limit: 255
+    t.integer  "volebni_obvod",              limit: 4
+    t.string   "nazev_volebni_strany",       limit: 255
+    t.string   "typ_volebni_strany",         limit: 255
+    t.string   "nazev_strany_a_hnuti",       limit: 255
+    t.integer  "pocet_clenu_zastupitelstva", limit: 4
+    t.string   "zmocnenec_jmeno",            limit: 255
+    t.string   "zmocnenec_adresa",           limit: 255
+    t.string   "nahradnik_jmeno",            limit: 255
+    t.string   "nahradnik_adresa",           limit: 255
+    t.text     "kandidati",                  limit: 65535
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+    t.integer  "candidates_list_file_id",    limit: 4
+  end
 
   create_table "contacts", force: :cascade do |t|
     t.string   "contactable_type", limit: 255
