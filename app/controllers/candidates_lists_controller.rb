@@ -1,24 +1,26 @@
 class CandidatesListsController < ApplicationController
 
-  before_action :authorize_backoffice
-
   def index
   end
 
   def new
+    authorize!(:upload, CandidatesList)
     @candidates_list = CandidatesListFile.new
   end
 
   def preview
+    authorize!(:upload, CandidatesList)
     candidates_list_file = CandidatesListFile.create(params.require(:candidates_list_file).permit(:sheet))
     @candidates_list = CandidatesList.load_from_xlsx(candidates_list_file)
   end
 
   def index
+    authorize!(:read, CandidatesList)
     @candidates_lists = CandidatesList.all
   end
 
   def show
+    authorize!(:read, CandidatesList)
     @candidates_list = CandidatesList.find(params[:id])
     respond_to do |format|
       format.html
@@ -33,8 +35,9 @@ class CandidatesListsController < ApplicationController
   end
 
   def declaration
+    authorize!(:generate_declaration, CandidatesList)
     candidates_list = CandidatesList.find(params[:candidates_list_id])
-    candidate = candidates_list.kandidati.detect{|k| k[:poradi]==params[:id].to_i }
+    candidate = candidates_list.kandidati[params[:id].to_i]
     respond_to do |format|
       format.html
       format.pdf do
@@ -48,6 +51,7 @@ class CandidatesListsController < ApplicationController
   end
 
   def create
+    authorize!(:upload, CandidatesList)
     respond_to do |format|
       Event.create(default_event_params.merge({
         command: "SaveCandidatesList",

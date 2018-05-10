@@ -52,6 +52,8 @@ class Ability
           can :supervise, Region
           can :supervise, Branch
           can [:read, :application, :export, :notes], Person
+        elsif role.body.try(:acronym)=="ReV"
+          can [:read], CandidatesList
         elsif role.body.try(:acronym)=="VK"
           # Volební komise + volební systém
           can [:read], Person
@@ -61,9 +63,10 @@ class Ability
       end
 
       # Speciální role pro kancelář
-      if ([1, 86, 342, 344, 2804, 3860, 5679, 7873].member?(user.id) || user.roles.detect{|r| r.body.try(:acronym)=="ReP"})
+      if ([342, 344, 2804, 3860, 5679, 7873].member?(user.id) || user.roles.detect{|r| r.body.try(:acronym)=="ReP"})
         can [:read, :application], Person
         can :upload, SignedApplication
+        can [:upload, :read, :generate_declaration], CandidatesList
         can [:create, :destroy], Role
         can :create, Branch
         can :backoffice, :all

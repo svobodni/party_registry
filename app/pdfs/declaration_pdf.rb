@@ -1,4 +1,5 @@
 class DeclarationPdf < Prawn::Document
+  include CandidatesListsHelper
   def initialize(candidate, candidates_list)
     super()
 
@@ -15,7 +16,7 @@ class DeclarationPdf < Prawn::Document
 
     width = bounds.width
     line_height = height_of('X')
-    vspace = 15
+    vspace = 14
 
     pad = 20
     width = bounds.width-2*pad
@@ -27,7 +28,7 @@ class DeclarationPdf < Prawn::Document
 
     move_down vspace*2
 
-    text("Příloha ke kandidátní listině pro volby do #{candidates_list[:druh_zastupitelstva]} #{candidates_list[:nazev_zastupitelstva]} konané ve dnech ..... ")
+    text("Příloha ke kandidátní listině pro volby do #{genitivize candidates_list[:druh_zastupitelstva]} #{candidates_list[:nazev_zastupitelstva]} konané ve dnech ..... ")
 
     move_down vspace
     text('Prohlášení kandidáta', {
@@ -37,7 +38,7 @@ class DeclarationPdf < Prawn::Document
     })
     move_down vspace
 
-    text("Já, níže podepsan#{is_male ? "ý" : "á"} #{candidate[:jmeno]} #{candidate[:prijmeni]}, narozen#{is_male ? "" : "a"} #{l(candidate[:datum_narozeni].to_date)}, trvale bytem #{candidate[:adresa_bydliste]}, prohlašuji, že souhlasím se svou kandidaturou; nejsou mi známy překážky volitelnosti; nedal jsem souhlas k tomu abych byl#{is_male ? "" : "a"} uvenden#{is_male ? "" : "a"} na jiné kandidátní listině pro volby do téhož zastupitelstva.")
+    text("Já, níže podepsan#{is_male ? "ý" : "á"} #{candidate[:jmeno]} #{candidate[:prijmeni]}, narozen#{is_male ? "" : "a"} #{l(candidate[:datum_narozeni].to_date)}, trvale bytem #{candidate[:adresa_bydliste]}, prohlašuji, že souhlasím se svou kandidaturou; nejsou mi známy překážky volitelnosti; nedal jsem souhlas k tomu abych byl#{is_male ? "" : "a"} uveden#{is_male ? "" : "a"} na jiné kandidátní listině pro volby do téhož zastupitelstva.")
     move_down vspace
     text("V .................................................................... dne ......................................")
     move_down vspace*2
@@ -61,13 +62,15 @@ class DeclarationPdf < Prawn::Document
     move_down vspace*2
     text("Jméno a příjmení včetně titulů:   "+'.'*160)
     move_down vspace
-    text("Povolání:\t\t\t\t"+'.'*160)
+    text("Povolání:                                             "+'.'*160)
     move_down vspace
     text("Prohlašuji, že souhlasím s kandidaturou za Stranu svobodných občanů do zastupitelstva obce a že souhasím se zásadami komunální politiky Svobodných *)")
     move_down vspace
     text("Čestně prohlašuji, že jsem nespolupracoval s StB, že jsem nebyl členem Lidových milicí a že nemám záznam v trestním rejstříku.")
     move_down vspace
     text("Prohlašuji, že jsem byl členem těchto politických stran nebo jsem kandidoval za tyto politické strany (vyjma Svobodných):")
+    move_down vspace
+    text(' '*40+'.'*180)
     move_down vspace
     text("
       *) Svobodní v komunální politice vychází obecně z těchto principů:
@@ -77,10 +80,7 @@ class DeclarationPdf < Prawn::Document
 4. Obce ukládají přebytky běžného hospodaření zásadně konzervativně, tj. do aktiv s minimálním rizikem.
 5. Obce jsou ve všech aktivitách maximálně transparentní.
 6. Obce se nepodílejí na převýchově občanů.
-    ", size: 8)
-    # move_right(20)
-    text(' '*40+'.'*180)
-    move_down vspace
+    ", size: 7)
     text("V .................................................................... dne ......................................")
     move_down vspace*2
     text("."*50)

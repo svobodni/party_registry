@@ -4,7 +4,11 @@ class CandidatesList < ActiveRecord::Base
   serialize :kandidati #, coder: JSON
 
   def cele_jmeno
-    "#{jmeno} #{prijmeni}"
+    [[titul_pred, jmeno, prijmeni].join(' '),titul_za].join(', ')
+  end
+
+  def strana?
+    typ_volebni_strany=="politická strana"
   end
 
   def self.load_from_xlsx(candidates_list_file)
@@ -25,7 +29,8 @@ class CandidatesList < ActiveRecord::Base
           povolani: row[7].value,
           obec: row[8].value,
           clenstvi_ve_strane: row[9].try(:value),
-          adresa_bydliste: row[10].try(:value)
+          adresa_bydliste: row[10].try(:value),
+          navrhujici_strana: row[11].try(:value)
         }
         rescue
         {

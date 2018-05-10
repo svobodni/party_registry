@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  resources :candidates_lists, only: [:new, :create, :index, :show] do
+  resources :candidates_lists, path: "kandidatni-listiny", only: [:new, :create, :index, :show] do
     collection do
       post :preview
     end

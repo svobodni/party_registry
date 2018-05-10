@@ -1,6 +1,6 @@
 <%
   page_title 'Kandidátní listina'
-  render 'backoffice/sidebar'
+  render 'sidebar'
 %>
 
 <table class="table table-condensed">
@@ -17,6 +17,7 @@
     <tr><th>Addresa zmocněnce</th><td><%= @candidates_list.zmocnenec_adresa %></td></tr>
     <tr><th>Jméno náhradníka</th><td><%= @candidates_list.nahradnik_jmeno %></td></tr>
     <tr><th>Addresa náhradníka</th><td><%= @candidates_list.nahradnik_adresa %></td></tr>
+    <tr><th></th><td><%= link_to("PDF", candidates_list_path(@candidates_list,format: 'pdf'), class: "btn btn-default") %></td></tr>
   </tbody>
 </table>
 
@@ -34,10 +35,13 @@
       <th>Obec/část</th>
       <th>Členství ve straně</th>
       <th>Adresa bydliště</th>
+      <% unless @candidates_list.strana? %>
+      <th>Navrhující strana</th>
+      <% end %>
     </tr>
   </thead>
   <tbody>
-    <% @candidates_list.kandidati.each do |candidate| %>
+    <% @candidates_list.kandidati.each_with_index do |candidate, index| %>
     <tr>
       <td><%= candidate[:poradi] %>.</td>
       <td><%= candidate[:titul_pred] %></td>
@@ -50,7 +54,10 @@
       <td><%= candidate[:obec] %></td>
       <td><%= candidate[:clenstvi_ve_strane] %></td>
       <td><%= candidate[:adresa_bydliste] %></td>
-      <td><%= link_to "Prohlášení", declaration_path(params[:id],candidate[:poradi],format: 'pdf') %></td>
+      <% unless @candidates_list.strana? %>
+      <td><%= candidate[:navrhujici_strana] %></td>
+      <% end %>
+      <td><%= link_to("Prohlášení", declaration_path(params[:id],index,format: 'pdf')) if can?(:generate_declaration, CandidatesList)%></td>
     </tr>
     <% end %>
   </tbody>

@@ -1,4 +1,5 @@
 class CandidatesListPdf < Prawn::Document
+  include CandidatesListsHelper
   def initialize(candidates_list, print_date=Date.today)
     super(page_layout: :landscape)
 
@@ -24,13 +25,13 @@ class CandidatesListPdf < Prawn::Document
     move_down vspace
 
     # text('Kandidátní listina pro volby do Poslanecké sněmovny Parlamentu České republiky', {
-    text("Kandidátní listina pro volby do #{candidates_list[:druh_zastupitelstva]} #{candidates_list[:nazev_zastupitelstva]} ", {
+    text("Kandidátní listina pro volby do #{genitivize candidates_list[:druh_zastupitelstva]} #{candidates_list[:nazev_zastupitelstva]} ", {
       :size => 16,
       :styles => [:bold],
       :align => :center
     })
     # move_down vspace
-    text('konané ve dnech 20. a 21. října 2018', {
+    text('konané ve dnech     . a    . října 2018', {
       :size => 16,
       :styles => [:bold],
       :align => :center
@@ -53,9 +54,15 @@ class CandidatesListPdf < Prawn::Document
       cells.borders = []
     end
 
+    if candidates_list.strana?
     table([["pořadí","jméno a příjmení", "pohlaví", "věk", "povolání", "obec trvalého pobytu", "Název politické strany, jejíž je kandidát členem"]]+candidates_list.kandidati.collect{|c|
-      ["#{c[:poradi]}.", "#{c[:jmeno]} #{c[:prijmeni]}", c[:pohlavi], "let", c[:povolani], "", c[:clenstvi_ve_strane]]
+      ["#{c[:poradi]}.", "#{c[:jmeno]} #{c[:prijmeni]}", c[:pohlavi], "let", c[:povolani], c[:obec], c[:clenstvi_ve_strane]]
     }, column_widths: [40, 140, 40, 40, 220, 80, 120])
+    else
+      table([["pořadí","jméno a příjmení", "pohlaví", "věk", "povolání", "obec trvalého pobytu", "Název politické strany, jejíž je kandidát členem", "Navrhující strana"]]+candidates_list.kandidati.collect{|c|
+        ["#{c[:poradi]}.", "#{c[:jmeno]} #{c[:prijmeni]}", c[:pohlavi], "let", c[:povolani], c[:obec], c[:clenstvi_ve_strane], c[:navrhujici_strana]]
+      }, column_widths: [30, 120, 30, 30, 200, 70, 80, 80])
+    end
 
 #{c.age(print_date)} let
     start_new_page
