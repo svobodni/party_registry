@@ -10,7 +10,7 @@ class CandidatesList < ActiveRecord::Base
   def self.load_from_xlsx(candidates_list_file)
     workbook = RubyXL::Parser.parse(candidates_list_file.sheet.path)
     puts workbook.sheets.last.name
-    kandidati = workbook["Kandidátní listina"].reject{ |row| row.nil? || row[0].value.blank? }.select{ |row|
+    kandidati = workbook["Kandidátní listina"].reject{ |row| row.nil? || row[0].nil? ||row[0].value.blank? }.select{ |row|
       puts row[0].value
       row[0].value.match(/\A(\d+\.|n.hradn.*)\z/)}.collect{ |row|
         begin
@@ -45,9 +45,9 @@ class CandidatesList < ActiveRecord::Base
       typ_volebni_strany: workbook["Hlavička"][11][1].value,
       nazev_strany_a_hnuti: workbook["Hlavička"][12][1].value,
       pocet_clenu_zastupitelstva: workbook["Hlavička"][14][1].value,
-      zmocnenec_jmeno: workbook["Hlavička"][16][2].value,
-      zmocnenec_adresa: workbook["Hlavička"][17][2].value,
-      nahradnik_jmeno: workbook["Hlavička"][18][2].value,
+      zmocnenec_jmeno: workbook["Hlavička"][16][2].try(:value),
+      zmocnenec_adresa: workbook["Hlavička"][17][2].try(:value),
+      nahradnik_jmeno: workbook["Hlavička"][18][2].try(:value),
       nahradnik_adresa: workbook["Hlavička"][19][2].try(:value),
       kandidati: kandidati
       # kandidati: kandidati.collect{|kandidat| OpenStruct.new(kandidat)}
