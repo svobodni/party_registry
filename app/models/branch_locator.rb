@@ -53,6 +53,8 @@ class BranchLocator
     return "Jesenice" if [539325, 513458, 539210, 539597, 539881, 539571].include?(obec_id)
     # Ústecký kraj
     return obec if obec=="Štětí"
+    # Zlínský kraj - Lechotice a Míškovice patří do pobočky Otrokovice
+    return "Otrokovice" if [588661, 588750].include?(obec_id)
   end
 
   # Pobočky na celém území působnosti obce s rozšířenou působností
@@ -87,6 +89,7 @@ class BranchLocator
     # kraj Vysočina
     return orp if orp=="Třebíč"
     # Zlínský kraj
+    return "Kroměříž" if ["Bystřice pod Hostýnem", "Holešov", "Kroměříž"].member?(orp)
     return orp if kraj_id == 141
   end
 
