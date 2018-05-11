@@ -11,6 +11,30 @@ class CandidatesList < ActiveRecord::Base
     typ_volebni_strany=="politická strana"
   end
 
+  def ruian_data
+    @ruian_data ||= HTTParty.get("http://openapi.cz/api/adresy/hledej/vse?dotaz=+kod_obce:#{kod_zastupitelstva}")["adresy"].
+      first.symbolize_keys.extract!(:kod_obce, :nazev_obce, :kod_pou, :nazev_pou, :kod_orp, :nazev_orp, :kod_momc, :nazev_momc, :kod_mop, :nazev_mop, :kod_kraje, :nazev_kraje)
+  end
+
+  def ruian
+    RuianAddress.new(
+      mestska_cast:     ruian_data[:nazev_momc],
+      mestska_cast_id:  ruian_data[:kod_momc],
+      okres:            ruian_data[:nazev_okresu],
+      okres_id:         ruian_data[:kod_okresu],
+      obec:             ruian_data[:nazev_obce],
+      obec_id:          ruian_data[:kod_obce],
+      kraj:             ruian_data[:nazev_kraje],
+      kraj_id:          ruian_data[:kod_kraje],
+      orp:              ruian_data[:nazev_orp],
+      orp_id:           ruian_data[:kod_orp]
+    )
+  end
+
+  def branch
+    @branch ||= BranchLocator.new(ruian).branch
+  end
+
   def self.load_from_xlsx(candidates_list_file)
     workbook = RubyXL::Parser.parse(candidates_list_file.sheet.path)
     puts workbook.sheets.last.name
