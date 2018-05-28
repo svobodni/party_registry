@@ -1,5 +1,5 @@
 class PeopleController < ApplicationController
-  before_action :set_person, only: [:show, :edit, :update, :destroy, :application, :signed_application, :private, :photo, :cv, :approve, :cancel_membership]
+  before_action :set_person, only: [:show, :edit, :update, :destroy, :application, :signed_application, :private, :photo, :cv, :approve, :reject, :cancel_membership]
 
   before_action :authenticate_person!, except: [:payments, :private, :photo, :cv]
   before_action do |controller|
