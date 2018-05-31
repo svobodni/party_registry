@@ -3,10 +3,6 @@ class CandidatesList < ActiveRecord::Base
   # store :data, accessors: [ :params, :permitted_params, :changes, :previous_data ], coder: JSON
   serialize :kandidati #, coder: JSON
 
-  def cele_jmeno
-    [[titul_pred, jmeno, prijmeni].join(' '),titul_za].join(', ')
-  end
-
   def strana?
     typ_volebni_strany=="politická strana"
   end
