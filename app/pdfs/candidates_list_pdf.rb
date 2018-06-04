@@ -56,7 +56,7 @@ class CandidatesListPdf < Prawn::Document
 
     if candidates_list.strana?
     table([["pořadí","jméno a příjmení", "pohlaví", "věk", "povolání", "obec trvalého pobytu", "Název politické strany, jejíž je kandidát členem"]]+candidates_list.kandidati.collect{|c|
-      ["#{c[:poradi]}.", "#{c[:jmeno]} #{c[:prijmeni]}", c[:pohlavi], "let", c[:povolani], c[:obec], c[:clenstvi_ve_strane]]
+      ["#{c[:poradi]}.", cele_jmeno(c), c[:pohlavi], "let", c[:povolani], c[:obec], c[:clenstvi_ve_strane]]
     }, column_widths: [40, 140, 40, 40, 220, 80, 120])
     else
       table([["pořadí","jméno a příjmení", "pohlaví", "věk", "povolání", "obec trvalého pobytu", "Název politické strany, jejíž je kandidát členem", "Navrhující strana"]]+candidates_list.kandidati.collect{|c|
