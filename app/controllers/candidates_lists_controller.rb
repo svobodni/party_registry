@@ -57,8 +57,8 @@ class CandidatesListsController < ApplicationController
       format.html
       format.zip do
         compressed_filestream = Zip::OutputStream.write_buffer do |zos|
-          candidates_list["kandidati"].each do |candidate|
-            zos.put_next_entry "prohlaseni-#{candidates_list['kod_zastupitelstva']}-#{candidate['poradi']}.pdf"
+          candidates_list["kandidati"].each_with_index do |candidate, index|
+            zos.put_next_entry "prohlaseni-#{candidates_list['kod_zastupitelstva']}-#{index+1}.pdf"
             zos.print DeclarationPdf.new(candidate, candidates_list).render
           end
         end
