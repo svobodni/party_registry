@@ -41,8 +41,8 @@ class CandidatesList < ActiveRecord::Base
         {
           poradi: row[0].value.to_i==0 ? "náhr" : row[0].value.to_i,
           titul_pred: row[1].try(:value),
-          prijmeni: row[2].value,
-          jmeno: row[3].value,
+          jmeno: row[2].value,
+          prijmeni: row[3].value,
           titul_za: row[4].try(:value),
           datum_narozeni: row[5].value.try(:to_date),
           pohlavi: row[6].value,
