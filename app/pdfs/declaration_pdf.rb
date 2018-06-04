@@ -47,7 +47,7 @@ class DeclarationPdf < Prawn::Document
     })
     move_down vspace
 
-    text("Já, níže podepsan#{is_male ? "ý" : "á"} <b>#{cele_jmeno(candidate)}</b>, narozen#{is_male ? "" : "a"} #{l(candidate[:datum_narozeni].to_date)}, trvale bytem #{candidate[:adresa_bydliste]}, prohlašuji, že souhlasím se svou kandidaturou; nejsou mi známy překážky volitelnosti, popřípadě tyto překážky pominou ke dni voleb do #{genitivize candidates_list[:druh_zastupitelstva]}; nedal jsem souhlas k tomu abych byl#{is_male ? "" : "a"} uveden#{is_male ? "" : "a"} na jiné kandidátní listině pro volby do téhož zastupitelstva.", inline_format: true)
+    text("Já, níže podepsan#{is_male ? "ý" : "á"} <b>#{cele_jmeno(candidate)}</b>, narozen#{is_male ? "" : "a"} #{l(candidate[:datum_narozeni].to_date)}, trvale bytem #{candidate[:adresa_bydliste]}, prohlašuji, že souhlasím se svou kandidaturou; nejsou mi známy překážky volitelnosti, popřípadě tyto překážky pominou ke dni voleb do #{genitivize candidates_list[:druh_zastupitelstva]}; nedal#{is_male ? "" : "a"} jsem souhlas k tomu abych byl#{is_male ? "" : "a"} uveden#{is_male ? "" : "a"} na jiné kandidátní listině pro volby do téhož zastupitelstva.", inline_format: true)
     move_down vspace*2
     text("V .................................................................... dne ......................................")
     move_down vspace*4
@@ -81,7 +81,7 @@ class DeclarationPdf < Prawn::Document
       Svobodní v komunální politice vychází obecně z těchto principů:
 1. Obce hospodaří zpravidla s vyrovnaným rozpočtem a dluhy tvoří jen v mimořádných situacích za souhlasu kvalifikované většiny zastupitelů.
 2. Obce vynakládají prostředky na prvním místě na veřejné statky, tj. na obecní silnice, chodníky a zajištění pořádku a čistoty v obcích.
-3. Obce svými podnikatelskými aktivitami nesmí deformovat tržní prostředí. Primárním smyslem obce není podnikat.
+3. Obce svými podnikatelskými aktivitami nemají deformovat tržní prostředí. Primárním smyslem obce není podnikat.
 4. Obce ukládají přebytky běžného hospodaření zásadně konzervativně, tj. do aktiv s minimálním rizikem.
 5. Obce jsou ve všech aktivitách maximálně transparentní.
 6. Obce se nepodílejí na převýchově občanů.
