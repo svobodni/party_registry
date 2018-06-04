@@ -50,6 +50,24 @@ class CandidatesListsController < ApplicationController
     end
   end
 
+  def declarations
+    authorize!(:generate_declaration, CandidatesList)
+    candidates_list = CandidatesList.find(params[:id])
+    respond_to do |format|
+      format.html
+      format.zip do
+        compressed_filestream = Zip::OutputStream.write_buffer do |zos|
+          candidates_list["kandidati"].each do |candidate|
+            zos.put_next_entry "prohlaseni-#{candidates_list['kod_zastupitelstva']}-#{candidate['poradi']}.pdf"
+            zos.print DeclarationPdf.new(candidate, candidates_list).render
+          end
+        end
+        compressed_filestream.rewind
+        send_data compressed_filestream.read, filename: "prohlaseni-#{candidates_list["kod_zastupitelstva"]}.zip"
+      end
+    end
+  end
+
   def create
     authorize!(:upload, CandidatesList)
     respond_to do |format|

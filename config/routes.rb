@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     end
   end
   get '/candidates_lists/:candidates_list_id/declaration/:id', to: 'candidates_lists#declaration', as: 'declaration'
+  get '/candidates_lists/:id/declarations', to: 'candidates_lists#declarations', as: 'declarations'
 
   namespace :backoffice do
     resources :attendance_lists, only: [:new, :create, :show] do

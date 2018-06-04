@@ -38,6 +38,7 @@
       <% unless @candidates_list.strana? %>
       <th>Navrhující strana</th>
       <% end %>
+      <th><%= link_to("Všechna prohlášení", declarations_path(params[:id],format: 'zip'), class: "btn btn-primary btn-xs") %></th>
     </tr>
   </thead>
   <tbody>
