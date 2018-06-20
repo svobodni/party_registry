@@ -18,6 +18,7 @@
     <tr><th>Jméno náhradníka</th><td><%= @candidates_list.nahradnik_jmeno %></td></tr>
     <tr><th>Addresa náhradníka</th><td><%= @candidates_list.nahradnik_adresa %></td></tr>
     <tr><th></th><td><%= link_to("PDF", candidates_list_path(@candidates_list,format: 'pdf'), class: "btn btn-default") %></td></tr>
+    <tr><th>Poznámka</th><td><%= @candidates_list.poznamka %></td></tr>
   </tbody>
 </table>
 

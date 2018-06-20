@@ -9,7 +9,7 @@
 <table class="table">
   <thead>
     <tr>
-      <th>Název zastupitelstva</th><th>Počet míst</th><th>Počet kandidátů</th>
+      <th>Název zastupitelstva</th><th>Počet míst</th><th>Počet kandidátů</th><th>Poznámka</th>
     </tr>
   </thead>
   <tbody>
@@ -18,7 +18,8 @@
       <td><%= candidates_list.nazev_zastupitelstva %></td>
       <td><%= candidates_list.pocet_clenu_zastupitelstva %></td>
       <td><%= candidates_list.kandidati.size %></td>
-      <td><%= link_to("Detail", candidates_list) if can?(:read, CandidatesList)%></td>
+      <td><%= candidates_list.poznamka %></td>
+      <td><%= link_to("Detail", candidates_list) if can?(:read, CandidatesList)%> <%=link_to("Upravit", edit_candidates_list_path(candidates_list)) if can?(:upload, CandidatesList)%></td>
     </tr>
     <% end %>
   </tbody>

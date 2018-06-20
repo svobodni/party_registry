@@ -1,0 +1,6 @@
+<% render 'backoffice/sidebar' %>
+<% page_title "Kandidátní listina #{@candidates_list.nazev_zastupitelstva}" %>
+<%= simple_form_for @candidates_list do |f| %>
+<%= f.input :poznamka, label: "Poznámka" %>
+<%= f.button :submit, value: "Uložit", class: 'btn btn-success' %>
+<% end %>

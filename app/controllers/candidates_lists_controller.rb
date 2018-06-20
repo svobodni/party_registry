@@ -82,6 +82,23 @@ class CandidatesListsController < ApplicationController
     end
   end
 
+  def edit
+    authorize!(:upload, CandidatesList)
+    @candidates_list = CandidatesList.find(params[:id])
+  end
+
+  def update
+    authorize!(:upload, CandidatesList)
+    @candidates_list = CandidatesList.find(params[:id])
+    respond_to do |format|
+      if @candidates_list.update(params.require(:candidates_list).permit(:poznamka))
+        format.html { redirect_to candidates_lists_path, notice: 'Poznámka uložena.' }
+      else
+        format.html { render :edit }
+      end
+    end
+  end
+
   private
     def authorize_backoffice
       authorize!(:backoffice, :all)
