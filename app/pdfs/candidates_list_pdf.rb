@@ -31,7 +31,7 @@ class CandidatesListPdf < Prawn::Document
       :align => :center
     })
     # move_down vspace
-    text('konané ve dnech     . a    . října 2018', {
+    text('konané ve dnech 5. a 6. října 2018', {
       :size => 16,
       :styles => [:bold],
       :align => :center
