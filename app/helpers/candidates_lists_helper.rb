@@ -13,4 +13,10 @@ module CandidatesListsHelper
     jmeno+=[kandidat[:jmeno], kandidat[:prijmeni]].join(' ')
     jmeno+=kandidat[:titul_za].blank? ? '' : ", #{kandidat[:titul_za]}"
   end
+
+  def vek(kandidat, today=nil)
+    now = today ? today.to_date : Date.today
+    dob = kandidat[:datum_narozeni].to_date
+    now.year - dob.year - ((now.month > dob.month || (now.month == dob.month && now.day >= dob.day)) ? 0 : 1)
+  end
 end

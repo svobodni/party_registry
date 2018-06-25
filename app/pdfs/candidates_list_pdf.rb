@@ -1,6 +1,6 @@
 class CandidatesListPdf < Prawn::Document
   include CandidatesListsHelper
-  def initialize(candidates_list, print_date=Date.today)
+  def initialize(candidates_list, print_date='2018-07-31')
     super(page_layout: :landscape)
 
     extend ActionView::Helpers::NumberHelper
@@ -56,11 +56,11 @@ class CandidatesListPdf < Prawn::Document
 
     if candidates_list.strana?
     table([["pořadí","jméno a příjmení", "pohlaví", "věk", "povolání", "obec trvalého pobytu", "Název politické strany, jejíž je kandidát členem"]]+candidates_list.kandidati.collect{|c|
-      ["#{c[:poradi]}.", cele_jmeno(c), c[:pohlavi], "let", c[:povolani], c[:obec], c[:clenstvi_ve_strane]]
+      ["#{c[:poradi]}.", cele_jmeno(c), c[:pohlavi], "#{vek(c, print_date)} let", c[:povolani], c[:obec], c[:clenstvi_ve_strane]]
     }, column_widths: [40, 140, 40, 40, 220, 80, 120])
     else
       table([["pořadí","jméno a příjmení", "pohlaví", "věk", "povolání", "obec trvalého pobytu", "Název politické strany, jejíž je kandidát členem", "Navrhující strana"]]+candidates_list.kandidati.collect{|c|
-        ["#{c[:poradi]}.", cele_jmeno(c), c[:pohlavi], "let", c[:povolani], c[:obec], c[:clenstvi_ve_strane], c[:navrhujici_strana]]
+        ["#{c[:poradi]}.", cele_jmeno(c), c[:pohlavi], "#{vek(c, print_date)} let", c[:povolani], c[:obec], c[:clenstvi_ve_strane], c[:navrhujici_strana]]
       }, column_widths: [30, 120, 30, 30, 200, 70, 80, 80])
     end
 

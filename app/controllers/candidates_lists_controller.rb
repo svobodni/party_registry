@@ -25,7 +25,7 @@ class CandidatesListsController < ApplicationController
     respond_to do |format|
       format.html
       format.pdf do
-        pdf = CandidatesListPdf.new(@candidates_list)
+        pdf = CandidatesListPdf.new(@candidates_list, params[:datum])
         send_data pdf.render,
                   filename: "kandidatni_listina.pdf",
                   type: 'application/pdf',
