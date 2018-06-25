@@ -43,8 +43,6 @@ class BranchLocator
     return obec if obec=="Cheb"
     # Královehradecký kraj
     return obec if ["Hradec Králové", "Nový Bydžov", "Chlumec", "Hořice", "Týniště", "Vrchlabí", "Tětín", "Vítězná"].member?(obec) && kraj_id==86
-    # Olomoucký kraj
-    return obec if ["Olomouc", "Přerov"].member?(obec)
     # Pardubický kraj
     return obec if obec=="Chrudim"
     # Středočeský kraj
@@ -112,7 +110,12 @@ class BranchLocator
     return "Okres Klatovy" if okres == "Klatovy"
     return "Okres Domažlice" if okres == "Domažlice"
     return "Okres Tachov" if okres == "Tachov"
-
+    # Olomoucký kraj
+    return "okres Jeseník" if okres == "Jeseník"
+    return "okres Prostějov" if okres == "Prostějov"
+    return "okres Šumperk" if okres == "Šumperk"
+    return "okres Olomouc" if okres == "Olomouc"
+    return "okres Přerov" if okres == "Přerov"
     # Středočeský kraj
     return okres if ["Benešov", "Beroun", "Kolín", "Kutná Hora", "Mělník", "Mladá Boleslav", "Nymburk", "Praha-západ", "Příbram", "Rakovník", "Kladno"].member?(okres)
     # Ústecký kraj
