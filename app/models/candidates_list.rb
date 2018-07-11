@@ -65,7 +65,7 @@ class CandidatesList < ActiveRecord::Base
       druh_zastupitelstva: workbook["Hlavička"][5][1].value,
       kod_zastupitelstva: workbook["Hlavička"][6][1].value,
       nazev_zastupitelstva: workbook["Hlavička"][7][1].value,
-      volebni_obvod: workbook["Hlavička"][8][1].value,
+      volebni_obvod: workbook["Hlavička"][8][1].try(:value),
       nazev_volebni_strany: workbook["Hlavička"][10][1].value,
       typ_volebni_strany: workbook["Hlavička"][11][1].value,
       nazev_strany_a_hnuti: workbook["Hlavička"][12][1].value,
