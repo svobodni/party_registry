@@ -72,7 +72,7 @@ class Ability
         can :backoffice, :all
       end
 
-      if [86, 2522].member?(user.id)
+      if [2522].member?(user.id)
         can :backoffice, :read
       end
 
