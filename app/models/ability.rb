@@ -72,6 +72,10 @@ class Ability
         can :backoffice, :all
       end
 
+      if ([344, 3860]).member?(user.id)
+        can :approve, Person
+      end
+
       if [2522].member?(user.id)
         can :backoffice, :read
       end

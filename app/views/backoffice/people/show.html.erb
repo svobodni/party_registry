@@ -49,6 +49,10 @@
   <div class="col-md-6">
     <% if @person.membership_request %>
     <%= render "people/membership_request_details" %>
+      <% if can?(:approve, @person) %>
+        <%=button_to("Vyznačit schválení", approve_person_path(@person), class: "btn btn-xs", data: { confirm: "Opravdu chcete vyznačit schválení? (#{@person.id} #{@person.short_name})"}) if @person.is_awaiting_presidium_decision?%>
+        <%=button_to("Vyznačit zamítnutí", reject_person_path(@person), class: "btn btn-xs", data: { confirm: "Opravdu chcete vyznačit neschválení? (#{@person.id} #{@person.short_name})"}) if @person.is_awaiting_presidium_decision?%>
+      <% end %>
     <% end %>
     <% unless @person.roles.empty? %>
     <h2>Aktuální funkce</h2>
