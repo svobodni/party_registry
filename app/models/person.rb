@@ -66,8 +66,8 @@ class Person < ActiveRecord::Base
 
   after_create :set_membership_type
   before_save :notify_coordinator
-  after_create :notify_member_registered
   after_create :store_creation_event
+  after_create :notify_member_registered
   after_create :welcome_new_supporter
 
   # změny evidujeme
