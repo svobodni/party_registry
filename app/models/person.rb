@@ -429,7 +429,7 @@ class Person < ActiveRecord::Base
   end
 
   def notify_member_registered
-    PresidiumNotifications.member_registered(self).deliver_now if awaiting_presidium_decision?
+    PresidiumNotifications.member_registered(self).deliver_now if is_awaiting_presidium_decision?
   end
 
   def welcome_new_supporter
