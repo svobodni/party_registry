@@ -77,6 +77,16 @@
     </table>
     <% end %>
 
+    <h2>Poznámky</h2>
+    <table class="table table-striped">
+      <% for note in @person.notes.order(created_at: :desc) %>
+        <tr>
+          <th><small><i><%=l note.created_at.to_date%></i></small><br/><%=note.creator.try(:name)%></th>
+          <td><%= note.content %></td>
+         </tr>
+       <% end %>
+    </table>
+
     <h2>Události</h2>
     <ul>
       <% @person.events.order(created_at: :desc).each do |event| %>
