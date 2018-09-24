@@ -435,7 +435,7 @@ class Person < ActiveRecord::Base
   end
 
   def notify_member_registered
-    PresidiumNotifications.member_registered(self).deliver_now if is_awaiting_presidium_decision?
+    PresidiumNotifications.member_registered(self).deliver_now if legacy_type=="member"
   end
 
   def welcome_new_supporter
