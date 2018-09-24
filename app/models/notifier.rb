@@ -1,4 +1,10 @@
 class Notifier
+  # novy zajemce o clenstvi
+  def self.new_membership_request(person)
+    MemberNotifications.registered(person).deliver
+    PresidiumNotifications.member_registered(person).deliver
+  end
+
   # novy radny clen
   def self.new_regular_member(person)
     MemberNotifications.regular(person).deliver

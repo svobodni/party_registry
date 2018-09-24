@@ -266,12 +266,18 @@ class Person < ActiveRecord::Base
       # Přijímaný člen zaplatil a stává se příznivcem
       transitions from: :registered, to: :regular_supporter,
         :guard => Proc.new { self.is_requesting_membership? },
-        :after => Proc.new { MemberNotifications.paid(self).deliver }
+        :after => Proc.new {
+          MemberNotifications.paid(self).deliver
+          PresidiumNotifications.requesting_paid(self).deliver
+        }
 
       # Přijímaný příznivec zaplatil
       transitions from: :regular_supporter, to: :regular_supporter,
         :guard => Proc.new { self.is_requesting_membership? && self.membership_request.previous_status=="regular_supporter"},
-        :after => Proc.new { MemberNotifications.supporter_paid(self).deliver }
+        :after => Proc.new {
+          MemberNotifications.supporter_paid(self).deliver
+          PresidiumNotifications.requesting_paid(self).deliver
+        }
 
       # Příznivec zaplatil
       transitions from: :registered, to: :regular_supporter,
@@ -291,7 +297,7 @@ class Person < ActiveRecord::Base
     # Žádost příznivce o členství
     event :membership_requested do
       transitions from: :registered, to: :registered,
-        :after => Proc.new { MemberNotifications.registered(self).deliver }
+        :after => Proc.new { Notifier.new_membership_request(self) }
       transitions from: :regular_supporter, to: :regular_supporter,
         :after => Proc.new { MemberNotifications.supporter_membership_requested(self).deliver }
     end
