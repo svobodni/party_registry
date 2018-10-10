@@ -103,7 +103,7 @@ class Event < ActiveRecord::Base
 
     # cleanup pokud byl uživatel úspěšně přeřazen
     if ["ApplicationReceived","PaymentAccepted","PersonAccepted"].member?(name)
-      eventable.membership_request.destroy if eventable.status=="regular_member"
+      eventable.membership_request.destroy if eventable.status=="regular_member" && eventable.membership_request
     end
 
   end

@@ -1,8 +1,8 @@
 class Backoffice::PeopleController < ApplicationController
 
-  before_action :set_person, only: [:edit, :update, :destroy, :paid]
-  before_action :authorize_backoffice_read, except: [:paid, :update, :destroy]
-  before_action :authorize_backoffice, only: [:paid, :update, :destroy]
+  before_action :set_person, only: [:edit, :update, :destroy, :member_paid, :supporter_paid]
+  before_action :authorize_backoffice_read, except: [:member_paid, :supporter_paid, :update, :destroy]
+  before_action :authorize_backoffice, only: [:member_paid, :supporter_paid, :update, :destroy]
 
   autocomplete :person, :email, :display_value => :email_name_id_region, :extra_data => [:name_prefix, :first_name, :last_name, :name_suffix, :domestic_region_id, :status]
 
@@ -92,17 +92,31 @@ class Backoffice::PeopleController < ApplicationController
     end
   end
 
-  # POST /people/1/paid
-  def paid
-    @person.paid_till="2018-12-31"
-    @person.paid!
+  # POST /people/1/supporter_paid
+  def supporter_paid
+    @person.paid_till="2019-12-31"
+    @person.supporter_paid!
     respond_to do |format|
       @person.events.create(default_event_params.merge({
         command: "AcceptPayment",
         name: "PaymentAccepted",
         changes: @person.previous_changes
       }))
-      format.html { redirect_to :back, notice: 'Úhrada byla úspěšně vyznačena.' }
+      format.html { redirect_to :back, notice: 'Úhrada do byla úspěšně vyznačena.' }
+    end
+  end
+
+  # POST /people/1/member_paid
+  def member_paid
+    @person.paid_till="2019-12-31"
+    @person.member_paid!
+    respond_to do |format|
+      @person.events.create(default_event_params.merge({
+        command: "AcceptPayment",
+        name: "PaymentAccepted",
+        changes: @person.previous_changes
+      }))
+      format.html { redirect_to :back, notice: 'Úhrada do byla úspěšně vyznačena.' }
     end
   end
 

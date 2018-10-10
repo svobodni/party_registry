@@ -11,9 +11,22 @@ class FinanceApiController < ApplicationController
     end
   end
 
-  def paid
-    @person.paid_till="2018-12-31"
-    @person.paid!
+  def supporter_paid
+    @person.paid_till="2019-12-31"
+    @person.supporter_paid!
+    respond_to do |format|
+      @person.events.create(default_api_event_params.merge({
+        command: "AcceptPayment",
+        name: "PaymentAccepted",
+        changes: @person.previous_changes
+      }))
+      format.json { head :no_content }
+    end
+  end
+
+  def member_paid
+    @person.paid_till="2019-12-31"
+    @person.member_paid!
     respond_to do |format|
       @person.events.create(default_api_event_params.merge({
         command: "AcceptPayment",
@@ -45,10 +58,8 @@ class FinanceApiController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_person
     vs = params[:id].to_s
-    # VS musí mít 5 znaků
-    raise ActiveRecord::RecordNotFound unless vs.length==5
-    # VS musí začínat jedničkou nebo pětkou
-    raise ActiveRecord::RecordNotFound unless vs[0].match(/1|5/)
+    # docasna kompatibilita se starym VS
+    vs = vs[1..5] if vs.length==5 && vs[0].match(/1|5/)
     @person = Person.find(vs[1..5])
   end
 

@@ -25,7 +25,8 @@ Rails.application.routes.draw do
         get 'addresses'
       end
       member do
-        post 'paid'
+        post 'member_paid'
+        post 'supporter_paid'
       end
       collection do
         get :autocomplete_person_id
@@ -144,7 +145,8 @@ Rails.application.routes.draw do
   post "/people/:id/supporter_payments", to: "finance_api#supporter_payments"
   post "/people/:id/member_payments", to: "finance_api#member_payments"
   get "/people/:id/payments", to: "finance_api#payments"
-  post "/people/:id/paid", to: "finance_api#paid"
+  post "/people/:id/supporter_paid", to: "finance_api#supporter_paid"
+  post "/people/:id/member_paid", to: "finance_api#member_paid"
 
   root 'people#dashboard'
 end

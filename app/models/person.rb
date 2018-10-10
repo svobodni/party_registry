@@ -50,7 +50,7 @@ class Person < ActiveRecord::Base
 
   scope :awaiting_first_payment, -> { where("status IN (?)", ["awaiting_first_payment", "regular_supporter_awaiting_first_payment"]) }
 
-  scope :not_renewed, -> { where("paid_till < ?", "2018-01-01") }
+  scope :not_renewed, -> { where("paid_till < ?", "2019-01-01") }
 
   scope :without_signed_application, -> { joins(:signed_application).where("signed_applications.person_id IS NULL") }
 
@@ -209,7 +209,7 @@ class Person < ActiveRecord::Base
   end
 
   def is_renewal_payment_expected?
-    is_regular? && paid_till && paid_till.to_date < "2018-01-01".to_date
+    is_regular? && paid_till && paid_till.to_date < "2019-01-01".to_date
   end
 
   def region
@@ -248,8 +248,8 @@ class Person < ActiveRecord::Base
     # FIXME: převod na :regular_supporter
     state :regular_supporter_awaiting_first_payment
 
-    # Platba členského/registračního příspěvku
-    event :paid do
+    # Platba členského příspěvku
+    event :member_paid do
       # Přijímaný člen zaplatil, splnil i ostatní podmínky a stává se členem
       transitions from: [:registered, :regular_supporter], to: :regular_member,
         :guard => Proc.new { self.validate_membership_conditions(["ApplicationReceived", "PersonAccepted"]) },
@@ -271,6 +271,14 @@ class Person < ActiveRecord::Base
           PresidiumNotifications.requesting_paid(self).deliver
         }
 
+      # Člen zaplatil na dalsi rok
+      transitions from: :regular_member, to: :regular_member,
+        # :guard => Proc.new { is_renewal_payment_expected? },
+        :after => Proc.new { MemberNotifications.renewed(self).deliver }
+    end
+
+    # Platba členského/registračního příspěvku
+    event :supporter_paid do
       # Příznivec zaplatil
       transitions from: :registered, to: :regular_supporter,
         :after => Proc.new { Notifier.new_regular_supporter(self) }
@@ -279,11 +287,6 @@ class Person < ActiveRecord::Base
       transitions from: :regular_supporter, to: :regular_supporter,
         :guard => Proc.new { is_renewal_payment_expected? },
         :after => Proc.new { SupporterNotifications.renewed(self).deliver }
-
-      # Člen zaplatil na dalsi rok
-      transitions from: :regular_member, to: :regular_member,
-        :guard => Proc.new { is_renewal_payment_expected? },
-        :after => Proc.new { MemberNotifications.renewed(self).deliver }
     end
 
     # Žádost příznivce o členství
@@ -345,6 +348,8 @@ class Person < ActiveRecord::Base
     event :rk_cancel_decision do
       transitions :from => :regular, :to => :registered
     end
+
+  end
 
   def files_photo_url
     "https://files.svobodni.cz/rep/is/member_photo/#{id}.png"
