@@ -1,7 +1,7 @@
 <% if @person.is_payment_expected? || @person.is_renewal_payment_expected? %>
   <% year = "2018" %>
   <% if !@person.is_member_or_requesting? %>
-    <% vs = @person.supporter_vs %>
+    <% vs = @person.vs %>
     <% amount = @person.amount.blank? ? 100 : @person.amount %>
     <% amount_text="100 Kč (základní sazba)" %>
     <% account = @country.supporters_account_number %>
@@ -15,7 +15,7 @@
     <% request_warning="Pozor! V souladu s novelou zákona o politických stranách máme <strong>jiné číslo účtu</strong> a vy musíte u platby <strong>uvést její účel do zprávy pro příjemce</strong>.".html_safe%>
     <% request_message="dar priznivce" %>
   <% else %>
-    <% vs = @person.member_vs %>
+    <% vs = @person.vs %>
     <% amount = @person.amount.blank? ? 1000 : @person.amount %>
     <% amount_text="1000 Kč (základní sazba)<br /> 300 Kč (studenti do 25 let a důchodci)".html_safe %>
     <% account = @country.members_account_number %>

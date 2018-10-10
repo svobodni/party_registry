@@ -155,15 +155,7 @@ class Person < ActiveRecord::Base
   end
 
   def vs
-    (is_member_or_requesting? ? member_vs : supporter_vs)
-  end
-
-  def member_vs
-    "1" + id.to_s.rjust(4,"0")
-  end
-
-  def supporter_vs
-    "5" + id.to_s.rjust(4,"0")
+    id
   end
 
   # podpora starého formátu
