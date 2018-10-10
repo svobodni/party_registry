@@ -354,33 +354,6 @@ class Person < ActiveRecord::Base
       transitions :from => :regular, :to => :registered
     end
 
-    event :migrate_to_new_system do
-      after do
-        events.create({
-          command: "MigratePerson",
-          name: "PersonMigrated",
-          changes: previous_changes
-        })
-      end
-      # schvaleni, maji platebni instrukce, dokonci proces
-      transitions :from => :awaiting_first_payment, :to => :registered
-
-      transitions :from => :awaiting_presidium_decision, :to => :registered,
-        :guard => Proc.new { self.membership_request.try(:membership_requested_on)<Date.parse("2018-01-01")},
-        :after => Proc.new { MigrationNotifications.older(self).deliver }
-
-      transitions :from => :awaiting_presidium_decision, :to => :registered,
-        :guard => Proc.new { self.membership_request.try(:membership_requested_on)>=Date.parse("2018-01-01")},
-        :after => Proc.new { MigrationNotifications.newer(self).deliver }
-
-      transitions :from => :regular_supporter_awaiting_presidium_decision, :to => :registered,
-        :guard => Proc.new { self.paid_till.to_s=="2017-12-31"}
-
-      transitions :from => :regular_supporter_awaiting_presidium_decision, :to => :regular_supporter,
-        :guard => Proc.new { self.paid_till.to_s=="2018-12-31"}
-    end
-  end
-
   def files_photo_url
     "https://files.svobodni.cz/rep/is/member_photo/#{id}.png"
   end
