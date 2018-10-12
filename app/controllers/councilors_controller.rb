@@ -13,10 +13,12 @@ class CouncilorsController < ApplicationController
         else
           @councilors=Councilor.all
         end
+        @councilors=@councilors.where("since>2016-01-01")
       }
       format.json {
         @regional_councilors = Councilor.regional.group_by{|c| c.council_name}
-        @municipal_councilors = Councilor.municipal.group_by{|c| [c.council_name, c.voting_party]}
+        @municipal_councilors = Councilor.municipal.where("since>'2018-01-01'").
+group_by{|c| [c.council_name, c.voting_party]}
       }
     end
   end
