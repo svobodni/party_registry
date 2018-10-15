@@ -142,9 +142,8 @@ Rails.application.routes.draw do
   resources :councilors, path: "zastupitele"
   resources :councilors, only: :index
 
-  post "/people/:id/supporter_payments", to: "finance_api#supporter_payments"
-  post "/people/:id/member_payments", to: "finance_api#member_payments"
-  get "/people/:id/payments", to: "finance_api#payments"
+  post "/people/:id/donation_payments", to: "finance_api#donation_payments"
+  post "/people/:id/membership_payments", to: "finance_api#membership_payments"
   post "/people/:id/supporter_paid", to: "finance_api#supporter_paid"
   post "/people/:id/member_paid", to: "finance_api#member_paid"
 

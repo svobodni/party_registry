@@ -5,7 +5,15 @@ class FinanceApiController < ApplicationController
   skip_before_action :authenticate_person!
   skip_before_action :load_country
 
-  def payments
+  def membership_payments
+    raise ActiveRecord::RecordNotFound unless @person.is_awaiting_membership? ||
+      @person.is_regular_member?
+    respond_to do |format|
+      format.json
+    end
+  end
+
+  def donation_payments
     respond_to do |format|
       format.json
     end
@@ -18,7 +26,8 @@ class FinanceApiController < ApplicationController
       @person.events.create(default_api_event_params.merge({
         command: "AcceptPayment",
         name: "PaymentAccepted",
-        changes: @person.previous_changes
+        changes: @person.previous_changes,
+        data: {payment_type: "supporter"}
       }))
       format.json { head :no_content }
     end
@@ -31,7 +40,8 @@ class FinanceApiController < ApplicationController
       @person.events.create(default_api_event_params.merge({
         command: "AcceptPayment",
         name: "PaymentAccepted",
-        changes: @person.previous_changes
+        changes: @person.previous_changes,
+        data: {payment_type: "member"}
       }))
       format.json { head :no_content }
     end
@@ -60,7 +70,7 @@ class FinanceApiController < ApplicationController
     vs = params[:id].to_s
     # docasna kompatibilita se starym VS
     vs = vs[1..5] if vs.length==5 && vs[0].match(/1|5/)
-    @person = Person.find(vs[1..5])
+    @person = Person.find(vs)
   end
 
 end
