@@ -285,7 +285,7 @@ class Person < ActiveRecord::Base
 
       # Příznivec zaplatil na dalsi rok
       transitions from: :regular_supporter, to: :regular_supporter,
-        :guard => Proc.new { is_renewal_payment_expected? },
+        :guard => Proc.new { self.is_renewal_payment_expected? },
         :after => Proc.new { SupporterNotifications.renewed(self).deliver }
     end
 
