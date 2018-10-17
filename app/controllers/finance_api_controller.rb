@@ -26,8 +26,8 @@ class FinanceApiController < ApplicationController
       @person.events.create(default_api_event_params.merge({
         command: "AcceptPayment",
         name: "PaymentAccepted",
-        changes: @person.previous_changes,
-        data: {payment_type: "supporter"}
+        data: {payment_type: "supporter"},
+        changes: @person.previous_changes
       }))
       format.json { head :no_content }
     end
@@ -40,8 +40,8 @@ class FinanceApiController < ApplicationController
       @person.events.create(default_api_event_params.merge({
         command: "AcceptPayment",
         name: "PaymentAccepted",
-        changes: @person.previous_changes,
-        data: {payment_type: "member"}
+        data: {payment_type: "member"},
+        changes: @person.previous_changes
       }))
       format.json { head :no_content }
     end
