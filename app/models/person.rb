@@ -209,7 +209,7 @@ class Person < ActiveRecord::Base
   end
 
   def is_renewal_payment_expected?
-    is_regular? && paid_till && paid_till.to_date < "2019-01-01".to_date
+    is_regular? && paid_till && attribute_was(:paid_till).to_date < "2019-01-01".to_date
   end
 
   def region
@@ -273,7 +273,7 @@ class Person < ActiveRecord::Base
 
       # Člen zaplatil na dalsi rok
       transitions from: :regular_member, to: :regular_member,
-        # :guard => Proc.new { is_renewal_payment_expected? },
+        :guard => Proc.new { self.is_renewal_payment_expected? },
         :after => Proc.new { MemberNotifications.renewed(self).deliver }
     end
 
