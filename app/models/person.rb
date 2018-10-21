@@ -48,13 +48,13 @@ class Person < ActiveRecord::Base
   scope :regular_members, -> { where("status = ?", "regular_member") }
   scope :regular_supporters, -> { where("status = ?", "regular_supporter") }
 
-  scope :awaiting_first_payment, -> { where("status IN (?)", ["awaiting_first_payment", "regular_supporter_awaiting_first_payment"]) }
+  scope :awaiting_first_payment, -> { joins(:membership_request).where("membership_requests.paid_on IS NULL") }
 
   scope :not_renewed, -> { where("paid_till < ?", "2019-01-01") }
 
   scope :without_signed_application, -> { joins(:signed_application).where("signed_applications.person_id IS NULL") }
 
-  scope :awaiting_presidium_decision, -> { where("status IN (?)", ["awaiting_presidium_decision", "regular_supporter_awaiting_presidium_decision"]) }
+  scope :awaiting_presidium_decision, -> { joins(:membership_request).where("membership_requests.approved_on IS NULL") }
 
   before_save :unset_domestic_ruian_address,
     if: Proc.new { |person| person.domestic_address_street_changed? }
@@ -204,7 +204,6 @@ class Person < ActiveRecord::Base
   end
 
   def is_payment_expected?
-    #(["awaiting_first_payment", "regular_supporter_awaiting_first_payment"].member?(status) && !signed_application.blank?) || (status=="registered")
     status=="registered" || is_awaiting_first_payment?
   end
 
@@ -233,20 +232,8 @@ class Person < ActiveRecord::Base
     state :registered, :initial => true
     # příznivce
     state :regular_supporter
-    # zájemce o členství (čeká se na schválení a přihlášku)
-    # FIXME: převod na :registered
-    state :awaiting_presidium_decision
-    # schválený zájemce o členství (čeká se na platbu a přihlášku)
-    # FIXME: převod na :registered
-    state :awaiting_first_payment
     # člen
     state :regular_member
-    # příznivce zájemce o členství (čeká se na schválení a přihlášku)
-    # FIXME: převod na :regular_supporter
-    state :regular_supporter_awaiting_presidium_decision
-    # příznivce schválený zájemce o členství (čeká se na platbu a přihlášku)
-    # FIXME: převod na :regular_supporter
-    state :regular_supporter_awaiting_first_payment
 
     # Platba členského příspěvku
     event :member_paid do

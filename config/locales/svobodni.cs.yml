@@ -7,10 +7,6 @@ cs:
     registered: "Nezaplacený příznivec"
     regular_supporter: "Příznivec"
     cancelled: "Zrušený příznivec"
-    regular_supporter_awaiting_presidium_decision: "Příznivec čekající na rozhodnutí KrP"
-    regular_supporter_awaiting_first_payment: "Příznivec čekající na potvrzení platby"
-    awaiting_presidium_decision: "Zájemce čekajcí na rozhodnutí KrP"
-    awaiting_first_payment: "Zájemce čekajcí na potvrzení platby"
     regular_member: "Řádný člen"
   person_type:
     member: "člen"
