@@ -3,6 +3,19 @@ Political party registry
 
 [![Build Status](https://travis-ci.org/svobodni/party_registry.svg?branch=master)](https://travis-ci.org/svobodni/party_registry)
 
+## Automated setup
+```
+cp config/configatron/development.example.rb config/configatron/development.rb
+docker-compose build
+docker-compose up
+```
+
+Attach to console:
+```
+docker-compose run web /myapp/bin/rails c
+```
+
+## Manual setup
 * Ruby version
 
     2.1.0 + rubygems
