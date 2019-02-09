@@ -77,7 +77,7 @@ ActiveRecord::Schema.define(version: 20180620233953) do
     t.datetime "created_at",                               null: false
     t.datetime "updated_at",                               null: false
     t.integer  "candidates_list_file_id",    limit: 4
-    t.string   "poznamka"
+    t.string   "poznamka",                   limit: 255
   end
 
   create_table "contacts", force: :cascade do |t|
