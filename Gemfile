@@ -156,7 +156,7 @@ gem 'exception_notification'
 # sorting
 gem 'twitter_cldr'
 
-gem 'bootstrap-sass', '~> 3.3.3'
+gem 'bootstrap-sass', '~> 3.4.1'
 
 gem 'twitter'
 gem 'rails_autolink'
