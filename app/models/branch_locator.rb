@@ -25,9 +25,11 @@ class BranchLocator
   # Pobočky na celém území městské části
   def name_by_mestska_cast
     # Jihomoravský kraj
-    return mestska_cast if ["Brno-střed", "Brno-sever", "Brno-Žabovřesky", "Brno-Kohoutovice", "Brno-Královo pole"].member?(mestska_cast)
-    return "Brno-Bystrc" if ["Brno-Bystrc", "Brno-Kníničky", "Brno-Komín", "Brno-Žebětín"].member?(mestska_cast)
-    return "Brno-východ" if ["Brno-Líšeň", "Brno-Vinohrady", "Brno-Židenice", "Brno-Slatina"].member?(mestska_cast)
+    return "Brno" if [
+      "Brno-střed", "Brno-sever", "Brno-Žabovřesky", "Brno-Kohoutovice",
+      "Brno-Královo pole", "Brno-Bystrc", "Brno-Kníničky", "Brno-Komín",
+      "Brno-Žebětín", "Brno-Líšeň", "Brno-Vinohrady", "Brno-Židenice",
+      "Brno-Slatina"].member?(mestska_cast)
     # Praha
     return mestska_cast if obec=="Praha"
   end
