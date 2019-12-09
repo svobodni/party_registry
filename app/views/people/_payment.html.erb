@@ -23,7 +23,7 @@
     <% if @person.is_requesting_membership? %>
     <% request_text="Zaplaťte prosím členský příspěvek na rok #{year}."%>
     <% elsif @person.is_regular? %>
-    <% request_text="Zaplaťte prosím členský příspěvek na rok #{year}. Tento rok bude ve znamení voleb do europarlamentu. Lhůta pro zaplacení členského příspěvku běží do konce ledna #{year}."%>
+    <% request_text="Zaplaťte prosím členský příspěvek na rok #{year}. Tento rok bude ve znamení krajských a senátních voleb. Lhůta pro zaplacení členského příspěvku běží do konce ledna #{year}."%>
     <% else %>
     <% request_text="Zaplaťte prosím členský příspěvek na rok #{year}. Jakmile platbu obdržíme, stanete se plnoprávným členem Strany svobodných občanů."%>
     <% end %>
