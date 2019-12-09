@@ -1,5 +1,5 @@
 <% if @person.is_payment_expected? || @person.is_renewal_payment_expected? %>
-  <% year = "2019" %>
+  <% year = "2020" %>
   <% if !@person.is_member_or_requesting? %>
     <% vs = @person.vs %>
     <% amount = @person.amount.blank? ? 100 : @person.amount %>
@@ -7,7 +7,7 @@
     <% account = @country.supporters_account_number %>
     <% title = "Příspěvek příznivce na rok #{year}" %>
     <% if @person.is_regular? %>
-    <% request_text="Zaplaťte prosím příspěvek příznivce na rok #{year}. Tento rok bude ve znamení komunálních voleb. Lhůta pro zaplacení příspěvku příznivce běží do konce ledna #{year}."%>
+    <% request_text="Zaplaťte prosím příspěvek příznivce na rok #{year}. Tento rok bude ve znamení krajských a senátních voleb. Lhůta pro zaplacení příspěvku příznivce běží do konce ledna #{year}."%>
     <% else %>
     <% request_text="Zaplaťte prosím příspěvek příznivce na rok #{year}. Jakmile platbu obdržíme, bude registrace kompletní. Budeme Vás o tom informovat emailem. Získáte pak přístup do sekce pro registrované uživatele, kde se mj. budete moci účastnit některých hlasování a účastnit se diskusí."%>
     <% end %>
