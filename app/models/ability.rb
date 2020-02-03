@@ -85,7 +85,7 @@ class Ability
       end
 
       # Speciální role pro adminitrátora
-      if [342].member?(user.id)
+      if ([342, 4039]).member?(user.id)
         can :manage, Doorkeeper::Application
       end
     end
