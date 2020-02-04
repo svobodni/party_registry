@@ -70,4 +70,12 @@ class AuthController < ApplicationController
     end
   end
 
+  # GET /auth/rocketprofile for rocketchat integration (forum.svobodni.cz)
+  def rocketprofile
+    @person = current_person
+    respond_to do |format|
+      format.json {render template: "people/rocketprofile"}
+    end
+  end
+
 end

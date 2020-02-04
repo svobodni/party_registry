@@ -73,6 +73,7 @@ Rails.application.routes.draw do
   get '/auth/public_key'
   get '/auth/profile'
   get '/auth/me'
+  get '/auth/rocketprofile'
 
   devise_for :people, :controllers => { :omniauth_callbacks => "people/omniauth_callbacks" }
 
