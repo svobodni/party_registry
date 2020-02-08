@@ -9,5 +9,5 @@ json.photo_url @person.photo_url
 json.roles @person.roles.collect{|role|  if role.body
     role.body.slug
   elsif role.branch
-    role.branch.slug
-  end }.concat([@person.domestic_region.slug, @person.status])
+    "koordinator"
+  end }.uniq.concat([@person.domestic_region.slug, @person.status])
