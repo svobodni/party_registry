@@ -7,9 +7,12 @@
   <Worksheet ss:Name="Sheet1">
     <Table>
       <Row>
+        <Cell><Data ss:Type="String">Kraj</Data></Cell>
         <Cell><Data ss:Type="String">ID</Data></Cell>
         <Cell><Data ss:Type="String">Jméno</Data></Cell>
         <Cell><Data ss:Type="String">Příjmení</Data></Cell>
+        <Cell><Data ss:Type="String">Telefon</Data></Cell>
+        <Cell><Data ss:Type="String">Email</Data></Cell>
         <Cell><Data ss:Type="String">Ulice</Data></Cell>
         <Cell><Data ss:Type="String">Město</Data></Cell>
         <Cell><Data ss:Type="String">PSČ</Data></Cell>
@@ -18,9 +21,12 @@
       </Row>
       <% @people.each do |person| %>
       <Row>
+        <Cell><Data ss:Type="String"><%= person.domestic_region.try(:name) %></Data></Cell>
         <Cell><Data ss:Type="String"><%= person.id %></Data></Cell>
         <Cell><Data ss:Type="String"><%= person.first_name %></Data></Cell>
         <Cell><Data ss:Type="String"><%= person.last_name %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= person.phone %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= person.email %></Data></Cell>
         <% if person.postal_address_street.blank? %>
         <Cell><Data ss:Type="String"><%= person.domestic_address_street %></Data></Cell>
         <Cell><Data ss:Type="String"><%= person.domestic_address_city %></Data></Cell>
