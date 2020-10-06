@@ -25,8 +25,8 @@ pdf.table([
 		[{ colspan: 2, content: "Prohlašuji, že nejsem členem jiné politické strany, že souhlasím se stanovami, programovým prohlášením, že jsem nebyl členem Lidových milicí ani spolupracovníkem či agentem STB, že všechny uvedené údaje jsou pravdivé a že souhlasím se zpracováním a správou uvedených údajů Svobodnými"}],
 		["Datum:","Podpis:"]], position: :center, column_widths: [100, 300])
 pdf.move_down 20
-pdf.text "Podepsanou přihlášku zašlete prosím na adresu:"
+pdf.text "Podepsanou přihlášku zašlete prosím na naši korespondenční adresu:"
 pdf.text "Svobodní"
-pdf.text "Perucká 2196/14"
-pdf.text "120 00 Praha 2"
+pdf.text "Frýdlantská 1310/23"
+pdf.text "182 00 Praha 8"
 end
