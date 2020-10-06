@@ -73,7 +73,7 @@ class DeclarationPdf < Prawn::Document
     move_down vspace
     text("Povolání:                                             <b>#{candidate[:povolani]}</b>", inline_format: true)
     move_down vspace
-    text("[  ] Prohlašuji, že souhlasím s kandidaturou za Stranu svobodných občanů do zastupitelstva obce a prohlašuji, že souhlasím s těmito principy komunální politiky Svobodných:")
+    text("[  ] Prohlašuji, že souhlasím s kandidaturou za Svobodných do zastupitelstva obce a prohlašuji, že souhlasím s těmito principy komunální politiky Svobodných:")
     move_down vspace/2
     indent 20 do
 
@@ -93,10 +93,10 @@ class DeclarationPdf < Prawn::Document
 move_down vspace
 text("Informace a souhlas se zpracováním osobních údajů", align: :center, style: :bold)
 move_down vspace
-text("  1. Správcem Vašich osobních údajů je Strana svobodných občanů, se sídlem Perucká 2196/14, 120 00 Praha 2, IČ 71339612, dále i Svobodní. Strana svobodných občanů spravuje osobní údaje v souladu s nařízením EU 2016/679 (GDPR).
+text("  1. Správcem Vašich osobních údajů jsou Svobodní, se sídlem Perucká 2196/14, 120 00 Praha 2, IČ 71339612. Svobodní spravují osobní údaje v souladu s nařízením EU 2016/679 (GDPR).
   2. Za účelem kandidatury ve volbách zpracováváme <b>podle zákona</b> o komunálních volbách č. 491/2001 Sb. § 22 odst. 1, písm d) tyto osobní údaje: <b>jméno a příjmení, adresa, datum narození, pohlaví, politická příslušnost, povolání</b>. Tyto údaje jsou zpracovávány po dobu určenou zákonem a jsou dále předávány těmto zpracovatelům: úřady dle zákona a správce registračního systému KRAXNET s.r.o. IČ 26460335.
   3. Za účelem informovanosti Republikového výboru Svobodných, který dle Pravidel pro výběr kandidátů schvaluje kandidátní listiny, zpracováváme <b>na základě</b> vašeho výslovného <b>souhlasu</b> tyto osobní údaje: <b>členství v politických stranách v minulosti, kandidatura v politických volbách v minulosti, prohlášení o čistém trestním rejstříku, prohlášení o nespolupráci s StB a nečlenství v LM</b>. Tyto údaje zpracováváme po dobu 5 let a předáváme zpracovateli správci registračního systému KRAXNET s.r.o. IČ 26460335.
-  4. Můžete vznést námitku proti tomuto zpracování, stejně jako můžete požadovat opravu osobních údajů, požádat o sdělení, jaké osobní údaje o vás evidujeme, případně požádat o výmaz osobních údajů, bude-li to možné. Máte právo na přenositelnost údajů a pokud dochází k automatizovanému zpracování, máte právo nebýt předmětem rozhodnutí založeného výhradně na tomto rozhodování. Souhlas můžete v budoucnu kdykoli odvolat. Se svými žádostmi se můžete obracet na emailem na kancelar@svobodni.cz nebo dopisem na sídlo naší společnosti: Strana svobodných občanů, Perucká 2196/14, 120 00 Praha 2. Můžete také podat stížnost dozorovému úřadu (Úřad na ochranu osobních údajů).
+  4. Můžete vznést námitku proti tomuto zpracování, stejně jako můžete požadovat opravu osobních údajů, požádat o sdělení, jaké osobní údaje o vás evidujeme, případně požádat o výmaz osobních údajů, bude-li to možné. Máte právo na přenositelnost údajů a pokud dochází k automatizovanému zpracování, máte právo nebýt předmětem rozhodnutí založeného výhradně na tomto rozhodování. Souhlas můžete v budoucnu kdykoli odvolat. Se svými žádostmi se můžete obracet na emailem na kancelar@svobodni.cz nebo dopisem na sídlo naší společnosti: Svobodní, Perucká 2196/14, 120 00 Praha 2. Můžete také podat stížnost dozorovému úřadu (Úřad na ochranu osobních údajů).
 ", size: 8, inline_format: true)
 text("
   [  ] Souhlasím se zpracováním osobních údajů uvedených v interním čestném prohlášení.
