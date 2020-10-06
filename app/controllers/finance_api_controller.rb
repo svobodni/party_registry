@@ -20,7 +20,7 @@ class FinanceApiController < ApplicationController
   end
 
   def supporter_paid
-    @person.paid_till="2020-12-31"
+    @person.paid_till="2021-12-31"
     @person.supporter_paid!
     respond_to do |format|
       @person.events.create(default_api_event_params.merge({
@@ -34,7 +34,7 @@ class FinanceApiController < ApplicationController
   end
 
   def member_paid
-    @person.paid_till="2020-12-31"
+    @person.paid_till="2021-12-31"
     @person.member_paid!
     respond_to do |format|
       @person.events.create(default_api_event_params.merge({

@@ -43,11 +43,11 @@
     <%= button_to("Vyznačit zaplacení zájemce o členství", member_paid_backoffice_person_path(@person), class: "btn btn-success pull-right") %>
     <% end %>
 
-    <% unless @person.paid_till.to_s=="2020-12-31" %>
+    <% unless @person.paid_till.to_s=="2021-12-31" %>
     <% if @person.is_regular_member? %>
-      <%= button_to("Vyznačit zaplacení členství na rok 2020", member_paid_backoffice_person_path(@person), class: "btn btn-success pull-right") %>
+      <%= button_to("Vyznačit zaplacení členství na rok 2021", member_paid_backoffice_person_path(@person), class: "btn btn-success pull-right") %>
     <% else %>
-      <%= button_to("Vyznačit zaplacení příznivectví na rok 2020", supporter_paid_backoffice_person_path(@person), class: "btn btn-success pull-right") %>
+      <%= button_to("Vyznačit zaplacení příznivectví na rok 2021", supporter_paid_backoffice_person_path(@person), class: "btn btn-success pull-right") %>
     <% end %>
     <% end %>
 
