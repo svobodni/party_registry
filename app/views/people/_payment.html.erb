@@ -17,7 +17,7 @@
   <% else %>
     <% vs = @person.vs %>
     <% amount = @person.amount.blank? ? 1000 : @person.amount %>
-    <% amount_text="1000 Kč (základní sazba)<br /> 300 Kč (studenti do 25 let a důchodci)".html_safe %>
+    <% amount_text="1000 Kč (základní sazba)" %>
     <% account = @country.members_account_number %>
     <% title = "Členské příspěvky na rok #{year}" %>
     <% if @person.is_requesting_membership? %>
@@ -27,7 +27,7 @@
     <% else %>
     <% request_text="Zaplaťte prosím členský příspěvek na rok #{year}. Jakmile platbu obdržíme, stanete se plnoprávným členem Svobodných."%>
     <% end %>
-    <% request_info_text="Příspěvek, prosím, uhraďte pod svým variabilním symbolem na níže uvedené konto. Minimální výše příspěvku činí 1000 Kč (300 Kč pro studenty a důchodce)." %>
+    <% request_info_text="Příspěvek, prosím, uhraďte pod svým variabilním symbolem na níže uvedené konto. Minimální výše příspěvku činí 1000 Kč." %>
     <% request_message="clensky prispevek" %>
   <% end %>
 
