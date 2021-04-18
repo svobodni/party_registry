@@ -41,10 +41,7 @@ class Ability
           can [:supervise], Branch, id: role.branch_id
         elsif (role.type == "President" || role.type == "Vicepresident") && role.body.organization.type=="Region"
           # Členové krajského předsednictva
-          can [:read, :application, :export, :update, :notes], Person, domestic_region_id: role.body.organization_id
-          unless role.body.organization_id.to_i==5
-            can [:approve], Person, domestic_region_id: role.body.organization_id
-          end
+          can [:read, :application, :export, :update, :approve, :notes], Person, domestic_region_id: role.body.organization_id
           can [:read, :application, :export, :notes], Person, guest_region_id: role.body.organization_id
           can [:create, :supervise], Branch, parent_id: role.body.organization_id
           can [:supervise], Region, id: role.body.organization_id
