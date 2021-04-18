@@ -70,9 +70,9 @@ class ApplicationController < ActionController::Base
 
   protected
   def configure_permitted_parameters
-    devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:legacy_type, :first_name, :last_name, :date_of_birth, :phone, :domestic_address_street, :domestic_address_city, :domestic_address_zip, :domestic_region_id, :postal_address_street, :postal_address_city, :postal_address_zip, :guest_region_id, :username, :email, :password, :password_confirmation, :remember_me, :agree, :amount, :previous_political_parties, :previous_candidatures) }
-    devise_parameter_sanitizer.for(:sign_in) { |u| u.permit(:login, :username, :email, :password, :remember_me) }
-    devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:username, :email, :password, :password_confirmation, :current_password) }
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:legacy_type, :first_name, :last_name, :date_of_birth, :phone, :domestic_address_street, :domestic_address_city, :domestic_address_zip, :domestic_region_id, :postal_address_street, :postal_address_city, :postal_address_zip, :guest_region_id, :username, :email, :password, :password_confirmation, :remember_me, :agree, :amount, :previous_political_parties, :previous_candidatures])
+    devise_parameter_sanitizer.permit(:sign_in, keys: [:login, :username, :email, :password, :remember_me])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:username, :email, :password, :password_confirmation, :current_password])
   end
 
   def default_event_params
