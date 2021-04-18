@@ -18,7 +18,7 @@ class Person < ApplicationRecord
   # může vykonávat funkci
   has_many :roles, -> { where("since <= ? and till >= ?", Time.now, Time.now ) }
   # vykonával funkci
-  has_many :historic_roles, -> { where("till < ?", Time.now) }, source: :role, class_name: 'Role'
+  has_many :historic_roles, -> { where("till < ?", Time.now) }, class_name: 'Role'
   # ve voleném orgánu
   has_many :bodies, through: :roles
   # může být koordinátorem více poboček
@@ -26,14 +26,14 @@ class Person < ApplicationRecord
   # patří do kraje dle volebního práva
   belongs_to :domestic_region, class_name: "Region"
   # hostuje v kraji dle své volby
-  belongs_to :guest_region, class_name: "Region"
+  belongs_to :guest_region, class_name: "Region", optional: true
   # patří do pobočky dle volebního práva
-  belongs_to :domestic_branch, class_name: "Branch"
+  belongs_to :domestic_branch, class_name: "Branch", optional: true
   # hostuje v pobočce dle své volby
-  belongs_to :guest_branch, class_name: "Branch"
+  belongs_to :guest_branch, class_name: "Branch", optional: true
   # má adresy (bydliště, poštovní)
-  belongs_to :domestic_ruian_address, class_name: :RuianAddress, foreign_key: :domestic_address_ruian_id
-  belongs_to :postal_ruian_address, class_name: :RuianAddress, foreign_key: :postal_address_ruian_id
+  belongs_to :domestic_ruian_address, class_name: :RuianAddress, foreign_key: :domestic_address_ruian_id, optional: true
+  belongs_to :postal_ruian_address, class_name: :RuianAddress, foreign_key: :postal_address_ruian_id, optional: true
   # má záznamy o přihlášení do systémů
   has_many :issued_token_log_entries
   # má v systému scan přihlášky

@@ -9,7 +9,7 @@ class Body < ApplicationRecord
   has_many :people, through: :roles
 
   # seznam bývalých funkcionářů
-  has_many :historic_roles, -> { where("till < ?", Time.now) }, source: :role, class_name: 'Role'
+  has_many :historic_roles, -> { where("till < ?", Time.now) }, class_name: 'Role'
   has_many :historic_people, through: :historic_roles, source: :person
 
   # Stávající předseda orgánu (u předsednictev)

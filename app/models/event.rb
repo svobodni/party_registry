@@ -6,17 +6,17 @@ class Event < ApplicationRecord
   before_create :set_regions_and_branches
   after_create :handle_event
 
-  belongs_to :requestor, foreign_key: :requestor_id, class_name: 'Person'
-  belongs_to :eventable, polymorphic: true
+  belongs_to :requestor, foreign_key: :requestor_id, class_name: 'Person', optional: true
+  belongs_to :eventable, polymorphic: true, optional: true
 
-  belongs_to :domestic_region, class_name: 'Region'
-  belongs_to :guest_region, class_name: 'Region'
-  belongs_to :domestic_branch, class_name: 'Branch'
-  belongs_to :guest_branch, class_name: 'Branch'
-  belongs_to :old_domestic_region, class_name: 'Region'
-  belongs_to :old_guest_region, class_name: 'Region'
-  belongs_to :old_domestic_branch, class_name: 'Branch'
-  belongs_to :old_guest_branch, class_name: 'Branch'
+  belongs_to :domestic_region, class_name: 'Region', optional: true
+  belongs_to :guest_region, class_name: 'Region', optional: true
+  belongs_to :domestic_branch, class_name: 'Branch', optional: true
+  belongs_to :guest_branch, class_name: 'Branch', optional: true
+  belongs_to :old_domestic_region, class_name: 'Region', optional: true
+  belongs_to :old_guest_region, class_name: 'Region', optional: true
+  belongs_to :old_domestic_branch, class_name: 'Branch', optional: true
+  belongs_to :old_guest_branch, class_name: 'Branch', optional: true
 
   def domestic_region
     super || (Region.where(id: previous_data['domestic_region_id']).first if previous_data)

@@ -4,9 +4,9 @@ class Role < ApplicationRecord
   # kdo funkci vykonává
   belongs_to :person
   # v jakém orgánu?
-  belongs_to :body
+  belongs_to :body, optional: true
   # /nebo/ v jaké pobočce
-  belongs_to :branch
+  belongs_to :branch, optional: true
 
   has_many :events, as: :eventable
 
