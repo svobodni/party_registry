@@ -58,7 +58,7 @@
               <!-- <div class="row" style="padding: 2em"> -->
                 <%if request_warning %><p class="bg-warning"><%=request_warning%></p><% end %>
                 <div class="col-md-5">
-                  <%= render :partial => 'profiles/qr_platba' %>
+                  <%= @qr.as_svg(module_size: 4).html_safe %>
                 </div>
                 <div class="col-md-7">
                   <table class="table table-condensed">
