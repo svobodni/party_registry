@@ -20,6 +20,9 @@ gem 'coffee-rails'
 # Speed up boot time by caching expensive operations.
 gem 'bootsnap'
 
+# default JavaScript compiler for Rails 6
+gem "webpacker"
+
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
