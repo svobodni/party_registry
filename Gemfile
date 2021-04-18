@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 gem 'rake'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '5.2.5'
+gem 'rails', '6.0.3.6'
 
 # Use mysql as the database for Active Record
 gem 'mysql2'
@@ -52,10 +52,11 @@ end
 # gem 'debugger', group: [:development, :test]
 
 # Autentizace
-gem 'devise'
+# gem 'devise'
+gem 'devise', github: 'heartcombo/devise', branch: 'ca-omniauth-2'
 gem 'devise-encryptable'
 gem 'doorkeeper'
-gem 'omniauth-facebook', '~> 4.0.0'
+gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 gem 'omniauth-openid'
 
