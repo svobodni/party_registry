@@ -1,6 +1,6 @@
 class FinanceApiController < ApplicationController
 
-  before_filter :authenticate, :set_person
+  before_action :authenticate, :set_person
 
   skip_before_action :authenticate_person!
   skip_before_action :load_country

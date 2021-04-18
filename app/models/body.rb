@@ -9,14 +9,14 @@ class Body < ApplicationRecord
   has_many :people, through: :roles
 
   # seznam bývalých funkcionářů
-  has_many :historic_roles, -> { where("till < ?", Time.now) }, source: :role, class_name: Role
+  has_many :historic_roles, -> { where("till < ?", Time.now) }, source: :role, class_name: 'Role'
   has_many :historic_people, through: :historic_roles, source: :person
 
   # Stávající předseda orgánu (u předsednictev)
-  has_one :president, -> { where("since < ? and till > ?", Time.now, Time.now  ) }, class_name: President
+  has_one :president, -> { where("since < ? and till > ?", Time.now, Time.now  ) }, class_name: 'President'
 
   # Stávající místopředsedové orgánu (u předsednictev)
-  has_many :vicepresidents, -> { where("since < ? and till > ?", Time.now, Time.now  ) }, class_name: Vicepresident
+  has_many :vicepresidents, -> { where("since < ? and till > ?", Time.now, Time.now  ) }, class_name: 'Vicepresident'
 
   scope :order_for_display, -> { order(display_position: :asc) }
 
