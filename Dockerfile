@@ -1,6 +1,7 @@
-FROM ruby:2.3.3
+FROM ruby:2.7.3
 
-RUN apt-get update -qq && apt-get install -y build-essential libopencv-dev mysql-client nodejs --no-install-recommends
+RUN apt-get update -qq && apt-get install -y mariadb-client npm --no-install-recommends
+RUN npm install --global yarn
 
 RUN mkdir /myapp
 WORKDIR /myapp
