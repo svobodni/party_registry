@@ -21,7 +21,7 @@ gem 'coffee-rails'
 gem 'bootsnap'
 
 # default JavaScript compiler for Rails 6
-gem "webpacker"
+gem 'webpacker'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
@@ -109,7 +109,7 @@ gem 'fio_api' # gem 'fio_api', :git => 'https://github.com/kubicek/fio_api.git'
 gem 'jwt'
 
 # přílohy
-gem "paperclip", "~> 4.2"
+gem 'paperclip'
 
 # formuláře
 gem 'simple_form'
@@ -152,7 +152,7 @@ end
 gem 'sinatra', :require => nil
 
 # sidekiq scheduler
-gem "sidekiq-cron"
+gem 'sidekiq-cron'
 
 # form wizzard
 gem 'wicked'
