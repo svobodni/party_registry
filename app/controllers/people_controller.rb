@@ -91,9 +91,9 @@ class PeopleController < ApplicationController
     }))
     respond_to do |format|
       if @person.errors.empty?
-        format.html { redirect_to :back, notice: 'Členství bylo úspěšně schváleno.'}
+        format.html { redirect_back(fallback_location: '/', notice: 'Členství bylo úspěšně schváleno.')}
       else
-        format.html { redirect_to :back, alert: 'Změnu se nepodařilo uložit: '+@person.errors.full_messages.join("<br/>") }
+        format.html { redirect_back(fallback_location: '/', alert: 'Změnu se nepodařilo uložit: '+@person.errors.full_messages.join("<br/>")) }
       end
     end
   end
@@ -109,9 +109,9 @@ class PeopleController < ApplicationController
     }))
     respond_to do |format|
       if @person.errors.empty?
-        format.html { redirect_to :back, notice: 'Členství bylo zamítnuto.'}
+        format.html { redirect_back(fallback_location: '/', notice: 'Členství bylo zamítnuto.')}
       else
-        format.html { redirect_to :back, alert: 'Změnu se nepodařilo uložit: '+@person.errors.full_messages.join("<br/>") }
+        format.html { redirect_back(fallback_location: '/', alert: 'Změnu se nepodařilo uložit: '+@person.errors.full_messages.join("<br/>")) }
       end
     end
   end
@@ -132,7 +132,7 @@ class PeopleController < ApplicationController
         }))
         format.html { redirect_to membership_profiles_path, notice: 'Členství bylo úspěšně zrušeno.'}
       else
-        format.html { redirect_to :back, alert: 'Změnu se nepodařilo uložit: '+@person.errors.full_messages.join("<br/>") }
+        format.html { redirect_back(fallback_location: '/', alert: 'Změnu se nepodařilo uložit: '+@person.errors.full_messages.join("<br/>")) }
       end
     end
   end

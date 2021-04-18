@@ -14,7 +14,7 @@ class ProfilesController < ApplicationController
           name: "PersonUpdated",
           changes: current_person.previous_changes
         }))
-        format.html { redirect_to :back, notice: 'Údaje úspěšně aktualizovány.' }
+        format.html { redirect_back(fallback_location: '/', notice: 'Údaje úspěšně aktualizovány.') }
       else
         format.html { render action: params[:id] }
       end

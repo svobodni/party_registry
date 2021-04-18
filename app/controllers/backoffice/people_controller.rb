@@ -83,7 +83,7 @@ class Backoffice::PeopleController < ApplicationController
           name: "PersonUpdated",
           changes: @person.previous_changes
         }))
-        format.html { redirect_to :back, notice: 'Person was successfully updated.' }
+        format.html { redirect_back(fallback_location: '/', notice: 'Údaje byly úspěšně uloženy.') }
         format.json { render :show, status: :ok, location: @person }
       else
         format.html { render :edit }
@@ -102,7 +102,7 @@ class Backoffice::PeopleController < ApplicationController
         name: "PaymentAccepted",
         changes: @person.previous_changes
       }))
-      format.html { redirect_to :back, notice: 'Úhrada do byla úspěšně vyznačena.' }
+      format.html { redirect_back(fallback_location: '/', notice: 'Úhrada do byla úspěšně vyznačena.') }
     end
   end
 
@@ -116,7 +116,7 @@ class Backoffice::PeopleController < ApplicationController
         name: "PaymentAccepted",
         changes: @person.previous_changes
       }))
-      format.html { redirect_to :back, notice: 'Úhrada do byla úspěšně vyznačena.' }
+      format.html { redirect_back(fallback_location: '/', notice: 'Úhrada do byla úspěšně vyznačena.') }
     end
   end
 
