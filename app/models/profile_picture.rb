@@ -1,4 +1,4 @@
-class ProfilePicture < ActiveRecord::Base
+class ProfilePicture < ApplicationRecord
   has_many :events, as: :eventable
 
   has_attached_file :photo, styles: {legacy: "110x132#",

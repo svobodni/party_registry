@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 require 'elasticsearch'
 
-class RuianAddress < ActiveRecord::Base
+class RuianAddress < ApplicationRecord
 
   geocoded_by :address_line
   attr_accessor :address_line

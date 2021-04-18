@@ -1,4 +1,4 @@
-class Event < ActiveRecord::Base
+class Event < ApplicationRecord
   store :metadata, accessors: [ :controller_path, :action_name, :remote_ip, :referer, :api_name ], coder: JSON
   store :data, accessors: [ :params, :permitted_params, :changes, :previous_data ], coder: JSON
 

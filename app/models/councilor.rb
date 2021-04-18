@@ -1,4 +1,4 @@
-class Councilor < ActiveRecord::Base
+class Councilor < ApplicationRecord
   belongs_to :region
   belongs_to :person
 

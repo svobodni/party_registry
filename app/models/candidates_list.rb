@@ -1,4 +1,4 @@
-class CandidatesList < ActiveRecord::Base
+class CandidatesList < ApplicationRecord
 
   # store :data, accessors: [ :params, :permitted_params, :changes, :previous_data ], coder: JSON
   serialize :kandidati #, coder: JSON

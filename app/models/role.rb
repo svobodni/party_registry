@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 # Třída Role reprezentuje volenou nebo jmenovanou funkci
-class Role < ActiveRecord::Base
+class Role < ApplicationRecord
   # kdo funkci vykonává
   belongs_to :person
   # v jakém orgánu?

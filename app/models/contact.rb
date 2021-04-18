@@ -1,4 +1,4 @@
-class Contact < ActiveRecord::Base
+class Contact < ApplicationRecord
   belongs_to :contactable, :polymorphic => true
 
   has_many :events, as: :eventable

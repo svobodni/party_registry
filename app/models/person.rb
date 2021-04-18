@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 require Rails.root.join('lib', 'dotnet_sha1')
 # Třída Person reprezentuje osobu (členy a příznivce)
-class Person < ActiveRecord::Base
+class Person < ApplicationRecord
   devise :database_authenticatable, :registerable, :encryptable, :confirmable,
       :lockable, :recoverable, :rememberable, :trackable, :validatable
   devise :omniauthable, :omniauth_providers => [:facebook, :twitter, :mojeid]

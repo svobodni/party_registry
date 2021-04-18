@@ -1,5 +1,5 @@
 # Třída reprezentuje orgán strany (ReP, Rev, KrP, RK, KK, VK)
-class Body < ActiveRecord::Base
+class Body < ApplicationRecord
   belongs_to :organization
 
   # Členové jsou v orgánech v rolích/funkcích (předseda, místopředseda, koordinátor, člen)

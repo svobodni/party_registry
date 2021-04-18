@@ -1,4 +1,4 @@
-class SignedApplication < ActiveRecord::Base
+class SignedApplication < ApplicationRecord
   belongs_to :person
 
   has_attached_file :scan, path: ":rails_root/data/signed_applications/:person_id.pdf", url: "/people/:person_id/signed_application.pdf"

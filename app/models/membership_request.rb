@@ -1,4 +1,4 @@
-class MembershipRequest < ActiveRecord::Base
+class MembershipRequest < ApplicationRecord
   belongs_to :person
 
   def application_received?

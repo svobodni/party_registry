@@ -1,2 +1,2 @@
-class BankPayment < ActiveRecord::Base
+class BankPayment < ApplicationRecord
 end
