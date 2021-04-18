@@ -1,4 +1,4 @@
-class CreateIssuedTokenLogEntries < ActiveRecord::Migration
+class CreateIssuedTokenLogEntries < ActiveRecord::Migration[4.2]
   def change
     create_table :issued_token_log_entries do |t|
       t.integer :person_id

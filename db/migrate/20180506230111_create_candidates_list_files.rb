@@ -1,4 +1,4 @@
-class CreateCandidatesListFiles < ActiveRecord::Migration
+class CreateCandidatesListFiles < ActiveRecord::Migration[4.2]
   def change
     create_table :candidates_list_files do |t|
       t.string :sheet_file_name

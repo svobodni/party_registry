@@ -1,4 +1,4 @@
-class AddRegionAndBranchToPerson < ActiveRecord::Migration
+class AddRegionAndBranchToPerson < ActiveRecord::Migration[4.2]
   def change
     add_column :people, :domestic_region_id, :integer
     add_column :people, :guest_region_id, :integer

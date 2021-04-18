@@ -1,4 +1,4 @@
-class AddLocakableToDevise < ActiveRecord::Migration
+class AddLocakableToDevise < ActiveRecord::Migration[4.2]
   def up
     add_column :people, :failed_attempts, :integer, default: 0
     add_column :people, :unlock_token, :string

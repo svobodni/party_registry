@@ -1,4 +1,4 @@
-class CreateCouncilors < ActiveRecord::Migration
+class CreateCouncilors < ActiveRecord::Migration[4.2]
   def change
     create_table :councilors do |t|
       t.string :council_name

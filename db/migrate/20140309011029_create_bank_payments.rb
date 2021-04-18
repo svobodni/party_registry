@@ -1,12 +1,10 @@
-class CreateBankPayments < ActiveRecord::Migration
+class CreateBankPayments < ActiveRecord::Migration[4.2]
   def change
 
     create_table "bank_payments" do |t|
       t.integer  "account_id"
       t.decimal  "amount",        :precision => 10, :scale => 2
       t.string   "status"
-      t.datetime "created_at"
-      t.datetime "updated_at"
       t.integer  "row_id"
       t.boolean  "transfer", :default => false
       t.date     "validfrom"

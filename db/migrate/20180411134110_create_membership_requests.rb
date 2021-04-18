@@ -1,4 +1,4 @@
-class CreateMembershipRequests < ActiveRecord::Migration
+class CreateMembershipRequests < ActiveRecord::Migration[4.2]
   def change
     create_table :membership_requests do |t|
       t.integer :person_id

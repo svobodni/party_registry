@@ -1,4 +1,4 @@
-class CreateCandidatesLists < ActiveRecord::Migration
+class CreateCandidatesLists < ActiveRecord::Migration[4.2]
   def change
     create_table :candidates_lists do |t|
       t.string :druh_zastupitelstva

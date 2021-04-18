@@ -1,4 +1,4 @@
-class AddBankAndAddressToOrganization < ActiveRecord::Migration
+class AddBankAndAddressToOrganization < ActiveRecord::Migration[4.2]
   def change
     add_column :organizations, :fio_account_number, :string
     add_column :organizations, :fio_token, :string

@@ -1,4 +1,4 @@
-class CreateProfilePictures < ActiveRecord::Migration
+class CreateProfilePictures < ActiveRecord::Migration[4.2]
   def change
     create_table :profile_pictures do |t|
       t.attachment :photo

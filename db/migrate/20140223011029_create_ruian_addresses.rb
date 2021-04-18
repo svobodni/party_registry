@@ -1,4 +1,4 @@
-class CreateRuianAddresses < ActiveRecord::Migration
+class CreateRuianAddresses < ActiveRecord::Migration[4.2]
   def change
     create_table :ruian_addresses do |t|
       t.string :mestska_cast
