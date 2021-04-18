@@ -3,11 +3,11 @@ Pokud(/^existuje uživatel s přihlašovací jménem "(.*?)" a heslem "(.*?)"$/)
 end
 
 Pokud(/^existuje člen s přihlašovací jménem "(.*?)" a heslem "(.*?)"$/) do |username, password|
-  $user_id = FactoryGirl.create(:person, username: username, password: password, status: "regular_member").id
+  $user_id = FactoryBot.create(:person, username: username, password: password, status: "regular_member").id
 end
 
 Pokud(/^existuje přijatý zájemce o členství s přihlašovací jménem "(.*?)" a heslem "(.*?)"$/) do |username, password|
-  $user_id = FactoryGirl.create(:person, username: username, password: password, status: "awaiting_first_payment").id
+  $user_id = FactoryBot.create(:person, username: username, password: password, status: "awaiting_first_payment").id
 end
 
 Pak(/^bych měl být úspešně přihlášen$/) do
@@ -23,7 +23,7 @@ Pak(/^(?:|měl bych|bych měl) vidět dashboard$/) do
 end
 
 def create_user(username, password)
-  $user_id = FactoryGirl.create(:person, username: username, password: password).id
+  $user_id = FactoryBot.create(:person, username: username, password: password).id
 end
 
 Pak(/^bych měl být zařazen jako hostující do pobočky "([^"]*)"$/) do |name|

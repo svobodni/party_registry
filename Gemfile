@@ -134,12 +134,13 @@ group :test do
   gem 'shoulda-context'
   gem 'sqlite3'
   gem 'mocha', :require => false
-  gem 'factory_girl_rails'
+  gem 'factory_bot_rails'
   gem 'email_spec'
   gem 'guard'
   gem 'guard-minitest'
   gem 'guard-cucumber'
   gem 'terminal-notifier-guard'
+  gem 'rails-controller-testing'
 end
 
 group :development do

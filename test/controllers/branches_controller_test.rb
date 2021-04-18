@@ -5,7 +5,7 @@ class BranchesControllerTest < ActionController::TestCase
   context 'An KrP member' do
 
     setup do
-      @branch = FactoryGirl.create(:branch)
+      @branch = FactoryBot.create(:branch)
       sign_in @branch.region.presidium.president.person
     end
 
@@ -45,7 +45,7 @@ class BranchesControllerTest < ActionController::TestCase
   context 'An coordinator' do
 
     setup do
-      @branch = FactoryGirl.create(:branch)
+      @branch = FactoryBot.create(:branch)
       sign_in @branch.coordinator.person
     end
 

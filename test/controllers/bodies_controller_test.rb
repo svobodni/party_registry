@@ -3,8 +3,8 @@ require 'test_helper'
 class BodiesControllerTest < ActionController::TestCase
 
   setup do
-    @body = FactoryGirl.create(:rk)
-    sign_in FactoryGirl.create(:person)
+    @body = FactoryBot.create(:rk)
+    sign_in FactoryBot.create(:person)
   end
 
   test "should get index" do

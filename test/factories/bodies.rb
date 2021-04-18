@@ -1,5 +1,5 @@
 # -*- encoding : utf-8 -*-
-FactoryGirl.define do
+FactoryBot.define do
   factory :body do
     factory :presidium do
       after(:create) do |presidium, evaluator|

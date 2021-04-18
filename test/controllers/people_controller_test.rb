@@ -3,7 +3,7 @@ require 'test_helper'
 class PeopleControllerTest < ActionController::TestCase
 
   setup do
-    @person = FactoryGirl.create(:party_member)
+    @person = FactoryBot.create(:party_member)
     sign_in @person
   end
 
@@ -14,19 +14,19 @@ class PeopleControllerTest < ActionController::TestCase
     end
 
     should "not get info on person without shared contact" do
-      @another_person = FactoryGirl.create(:person)
+      @another_person = FactoryBot.create(:person)
       get :show, id: @another_person
       assert_response :forbidden
     end
 
     should "get public info on person with shared public contact" do
-      @another_person = FactoryGirl.create(:person_with_public_contact)
+      @another_person = FactoryBot.create(:person_with_public_contact)
       get :show, id: @another_person
       assert_response :success
     end
 
     should "not get private info on person with shared public contact" do
-      @another_person = FactoryGirl.create(:person_with_public_contact)
+      @another_person = FactoryBot.create(:person_with_public_contact)
       get :show, id: @another_person
       assert_no_match /narození/, response.body
     end
@@ -64,7 +64,7 @@ class PeopleControllerTest < ActionController::TestCase
 
     should "not get info on person in other branch without shared contact" do
       @coordinator = @person.domestic_branch.coordinator.person
-      @other_person = FactoryGirl.create(:person_with_coordinator_contact, domestic_branch: FactoryGirl.create(:branch, name: "Nepraha7"))
+      @other_person = FactoryBot.create(:person_with_coordinator_contact, domestic_branch: FactoryBot.create(:branch, name: "Nepraha7"))
       sign_in @coordinator
       get :show, id: @other_person
       assert_response :forbidden
@@ -82,7 +82,7 @@ class PeopleControllerTest < ActionController::TestCase
 
     should "not get info on person in other region without shared contact" do
       @president = @person.domestic_region.presidium.president.person
-      @other_person = FactoryGirl.create(:person_with_regional_contact, domestic_region: FactoryGirl.create(:region, name: "Nepraha"))
+      @other_person = FactoryBot.create(:person_with_regional_contact, domestic_region: FactoryBot.create(:region, name: "Nepraha"))
       sign_in @president
       get :show, id: @other_person
       assert_response :forbidden
@@ -91,7 +91,7 @@ class PeopleControllerTest < ActionController::TestCase
 
   context "Voting commission member" do
     should "get list of all regular people" do
-      role = FactoryGirl.create(:vk_member)
+      role = FactoryBot.create(:vk_member)
       @vk = Body.find_by_acronym("VK")
       @person = @vk.members.first
       sign_in @person

@@ -5,7 +5,7 @@ class AuthControllerTest < ActionController::TestCase
 
   setup do
     @public_key = "-----BEGIN PUBLIC KEY-----\nMFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBALsl3zoyj4QoyIzxEOZ/o/xQ3nuJRBJd\nhMNC+5LXdlhKbfp42/px6xQk0G86+vQasoiJ51l/2IAzOA5FEFf1MVsCAwEAAQ==\n-----END PUBLIC KEY-----\n"
-    @person = FactoryGirl.create(:person, status: "regular_member")
+    @person = FactoryBot.create(:person, status: "regular_member")
     now = Time.now
     @token = JWT.encode({iss: "https://registr.svobodni.cz",
       sub: "db|#{@person.id}",
@@ -31,14 +31,14 @@ class AuthControllerTest < ActionController::TestCase
   end
 
   test "should not get token unless regular person" do
-    sign_in FactoryGirl.create(:person, status: "awaiting_first_payment")
+    sign_in FactoryBot.create(:person, status: "awaiting_first_payment")
     get :token, format: :json
     assert_response 403
     assert_equal '{"error":"Access Denied"}', response.body
   end
 
   test "should not get token unless regular supporter" do
-    sign_in FactoryGirl.create(:person, status: "registered")
+    sign_in FactoryBot.create(:person, status: "registered")
     get :token, format: :json
     assert_response 403
     assert_equal '{"error":"Access Denied"}', response.body

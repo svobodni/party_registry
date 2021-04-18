@@ -3,7 +3,7 @@ require 'test_helper'
 class ProfilesControllerTest < ActionController::TestCase
 
   setup do
-    @person = FactoryGirl.create(:person)
+    @person = FactoryBot.create(:person)
     sign_in @person
   end
 
@@ -34,7 +34,7 @@ class ProfilesControllerTest < ActionController::TestCase
 
 context "Zaregistrovaný zájemce o členství bez nahrané přihlášky" do
   should "should get membership info" do
-    @person = FactoryGirl.create(:member_awaiting_decision)
+    @person = FactoryBot.create(:member_awaiting_decision)
     sign_in @person
     get :membership
     assert_response :success
@@ -52,7 +52,7 @@ end
 
 context "Zaregistrovaný zájemce o členství s nahranou přihláškou" do
   should "get membership info" do
-    @person = FactoryGirl.create(:signed_member_awaiting_decision)
+    @person = FactoryBot.create(:signed_member_awaiting_decision)
     sign_in @person
     get :membership
     assert_response :success
@@ -70,7 +70,7 @@ end
 
 context "Schválený zájemce o členství bez nahrané přihlášky" do
   should "not get membership info" do
-    @person = FactoryGirl.create(:person, status: "awaiting_first_payment")
+    @person = FactoryBot.create(:person, status: "awaiting_first_payment")
     sign_in @person
     get :membership
     assert_response :success
@@ -88,7 +88,7 @@ end
 
 context "Schválený zájemce o členství s nahranou přihláškou" do
   should "should get membership info" do
-    @person = FactoryGirl.create(:member_awaiting_first_payment)
+    @person = FactoryBot.create(:member_awaiting_first_payment)
     sign_in @person
     get :membership
     assert_response :success
@@ -106,7 +106,7 @@ end
 
 context "Řádný člen" do
   should "should get membership info" do
-    @person = FactoryGirl.create(:party_member)
+    @person = FactoryBot.create(:party_member)
     sign_in @person
     get :membership
     assert_response :success
@@ -124,7 +124,7 @@ end
 
 context "Nezaplacený příznivec" do
   should "should get membership info" do
-    @person = FactoryGirl.create(:supporter, status: "registered")
+    @person = FactoryBot.create(:supporter, status: "registered")
     sign_in @person
     get :membership
     assert_response :success
@@ -142,7 +142,7 @@ end
 
 context "Zaplacený příznivec" do
   should "should get membership info" do
-    @person = FactoryGirl.create(:supporter, status: "regular_supporter")
+    @person = FactoryBot.create(:supporter, status: "regular_supporter")
     sign_in @person
     get :membership
     assert_response :success
@@ -160,7 +160,7 @@ end
 
 context "Zaplacený příznivec zájemce o členství bez nahrané přihlášky" do
   should "should get membership info" do
-    @person = FactoryGirl.create(:supporter, status: "regular_supporter_awaiting_presidium_decision")
+    @person = FactoryBot.create(:supporter, status: "regular_supporter_awaiting_presidium_decision")
     sign_in @person
     get :membership
     assert_response :success
@@ -178,7 +178,7 @@ end
 
 context "Zaplacený příznivec zájemce o členství s nahranou přihláškou" do
   should "should get membership info" do
-    @person = FactoryGirl.create(:signed_person, status: "regular_supporter_awaiting_presidium_decision")
+    @person = FactoryBot.create(:signed_person, status: "regular_supporter_awaiting_presidium_decision")
     sign_in @person
     get :membership
     assert_response :success
@@ -196,7 +196,7 @@ end
 
 context "Zaplacený příznivec schválený zájemce o členství s nahranou přihláškou" do
   should "should get membership info" do
-    @person = FactoryGirl.create(:signed_person, status: "regular_supporter_awaiting_first_payment")
+    @person = FactoryBot.create(:signed_person, status: "regular_supporter_awaiting_first_payment")
     sign_in @person
     get :membership
     assert_response :success

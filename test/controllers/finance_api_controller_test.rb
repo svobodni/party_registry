@@ -9,7 +9,7 @@ class FinanceApiControllerTest < ActionController::TestCase
     end
 
     should "get info on membership_fee payment" do
-      @person = FactoryGirl.create(:member_awaiting_first_payment)
+      @person = FactoryBot.create(:member_awaiting_first_payment)
       post :payments, format: :json, id: @person.vs
       assert_response :success
       body = JSON.parse(response.body)
@@ -17,7 +17,7 @@ class FinanceApiControllerTest < ActionController::TestCase
     end
 
     should "get info on supporter fee payment" do
-      @person = FactoryGirl.create(:supporter)
+      @person = FactoryBot.create(:supporter)
       post :payments, format: :json, id: @person.vs
       assert_response :success
       body = JSON.parse(response.body)

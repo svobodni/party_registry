@@ -3,8 +3,8 @@ require 'test_helper'
 class RegionsControllerTest < ActionController::TestCase
 
   setup do
-    @region = FactoryGirl.create(:region)
-    @user = FactoryGirl.create(:person)
+    @region = FactoryBot.create(:region)
+    @user = FactoryBot.create(:person)
     sign_in @user
   end
 
