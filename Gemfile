@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 gem 'rake'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.3'
+gem 'rails', '4.2.11.3'
 
 # Use mysql as the database for Active Record
 gem 'mysql2'
@@ -165,5 +165,5 @@ gem 'jquery-datatables-rails'
 gem 'font-awesome-sass'
 
 gem 'mini_magick'
-gem 'ruby-opencv'
+# gem 'ruby-opencv'
 gem 'rubyXL'
