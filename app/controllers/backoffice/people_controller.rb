@@ -40,7 +40,7 @@ class Backoffice::PeopleController < ApplicationController
   end
 
   def members_without_signed_application
-    @people = Person.includes([:domestic_region, :signed_application]).regular_members.order("domestic_region_id ").select{|p| p.signed_application.blank?}
+    @people = Person.includes([:domestic_region, :signed_application]).regular_members.order("domestic_region_id").select{|p| p.signed_application.blank?}
   end
 
   def with_bad_region

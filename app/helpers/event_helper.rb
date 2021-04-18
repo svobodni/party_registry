@@ -28,6 +28,8 @@ module EventHelper
       output << 'převod do nového systému přijímání'
     elsif event.name=='PersonAccepted'
       output << 'byl schválen KrP'
+    elsif event.name=='PersonRejected'
+      output << 'členství zamítnuto'
     elsif event.name=='SupporterRegistered'
       output << 'se zaregistroval jako příznivec'
     elsif event.name=='SupportEnded'

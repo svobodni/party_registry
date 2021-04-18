@@ -308,7 +308,7 @@ class Person < ApplicationRecord
     # Členství neschváleno KrP
     event :presidium_denied do
       after do
-        OfficeNotification.membership_request_rejected(self).deliver
+        OfficeNotifications.membership_request_rejected(self).deliver
       end
       transitions from: :regular_supporter, to: :regular_supporter,
         :guard => Proc.new { self.membership_request.try(:previous_status)=="regular_supporter"},
