@@ -32,75 +32,100 @@ class ProfilesControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-context "Zaregistrovaný zájemce o členství bez nahrané přihlášky" do
+context "Zaregistrovaný zájemce o členství" do
   should "should get membership info" do
-    @person = FactoryBot.create(:member_awaiting_decision)
+    @person = FactoryBot.create(:registered_requesting_membership)
     sign_in @person
     get :membership
     assert_response :success
-    refute_match "Jste řádným členem", response.body
-    assert_match "Požádal jste o členství a čeká se na rozhodnutí", response.body
-    refute_match "Vaše členství bylo schváleno krajským předsednictvem", response.body
+    assert_match "jste požádal/a o členství", response.body
+    assert_match "doručit podepsanou přihlášku", response.body
     assert_match "vytiskněte ji a podepsanou odešlete na adresu kanceláře", response.body
-    refute_match "Uhraďte prosím členský příspěvek", response.body
-    refute_match "Jste příznivce Svobodných se řádně zaplaceným příspěvkem", response.body
-    refute_match /Registrační příspěvek (.*) uhraďte/, response.body
-    refute_match "pod variabilním symbolem", response.body
-    #refute_match "Staňte se členem Svobodných", response.body
+    assert_match "zaplatit členský příspěvek", response.body
+    assert_match "Zaplaťte prosím členský příspěvek", response.body
+    assert_match "být schválen krajským předsednictvem", response.body
+
+    refute_match "Platba zpracována dne", response.body
+    refute_match "Přihláška přijata dne", response.body
+    refute_match "Členství schváleno dne", response.body
+
+    refute_match "Jste řádným členem", response.body
+    refute_match "Jste příznivce Svobodných", response.body
+
+    refute_match "Staňte se členem Svobodných", response.body
   end
 end
 
 context "Zaregistrovaný zájemce o členství s nahranou přihláškou" do
   should "get membership info" do
-    @person = FactoryBot.create(:signed_member_awaiting_decision)
+    @person = FactoryBot.create(:registered_requesting_membership_with_signed_application)
     sign_in @person
     get :membership
     assert_response :success
+
+    assert_match "jste požádal/a o členství", response.body
+    # refute_match "doručit po depsanou přihlášku", response.body
+    # refute_match "vytiskněte ji a podepsanou odešlete na adresu kanceláře", response.body
+    assert_match "zaplatit členský příspěvek", response.body
+    assert_match "Zaplaťte prosím členský příspěvek", response.body
+    assert_match "být schválen krajským předsednictvem", response.body
+
+    refute_match "Platba zpracována dne", response.body
+    assert_match "Přihláška přijata dne", response.body
+    refute_match "Členství schváleno dne", response.body
+
     refute_match "Jste řádným členem", response.body
-    assert_match "Požádal jste o členství a čeká se na rozhodnutí", response.body
-    refute_match "Vaše členství bylo schváleno krajským předsednictvem", response.body
-    refute_match "vytiskněte ji a podepsanou odešlete na adresu kanceláře", response.body
-    refute_match "Uhraďte prosím členský příspěvek", response.body
-    refute_match "Jste příznivce Svobodných se řádně zaplaceným příspěvkem", response.body
-    refute_match /Registrační příspěvek (.*) uhraďte/, response.body
-    refute_match "pod variabilním symbolem", response.body
-    #refute_match "Staňte se členem Svobodných", response.body
+    refute_match "Jste příznivce Svobodných", response.body
+
+    refute_match "Staňte se členem Svobodných", response.body
   end
 end
 
 context "Schválený zájemce o členství bez nahrané přihlášky" do
   should "not get membership info" do
-    @person = FactoryBot.create(:person, status: "awaiting_first_payment")
+    @person = FactoryBot.create(:registered_requesting_membership_approved)
     sign_in @person
     get :membership
     assert_response :success
-    refute_match "Jste řádným členem", response.body
-    refute_match "Požádal jste o členství a čeká se na rozhodnutí", response.body
-    assert_match "Vaše členství bylo schváleno krajským předsednictvem", response.body
+    assert_match "jste požádal/a o členství", response.body
+    assert_match "doručit podepsanou přihlášku", response.body
     assert_match "vytiskněte ji a podepsanou odešlete na adresu kanceláře", response.body
-    refute_match "Uhraďte prosím členský příspěvek", response.body
-    refute_match "Jste příznivce Svobodných se řádně zaplaceným příspěvkem", response.body
-    refute_match /Registrační příspěvek (.*) uhraďte/, response.body
-    refute_match "pod variabilním symbolem", response.body
-    #refute_match "Staňte se členem Svobodných", response.body
+    assert_match "zaplatit členský příspěvek", response.body
+    assert_match "Zaplaťte prosím členský příspěvek", response.body
+    assert_match "být schválen krajským předsednictvem", response.body
+
+    refute_match "Platba zpracována dne", response.body
+    refute_match "Přihláška přijata dne", response.body
+    assert_match "Členství schváleno dne", response.body
+
+    refute_match "Jste řádným členem", response.body
+    refute_match "Jste příznivce Svobodných", response.body
+
+    refute_match "Staňte se členem Svobodných", response.body
   end
 end
 
 context "Schválený zájemce o členství s nahranou přihláškou" do
   should "should get membership info" do
-    @person = FactoryBot.create(:member_awaiting_first_payment)
+    @person = FactoryBot.create(:registered_requesting_membership_approved_with_application)
     sign_in @person
     get :membership
     assert_response :success
+    assert_match "jste požádal/a o členství", response.body
+    assert_match "doručit podepsanou přihlášku", response.body
+    assert_match "vytiskněte ji a podepsanou odešlete na adresu kanceláře", response.body
+    assert_match "zaplatit členský příspěvek", response.body
+    assert_match "Zaplaťte prosím členský příspěvek", response.body
+    assert_match "být schválen krajským předsednictvem", response.body
+
+    refute_match "Platba zpracována dne", response.body
+    assert_match "Přihláška přijata dne", response.body
+    assert_match "Členství schváleno dne", response.body
+
     refute_match "Jste řádným členem", response.body
-    refute_match "Požádal jste o členství a čeká se na rozhodnutí", response.body
-    assert_match "Vaše členství bylo schváleno krajským předsednictvem", response.body
-    refute_match "vytiskněte ji a podepsanou odešlete na adresu kanceláře", response.body
-    assert_match "Uhraďte prosím členský příspěvek", response.body
-    assert_match "pod variabilním symbolem 1#{@person.id.to_s.rjust(4,'0')}", response.body
-    refute_match "Jste příznivce Svobodných se řádně zaplaceným příspěvkem", response.body
-    refute_match /Registrační příspěvek (.*) uhraďte/, response.body
-    #refute_match "Staňte se členem Svobodných", response.body
+    refute_match "Jste příznivce Svobodných", response.body
+
+    refute_match "Staňte se členem Svobodných", response.body
   end
 end
 
@@ -110,15 +135,21 @@ context "Řádný člen" do
     sign_in @person
     get :membership
     assert_response :success
-    assert_match "Jste řádným členem", response.body
-    refute_match "Požádal jste o členství a čeká se na rozhodnutí", response.body
-    refute_match "Vaše členství bylo schváleno krajským předsednictvem", response.body
+    refute_match "jste požádal/a o členství", response.body
+    refute_match "doručit podepsanou přihlášku", response.body
     refute_match "vytiskněte ji a podepsanou odešlete na adresu kanceláře", response.body
-    refute_match "Uhraďte prosím členský příspěvek", response.body
-    refute_match "Jste příznivce Svobodných se řádně zaplaceným příspěvkem", response.body
-    refute_match /Registrační příspěvek (.*) uhraďte/, response.body
-    refute_match "pod variabilním symbolem", response.body
-    #refute_match "Staňte se členem Svobodných", response.body
+    refute_match "zaplatit členský příspěvek", response.body
+    refute_match "Zaplaťte prosím členský příspěvek", response.body
+    refute_match "být schválen krajským předsednictvem", response.body
+
+    refute_match "Platba zpracována dne", response.body
+    refute_match "Přihláška přijata dne", response.body
+    refute_match "Členství schváleno dne", response.body
+
+    assert_match "Jste řádným členem", response.body
+    refute_match "Jste příznivce Svobodných", response.body
+
+    refute_match "Staňte se členem Svobodných", response.body
   end
 end
 
@@ -128,87 +159,21 @@ context "Nezaplacený příznivec" do
     sign_in @person
     get :membership
     assert_response :success
-    refute_match "Jste řádným členem", response.body
-    refute_match "Požádal jste o členství a čeká se na rozhodnutí", response.body
-    refute_match "Vaše členství bylo schváleno krajským předsednictvem", response.body
+    refute_match "jste požádal/a o členství", response.body
+    refute_match "doručit podepsanou přihlášku", response.body
     refute_match "vytiskněte ji a podepsanou odešlete na adresu kanceláře", response.body
-    refute_match "Uhraďte prosím členský příspěvek", response.body
-    refute_match "Jste příznivce Svobodných se řádně zaplaceným příspěvkem", response.body
-    assert_match /Registrační příspěvek (.*) uhraďte/, response.body
-    assert_match "pod variabilním symbolem 5#{@person.id.to_s.rjust(4,'0')}", response.body
-    #assert_match "Staňte se členem Svobodných", response.body
-  end
-end
+    refute_match "zaplatit členský příspěvek", response.body
+    refute_match "Zaplaťte prosím členský příspěvek", response.body
+    refute_match "být schválen krajským předsednictvem", response.body
 
-context "Zaplacený příznivec" do
-  should "should get membership info" do
-    @person = FactoryBot.create(:supporter, status: "regular_supporter")
-    sign_in @person
-    get :membership
-    assert_response :success
-    refute_match "Jste řádným členem", response.body
-    refute_match "Požádal jste o členství a čeká se na rozhodnutí", response.body
-    refute_match "Vaše členství bylo schváleno krajským předsednictvem", response.body
-    refute_match "vytiskněte ji a podepsanou odešlete na adresu kanceláře", response.body
-    refute_match "Uhraďte prosím členský příspěvek", response.body
-    assert_match "Jste příznivce Svobodných se řádně zaplaceným příspěvkem", response.body
-    refute_match /Registrační příspěvek (.*) uhraďte/, response.body
-    refute_match "pod variabilním symbolem", response.body
-    #assert_match "Staňte se členem Svobodných", response.body
-  end
-end
+    refute_match "Platba zpracována dne", response.body
+    refute_match "Přihláška přijata dne", response.body
+    refute_match "Členství schváleno dne", response.body
 
-context "Zaplacený příznivec zájemce o členství bez nahrané přihlášky" do
-  should "should get membership info" do
-    @person = FactoryBot.create(:supporter, status: "regular_supporter_awaiting_presidium_decision")
-    sign_in @person
-    get :membership
-    assert_response :success
     refute_match "Jste řádným členem", response.body
-    assert_match "Požádal jste o členství a čeká se na rozhodnutí", response.body
-    refute_match "Vaše členství bylo schváleno krajským předsednictvem", response.body
-    assert_match "vytiskněte ji a podepsanou odešlete na adresu kanceláře", response.body
-    refute_match "Uhraďte prosím členský příspěvek", response.body
-    assert_match "Jste příznivce Svobodných se řádně zaplaceným příspěvkem", response.body
-    refute_match /Registrační příspěvek (.*) uhraďte/, response.body
-    refute_match "pod variabilním symbolem", response.body
-    #refute_match "Staňte se členem Svobodných", response.body
-  end
-end
+    refute_match "Jste příznivce Svobodných", response.body
 
-context "Zaplacený příznivec zájemce o členství s nahranou přihláškou" do
-  should "should get membership info" do
-    @person = FactoryBot.create(:signed_person, status: "regular_supporter_awaiting_presidium_decision")
-    sign_in @person
-    get :membership
-    assert_response :success
-    refute_match "Jste řádným členem", response.body
-    assert_match "Požádal jste o členství a čeká se na rozhodnutí", response.body
-    refute_match "Vaše členství bylo schváleno krajským předsednictvem", response.body
-    refute_match "vytiskněte ji a podepsanou odešlete na adresu kanceláře", response.body
-    refute_match "Uhraďte prosím členský příspěvek", response.body
-    assert_match "Jste příznivce Svobodných se řádně zaplaceným příspěvkem", response.body
-    refute_match /Registrační příspěvek (.*) uhraďte/, response.body
-    refute_match "pod variabilním symbolem", response.body
-    #refute_match "Staňte se členem Svobodných", response.body
-  end
-end
-
-context "Zaplacený příznivec schválený zájemce o členství s nahranou přihláškou" do
-  should "should get membership info" do
-    @person = FactoryBot.create(:signed_person, status: "regular_supporter_awaiting_first_payment")
-    sign_in @person
-    get :membership
-    assert_response :success
-    refute_match "Jste řádným členem", response.body
-    refute_match "Požádal jste o členství a čeká se na rozhodnutí", response.body
-    assert_match "Vaše členství bylo schváleno krajským předsednictvem", response.body
-    refute_match "vytiskněte ji a podepsanou odešlete na adresu kanceláře", response.body
-    assert_match "Uhraďte prosím členský příspěvek", response.body
-    assert_match "pod variabilním symbolem 1#{@person.id.to_s.rjust(4,'0')}", response.body
-    assert_match "Jste příznivce Svobodných se řádně zaplaceným příspěvkem", response.body
-    refute_match /Registrační příspěvek (.*) uhraďte/, response.body
-    #refute_match "Staňte se členem Svobodných", response.body
+    assert_match "Staňte se členem Svobodných", response.body
   end
 end
 
