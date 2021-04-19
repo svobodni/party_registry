@@ -28,7 +28,7 @@ class PeopleController < ApplicationController
     respond_to do |format|
       format.xls
       format.csv {
-        render text: (CSV.generate do |csv|
+        render plain: (CSV.generate do |csv|
           column_names=[:first_name, :last_name, :street, :city, :zip]
           csv << column_names
           @people.each do |person|
@@ -221,7 +221,7 @@ class PeopleController < ApplicationController
     if @person.cv.path
       send_file @person.cv.path, type: @person.cv.content_type, disposition: :inline
     else
-      render text: 'Kandidát dosud nenahrál ke svému profilu žádný životopis', status: '404', content_type: "text/html"
+      render plain: 'Kandidát dosud nenahrál ke svému profilu žádný životopis', status: '404', content_type: "text/html"
     end
   end
 

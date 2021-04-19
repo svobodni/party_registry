@@ -43,7 +43,7 @@ class AuthController < ApplicationController
         #uri = URI.parse(params[:redirect_uri])
         redirect_to (params[:redirect_uri]+"?jwt="+@token)
       }
-      format.json {render text: @token}
+      format.json {render plain: @token}
     end
   end
 
@@ -51,7 +51,7 @@ class AuthController < ApplicationController
   # GET /auth/public_key
   def public_key
     public_key = configatron.auth.private_key.public_key.to_s
-    render text: public_key
+    render plain: public_key
   end
 
   # GET /auth/me

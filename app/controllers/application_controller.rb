@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
   def authorization_error
     # 403 Forbidden response
     respond_to do |format|
-      format.html{ render text: 'Access Denied', status: 403 }
+      format.html{ render plain: 'Access Denied', status: 403 }
       format.json{ render json: {error: 'Access Denied'}, status: 403 }
     end
   end
