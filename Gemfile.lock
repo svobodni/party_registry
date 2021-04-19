@@ -97,7 +97,7 @@ GEM
     buftok (0.2.0)
     builder (3.2.4)
     camertron-eprun (1.1.1)
-    cancan (1.6.10)
+    cancancan (3.2.1)
     capistrano (3.16.0)
       airbrussh (>= 1.0.0)
       i18n
@@ -217,10 +217,10 @@ GEM
     factory_bot_rails (6.1.0)
       factory_bot (~> 6.1.0)
       railties (>= 5.0.0)
-    faraday (1.4.0)
-      faraday-excon (~> 1.0)
+    faraday (1.4.1)
+      faraday-excon (~> 1.1)
       faraday-net_http (~> 1.0)
-      faraday-net_http_persistent (~> 1.0)
+      faraday-net_http_persistent (~> 1.1)
       multipart-post (>= 1.2, < 3)
       ruby2_keywords (>= 0.0.4)
     faraday-excon (1.1.0)
@@ -574,7 +574,7 @@ DEPENDENCIES
   bootstrap-sass
   bootstrap-will_paginate
   bower-rails (~> 0.7.3)
-  cancan
+  cancancan
   capistrano-bundler (~> 1.1)
   capistrano-rails (~> 1.1)
   capistrano-sidekiq
@@ -637,7 +637,7 @@ DEPENDENCIES
   turbolinks
   twitter
   twitter_cldr
-  uglifier (>= 1.3.0)
+  uglifier
   underscore-rails
   webpacker
   wicked
