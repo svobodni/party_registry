@@ -10,46 +10,56 @@ FactoryBot.define do
   end
 
   factory :person do
-    agree '1'
-    amount '1000'
+    agree {'1'}
+    amount {'1000'}
     email
     username
-    password 'password'
-    first_name "Jan"
-    last_name "Novák"
-    date_of_birth "1980-10-10"
-    phone "123 456 890"
-    domestic_address_street "Dlouhá 23/312"
-    domestic_address_city "Starý Františkov"
-    domestic_address_zip "123 98"
+    password {'password'}
+    first_name {"Jan"}
+    last_name {"Novák"}
+    date_of_birth {"1980-10-10"}
+    phone {"123 456 890"}
+    domestic_address_street {"Dlouhá 23/312"}
+    domestic_address_city {"Starý Františkov"}
+    domestic_address_zip {"123 98"}
     domestic_region { Region.find_by_name("Praha") || create(:praha) }
     domestic_branch { Branch.find_by_name("Praha 7") || create(:praha_7) }
 
-    factory :member_awaiting_decision do
-      status :awaiting_presidium_decision
+    factory :registered do
+      status {:registered}
     end
 
-    factory :signed_member_awaiting_decision do
-      status :awaiting_presidium_decision
-      signed_application
+    factory :registered_requesting_membership do
+      status {:registered}
+      membership_request { association :membership_request, person: instance }
     end
 
-    factory :member_awaiting_first_payment do
-      status :awaiting_first_payment
-      signed_application
+    factory :registered_requesting_membership_with_signed_application do
+      status {:registered}
+      membership_request { association :membership_request, person: instance, application_received_on: "2021-01-01"}
+    end
+
+    factory :registered_requesting_membership_approved do
+      status {:registered}
+      membership_request { association :membership_request, person: instance, approved_on: "2021-01-01"}
+    end
+
+    factory :registered_requesting_membership_approved_with_application do
+      status {:registered}
+      membership_request { association :membership_request, person: instance, application_received_on: "2021-01-01", approved_on: "2021-01-01"}
     end
 
     factory :party_member do
-      status :regular_member
+      status {:regular_member}
       signed_application
     end
 
     factory :supporter do
-      status :regular_supporter
+      status {:regular_supporter}
     end
 
     factory :office_worker do
-      id 342
+      id {342}
     end
 
     factory :signed_person do
@@ -58,19 +68,19 @@ FactoryBot.define do
 
     factory :person_with_public_contact do
       after(:create) do |person, evaluator|
-        person.contacts << create(:contact, contact_type: "email", privacy: "public", contact: person.email)
+        person.contacts << create(:contact, contact_type: "email", privacy: "public", contact: person.email, contactable: person)
       end
     end
 
     factory :person_with_coordinator_contact do
       after(:create) do |person, evaluator|
-        person.contacts << create(:contact, contact_type: "email", privacy: "coordinator", contact: person.email)
+        person.contacts << create(:contact, contact_type: "email", privacy: "coordinator", contact: person.email, contactable: person)
       end
     end
 
     factory :person_with_regional_contact do
       after(:create) do |person, evaluator|
-        person.contacts << create(:contact, contact_type: "email", privacy: "regional", contact: person.email)
+        person.contacts << create(:contact, contact_type: "email", privacy: "regional", contact: person.email, contactable: person)
       end
     end
 

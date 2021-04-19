@@ -7,7 +7,7 @@ FactoryBot.define do
       create(:coordinator, branch: branch)
     end
     factory :praha_7 do
-      name "Praha 7"
+      name { "Praha 7" }
     end
   end
 end

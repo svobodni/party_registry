@@ -25,6 +25,7 @@ class EventTest < ActiveSupport::TestCase
   end
 
   should "handle ApplicationReceived event" do
+    event = @person.events.create(name: "MembershipRequested")
     event = @person.events.create(name: "ApplicationReceived")
     assert_not_nil @person.membership_request.application_received_on
   end

@@ -3,8 +3,8 @@ FactoryBot.define do
 
   factory :region do
     factory :praha do
-      id 10
-      name "Praha"
+      id {10}
+      name {"Praha"}
     end
     country { Country.first || create(:country) }
     after(:create) do |region, evaluator|
@@ -13,9 +13,9 @@ FactoryBot.define do
   end
 
   factory :country do
-    id 1
-    name "Republikové orgány"
-    fio_account_number "123456789"
+    id {1}
+    name {"Republikové orgány"}
+    fio_account_number {"123456789"}
   end
 
 end

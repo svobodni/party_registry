@@ -8,18 +8,18 @@ FactoryBot.define do
     end
     factory :country_bodies do
       factory :rep do
-        id 1
-        name "Republikové předsednictvo"
-        acronym "ReP"
+        id { 1 }
+        name { "Republikové předsednictvo" }
+        acronym { "ReP" }
       end
       factory :vk do
-        id 3
-        name "Volební komise"
-        acronym "VK"
+        id { 3 }
+        name {  "Volební komise" }
+        acronym { "VK" }
       end
       factory :rk do
-        name "Rozhodčí komise"
-        acronym "RK"
+        name { "Rozhodčí komise" }
+        acronym{ "RK" }
       end
       organization { Country.first || create(:country) }
     end
