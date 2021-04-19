@@ -19,7 +19,7 @@ module PartyRegistry
 
     config.middleware.insert_before 0, Rack::Cors do
       allow do
-        origins '*'
+        origins 'localhost:3000',  /\Ahttps:\/\/svobodni\.cz\z/
 
         resource '/auth/token',
         :headers => :any,
