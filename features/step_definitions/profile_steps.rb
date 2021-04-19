@@ -10,16 +10,30 @@ Pak /^(?:|neměl bych|bych neměl) vidět "([^\"]*)"$/ do |text|
 end
 
 Pak(/^měl bych vidět číslo republikového účtu$/) do
-  assert page.has_xpath?('//*', :text => Country.first.fio_account_number)
+  assert page.has_xpath?('//*', :text => Country.first.members_account_number)
 end
 
 Když(/^jdu na stránku Členství$/) do
   visit membership_profiles_path
 end
 
-Když(/^se přihlásím jako (|schválený )zájemce o členství(| s nahranou přihláškou)$/)  do |approved, signed|
-  $user_id = FactoryBot.create(signed.empty? ? :person : :signed_person, username: 'test', password: 'testovaciheslo',
-    status: approved.empty? ? "awaiting_presidium_decision" : "awaiting_first_payment").id
+Když(/^se přihlásím jako zájemce o členství$/) do
+  $user_id = FactoryBot.create(:registered_requesting_membership, username: 'test', password: 'testovaciheslo').id
+  log_user_in('test', 'testovaciheslo')
+end
+
+Když(/^se přihlásím jako schválený zájemce o členství$/) do
+  $user_id = FactoryBot.create(:registered_requesting_membership_approved, username: 'test', password: 'testovaciheslo').id
+  log_user_in('test', 'testovaciheslo')
+end
+
+Když(/^se přihlásím jako zájemce o členství s nahranou přihláškou$/) do
+  $user_id = FactoryBot.create(:registered_requesting_membership_with_signed_application, username: 'test', password: 'testovaciheslo').id
+  log_user_in('test', 'testovaciheslo')
+end
+
+Když(/^se přihlásím jako schválený zájemce o členství s nahranou přihláškou$/) do
+  $user_id = FactoryBot.create(:registered_requesting_membership_approved_with_application, username: 'test', password: 'testovaciheslo').id
   log_user_in('test', 'testovaciheslo')
 end
 
