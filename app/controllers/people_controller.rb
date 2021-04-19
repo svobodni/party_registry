@@ -46,7 +46,6 @@ class PeopleController < ApplicationController
 
   # GET /people/1.json
   def show
-    #authorize!(:show, @person)
     if @person.contacts.accessible_by(current_ability).empty? && !can?(:show, @person)
       authorize!(:show, @person)
     else

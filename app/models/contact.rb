@@ -4,7 +4,8 @@ class Contact < ApplicationRecord
   has_many :events, as: :eventable
 
   belongs_to :person,
-           foreign_key: 'contactable_id'
+           foreign_key: 'contactable_id',
+           optional: true           
            #conditions: "contacts.contactable_type = 'Person'"
            #includes: :contacts
 

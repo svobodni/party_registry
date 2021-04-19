@@ -83,7 +83,7 @@ class Event < ApplicationRecord
     when "MembershipRequested"
       req=MembershipRequest.find_or_initialize_by(person_id: eventable_id)
       req.membership_requested_on=created_at
-      if changes[:status] && changes[:status].first=="regular_supporter"
+      if previous_changes[:status] && previous_changes[:status].first=="regular_supporter"
         req.previous_status="regular_supporter"
       elsif eventable.status=="regular_supporter"
         req.previous_status="regular_supporter"

@@ -59,9 +59,9 @@ class ApplicationController < ActionController::Base
     token = request.headers['Authorization'].split(' ').last
 
     jwt = JWT.decode(token, nil, false)
-    raise CanCan::AccessDenied unless jwt.last['alg']=="RS256" && jwt.last['typ']=="JWT"
+    raise CanCan::AccessDenied unless jwt.last['alg']=="RS256"
 
-    jwt = JWT.decode(token, configatron.auth.private_key.public_key, true).first
+    jwt = JWT.decode(token, configatron.auth.private_key.public_key, true, { algorithm: 'RS256' }).first
     @current_person = Person.find(jwt['sub'].split('|').last)
   end
   def load_country

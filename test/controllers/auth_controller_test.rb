@@ -27,14 +27,7 @@ class AuthControllerTest < ActionController::TestCase
     get :token, format: :json
     assert_response :success
     public_key = OpenSSL::PKey::RSA.new(@public_key)
-    JWT.decode(response.body, public_key)
-  end
-
-  test "should not get token unless regular person" do
-    sign_in FactoryBot.create(:person, status: "awaiting_first_payment")
-    get :token, format: :json
-    assert_response 403
-    assert_equal '{"error":"Access Denied"}', response.body
+    JWT.decode(response.body, public_key, true, { algorithm: 'RS256' } )
   end
 
   test "should not get token unless regular supporter" do
