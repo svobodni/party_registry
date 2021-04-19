@@ -54,7 +54,7 @@ class AuthControllerTest < ActionController::TestCase
 
   test "should be redirected with token added" do
     sign_in @person
-    get :token, redirect_uri: 'https://somesystem.cz/callback.php', format: :html
+    get :token, params: {redirect_uri: 'https://somesystem.cz/callback.php'}, format: :html
     assert_response :redirect
     uri = URI.parse(response.redirect_url)
     assert_equal 'somesystem.cz', uri.host
@@ -67,7 +67,7 @@ class AuthControllerTest < ActionController::TestCase
 
   test "should be redirected with token for known requesting system added" do
     sign_in @person
-    get :token, redirect_uri: URI::escape('https://knownsystem.svobodni.cz/callback.php'), format: :html
+    get :token, params: {redirect_uri: URI::escape('https://knownsystem.svobodni.cz/callback.php')}, format: :html
     uri = URI.parse(response.redirect_url)
     token = uri.query.split('&').collect{|kv| kv.split('=')}.to_h['jwt']
     jwt = JWT.decode(token, nil, nil).first

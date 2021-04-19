@@ -14,7 +14,7 @@ class BodiesControllerTest < ActionController::TestCase
   end
 
   test "should show body" do
-    get :show, id: @body.id, format: :json
+    get :show, params: {id: @body.id}, format: :json
     assert_response :success
   end
 

@@ -9,25 +9,25 @@ class PeopleControllerTest < ActionController::TestCase
 
   context "Registrated person" do
     should "get info on self" do
-      get :show, id: @person
+      get :show, params: {id: @person}
       assert_response :success
     end
 
     should "not get info on person without shared contact" do
       @another_person = FactoryBot.create(:person)
-      get :show, id: @another_person
+      get :show, params: {id: @another_person}
       assert_response :forbidden
     end
 
     should "get public info on person with shared public contact" do
       @another_person = FactoryBot.create(:person_with_public_contact)
-      get :show, id: @another_person
+      get :show, params: {id: @another_person}
       assert_response :success
     end
 
     should "not get private info on person with shared public contact" do
       @another_person = FactoryBot.create(:person_with_public_contact)
-      get :show, id: @another_person
+      get :show, params: {id: @another_person}
       assert_no_match /narození/, response.body
     end
 
@@ -57,7 +57,7 @@ class PeopleControllerTest < ActionController::TestCase
     should "get info on person in own branch without shared contact" do
       @coordinator = @person.domestic_branch.coordinator.person
       sign_in @coordinator
-      get :show, id: @person
+      get :show, params: {id: @person}
       assert_response :success
       assert_match /narození/, response.body
     end
@@ -66,7 +66,7 @@ class PeopleControllerTest < ActionController::TestCase
       @coordinator = @person.domestic_branch.coordinator.person
       @other_person = FactoryBot.create(:person_with_coordinator_contact, domestic_branch: FactoryBot.create(:branch, name: "Nepraha7"))
       sign_in @coordinator
-      get :show, id: @other_person
+      get :show, params: {id: @other_person}
       assert_response :forbidden
     end
   end
@@ -75,7 +75,7 @@ class PeopleControllerTest < ActionController::TestCase
     should "get info on person in own region without shared contact" do
       @president = @person.domestic_region.presidium.president.person
       sign_in @president
-      get :show, id: @person
+      get :show, params: {id: @person}
       assert_response :success
       assert_match /narození/, response.body
     end
@@ -84,7 +84,7 @@ class PeopleControllerTest < ActionController::TestCase
       @president = @person.domestic_region.presidium.president.person
       @other_person = FactoryBot.create(:person_with_regional_contact, domestic_region: FactoryBot.create(:region, name: "Nepraha"))
       sign_in @president
-      get :show, id: @other_person
+      get :show, params: {id: @other_person}
       assert_response :forbidden
     end
   end

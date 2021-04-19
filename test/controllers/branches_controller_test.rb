@@ -24,18 +24,18 @@ class BranchesControllerTest < ActionController::TestCase
 #    end
 
     should "show branch" do
-      get :show, id: @branch, format: :json
+      get :show, params: {id: @branch}, format: :json
       assert_response :success
     end
 
     should "not update branch" do
-      patch :update, id: @branch, branch: { name: @branch.name, parent_id: @branch.parent_id }, format: :json
+      patch :update, params: {id: @branch, branch: { name: @branch.name, parent_id: @branch.parent_id }}, format: :json
       assert_response :forbidden
     end
 
     should "not destroy branch" do
       assert_no_difference('Branch.count', -1) do
-        delete :destroy, id: @branch, format: :json
+        delete :destroy, params: {id: @branch}, format: :json
       end
 
       assert_response :forbidden
@@ -57,25 +57,25 @@ class BranchesControllerTest < ActionController::TestCase
 
     should "not_create branch" do
       assert_no_difference('Branch.count') do
-        post :create, branch: { name: @branch.name, parent_id: @branch.parent_id }, format: :json
+        post :create, params: {branch: { name: @branch.name, parent_id: @branch.parent_id }}, format: :json
       end
 
       assert_response :forbidden
     end
 
     should "show branch" do
-      get :show, id: @branch, format: :json
+      get :show, params: {id: @branch}, format: :json
       assert_response :success
     end
 
     should "not update branch" do
-      patch :update, id: @branch, branch: { name: @branch.name, parent_id: @branch.parent_id }, format: :json
+      patch :update, params: {id: @branch, branch: { name: @branch.name, parent_id: @branch.parent_id }}, format: :json
       assert_response :forbidden
     end
 
     should "not destroy branch" do
       assert_no_difference('Branch.count', -1) do
-        delete :destroy, id: @branch, format: :json
+        delete :destroy, params: {id: @branch}, format: :json
       end
 
       assert_response :forbidden

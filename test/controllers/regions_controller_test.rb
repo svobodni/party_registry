@@ -15,7 +15,7 @@ class RegionsControllerTest < ActionController::TestCase
   end
 
   test "should show region" do
-    get :show, id: @region, format: :json
+    get :show, params: {id: @region}, format: :json
     assert_response :success
   end
 
