@@ -16,7 +16,7 @@ class ProfilesController < ApplicationController
         }))
         format.html { redirect_back(fallback_location: '/', notice: 'Údaje úspěšně aktualizovány.') }
       else
-        format.html { render action: params[:id] }
+        format.html { redirect_back(fallback_location: '/') }
       end
     end
   end
