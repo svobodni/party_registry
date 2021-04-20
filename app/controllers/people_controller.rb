@@ -118,7 +118,7 @@ class PeopleController < ApplicationController
   def cancel_membership_request
   end
 
-  # POST /people/123/approve
+  # POST /people/123/cancel_membership
   def cancel_membership
     authorize!(:cancel_membership, @person)
     @person.cancel_request!
@@ -127,7 +127,10 @@ class PeopleController < ApplicationController
         @person.events.create(default_event_params.merge({
           command: "CancelMembership",
           name: "MembershipCancelled",
-          changes: @person.previous_changes
+          data: {
+            changes: @person.previous_changes,
+            reason: person_params[:reason]            
+          }
         }))
         format.html { redirect_to membership_profiles_path, notice: 'Členství bylo úspěšně zrušeno.'}
       else
@@ -237,6 +240,6 @@ class PeopleController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def person_params
-      params.require(:person).permit(:first_name, :last_name, :email, :password)
+      params.require(:person).permit(:first_name, :last_name, :email, :password, :reason)
     end
 end
