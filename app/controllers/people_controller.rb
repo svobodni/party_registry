@@ -197,6 +197,11 @@ class PeopleController < ApplicationController
 
   def application
     authorize!(:application, @person)
+    pdf = ApplicationPdf.new(@person)
+    send_data pdf.render,
+              filename: "prihlaska.pdf",
+              type: 'application/pdf',
+              disposition: 'inline'
   end
 
   def signed_application
